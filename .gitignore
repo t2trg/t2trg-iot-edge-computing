@@ -1,0 +1,17 @@
+*.redxml
+*.txt
+*.html
+*.pdf
+*~
+*.swp
+/*-[0-9][0-9].xml
+.refcache
+.vs
+venv/
+issues.json
+lib
+draft-hong-t2trg-iot-edge-computing.xml
+
+.targets.mk
+
+draft-hong-t2trg-iot-edge-computing-??.md
