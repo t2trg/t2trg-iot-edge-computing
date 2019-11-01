@@ -13,7 +13,7 @@ pi:
   colonspace: 'yes'
   rfcedstyle: 'no'
   tocdepth: '4'
-title: Problem Statement of IoT integrated with Edge Computing
+title: IoT Edge Computing Challenges, Model and State-of-Art Review
 abbrev: IoT Edge Computing
 area: T2TRG
 author:
