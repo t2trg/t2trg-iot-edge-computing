@@ -394,10 +394,10 @@ It is expected edge computing architectures will play an important role to deplo
 | +------------+-------------+  |            | |
 | | Edge computing functions |  |            | |
 | |   (on computing nodes)   +--+ Edge       | |
-| |   * finding resources    |  | Computing  | |
-| |   * authentication       |  | Domain     | |
-| |   * storage/processing   |  | Management | |
-| |                          |  |            | |
+| | * finding resources      |  | Computing  | |
+| | * authentication         |  | Domain     | |
+| | * storage/processing     |  | Management | |
+| | * data/device management |  |            | |
 | +------------+-------------+  |            | |
 |              |                |            | |
 | +------------+-------------+  |            | |
@@ -419,11 +419,11 @@ The edge computing domains is interconnected with IoT end devices (southbound co
 
 ## Gateway Function and Remote Network
 
-A northbound interface may be provided by a gateway component to a remote network, e.g. a cloud, home or enterprise network. These components may not exist in not-connected scenarios, where edge computing is provided only locally. The northbound interface is a data plane interface. Nevertheless, the remote network may also host an edge cloud manager function, and use this interface for management as well (as is commonly the case with IoT gateways today).
+A northbound interface is provided by a gateway component to a remote network, e.g. a cloud, home or enterprise network. These components may not exist in standalone scenarios, where edge computing is provided locally without a connection to a remote network. The northbound interface is a data plane interface. Nevertheless, the remote network may also host an edge cloud manager function.
 
 ## Edge Computing Domain Management and Manager Role
 
-Edge computing domain management can include management of resources and functions in the edge computing domain, as well as IoT end devices and IoT data. The management function can provides SaaS, PaaS, IaaS service APIs to an edge computing manager. The edge management role may be taken by an entity in the cloud, but it may also be a local entity, or even be non-existent (during normal operation) in self-managed systems.
+Edge computing domain management includes management of resources and functions in the edge computing domain. Management of IoT end devices and IoT data may be included or may be part of the edge computing logical functions (OPEN QUESTION). The management function can provides SaaS, PaaS, IaaS service APIs to an edge computing manager. The edge management role may be taken by an entity in the cloud, but it may also be a local entity, or even be non-existent (during normal operation) in autonomic systems.
 
 ## Edge Computing Logical Functions
 
@@ -431,7 +431,8 @@ Edge computing nodes host logical functions relative to:
  
 * Finding resources, such as compute, storage or data resources;
 * Authenticating platforms, end devices, functions, data;
-* Providing compute and storage offloading.
+* Providing compute and storage offloading;
+* Management, e.g. of IoT end devices and data.
 
 With regard to the high level challenges listed in {{sec-challenges}}, data storage and processing at the edge is a major aspect of IoT edge computing. Data may therefore need to be classified (e.g. in terms of privacy, importance, validity, etc.). Data analysis such as performed in AI/ML tasks performed at the edge may benefit from specialized hardware support on computing nodes. IoT edge computing will face detailed challenges in term of, for example, programmability, naming, data abstraction and service management. Furthermore, while edge computing can support IoT services independently of cloud computing, it is increasingly connected to cloud computing in most IoT systems: thus, the relationship of IoT edge Computing to cloud Computing is another potential challenge {{ISO_TR}}.
 
