@@ -271,8 +271,8 @@ informative:
 --- abstract
 
 This document describes new challenges such as strict latency, uplink cost, uninterrupted services, privacy and security, for IoT services originated from the IoT environmental changes.
-In order to address those new challenges, the integration of Edge computing and IoT has been emerged as a promising solution.
-This document discribes the concept of IoT integrated with Edge computing as well as the state-of-the-art of IoT Edge computing. It also proposes an architecture of IoT Edge computing.
+In order to address those new challenges, the integration of Edge computing and IoT has emerged as a promising solution.
+This document describes the concept of IoT integrated with Edge computing as well as the state-of-the-art of IoT Edge computing. It also proposes a general model for IoT Edge computing.
 The direction of Edge computing for IoT should be discussed in the IETF/IRTF.
 
 --- middle
