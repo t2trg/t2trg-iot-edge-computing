@@ -326,7 +326,7 @@ The definition of Edge computing from ISO is 'Form of distributed computing in w
 And the similar concept of Fog computing from Open Fog Consortium is 'A horizontal, system-level architecture that distributes computing, storage, control and networking functions closer to the users along a cloud-to-thing continuum' {{OpenFog}}.
 Based on these definitions, we can summarize a general philosophy of Edge computing as "Distribute the required functions close to users and data".
 
-# Challenges for IoT and Impacts of Edge Computing
+# Challenges for IoT and Impacts of Edge Computing {#sec-challenges}
 
 As the IoT is maturing, systems are converging, deployments are growing, and IoT technology is used with more and more demanding applications such as industrial, automotive, or healthcare.
 This leads to new challenges for the IoT.
@@ -433,19 +433,7 @@ Edge computing nodes host logical functions relative to:
 * Authenticating platforms, end devices, functions, data;
 * Providing compute and storage offloading.
 
-Motivations for processing data at the edge include the following (sometimes correlated) aspects:
-
-* Delay-sensitiveness,
-* High data volume,
-* Trust/privacy sensitivity,
-* Disconnection (intermittent or permanent), 
-* Energy efficiency,
-* Cost to transmit.
-
-With regard to these motivations, IoT data storage and processing is a major aspect of edge computing.
-As a massive number of IoT sensors, IoT actuators, and other IoT devices are connected to the Internet, data volume is expected to increase accordingly. It is expected that much of this high volume of IoT data will be processed and/or consumed within edge/local networks, and won't reach cloud networks. Data may therefore need to be classified (e.g. in terms of privacy, importance, validity, etc.). Data analysis such as performed in AI/ML tasks performed at the edge may benefit from specialized hardware support on computing nodes.
-
-In spite of its benefits, edge computing in IoT has challenges such as programmability, naming, data abstraction, service management, privacy and security and optimization metrics. Edge computing can support IoT services independently of cloud computing. However, edge computing is increasingly connected to cloud computing in most IoT systems for processing and storing data. Thus, the relationship of IoT edge Computing to cloud Computing is another challenge {{ISO_TR}}.
+With regard to the high level challenges listed in {{sec-challenges}}, data storage and processing at the edge is a major aspect of IoT edge computing. Data may therefore need to be classified (e.g. in terms of privacy, importance, validity, etc.). Data analysis such as performed in AI/ML tasks performed at the edge may benefit from specialized hardware support on computing nodes. IoT edge computing will face detailed challenges in term of, for example, programmability, naming, data abstraction and service management. Furthermore, while edge computing can support IoT services independently of cloud computing, it is increasingly connected to cloud computing in most IoT systems: thus, the relationship of IoT edge Computing to cloud Computing is another potential challenge {{ISO_TR}}.
 
 ## Edge Networking Function and IoT End Devices
 
