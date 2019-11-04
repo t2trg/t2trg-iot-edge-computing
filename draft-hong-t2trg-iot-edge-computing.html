@@ -5,7 +5,7 @@
 <head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
   <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
 
-  <title>Problem Statement of IoT integrated with Edge Computing</title>
+  <title>IoT Edge Computing Challenges and Functions</title>
 
   
 <style type="text/css">/*<![CDATA[*/
@@ -277,8 +277,8 @@ ul.toc li {
   .github-fork-ribbon-wrapper {
     position: fixed;
   }
-  /*]]>*/</style>
-  <meta name="viewport" content="initial-scale=1.0">
+/*]]>*/</style>
+<meta name="viewport" content="initial-scale=1.0">
 
 
   <link href="#rfc.toc" rel="Contents">
@@ -288,32 +288,27 @@ ul.toc li {
 <link href="#rfc.section.3.1" rel="Chapter" title="3.1 Internet of Things (IoT)">
 <link href="#rfc.section.3.2" rel="Chapter" title="3.2 Cloud Computing">
 <link href="#rfc.section.3.3" rel="Chapter" title="3.3 Edge computing">
-<link href="#rfc.section.4" rel="Chapter" title="4 New challenges of IoT">
+<link href="#rfc.section.4" rel="Chapter" title="4 Challenges for IoT and Impacts of Edge Computing">
 <link href="#rfc.section.4.1" rel="Chapter" title="4.1 Strict Latency and Jitter">
 <link href="#rfc.section.4.2" rel="Chapter" title="4.2 Uplink Cost">
 <link href="#rfc.section.4.3" rel="Chapter" title="4.3 Uninterrupted Services">
 <link href="#rfc.section.4.4" rel="Chapter" title="4.4 Privacy and Security">
-<link href="#rfc.section.5" rel="Chapter" title="5 IoT Integrated with Edge Computing">
-<link href="#rfc.section.5.1" rel="Chapter" title="5.1 IoT Data in Edge Computing">
-<link href="#rfc.section.5.1.1" rel="Chapter" title="5.1.1 Data Storage">
-<link href="#rfc.section.5.1.2" rel="Chapter" title="5.1.2 Data Processing">
-<link href="#rfc.section.5.1.3" rel="Chapter" title="5.1.3 Data Analyzing">
-<link href="#rfc.section.5.2" rel="Chapter" title="5.2 IoT Device Management in Edge Computing">
-<link href="#rfc.section.6" rel="Chapter" title="6 Architecture of IoT integrated with Edge Computing">
-<link href="#rfc.section.7" rel="Chapter" title="7 State-of-the-Art of IoT Edge Computing">
-<link href="#rfc.section.7.1" rel="Chapter" title="7.1 Common aspects of IoT edge computing service platforms">
-<link href="#rfc.section.7.2" rel="Chapter" title="7.2 Use Cases of IoT Edge Computing">
-<link href="#rfc.section.7.2.1" rel="Chapter" title="7.2.1 Smart Constructions">
-<link href="#rfc.section.7.2.2" rel="Chapter" title="7.2.2 Smart Grid">
-<link href="#rfc.section.7.2.3" rel="Chapter" title="7.2.3 Smart Water System">
-<link href="#rfc.section.7.2.4" rel="Chapter" title="7.2.4 Smart Buildings">
-<link href="#rfc.section.7.2.5" rel="Chapter" title="7.2.5 Smart Cities">
-<link href="#rfc.section.7.2.6" rel="Chapter" title="7.2.6 Connected Vehicles">
-<link href="#rfc.section.8" rel="Chapter" title="8 Security Considerations">
-<link href="#rfc.section.9" rel="Chapter" title="9 Acknowledgement">
-<link href="#rfc.references" rel="Chapter" title="10 References">
-<link href="#rfc.references.1" rel="Chapter" title="10.1 Normative References">
-<link href="#rfc.references.2" rel="Chapter" title="10.2 Informative References">
+<link href="#rfc.section.5" rel="Chapter" title="5 IoT Edge Computing Model">
+<link href="#rfc.section.5.1" rel="Chapter" title="5.1 Gateway Function and Remote Network">
+<link href="#rfc.section.5.2" rel="Chapter" title="5.2 Edge Computing Domain Management and Manager Role">
+<link href="#rfc.section.5.3" rel="Chapter" title="5.3 Edge Computing Logical Functions">
+<link href="#rfc.section.5.4" rel="Chapter" title="5.4 Edge Networking Function and IoT End Devices">
+<link href="#rfc.section.6" rel="Chapter" title="6 State-of-the-Art of IoT Edge Computing">
+<link href="#rfc.section.6.1" rel="Chapter" title="6.1 Common aspects of IoT Edge computing service platforms">
+<link href="#rfc.section.6.2" rel="Chapter" title="6.2 Use Cases of IoT Edge Computing">
+<link href="#rfc.section.6.2.1" rel="Chapter" title="6.2.1 Smart Constructions">
+<link href="#rfc.section.6.2.2" rel="Chapter" title="6.2.2 Smart Grid">
+<link href="#rfc.section.6.2.3" rel="Chapter" title="6.2.3 Smart Water System">
+<link href="#rfc.section.7" rel="Chapter" title="7 Security Considerations">
+<link href="#rfc.section.8" rel="Chapter" title="8 Acknowledgement">
+<link href="#rfc.references" rel="Chapter" title="9 References">
+<link href="#rfc.references.1" rel="Chapter" title="9.1 Normative References">
+<link href="#rfc.references.2" rel="Chapter" title="9.2 Informative References">
 <link href="#rfc.appendix.A" rel="Chapter" title="A Overview of the IoT Edge Computing">
 <link href="#rfc.appendix.A.1" rel="Chapter" title="A.1 Open Source Projects">
 <link href="#rfc.appendix.A.1.1" rel="Chapter" title="A.1.1 Gateway/CPE Platforms">
@@ -339,9 +334,9 @@ ul.toc li {
 
   <meta name="dct.creator" content="Hong, J., Hong, Y-G., de Foy, X., Kovatsch, M., Schooler, E., and D. Kutscher" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-hong-t2trg-iot-edge-computing-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2019-10-31" />
-  <meta name="dct.abstract" content="This document describes new challenges such as strict latency, uplink cost, uninterrupted services, privacy and security, for IoT services originated from the IoT environmental changes.  In order to address those new challenges, the integration of Edge computing and IoT has been emerged as a promising solution.  This document discribes the concept of IoT integrated with Edge computing as well as the state-of-the-art of IoT Edge computing. It also proposes an architecture of IoT Edge computing.  The direction of Edge computing for IoT should be discussed in the IETF/IRTF." />
-  <meta name="description" content="This document describes new challenges such as strict latency, uplink cost, uninterrupted services, privacy and security, for IoT services originated from the IoT environmental changes.  In order to address those new challenges, the integration of Edge computing and IoT has been emerged as a promising solution.  This document discribes the concept of IoT integrated with Edge computing as well as the state-of-the-art of IoT Edge computing. It also proposes an architecture of IoT Edge computing.  The direction of Edge computing for IoT should be discussed in the IETF/IRTF." />
+  <meta name="dct.issued" scheme="ISO8601" content="2019-11-04" />
+  <meta name="dct.abstract" content="This document describes new challenges such as strict latency, uplink cost, uninterrupted services, privacy and security, for IoT services originated from the IoT environmental changes.  In order to address those new challenges, the integration of Edge computing and IoT has emerged as a promising solution.  This document describes the concept of IoT integrated with Edge computing as well as the state-of-the-art of IoT Edge computing. It also proposes a general model for IoT Edge computing.  The direction of Edge computing for IoT should be discussed in the IETF/IRTF." />
+  <meta name="description" content="This document describes new challenges such as strict latency, uplink cost, uninterrupted services, privacy and security, for IoT services originated from the IoT environmental changes.  In order to address those new challenges, the integration of Edge computing and IoT has emerged as a promising solution.  This document describes the concept of IoT integrated with Edge computing as well as the state-of-the-art of IoT Edge computing. It also proposes a general model for IoT Edge computing.  The direction of Edge computing for IoT should be discussed in the IETF/IRTF." />
 
 </head>
 
@@ -363,7 +358,7 @@ ul.toc li {
 <td class="right">ETRI</td>
 </tr>
 <tr>
-<td class="left">Expires: May 3, 2020</td>
+<td class="left">Expires: May 7, 2020</td>
 <td class="right">X. de Foy</td>
 </tr>
 <tr>
@@ -396,23 +391,23 @@ ul.toc li {
 </tr>
 <tr>
 <td class="left"></td>
-<td class="right">October 31, 2019</td>
+<td class="right">November 04, 2019</td>
 </tr>
 
     	
     </tbody>
   </table>
 
-  <p class="title">Problem Statement of IoT integrated with Edge Computing<br />
+  <p class="title">IoT Edge Computing Challenges and Functions<br />
   <span class="filename">draft-hong-t2trg-iot-edge-computing-latest</span></p>
   
   <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
-<p>This document describes new challenges such as strict latency, uplink cost, uninterrupted services, privacy and security, for IoT services originated from the IoT environmental changes.  In order to address those new challenges, the integration of Edge computing and IoT has been emerged as a promising solution.  This document discribes the concept of IoT integrated with Edge computing as well as the state-of-the-art of IoT Edge computing. It also proposes an architecture of IoT Edge computing.  The direction of Edge computing for IoT should be discussed in the IETF/IRTF.</p>
+<p>This document describes new challenges such as strict latency, uplink cost, uninterrupted services, privacy and security, for IoT services originated from the IoT environmental changes.  In order to address those new challenges, the integration of Edge computing and IoT has emerged as a promising solution.  This document describes the concept of IoT integrated with Edge computing as well as the state-of-the-art of IoT Edge computing. It also proposes a general model for IoT Edge computing.  The direction of Edge computing for IoT should be discussed in the IETF/IRTF.</p>
 <h1 id="rfc.status"><a href="#rfc.status">Status of This Memo</a></h1>
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on May 3, 2020.</p>
+<p>This Internet-Draft will expire on May 7, 2020.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2019 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -434,7 +429,7 @@ ul.toc li {
 </li>
 <li>3.3.   <a href="#rfc.section.3.3">Edge computing</a>
 </li>
-</ul><li>4.   <a href="#rfc.section.4">New challenges of IoT</a>
+</ul><li>4.   <a href="#rfc.section.4">Challenges for IoT and Impacts of Edge Computing</a>
 </li>
 <ul><li>4.1.   <a href="#rfc.section.4.1">Strict Latency and Jitter</a>
 </li>
@@ -444,47 +439,37 @@ ul.toc li {
 </li>
 <li>4.4.   <a href="#rfc.section.4.4">Privacy and Security</a>
 </li>
-</ul><li>5.   <a href="#rfc.section.5">IoT Integrated with Edge Computing</a>
+</ul><li>5.   <a href="#rfc.section.5">IoT Edge Computing Model</a>
 </li>
-<ul><li>5.1.   <a href="#rfc.section.5.1">IoT Data in Edge Computing</a>
+<ul><li>5.1.   <a href="#rfc.section.5.1">Gateway Function and Remote Network</a>
 </li>
-<ul><li>5.1.1.   <a href="#rfc.section.5.1.1">Data Storage</a>
+<li>5.2.   <a href="#rfc.section.5.2">Edge Computing Domain Management and Manager Role</a>
 </li>
-<li>5.1.2.   <a href="#rfc.section.5.1.2">Data Processing</a>
+<li>5.3.   <a href="#rfc.section.5.3">Edge Computing Logical Functions</a>
 </li>
-<li>5.1.3.   <a href="#rfc.section.5.1.3">Data Analyzing</a>
+<li>5.4.   <a href="#rfc.section.5.4">Edge Networking Function and IoT End Devices</a>
 </li>
-</ul><li>5.2.   <a href="#rfc.section.5.2">IoT Device Management in Edge Computing</a>
+</ul><li>6.   <a href="#rfc.section.6">State-of-the-Art of IoT Edge Computing</a>
 </li>
-</ul><li>6.   <a href="#rfc.section.6">Architecture of IoT integrated with Edge Computing</a>
+<ul><li>6.1.   <a href="#rfc.section.6.1">Common aspects of IoT Edge computing service platforms</a>
 </li>
-<li>7.   <a href="#rfc.section.7">State-of-the-Art of IoT Edge Computing</a>
+<li>6.2.   <a href="#rfc.section.6.2">Use Cases of IoT Edge Computing</a>
 </li>
-<ul><li>7.1.   <a href="#rfc.section.7.1">Common aspects of IoT edge computing service platforms</a>
+<ul><li>6.2.1.   <a href="#rfc.section.6.2.1">Smart Constructions</a>
 </li>
-<li>7.2.   <a href="#rfc.section.7.2">Use Cases of IoT Edge Computing</a>
+<li>6.2.2.   <a href="#rfc.section.6.2.2">Smart Grid</a>
 </li>
-<ul><li>7.2.1.   <a href="#rfc.section.7.2.1">Smart Constructions</a>
+<li>6.2.3.   <a href="#rfc.section.6.2.3">Smart Water System</a>
 </li>
-<li>7.2.2.   <a href="#rfc.section.7.2.2">Smart Grid</a>
+</ul></ul><li>7.   <a href="#rfc.section.7">Security Considerations</a>
 </li>
-<li>7.2.3.   <a href="#rfc.section.7.2.3">Smart Water System</a>
+<li>8.   <a href="#rfc.section.8">Acknowledgement</a>
 </li>
-<li>7.2.4.   <a href="#rfc.section.7.2.4">Smart Buildings</a>
+<li>9.   <a href="#rfc.references">References</a>
 </li>
-<li>7.2.5.   <a href="#rfc.section.7.2.5">Smart Cities</a>
+<ul><li>9.1.   <a href="#rfc.references.1">Normative References</a>
 </li>
-<li>7.2.6.   <a href="#rfc.section.7.2.6">Connected Vehicles</a>
-</li>
-</ul></ul><li>8.   <a href="#rfc.section.8">Security Considerations</a>
-</li>
-<li>9.   <a href="#rfc.section.9">Acknowledgement</a>
-</li>
-<li>10.   <a href="#rfc.references">References</a>
-</li>
-<ul><li>10.1.   <a href="#rfc.references.1">Normative References</a>
-</li>
-<li>10.2.   <a href="#rfc.references.2">Informative References</a>
+<li>9.2.   <a href="#rfc.references.2">Informative References</a>
 </li>
 </ul><li>Appendix A.   <a href="#rfc.appendix.A">Overview of the IoT Edge Computing</a>
 </li>
@@ -557,7 +542,7 @@ ul.toc li {
 <p id="rfc.section.3.3.p.1">Edge computing is a new paradigm in which substantial computing and storage resources are placed at the Internet&#8217;s edge in close proximity to mobile devices or sensors so that computing happens near data sources <a href="#Mahadev" class="xref">[Mahadev]</a>.  It works on both downstream data on behalf of cloud services and upstream data on behalf of IoT services. An edge device is any computing or networking resource residing between data sources and cloud-based datacenters.  In Edge computing, the end device not only consumes data but also produces data. And at the network edge, devices not only request services and information from the cloud but also handle computing tasks including processing, storage, caching, and load balancing on data sent to and from the cloud <a href="#Shi" class="xref">[Shi]</a>.</p>
 <p id="rfc.section.3.3.p.2">The definition of Edge computing from ISO is &#8216;Form of distributed computing in which significant processing and data storage takes place on nodes which are at the edge of the network&#8217; <a href="#ISO_TR" class="xref">[ISO_TR]</a>.  And the similar concept of Fog computing from Open Fog Consortium is &#8216;A horizontal, system-level architecture that distributes computing, storage, control and networking functions closer to the users along a cloud-to-thing continuum&#8217; <a href="#OpenFog" class="xref">[OpenFog]</a>.  Based on these definitions, we can summarize a general philosophy of Edge computing as &#8220;Distribute the required functions close to users and data&#8221;.</p>
 <h1 id="rfc.section.4">
-<a href="#rfc.section.4">4.</a> <a href="#new-challenges-of-iot" id="new-challenges-of-iot">New challenges of IoT</a>
+<a href="#rfc.section.4">4.</a> <a href="#sec-challenges" id="sec-challenges">Challenges for IoT and Impacts of Edge Computing</a>
 </h1>
 <p id="rfc.section.4.p.1">As the IoT is maturing, systems are converging, deployments are growing, and IoT technology is used with more and more demanding applications such as industrial, automotive, or healthcare.  This leads to new challenges for the IoT.  In particular, the amount of data created at the edge is expected to be vast.  Industrial machines such as laser cutters already produce over 1 terabyte per hour, the same applies for autonomous cars <a href="#NVIDIA" class="xref">[NVIDIA]</a>.  90% of IoT data is expected to be stored, processed, analyzed, and acted upon close to the source <a href="#Kelly" class="xref">[Kelly]</a>, as Cloud Computing models alone cannot address the new challenges <a href="#Chiang" class="xref">[Chiang]</a>.</p>
 <h1 id="rfc.section.4.1">
@@ -571,178 +556,151 @@ ul.toc li {
 <h1 id="rfc.section.4.3">
 <a href="#rfc.section.4.3">4.3.</a> <a href="#uninterrupted-services" id="uninterrupted-services">Uninterrupted Services</a>
 </h1>
-<p id="rfc.section.4.3.p.1">Many IoT devices such as sensors, data collectors, actuators, controllers, etc. have very limited hardware resources and cannot rely solely on their limited resources to meet all their computing and/or storage needs.  They require reliable, uninterrupted services to augment their capabilities in order to fulfill their application tasks.  This is hard and partly impossible to achieve with cloud services for systems such as vehicles, drones, or oil rigs that have intermittent network connectivity.</p>
+<p id="rfc.section.4.3.p.1">Many IoT devices such as sensors, data collectors, actuators, controllers, etc. have very limited hardware resources and cannot rely solely on their limited resources to meet all their computing and/or storage needs.  They require reliable, uninterrupted services to augment their capabilities in order to fulfill their application tasks.  This is hard and partly impossible to achieve with cloud services for systems such as vehicles, drones, or oil rigs that have intermittent network connectivity. Example of related challenges include support for IoT device and Edge computing node mobility, as well as software instance migration.</p>
 <h1 id="rfc.section.4.4">
 <a href="#rfc.section.4.4">4.4.</a> <a href="#privacy-and-security" id="privacy-and-security">Privacy and Security</a>
 </h1>
 <p id="rfc.section.4.4.p.1">When IoT services are deployed at home, personal information can be learned from detected usage data.  For example, one can extract information about employment, family status, age, and income by analyzing smart meter data <a href="#ENERGY" class="xref">[ENERGY]</a>.  Policy makers started to provide frameworks that limit the usage of personal data and put strict requirements on data controllers and processors.  However, data stored indefinitely in the cloud also increases the risk of data leakage, for instance, through attacks on rich targets.</p>
 <p id="rfc.section.4.4.p.2">Industrial systems are often argued to not have privacy implications, as no personal data is gathered.  Yet data from such systems is often highly classified, as one might be able to infer trade secrets such as the setup of production lines.  Hence, the owner of these systems are generally reluctant to upload related IoT to the cloud.</p>
 <h1 id="rfc.section.5">
-<a href="#rfc.section.5">5.</a> <a href="#iot-integrated-with-edge-computing" id="iot-integrated-with-edge-computing">IoT Integrated with Edge Computing</a>
+<a href="#rfc.section.5">5.</a> <a href="#iot-edge-computing-model" id="iot-edge-computing-model">IoT Edge Computing Model</a>
 </h1>
-<p id="rfc.section.5.p.1">As described in section 4, there are new challenges for supporting emerging IoT services and Edge computing is one of the candidates to satisfy these challenges.  The motivation for IoT Edge computing was discussed at an Edge computing discussion in IETF/IRTF meetings as follows:</p>
+<p id="rfc.section.5.p.1">It is expected Edge computing will play an important role to deploy new IoT services integrated with Big data, AI services. Although there are lots of approach to Edge computing, this section focus on common function of Edge computing, therefore draw an IoT Edge computing model. In this section we discuss a general model that aims to be applicable to multiple Edge computing architectures, such as:</p>
 <p></p>
 
 <ul>
-<li>Delay-sensitive</li>
-<li>High-volume</li>
-<li>Trust-sensitive</li>
-<li>(Intermittently) disconnected</li>
-<li>Energy-challenged</li>
-<li>Costly to transmit</li>
+<li>A single IoT gateway, or a hierarchy of IoT gateways, typically connected to the cloud (e.g., to extend the traditionally cloud-based management of IoT devices and data to the edge). A common role of an IoT Gateway is to provide access to an heterogeneous set of IoT devices/sensors; handle IoT data; and deliver IoT data to its final destination in a cloud network. Whereas an IoT gateway needs  interactoins with cloud like as conventional Cloud computing, Edge computing can operate independently.</li>
+<li>A set of distributed computing nodes, e.g. embedded in switches, routers, edge cloud servers or mobile devices. In the future, some IoT end devices may have enough computing capabilities to participate in such distributed systems. In this model, each Edge computing node can collaborate with each other to share its resources to others or ask other&#8217;s resources.</li>
 </ul>
-<p id="rfc.section.5.p.3">As we described at previous sections, the above motivation for IoT Edge computing could directly be benefits of Edge computing in the IoT environment. The above motivation for IoT Edge computing is mainly related to IoT data and other motivation for IoT Edge computing can exist as other aspects of networking and communication.</p>
-<p id="rfc.section.5.p.4">In spite of its benefits, Edge computing in IoT services has challenges such as programmability, naming, data abstraction, service management, privacy and security and optimization metrics.</p>
-<p id="rfc.section.5.p.5">Edge computing can support IoT services independently of Cloud computing. However, Edge computing is increasingly connected to Cloud computing in most IoT systems for processing and storaging data. Thus, the relationship of Edge Computing to Cloud Computing is also another challenge of Edge Computing in IoT <a href="#ISO_TR" class="xref">[ISO_TR]</a>.</p>
-<h1 id="rfc.section.5.1">
-<a href="#rfc.section.5.1">5.1.</a> <a href="#iot-data-in-edge-computing" id="iot-data-in-edge-computing">IoT Data in Edge Computing</a>
-</h1>
-<p id="rfc.section.5.1.p.1">As an aspect of IoT, Edge computing can provide many capabilities for IoT services because IoT systems are based on sensors and actuator devices in edge area and IoT data generated from sensors and actuator devices are gathered through a gateway <a href="#ISO_TR" class="xref">[ISO_TR]</a>. Besides on IoT data, other functions such as computing, control and network functions are also very remarkable to support IoT services. In this document, we will first concentrate on IoT data&#8217;s aspect since the benefit of Edge computing with IoT data is very big in use cases.</p>
-<h1 id="rfc.section.5.1.1">
-<a href="#rfc.section.5.1.1">5.1.1.</a> <a href="#data-storage" id="data-storage">Data Storage</a>
-</h1>
-<p id="rfc.section.5.1.1.p.1">As tremendous IoT sensors, IoT actuators, and IoT devices are connected to the Internet, IoT data volume from these things are expected to increase explosively. And it is expected that much of this high volume of IoT data is produced and/or consumed within edge/local networks, not to traverse through cloud networks. Until now, most IoT data generated by IoT things is transferred and accumulated in a remote server and storage of IoT data in a remote server is expensive in transmission and storage. To mitigate the cost of transmission and storage, it is required to divide IoT data into two types of data; one is stored in edge/local networks and the other is stored in cloud networks. The effect of Edge computing is revealed with the handling IoT data in edge/local networks.</p>
-<h1 id="rfc.section.5.1.2">
-<a href="#rfc.section.5.1.2">5.1.2.</a> <a href="#data-processing" id="data-processing">Data Processing</a>
-</h1>
-<p id="rfc.section.5.1.2.p.1">Until now, most network equipment such as routers, gateways, and switches just forward data delivered from other network devices without reading or modifying the content. In end-to-end communication, data is acknowledged and proceed at a final corresponding node. This is a typical usage of cloud computing and a client-server communication. But, in the IoT environment, some IoT data will be transferred to a cloud network and some will be delivered to an edge node. The main reason of this separation is to provide real-time processing and security enhancement in IoT. Although there are many new technologies to reduce the delay and transmission time, it is not easy to guarantee real-time processing. The typical use case of this requirement is industrial Internet and smart factory. Even though there are also several solutions to provide security in IoT, the more basic rule is not to expose the privacy data to public networks. If we separate IoT data into private and non-private data, and keep private data within an edge/local network not to expose them in a public network, the security and privacy in IoT cna be addressed by the separation.</p>
-<h1 id="rfc.section.5.1.3">
-<a href="#rfc.section.5.1.3">5.1.3.</a> <a href="#data-analyzing" id="data-analyzing">Data Analyzing</a>
-</h1>
-<p id="rfc.section.5.1.3.p.1">If it is possible to separate IoT data in edge/local networks and cloud networks, Edge computing can do more functions with IoT data in edge/local networks. Because Edge computing has the capabilities to handle IoT data in edge/local networks, it is also possible to analyze IoT data to provide enhanced IoT services such as intelligence. To analyze IoT data in an edge/local network, it is required to have comparatively processing performance and this requirement is not obstacle to deploy Edge computing due to the development of H/W and S/W.</p>
-<h1 id="rfc.section.5.2">
-<a href="#rfc.section.5.2">5.2.</a> <a href="#iot-device-management-in-edge-computing" id="iot-device-management-in-edge-computing">IoT Device Management in Edge Computing</a>
-</h1>
-<p id="rfc.section.5.2.p.1">If we consider new challenges of IoT services, not only the big volume of IoT data but also the massive number of IoT things can be a critical problem. Even though, we acknowledge this future problem, the Internet architecture originally has the capability of scalability and it will mitigate scalability issue in the IoT environment. But, we cannot estimate the number of IoT things in the future and we cannot guarantee the Internet architecture still sustain the scalability issue in the IoT environment. Edge computing will separate the scalability domain into edge/local networks and outside network (e.g., cloud networks) and this separation of scalability domain can provide more efficient way to tackle the massive number of IoT things.</p>
-<p id="rfc.section.5.2.p.2">Because Edge computing can handle IoT data in an edge area and store the IoT data in an edge node, and proceed IoT data if it is needed, it can also separate the management domain into two parts. Edge Computing can concentrate on management of IoT things in an edge area and cooperate with the management of other outside networks.</p>
-<h1 id="rfc.section.6">
-<a href="#rfc.section.6">6.</a> <a href="#architecture-of-iot-integrated-with-edge-computing" id="architecture-of-iot-integrated-with-edge-computing">Architecture of IoT integrated with Edge Computing</a>
-</h1>
-<p id="rfc.section.6.p.1">When we consider the implementation and deployment of Edge computing, it can be mainly referred to an IoT Gateway. The role of an IoT Gateway is to provide multiple accesses to the heterogeneous IoT devices/sensors, handling IoT data and delivering the IoT data to the final destinations such as cloud networks. Similar to an IoT Gateway, an Edge computing architecture as an edge computing node provides downside connectivity to IoT sensors and devices (southbound connectivity) and upside connectivity to cloud networks (northbound connectivity). Also, the architecture provides the function of data storage. Beside these functions, the Edge computing architecture should provide the computing functions, such as data processing, data analyzing, and additional function of intelligence.</p>
 <div id="rfc.figure.1"></div>
 <div id="rl-fig1"></div>
 <pre>
-          +---------------------------+
-          |                           |
-          |       Cloud networks      |
-          |                           |
-          +------------+--------------+
-                      |
-                      |
-+----------------------+-----------------------+
-|                      |                       |
-|      +---------------+---------------+       |
-|      |                               |       |
-|      |    Edge gateway function      |       |
-|      |         (Northbound)          |       |
-|      |                               |       |
-|      +---------------+---------------+       |
-|                      |                       |
-|      +---------------+---------------+       |
-|      |                               |       |
-|      |    Edge computing function    |       |
-|      |     (Storage, Processing,     |       |
-|      |     Analyzing, Intelligence)  |       |
-|      |                               |       |
-|      +---------------+---------------+       |
-|                      |                       |
-|      +---------------+---------------+       |
-|      |                               |       |
-|      |    Edge networking function   |       |
-|      |         (Southbound)          |       |
-|      |                               |       |
-|      +-------------------------------+       |
-|                                              |
-|              Edge computing node             |
-+-----+-------+------+-------+-------+-------+-+
-      |       |      |       |       |       |
-      |       |      |       |       |       |
-  +---+----+  |  +---+----+  |   +---+----+  |
-  |Sensor 1|  |  |Sensor 2| .|.. |Sensor n|  |
-  +--------+  |  +--------+  |   +--------+  |
-              |              |               |
-              |              |               |
-        +----+---+    +-----+--+      +-----+--+
-        |Device 1|    |Device 2| .... |Device n|
-        +--------+    +--------+      +--------+
+   +---------------------+
+   |   Remote network    |  +---------------+
+   |(e.g. cloud network) |  | Edge Computing|
+   +-----------+---------+  |    Manager    |
+               |            +------+--------+
+               |                   |
++----------------------------------------------+
+|              |                   |           |
+| +------------+-------------+  +--+---------+ |
+| | Edge gateway function    +--+            | |
+| |      (Northbound)        |  |            | |
+| +------------+-------------+  |            | |
+|              |                |            | |
+| +------------+-------------+  |            | |
+| | Edge computing functions |  |            | |
+| |   (on computing nodes)   +--+ Edge       | |
+| | * finding resources      |  | Computing  | |
+| | * authentication         |  | Domain     | |
+| | * storage/processing     |  | Management | |
+| | * data/device management |  |            | |
+| +------------+-------------+  |            | |
+|              |                |            | |
+| +------------+-------------+  |            | |
+| | Edge networking function +--+            | |
+| |      (Southbound)        |  |            | |
+| +--------------------------+  +------------+ |
+|    Edge Computing Domain                     |
++------+--------------+---------------+--------+
+       |              |               |
+       |              |               |
+  +----+---+    +-----+--+      +-----+--+
+  |  End   |    |  End   | .... |  End   |
+  |Device 1|    |Device 2| .... |Device n|
+  +--------+    +--------+      +--------+
 </pre>
-<p class="figure">Figure 1: Architecture of IoT integrated with Edge computing</p>
-<p id="rfc.section.6.p.2">It is expected that the Edge computing architecture will play an important role to deploy new IoT services with integration to big data and AI services.</p>
-<h1 id="rfc.section.7">
-<a href="#rfc.section.7">7.</a> <a href="#state-of-the-art-of-iot-edge-computing" id="state-of-the-art-of-iot-edge-computing">State-of-the-Art of IoT Edge Computing</a>
+<p class="figure">Figure 1: Model of IoT integrated with Edge computing</p>
+<p id="rfc.section.5.p.3">The Edge computing domains is interconnected with IoT end devices (southbound connectivity) and possibly with a remote/cloud network (northbound connectivity). Edge computing nodes provide multiple logical functions such as finding resources, authentication, storage/processing and management.</p>
+<h1 id="rfc.section.5.1">
+<a href="#rfc.section.5.1">5.1.</a> <a href="#gateway-function-and-remote-network" id="gateway-function-and-remote-network">Gateway Function and Remote Network</a>
 </h1>
-<h1 id="rfc.section.7.1">
-<a href="#rfc.section.7.1">7.1.</a> <a href="#common-aspects-of-iot-edge-computing-service-platforms" id="common-aspects-of-iot-edge-computing-service-platforms">Common aspects of IoT edge computing service platforms</a>
+<p id="rfc.section.5.1.p.1">A northbound interface is provided by a gateway component to a remote network, e.g. a cloud, home or enterprise network. These components may not exist in standalone scenarios, where Edge computing is provided locally without a connection to a remote network. The northbound interface is a data plane interface. Nevertheless, the remote network may also host an edge cloud manager function.</p>
+<h1 id="rfc.section.5.2">
+<a href="#rfc.section.5.2">5.2.</a> <a href="#edge-computing-domain-management-and-manager-role" id="edge-computing-domain-management-and-manager-role">Edge Computing Domain Management and Manager Role</a>
 </h1>
-<p id="rfc.section.7.1.p.1">This section provides an overview of today&#8217;s IoT Edge Computing field, based on a limited review of standards, research, open-source and proprietary products in <a href="#sec-overview" class="xref">Appendix A</a>.</p>
-<p id="rfc.section.7.1.p.2">Common aspects of IoT edge computing service platforms are summarized here:</p>
+<p id="rfc.section.5.2.p.1">Edge computing domain management includes management of resources and functions in the Edge computing domain. Management of IoT end devices and IoT data may be included or may be part of the Edge computing logical functions (OPEN QUESTION). The management function can provides SaaS, PaaS, IaaS service APIs to an Edge computing manager. The edge management role may be taken by an entity in the cloud, but it may also be a local entity, or even be non-existent (during normal operation) in autonomic systems.</p>
+<h1 id="rfc.section.5.3">
+<a href="#rfc.section.5.3">5.3.</a> <a href="#edge-computing-logical-functions" id="edge-computing-logical-functions">Edge Computing Logical Functions</a>
+</h1>
+<p id="rfc.section.5.3.p.1">Edge computing nodes host logical functions relative to:</p>
+<p></p>
+
+<ul>
+<li>Finding resources, such as compute, storage or data resources;</li>
+<li>Authenticating platforms, end devices, functions, data;</li>
+<li>Providing compute and storage offloading;</li>
+<li>Management, e.g. of IoT end devices and data.</li>
+</ul>
+<p id="rfc.section.5.3.p.3">With regard to the high level challenges listed in <a href="#sec-challenges" class="xref">Section 4</a>, data storage and processing at the edge is a major aspect of IoT Edge computing. Data may therefore need to be classified (e.g. in terms of privacy, importance, validity, etc.). Data analysis such as performed in AI/ML tasks performed at the edge may benefit from specialized hardware support on computing nodes. IoT Edge computing will face detailed challenges in term of, for example, programmability, naming, data abstraction and service management. Furthermore, while Edge computing can support IoT services independently of Cloud computing, it is increasingly connected to Cloud computing in most IoT systems: thus, the relationship of IoT Edge Computing to Cloud Computing is another potential challenge <a href="#ISO_TR" class="xref">[ISO_TR]</a>.</p>
+<h1 id="rfc.section.5.4">
+<a href="#rfc.section.5.4">5.4.</a> <a href="#edge-networking-function-and-iot-end-devices" id="edge-networking-function-and-iot-end-devices">Edge Networking Function and IoT End Devices</a>
+</h1>
+<p id="rfc.section.5.4.p.1">IoT end devices can be sensors, actuators, or more generally IoT things. Not only the big volume of IoT data but also the massive number of IoT end devices are the cause of a massive scalability issue in future IoT environments. To address this challenge Edge computing separates the scalability domain into edge/local networks and remote network.</p>
+<p id="rfc.section.5.4.p.2">Edge computing nodes communicate between themselves and with end devices over an underlying network. There is therefore a need for the Edge computing domain to directly or indirectly control those network functions.</p>
+<h1 id="rfc.section.6">
+<a href="#rfc.section.6">6.</a> <a href="#state-of-the-art-of-iot-edge-computing" id="state-of-the-art-of-iot-edge-computing">State-of-the-Art of IoT Edge Computing</a>
+</h1>
+<h1 id="rfc.section.6.1">
+<a href="#rfc.section.6.1">6.1.</a> <a href="#common-aspects-of-iot-edge-computing-service-platforms" id="common-aspects-of-iot-edge-computing-service-platforms">Common aspects of IoT Edge computing service platforms</a>
+</h1>
+<p id="rfc.section.6.1.p.1">This section provides an overview of today&#8217;s IoT Edge Computing field, based on a limited review of standards, research, open-source and proprietary products in <a href="#sec-overview" class="xref">Appendix A</a>.</p>
+<p id="rfc.section.6.1.p.2">Common aspects of IoT Edge computing service platforms are summarized here:</p>
 <p></p>
 
 <dl>
 <dt>Computing devices:</dt>
-<dd style="margin-left: 8">IoT gateways (<a href="#sec-iot-gateways" class="xref">Appendix A.2.1</a>, <a href="#sec-gateway-platforms" class="xref">Appendix A.1.1</a>) represent a common class of IoT edge computing products, where the gateway is providing a local service on customer premises, and is remotely managed through a cloud service. IoT communication protocols are typically used between IoT devices and the gateway, including CoAP, MQTT and many specialized IoT protocols, while the gateway communicates with the distant cloud using typically HTTP and WebSocket. Virtualization platforms enable the deployment of virtual edge computing functions, including IoT gateway software, on servers in the mobile network infrastructure (at base station and concentration points), in edge datacenters (in central offices) or regional datacenters located near central offices. End devices as computing devices are envisioned in fog architecture and research projects, but are not commonly used as such today.</dd>
+<dd style="margin-left: 8">IoT gateways (<a href="#sec-iot-gateways" class="xref">Appendix A.2.1</a>, <a href="#sec-gateway-platforms" class="xref">Appendix A.1.1</a>) represent a common class of IoT Edge computing products, where the gateway is providing a local service on customer premises, and is remotely managed through a cloud service. IoT communication protocols are typically used between IoT devices and the gateway, including CoAP, MQTT and many specialized IoT protocols, while the gateway communicates with the distant cloud using typically HTTP and WebSocket. Virtualization platforms enable the deployment of virtual Edge computing functions, including IoT gateway software, on servers in the mobile network infrastructure (at base station and concentration points), in edge datacenters (in central offices) or regional datacenters located near central offices. End devices as computing devices are envisioned in fog architecture and research projects, but are not commonly used as such today.</dd>
 <dt>Service models:</dt>
 <dd style="margin-left: 8">Physical or virtual IoT gateways can host application programs built using an SDK. Edge cloud system operators host their customers&#8217; applications VMs or containers on servers located in or near access networks. These application have access to edge service APIs. For example, mobile network services include radio network information, location, bandwidth management. In a cloud-like service model, service providers consume low-level edge platform APIs and offer high-level APIs to their own customers&#8217; applications. This cloud-like model can be offered as an edge cloud service, or as an hybrid cloud service covering edge and distant cloud.</dd>
 <dt>Management:</dt>
 <dd style="margin-left: 8">Life cycle management of services and applications on physical IoT gateways is often cloud-based. Edge cloud management platforms and products (<a href="#sec-cloud-management-platforms" class="xref">Appendix A.1.2</a>, <a href="#sec-cloud-platforms" class="xref">Appendix A.2.2</a>) adapt cloud management technologies (e.g. kubernetes) to the edge cloud, i.e. to smaller, distributed computing devices running outside a controlled data center. Services and application life-cycle is typically using a NFV-like management and orchestration model.</dd>
 <dt>Communication services:</dt>
-<dd style="margin-left: 8">The platform typically includes services to advertise or consume APIs, and enables communicating with local and remote endpoints. The service platform is typically extensible by edge applications, since they can advertise an API that other edge applications can consume. IoT communication services include protocols translation, analytics and transcoding. Communication between edge computing devices is enabled in tiered deployments or distributed deployments.</dd>
+<dd style="margin-left: 8">The platform typically includes services to advertise or consume APIs, and enables communicating with local and remote endpoints. The service platform is typically extensible by edge applications, since they can advertise an API that other edge applications can consume. IoT communication services include protocols translation, analytics and transcoding. Communication between Edge computing devices is enabled in tiered deployments or distributed deployments.</dd>
 <dt>Storage models:</dt>
 <dd style="margin-left: 8">An edge cloud platform may enable pass-through without storage, local storage (e.g. on IoT gateways). Some edge cloud platforms use a distributed form of storage, e.g. an ICN network or a distributed storage platform. External storage, e.g. on databases in distant or local IT cloud, is typically used for filtered data deemed worthy of long term storage, or in some cases for all data, for example when required for regulatory reasons.</dd>
 <dt>Computing models:</dt>
 <dd style="margin-left: 8">Stateful computing is supported on platforms hosting native programs, VMs or containers. Stateless computing is supported on platforms providing a &#8220;serverless computing&#8221; service (a.k.a. function-as-a-service), or on systems based on named function networking.</dd>
 <dt>Network traffic patterns:</dt>
-<dd style="margin-left: 8">Network traffic is typically high volume uplink with throttling by edge computing devices (or deferred to off-peak hours or using physical shipping); and downlink for control and software updates.</dd>
+<dd style="margin-left: 8">Network traffic is typically high volume uplink with throttling by Edge computing devices (or deferred to off-peak hours or using physical shipping); and downlink for control and software updates.</dd>
 </dl>
-<h1 id="rfc.section.7.2">
-<a href="#rfc.section.7.2">7.2.</a> <a href="#use-cases-of-iot-edge-computing" id="use-cases-of-iot-edge-computing">Use Cases of IoT Edge Computing</a>
+<h1 id="rfc.section.6.2">
+<a href="#rfc.section.6.2">6.2.</a> <a href="#use-cases-of-iot-edge-computing" id="use-cases-of-iot-edge-computing">Use Cases of IoT Edge Computing</a>
 </h1>
-<h1 id="rfc.section.7.2.1">
-<a href="#rfc.section.7.2.1">7.2.1.</a> <a href="#smart-constructions" id="smart-constructions">Smart Constructions</a>
+<h1 id="rfc.section.6.2.1">
+<a href="#rfc.section.6.2.1">6.2.1.</a> <a href="#smart-constructions" id="smart-constructions">Smart Constructions</a>
 </h1>
-<p id="rfc.section.7.2.1.p.1">In traditional construction domain, there are many heavy equipment and machineries and dangerous elements. Even though human pay attention to risk elements, it is not easy to avoid them. If some accidents are happened in a construction site, it causes a loss of lives and property. Thus, there have been many trials in a construction area to protect lives and property.</p>
-<p id="rfc.section.7.2.1.p.2">Measurements of noise, vibration, and gas in a construction area are recorded on a remote server and reported to an inspector. Today, data produced bu such measurements is collected by a gateway in a construction area and transferred to a remote server. This incurs transmission cost, e.g. over a LTE connection, and storage cost, e.g. when using Amazon Web Services. When an inspector wants to investigate some accidents, he checks the information stored in a server.</p>
-<p id="rfc.section.7.2.1.p.3">If we deploy Edge computing in a construction area, the sensor data can be processed and analyzed in a gateway located within or near a construction area. And with the help of a statistical analysis or machine learning technologies, we can predict future accidents in advance and this prediction can be used as an alarm in a construction area and a notification to an inspector.</p>
-<p id="rfc.section.7.2.1.p.4">To determine the exact cause of some accident, not only sensor data but also audio and video data are transferred to a remote server or cloud networks. In this case, the data volume of audio and video is quite big and the cost of transmission can be a problem. If Edge computing can predict the time of accident, it can reduce the data volume of transmission; in general period, it can transmit the audio and video data with a low resolution/degree and in emergent period, it transmits the audio and video data with a high resolution/degree. By adjusting the resolution/degree of audio and video data, it can reduce transmission cost significantly.</p>
-<h1 id="rfc.section.7.2.2">
-<a href="#rfc.section.7.2.2">7.2.2.</a> <a href="#smart-grid" id="smart-grid">Smart Grid</a>
+<p id="rfc.section.6.2.1.p.1">In traditional construction domain, there are many heavy equipment and machineries and dangerous elements. Even though human pay attention to risk elements, it is not easy to avoid them. If some accidents are happened in a construction site, it causes a loss of lives and property. Thus, there have been many trials in a construction area to protect lives and property.</p>
+<p id="rfc.section.6.2.1.p.2">Measurements of noise, vibration, and gas in a construction area are recorded on a remote server and reported to an inspector. Today, data produced bu such measurements is collected by a gateway in a construction area and transferred to a remote server. This incurs transmission cost, e.g. over a LTE connection, and storage cost, e.g. when using Amazon Web Services. When an inspector wants to investigate some accidents, he checks the information stored in a server.</p>
+<p id="rfc.section.6.2.1.p.3">If we deploy Edge computing in a construction area, the sensor data can be processed and analyzed in a gateway located within or near a construction area. And with the help of a statistical analysis or machine learning technologies, we can predict future accidents in advance and this prediction can be used as an alarm in a construction area and a notification to an inspector.</p>
+<p id="rfc.section.6.2.1.p.4">To determine the exact cause of some accident, not only sensor data but also audio and video data are transferred to a remote server or cloud networks. In this case, the data volume of audio and video is quite big and the cost of transmission can be a problem. If Edge computing can predict the time of accident, it can reduce the data volume of transmission; in general period, it can transmit the audio and video data with a low resolution/degree and in emergent period, it transmits the audio and video data with a high resolution/degree. By adjusting the resolution/degree of audio and video data, it can reduce transmission cost significantly.</p>
+<h1 id="rfc.section.6.2.2">
+<a href="#rfc.section.6.2.2">6.2.2.</a> <a href="#smart-grid" id="smart-grid">Smart Grid</a>
 </h1>
-<p id="rfc.section.7.2.2.p.1">In future smart cities, Smart grids will be critical in ensuring availability and efficiency for energy saving and control in city-wide electricity management. Edge computing is expected to play a significant role in those systems to improve transmission efficiency of electricity, react and restore for power disturbances, reduce operation cost, reuse renewable energy effectively, save energy of electricity for future usage, and so on. In addition, Edge computing can help monitoring power generation and power demands, and making electrical energy storage decisions in the Smart grid system.</p>
-<h1 id="rfc.section.7.2.3">
-<a href="#rfc.section.7.2.3">7.2.3.</a> <a href="#smart-water-system" id="smart-water-system">Smart Water System</a>
+<p id="rfc.section.6.2.2.p.1">In future smart cities, Smart grids will be critical in ensuring availability and efficiency for energy saving and control in city-wide electricity management. Edge computing is expected to play a significant role in those systems to improve transmission efficiency of electricity, react and restore for power disturbances, reduce operation cost, reuse renewable energy effectively, save energy of electricity for future usage, and so on. In addition, Edge computing can help monitoring power generation and power demands, and making electrical energy storage decisions in the Smart grid system.</p>
+<h1 id="rfc.section.6.2.3">
+<a href="#rfc.section.6.2.3">6.2.3.</a> <a href="#smart-water-system" id="smart-water-system">Smart Water System</a>
 </h1>
-<p id="rfc.section.7.2.3.p.1">The Water system is one of the most important aspects for building smart city. Effective use of water, and cost-effective and environment-friendly treatment of water are critical for water control and management. This can be facilitated by Edge computing in Smart water systems, to help monitor water consumption, transportation, prediction of future water use, and so on. For example, water harvesting and ground water monitoring will be supported from Edge computing. Also, a Smart water system is able to analyze collected information related to water control and management, control the reduction of water losses and improve the city water system through Edge computing.</p>
-<h1 id="rfc.section.7.2.4">
-<a href="#rfc.section.7.2.4">7.2.4.</a> <a href="#smart-buildings" id="smart-buildings">Smart Buildings</a>
+<p id="rfc.section.6.2.3.p.1">The Water system is one of the most important aspects for building smart city. Effective use of water, and cost-effective and environment-friendly treatment of water are critical for water control and management. This can be facilitated by Edge computing in Smart water systems, to help monitor water consumption, transportation, prediction of future water use, and so on. For example, water harvesting and ground water monitoring will be supported from Edge computing. Also, a Smart water system is able to analyze collected information related to water control and management, control the reduction of water losses and improve the city water system through Edge computing.</p>
+<h1 id="rfc.section.7">
+<a href="#rfc.section.7">7.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a>
 </h1>
-<p id="rfc.section.7.2.4.p.1">T.B.D.</p>
-<h1 id="rfc.section.7.2.5">
-<a href="#rfc.section.7.2.5">7.2.5.</a> <a href="#smart-cities" id="smart-cities">Smart Cities</a>
-</h1>
-<p id="rfc.section.7.2.5.p.1">T.B.D.</p>
-<h1 id="rfc.section.7.2.6">
-<a href="#rfc.section.7.2.6">7.2.6.</a> <a href="#connected-vehicles" id="connected-vehicles">Connected Vehicles</a>
-</h1>
-<p id="rfc.section.7.2.6.p.1">T.B.D.</p>
+<p id="rfc.section.7.p.1">T.B.D.</p>
 <h1 id="rfc.section.8">
-<a href="#rfc.section.8">8.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a>
+<a href="#rfc.section.8">8.</a> <a href="#acknowledgement" id="acknowledgement">Acknowledgement</a>
 </h1>
-<p id="rfc.section.8.p.1">T.B.D.</p>
-<h1 id="rfc.section.9">
-<a href="#rfc.section.9">9.</a> <a href="#acknowledgement" id="acknowledgement">Acknowledgement</a>
-</h1>
-<p id="rfc.section.9.p.1">The authors would like to thank Joo-Sang Youn and Akbak Rahman for their valuable comments and suggestions on this document.</p>
+<p id="rfc.section.8.p.1">The authors would like to thank Joo-Sang Youn and Akbak Rahman for their valuable comments and suggestions on this document.</p>
 <h1 id="rfc.references">
-<a href="#rfc.references">10.</a> References</h1>
+<a href="#rfc.references">9.</a> References</h1>
 <h1 id="rfc.references.1">
-<a href="#rfc.references.1">10.1.</a> Normative References</h1>
+<a href="#rfc.references.1">9.1.</a> Normative References</h1>
 <table><tbody><tr>
 <td class="reference"><b id="RFC2119">[RFC2119]</b></td>
 <td class="top">
 <a>Bradner, S.</a>, "<a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997.</td>
 </tr></tbody></table>
 <h1 id="rfc.references.2">
-<a href="#rfc.references.2">10.2.</a> Informative References</h1>
+<a href="#rfc.references.2">9.2.</a> Informative References</h1>
 <table><tbody>
 <tr>
 <td class="reference"><b id="_3GPP.23.501">[_3GPP.23.501]</b></td>
