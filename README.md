@@ -1,8 +1,8 @@
-# Problem Statement of IoT integrated with Edge Computing
+# IoT Edge Computing Challenges and Functions
 
-This is the working area for the Individual Internet-Draft "Problem Statement of IoT integrated with Edge Computing".
+This is the working area for the Individual Internet-Draft "IoT Edge Computing Challenges and Functions".
 
-* [Editor's copy](https://t2trg.github.io/t2trg-iot-edge-computing/)
+* [Editor's copy](https://t2trg.github.io/t2trg-iot-edge-computing/draft-hong-t2trg-iot-edge-computing.html)
 * [RG Draft](https://tools.ietf.org/html/draft-hong-iot-edge-computing)
 
 ## Building the Draft
