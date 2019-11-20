@@ -429,7 +429,7 @@ Edge computing domain management includes management of resources and functions 
 
 Edge computing nodes host logical functions relative to:
 
-* Finding resources, such as compute, storage or data resources;
+* Finding resources, such as compute, network, storage or data resources;
 * Authenticating platforms, end devices, functions, data;
 * Providing compute and storage offloading;
 * Management, e.g. of IoT end devices and data.
