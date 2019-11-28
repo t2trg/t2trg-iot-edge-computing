@@ -326,6 +326,51 @@ The definition of Edge computing from ISO is 'Form of distributed computing in w
 And the similar concept of Fog computing from Open Fog Consortium is 'A horizontal, system-level architecture that distributes computing, storage, control and networking functions closer to the users along a cloud-to-thing continuum' {{OpenFog}}.
 Based on these definitions, we can summarize a general philosophy of Edge computing as "Distribute the required functions close to users and data".
 
+## Example of IoT Edge Computing Use Cases
+
+### Smart Constructions
+
+In traditional construction domain, heavy equipment and machineries pause risks to humans and property. Thus, there have been many attempts to deploy technology to protect lives and property in construction sites. For example, measurements of noise, vibration, and gas in a construction site can be recorded on a remote server and reported to an inspector. Today, data produced by such measurements is collected by a gateway in a construction site and transferred to a remote server. This incurs transmission costs, e.g. over a LTE connection, and storage costs, e.g. when using Amazon Web Services. When an inspector needs to investigate some accidents, he checks the information stored in a server.
+
+If we leverage IoT edge computing, sensor data can be processed and analyzed in a gateway located within or near a construction site. And with the help of a statistical analysis or machine learning technologies, we can predict future accidents in advance and this prediction can trigger an alarm in a construction site and a notification to an inspector.
+
+To determine the exact cause of an accident, not only sensor data but also audio and video data are transferred to a remote server or cloud networks. In this case, the data volume of audio and video is quite big and the cost of transmission can be an issue. If edge computing can be leveraged to predict the time of an accident, this can reduce the data volume of transmission; while during a normal time period audio and video data may be transmitted with a low resolution, during an emergency, this transmission may use a high resolution. This adjustment can reduce transmission cost significantly.
+
+### Smart Grid
+
+In future smart city scenarios, the smart grid will be critical in ensuring highly available/efficient energy saving and control in city-wide electricity management. Edge computing is expected to play a significant role in those systems to improve transmission efficiency of electricity, to react and restore power after a disturbance, reduce operation cost and reuse renewable energy effectively. In addition, edge computing can help monitoring power generation and power demand, and making electrical energy storage decisions in the Smart grid system.
+
+### Smart Water System
+
+The water system is one of the most important aspects of a city. Effective use of water, and cost-effective and environment-friendly treatment of water are critical for water control and management. This can be facilitated by edge computing in smart water systems, to help monitor water consumption, transportation and prediction of future water use. For example, water harvesting and ground water monitoring will be supported through edge computing. Also, a smart water system is able to analyze collected information related to water control and management, control the reduction of water losses and improve the city water system through edge computing.
+
+## Common Aspects of Current IoT Edge Computing Service Platforms
+
+This section provides an overview of today's IoT Edge Computing field, based on a limited review of standards, research, open-source and proprietary products in {{sec-overview}}.
+
+Common aspects of IoT Edge computing service platforms are summarized here:
+
+Computing devices:
+: IoT gateways ({{sec-iot-gateways}}, {{sec-gateway-platforms}}) represent a common class of IoT Edge computing products, where the gateway is providing a local service on customer premises, and is remotely managed through a cloud service. IoT communication protocols are typically used between IoT devices and the gateway, including CoAP, MQTT and many specialized IoT protocols, while the gateway communicates with the distant cloud using typically HTTP and WebSocket. Virtualization platforms enable the deployment of virtual Edge computing functions, including IoT gateway software, on servers in the mobile network infrastructure (at base station and concentration points), in edge datacenters (in central offices) or regional datacenters located near central offices. End devices as computing devices are envisioned in fog architecture and research projects, but are not commonly used as such today.
+
+Service models:
+: Physical or virtual IoT gateways can host application programs built using an SDK. Edge cloud system operators host their customers' applications VMs or containers on servers located in or near access networks. These application have access to edge service APIs. For example, mobile network services include radio network information, location, bandwidth management. In a cloud-like service model, service providers consume low-level edge platform APIs and offer high-level APIs to their own customers' applications. This cloud-like model can be offered as an edge cloud service, or as an hybrid cloud service covering edge and distant cloud.
+
+Management:
+: Life cycle management of services and applications on physical IoT gateways is often cloud-based. Edge cloud management platforms and products ({{sec-cloud-management-platforms}}, {{sec-cloud-platforms}}) adapt cloud management technologies (e.g. kubernetes) to the edge cloud, i.e. to smaller, distributed computing devices running outside a controlled data center. Services and application life-cycle is typically using a NFV-like management and orchestration model.
+
+Communication services:
+: The platform typically includes services to advertise or consume APIs, and enables communicating with local and remote endpoints. The service platform is typically extensible by edge applications, since they can advertise an API that other edge applications can consume. IoT communication services include protocols translation, analytics and transcoding. Communication between Edge computing devices is enabled in tiered deployments or distributed deployments.
+
+Storage models:
+: An edge cloud platform may enable pass-through without storage, local storage (e.g. on IoT gateways). Some edge cloud platforms use a distributed form of storage, e.g. an ICN network or a distributed storage platform. External storage, e.g. on databases in distant or local IT cloud, is typically used for filtered data deemed worthy of long term storage, or in some cases for all data, for example when required for regulatory reasons.
+
+Computing models:
+: Stateful computing is supported on platforms hosting native programs, VMs or containers. Stateless computing is supported on platforms providing a "serverless computing" service (a.k.a. function-as-a-service), or on systems based on named function networking.
+
+Network traffic patterns:
+: Network traffic is typically high volume uplink with throttling by Edge computing devices (or deferred to off-peak hours or using physical shipping); and downlink for control and software updates.
+
 # Challenges for IoT and Impacts of Edge Computing {#sec-challenges}
 
 As the IoT is maturing, systems are converging, deployments are growing, and IoT technology is used with more and more demanding applications such as industrial, automotive, or healthcare.
@@ -442,55 +487,6 @@ IoT end devices can be sensors, actuators, or more generally IoT things. Not onl
 
 Edge computing nodes communicate between themselves and with end devices over an underlying network. There
 is therefore a need for the Edge computing domain to directly or indirectly control those network functions.
-
-# State-of-the-Art of IoT Edge Computing
-
-## Common aspects of IoT Edge computing service platforms
-
-This section provides an overview of today's IoT Edge Computing field, based on a limited review of standards, research, open-source and proprietary products in {{sec-overview}}.
-
-Common aspects of IoT Edge computing service platforms are summarized here:
-
-Computing devices:
-: IoT gateways ({{sec-iot-gateways}}, {{sec-gateway-platforms}}) represent a common class of IoT Edge computing products, where the gateway is providing a local service on customer premises, and is remotely managed through a cloud service. IoT communication protocols are typically used between IoT devices and the gateway, including CoAP, MQTT and many specialized IoT protocols, while the gateway communicates with the distant cloud using typically HTTP and WebSocket. Virtualization platforms enable the deployment of virtual Edge computing functions, including IoT gateway software, on servers in the mobile network infrastructure (at base station and concentration points), in edge datacenters (in central offices) or regional datacenters located near central offices. End devices as computing devices are envisioned in fog architecture and research projects, but are not commonly used as such today.
-
-Service models:
-: Physical or virtual IoT gateways can host application programs built using an SDK. Edge cloud system operators host their customers' applications VMs or containers on servers located in or near access networks. These application have access to edge service APIs. For example, mobile network services include radio network information, location, bandwidth management. In a cloud-like service model, service providers consume low-level edge platform APIs and offer high-level APIs to their own customers' applications. This cloud-like model can be offered as an edge cloud service, or as an hybrid cloud service covering edge and distant cloud.
-
-Management:
-: Life cycle management of services and applications on physical IoT gateways is often cloud-based. Edge cloud management platforms and products ({{sec-cloud-management-platforms}}, {{sec-cloud-platforms}}) adapt cloud management technologies (e.g. kubernetes) to the edge cloud, i.e. to smaller, distributed computing devices running outside a controlled data center. Services and application life-cycle is typically using a NFV-like management and orchestration model.
-
-Communication services:
-: The platform typically includes services to advertise or consume APIs, and enables communicating with local and remote endpoints. The service platform is typically extensible by edge applications, since they can advertise an API that other edge applications can consume. IoT communication services include protocols translation, analytics and transcoding. Communication between Edge computing devices is enabled in tiered deployments or distributed deployments.
-
-Storage models:
-: An edge cloud platform may enable pass-through without storage, local storage (e.g. on IoT gateways). Some edge cloud platforms use a distributed form of storage, e.g. an ICN network or a distributed storage platform. External storage, e.g. on databases in distant or local IT cloud, is typically used for filtered data deemed worthy of long term storage, or in some cases for all data, for example when required for regulatory reasons.
-
-Computing models:
-: Stateful computing is supported on platforms hosting native programs, VMs or containers. Stateless computing is supported on platforms providing a "serverless computing" service (a.k.a. function-as-a-service), or on systems based on named function networking.
-
-Network traffic patterns:
-: Network traffic is typically high volume uplink with throttling by Edge computing devices (or deferred to off-peak hours or using physical shipping); and downlink for control and software updates.
-
-## Use Cases of IoT Edge Computing
-
-### Smart Constructions
-
-In traditional construction domain, there are many heavy equipment and machineries and dangerous elements. Even though human pay attention to risk elements, it is not easy to avoid them. If some accidents are happened in a construction site, it causes a loss of lives and property. Thus, there have been many trials in a construction area to protect lives and property.
-
-Measurements of noise, vibration, and gas in a construction area are recorded on a remote server and reported to an inspector. Today, data produced bu such measurements is collected by a gateway in a construction area and transferred to a remote server. This incurs transmission cost, e.g. over a LTE connection, and storage cost, e.g. when using Amazon Web Services. When an inspector wants to investigate some accidents, he checks the information stored in a server.
-
-If we deploy Edge computing in a construction area, the sensor data can be processed and analyzed in a gateway located within or near a construction area. And with the help of a statistical analysis or machine learning technologies, we can predict future accidents in advance and this prediction can be used as an alarm in a construction area and a notification to an inspector.
-
-To determine the exact cause of some accident, not only sensor data but also audio and video data are transferred to a remote server or cloud networks. In this case, the data volume of audio and video is quite big and the cost of transmission can be a problem. If Edge computing can predict the time of accident, it can reduce the data volume of transmission; in general period, it can transmit the audio and video data with a low resolution/degree and in emergent period, it transmits the audio and video data with a high resolution/degree. By adjusting the resolution/degree of audio and video data, it can reduce transmission cost significantly.
-
-### Smart Grid
-
-In future smart cities, Smart grids will be critical in ensuring availability and efficiency for energy saving and control in city-wide electricity management. Edge computing is expected to play a significant role in those systems to improve transmission efficiency of electricity, react and restore for power disturbances, reduce operation cost, reuse renewable energy effectively, save energy of electricity for future usage, and so on. In addition, Edge computing can help monitoring power generation and power demands, and making electrical energy storage decisions in the Smart grid system.
-
-### Smart Water System
-
-The Water system is one of the most important aspects for building smart city. Effective use of water, and cost-effective and environment-friendly treatment of water are critical for water control and management. This can be facilitated by Edge computing in Smart water systems, to help monitor water consumption, transportation, prediction of future water use, and so on. For example, water harvesting and ground water monitoring will be supported from Edge computing. Also, a Smart water system is able to analyze collected information related to water control and management, control the reduction of water losses and improve the city water system through Edge computing.
 
 # Security Considerations
 
