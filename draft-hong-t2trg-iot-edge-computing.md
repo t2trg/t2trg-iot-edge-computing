@@ -462,31 +462,65 @@ It is expected Edge computing will play an important role to deploy new IoT serv
 
 The Edge computing domains is interconnected with IoT end devices (southbound connectivity) and possibly with a remote/cloud network (northbound connectivity). Edge computing nodes provide multiple logical functions such as finding resources, authentication, storage/processing and management.
 
-## Gateway Function and Remote Network
+# IoT Edge Computing Components
 
-A northbound interface is provided by a gateway component to a remote network, e.g. a cloud, home or enterprise network. These components may not exist in standalone scenarios, where Edge computing is provided locally without a connection to a remote network. The northbound interface is a data plane interface. Nevertheless, the remote network may also host an edge cloud manager function.
+This section lists typical architecture components of an edge computing system. Most components can be centralized or distributed, implemented in the edge network, or through some interworking between the edge network and a remote cloud network.
 
-## Edge Computing Domain Management and Manager Role
+## OAM Components
 
-Edge computing domain management includes management of resources and functions in the Edge computing domain. Management of IoT end devices and IoT data may be included or may be part of the Edge computing logical functions (OPEN QUESTION). The management function can provides SaaS, PaaS, IaaS service APIs to an Edge computing manager. The edge management role may be taken by an entity in the cloud, but it may also be a local entity, or even be non-existent (during normal operation) in autonomic systems.
+Edge computing OAM goes beyond the network-related OAM functions listed in RFC 6291. Besides infrastructure (network, storage and computing resources), edge computing systems can also include computing environments (for VMs, software containers, functions), IoT end devices, data and code.
 
-## Edge Computing Logical Functions
+Operation related functions include performance monitoring for service level agreement measurement; fault management and provisioning for links, nodes, compute and storage resources, platforms and services. Administration covers network/compute/storage resources, platforms and services discovery, configuration and planning. Management covers monitoring and diagnostics of failures, as well as means to minimize their occurrence and take corrective actions. This may include software updates management, high service availability through redundancy and multipath communication.
 
-Edge computing nodes host logical functions relative to:
+We further detail a few OAM aspects.
 
-* Finding resources, such as compute, network, storage or data resources;
-* Authenticating platforms, end devices, functions, data;
-* Providing compute and storage offloading;
-* Management, e.g. of IoT end devices and data.
+### Resources Discovery
 
-With regard to the high level challenges listed in {{sec-challenges}}, data storage and processing at the edge is a major aspect of IoT Edge computing. Data may therefore need to be classified (e.g. in terms of privacy, importance, validity, etc.). Data analysis such as performed in AI/ML tasks performed at the edge may benefit from specialized hardware support on computing nodes. IoT Edge computing will face detailed challenges in term of, for example, programmability, naming, data abstraction and service management. Furthermore, while Edge computing can support IoT services independently of Cloud computing, it is increasingly connected to Cloud computing in most IoT systems: thus, the relationship of IoT Edge Computing to Cloud Computing is another potential challenge {{ISO_TR}}.
+This OAM component is about finding infrastructure resources, such as compute, network and storage, but also other resources such as IoT end devices, sensors, data, code, or services.
 
-## Edge Networking Function and IoT End Devices
+### Virtualization Management
 
-IoT end devices can be sensors, actuators, or more generally IoT things. Not only the big volume of IoT data but also the massive number of IoT end devices are the cause of a massive scalability issue in future IoT environments. To address this challenge Edge computing separates the scalability domain into edge/local networks and remote network.
+Some IoT edge computing systems make use of virtualized (compute, storage and networking) resources, which needs to be allocated and configured.
 
-Edge computing nodes communicate between themselves and with end devices over an underlying network. There
-is therefore a need for the Edge computing domain to directly or indirectly control those network functions.
+### Authentication
+
+This can cover authenticating platforms, end devices, data and code units. Today authentication typically relies on the installation of a secret on IoT end devices and on computing devices (e.g. a device certificate).
+
+### IoT End Devices Management
+
+IoT end device management includes managing information about the IoT devices, including their sensors, how to communicate with them, etc. Edge computing addresses the scalability challenges from the massive number of IoT end devices and IoT data value by separating the scalability domain into edge/local networks and remote network.
+
+## Functional Components
+
+### External APIs
+
+An IoT edge cloud may provide a northbound data plane or management plane interface to a remote network, e.g. a cloud, home or enterprise network. This interface does not exist in standalone (local-only) scenarios. To support such an interface when it exists, an edge computing component needs to expose an API, deal with authentication and authorization, support secure communication.
+
+An IoT edge cloud may provide an API or interface to local users (e.g. to facilitate local management), or to mobile users (e.g. to provide access to services and applications).
+
+### Communication Brokering
+
+A typical function of IoT edge computing is to facilitate communication with IoT end devices: for example, enable clients to register as recipients for data from devices, as well as forwarding/routing of traffic to or from IoT end devices. Another aspect of a communication component is dispatching of alerts and notifications to interested consumers both inside and outside of the edge computing domain. Protocol translation may also be performed when necessary.
+
+Communication brokering may be centralized in some systems, e.g. using a hub-and-spoke message broker, or distributed like with message buses. Distributed systems may leverage direct communication between end devices and communication devices, such as device-to-device links. Brokers functions can include ensuring communication reliability, traceability, an in some cases transaction management.
+
+QoS can be provided in some systems through the combination of network QoS (e.g. traffic engineering or wireless resource scheduling) and compute/storage resource allocations. In some systems a bandwidth manager service can be exposed to enable allocation of bandwidth to/from an edge computing application instance.
+
+### In-Network Computation
+
+A core function of IoT edge computing is to enable computation offloading, i.e. to perform computation on an edge node on behalf of a device or user. The support for in-network computation may vary in term of capability, e.g. computing nodes can host a virtual machine able run stateful or stateless code, or a rule engine providing an API to register actions in response to conditions such as IoT device ID, sensor values to check, thresholds, etc. Computation offloading includes orchestration or application lifecycle related aspects, such as: selecting an appropriate compute device based on available resources, compute node properties, etc.; onboarding code on a platform or compute device; invoking a remote code execution; relocating an instance from one compute node to another.
+
+### Edge Caching
+
+A purpose of local caching may be to enable local data processing (e.g. pre-processing or analysis), or to enable delayed virtual or physical shipping. A responsibility of the edge caching component is to manage data persistence, e.g. to schedule removal of data when it is no longer needed. Another aspect of this component may be to authenticate an encrypt data. It can for example take the form of a distributed storage system (e.g. Ceph).
+
+### Data Analysis
+
+With regard to the high level challenges listed in {{sec-challenges}}, data storage and processing at the edge is a major aspect of IoT edge computing. Data may therefore need to be classified (e.g. in terms of privacy, importance, validity, etc.). Data analysis such as performed in AI/ML tasks performed at the edge may benefit from specialized hardware support on computing nodes. IoT edge computing will face challenges in term of, for example, programmability, naming, data abstraction and service management. Furthermore, while edge computing can support IoT services independently of cloud computing, it is increasingly connected to cloud computing in most IoT systems: thus, the relationship of IoT edge computing to cloud computing is another potential challenge {{ISO_TR}}.
+
+### Other Services
+
+Data generated by IoT devices and associated information obtained from the access network may be used to provide high level services such as end device location, radio network information, etc.
 
 # Security Considerations
 
