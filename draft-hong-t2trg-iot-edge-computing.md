@@ -289,19 +289,18 @@ informative:
 
 --- abstract
 
-IoT services face new challenges originating from developing IoT environmental requirements, such as strict latency, uplink cost, uninterrupted services, privacy and security.
-In response to those challenges, the integration of edge computing and IoT has emerged as a promising solution, whose direction should be discussed in the IETF/IRTF.
-This document describes the aforementioned challenges, and some aspects of IoT Edge Computing including state-of-the-art, general model and major components, with the goal to provide a common base for future discussions in T2TRG and other groups.
+IoT services face new challenges originating from developing IoT environmental requirements, such as strict latency, uplink cost, uninterrupted services, privacy, and security.
+In response to those challenges, the integration of edge computing and IoT has emerged as a promising solution, whose direction should be discussed in the IRTF.
+This document describes the aforementioned challenges and some aspects of IoT edge computing including the state of the art, a general model, and major components, with the goal to provide a common base for future discussions in T2TRG and other groups.
 
 --- middle
 
 # Introduction
 
-Nowadays, most IoT services are based on cloud computing in the back-end, since it can provide virtually unlimited storage and processing power. The integration of IoT with cloud computing brings many advantages such as flexibility, efficiency, and ability to store and use data.
+Nowadays, most IoT services are based on cloud computing for the back-end, since it can provide virtually unlimited storage and processing power. The integration of IoT with cloud computing brings many advantages such as flexibility, efficiency, and ability to store and use data.
 
-However, the IoT environment is changing in such a way that vast amounts of data are created at edge/local networks and about a half of data is stored, processed, analyzed and acted upon close to the data producer. Thus, emerging IoT services introduce new challenges, such as strict latency, uplink cost, uninterrupted services, privacy and security, that cannot be addressed by today's centralized cloud computing models alone.
-
-In response to those challenges, the integration of edge computing and IoT (or "IoT Edge Computing") has emerged as a promising solution, whose direction should be discussed in the IRTF. This document therefore describes, besides these new challenges, some aspects of IoT Edge Computing including state-of-the-art, general models and major components, with the goal to provide a common base for future discussions in T2TRG and other groups.
+However, the IoT environment is changing in such a way that vast amounts of data are created at the local networks, often referred to as "the edge", and about half of the data is stored, processed, analyzed, and acted upon close to the data producer. Thus, emerging IoT services introduce new challenges, such as strict latency, uplink cost, uninterrupted services, privacy, and security, which cannot be addressed by today's centralized cloud computing models alone.
+In response to those challenges, the integration of edge computing and IoT (or "IoT edge computing") has emerged as a promising solution.
 
 # Conventions and Terminology
 
@@ -311,9 +310,12 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 ## Internet of Things (IoT)
 
-Since the phrase 'Internet of Things (IoT)' was coined by Kevin Ashton in 1999 working on Radio-frequency identification (RFID) technology at the Auto-ID Center of the Massachusetts Institute of Technology (MIT) {{Ashton}},
-the concept of IoT has been that things connected to the Internet can send and receive information collected by sensors without human intervention, where things are various embedded systems such as home appliances, mobile equipment, wearable devices, etc. IoT has become one of the notable innovations playing an important role in our daily lives {{Lin}}.
-IoT is generally characterized by real world small things that are widely distributed but have limited storage and processing power, which involve concerns regarding reliability, performance, energy consumption, security, and privacy.
+Since the term "Internet of Things" (IoT) was coined by Kevin Ashton in 1999 working on Radio-Frequency Identification (RFID) technology at the Auto-ID Center of the Massachusetts Institute of Technology (MIT) {{Ashton}},
+the concept of IoT had been broadened to reflect the vision of connecting the physical world to the virtual world of computers using (wireless) sensor networks with any kind of technology with which the Things can send and receive information without human intervention.
+Recently, the term has become more literal by actually connecting Things to the Internet and converging on Internet and also Web technology.
+Things are usually embedded systems of various kinds, such as home appliances, mobile equipment, wearable devices, etc.
+They are widely distributed, but have limited storage and processing power, which involve concerns regarding reliability, performance, energy consumption, security, and privacy.
+Nonetheless, IoT has become one of the notable innovations playing an important role in our daily lives {{Lin}}.
 
 ## Cloud Computing
 
@@ -329,56 +331,72 @@ It is predicted that by 2019, 45% of the data created in IoT will be stored, pro
 
 In cloud computing, users traditionally only consumed IoT data through cloud services. Now, however, users are also producing IoT data with their mobile devices. This change requires more functionality at edge/local networks {{Shi}}.
 
-## Edge (or Fog) Computing
+## Edge Computing
 
-Edge computing, also referred to as fog computing, is a new paradigm in which substantial computing and storage resources are placed at the Internet's edge in close proximity to mobile devices, sensors or actuators so that computing happens near data sources {{Mahadev}}, or closer to where the action or decisions are happening.
-It works on both downstream data on behalf of cloud services and upstream data on behalf of IoT services. An edge device is any computing or networking resource residing between data sources and cloud-based datacenters.
-In edge computing, the end device not only consumes data but also produces data. And at the network edge, devices not only request services and information from the cloud but also handle computing tasks including
-processing, storage, caching, and load balancing on data sent to and from the cloud {{Shi}}.
+Edge computing, under certain aspects also referred to as fog computing, is a new paradigm in which substantial computing and storage resources are placed at the edge of the Internet, that is,in close proximity to mobile devices, sensors, actuators, or machines, so that computing happens near data sources {{Mahadev}}, or closer to where decisions or interactions with the physical world are happening.
+It works on both downstream data on behalf of cloud services and upstream data on behalf of IoT services.
 
-The definition of edge computing from ISO is a 'form of distributed computing in which significant processing and data storage takes place on nodes which are at the edge of the network' {{ISO_TR}}. ETSI's definition of multi-access edge computing is a 'system which provides an IT service environment and cloud-computing capabilities at the edge of an access network which contains one or more type of access technology, and in close proximity to its users' {{ETSI_MEC_01}}.
-And the similar concept of fog computing from the OpenFog/Industrial Internet Consortium is 'a horizontal, system-level architecture that distributes computing, storage, control and networking functions closer to the users along a cloud-to-thing continuum' {{sec-openfog}}.
-Based on these definitions, we can summarize a general philosophy of edge computing as to "distribute the required functions close to users and data".
+An edge device is any computing or networking resource residing between data sources and cloud-based datacenters.
+In edge computing, end devices not only consume data, but also produce data. And at the network edge, devices not only request services and information from the cloud, but also handle computing tasks including processing, storage, caching, and load balancing on data sent to and from the cloud {{Shi}}.
 
-Actors from various industries approach edge/fog computing using different terms and reference models, although in practice these approaches are not incompatible and may integrate with each other. The telecommunication industry tends to use a model where edge computing services are deployed over NFV infrastructure at aggregation points, or in proximity to gNodeBs (e.g., {{sec-etsi-mec}}). The industrial IoT industry tends to use an IT-centric model, where edge devices (such as gateways) and edge servers are integrated with non-IT operational systems, as an extension of the IT infrastructure (e.g., {{sec-iot-gateways}}).
+The definition of edge computing from ISO is a "form of distributed computing in which significant processing and data storage takes place on nodes which are at the edge of the network" {{ISO_TR}}. ETSI's definition of multi-access edge computing is a "system which provides an IT service environment and cloud-computing capabilities at the edge of an access network which contains one or more type of access technology, and in close proximity to its users" {{ETSI_MEC_01}}.
+
+The similar concept of fog computing from the Industrial Internet Consortium (formerly OpenFog) is "a horizontal, system-level architecture that distributes computing, storage, control and networking functions closer to the users along a cloud-to-thing continuum" {{sec-openfog}}.
+The term fog computing usually represents the notion of a multi-tiered edge computing, that is, several layers of compute infrastructure between the end devices and the cloud.
+
+Based on these definitions, we can summarize a general philosophy of edge computing as to distribute the required functions close to users and data, while the difference to classic local systems is the usage of management and orchestration features adopted from cloud computing.
+
+Actors from various industries approach edge computing using different terms and reference models,although in practice these approaches are not incompatible and may integrate with each other:
+
+* The telecommunication industry tends to use a model where edge computing services are deployed over NFV infrastructure at aggregation points, or in proximity to the user equipment (e.g., gNodeBs) {{sec-etsi-mec}}.
+* Enterprise and campus solutions often interpret edge computing as an "edge cloud", that is, a smaller data center directly connected to the local network (often referred to as "on-premise").
+* The automation industry defines the edge as the connection point between IT from OT (Operational Technology). Hence, here edge computing sometimes referres to applying IT solutions to OT problems such as analytics, more flexible user interfaces, or simply having more compute power than an automation controller.
+
+It is clear that the combination of these models leads to a multi-tier edge computing solution as mentioned above.
 
 ## Example of IoT Edge Computing Use Cases
 
-IoT edge computing can be used in use cases in smart home, industry, grid, healthcare, city, transportation, agriculture, education scenarios. We discuss here only a few examples of such scenarios.
+IoT edge computing can be used in home, industry, grid, healthcare, city, transportation, agriculture, and/or education scenarios.
+We discuss here only a few examples of such use cases.
 
 ### Smart Constructions
 
-In traditional construction domain, heavy equipment and machinery pose risks to humans and property. Thus, there have been many attempts to deploy technology to protect lives and property in construction sites. For example, measurements of noise, vibration, and gas can be recorded on a remote server and reported to an inspector. Today, data produced by such measurements is collected by a local gateway and transferred to a remote server. This incurs transmission costs, e.g. over a LTE connection, and storage costs, e.g. when using Amazon Web Services. When an inspector needs to investigate an incident, he checks the information stored on a server.
+In traditional construction domain, heavy equipment and machinery pose risks to humans and property. Thus, there have been many attempts to deploy technology to protect lives and property in construction sites. For example, measurements of noise, vibration, and gas can be recorded on a remote server and reported to an inspector. Today, data produced by such measurements is collected by a local gateway and transferred to a remote server. This incurs transmission costs, e.g., over a LTE connection, and storage costs, e.g., when using Amazon Web Services. When an inspector needs to investigate an incident, he checks the information stored on a server.
 
 If we leverage IoT edge computing, sensor data can be processed and analyzed on a gateway located within or near a construction site. And with the help of statistical analysis or machine learning technologies, we can predict future incidents in advance and this prediction can trigger an on-site alarm and a notification to an inspector.
 
-To determine the exact cause of an incident, sensor data including audio and video are transferred to a remote server. In this case, audio and video data volume is typically very large and the cost of transmission can be an issue. Edge computing can be leveraged to predict the time of an incident, which can reduce the volume of transmitted data; while during a normal time period audio and video data may be transmitted with a low resolution, during an emergency, this transmission may use a high resolution. This adjustment can reduce transmission cost significantly.
+To determine the exact cause of an incident, sensor data including audio and video are transferred to a remote server. In this case, audio and video data volume is typically very large and the cost of transmission can be an issue.
+Edge computing can be leveraged to predict the time of an incident, which can reduce the volume of transmitted data; while during a normal time period audio and video data may be transmitted with a low resolution, during an emergency, this transmission may use a high resolution. This adjustment can reduce transmission cost significantly.
 
 ### Smart Grid
 
-In future smart city scenarios, the Smart Grid will be critical in ensuring highly available/efficient energy control in city-wide electricity management. Edge computing is expected to play a significant role in those systems to improve transmission efficiency of electricity; to react and restore power after a disturbance; to reduce operation costs and reuse renewable energy effectively, since these operations involve local decision making. In addition, edge computing can help monitoring power generation and power demand, and making electrical energy storage decisions in the smart grid system.
+In future smart city scenarios, the Smart Grid will be critical in ensuring highly available/efficient energy control in city-wide electricity management.
+Edge computing is expected to play a significant role in those systems to improve transmission efficiency of electricity; to react and restore power after a disturbance; to reduce operation costs and reuse renewable energy effectively, since these operations involve local decision making. In addition, edge computing can help monitoring power generation and power demand, and making electrical energy storage decisions in the smart grid system.
 
 ### Smart Water System
 
-The water system is one of the most important aspects of a city. Effective use of water, and cost-effective and environment-friendly water treatment  are critical aspects of this system. They can be facilitated by edge computing in smart water systems, to help monitor water consumption, transportation and prediction of future water use. For example, water harvesting and ground water monitoring will be supported through edge computing. Edge computing will also enable locally analyzing collected information related to water control and management, and limit water losses.
+The water system is one of the most important aspects of a city. Effective use of water, and cost-effective and environment-friendly water treatment  are critical aspects of this system. They can be facilitated by edge computing in smart water systems, to help monitor water consumption, transportation and prediction of future water use. For example, water harvesting and ground water monitoring will be supported through edge computing.
+Edge computing will also enable locally analyzing collected information related to water control and management, and limit water losses.
 
 ## Common Aspects of Current IoT Edge Computing Service Platforms
 
-This section provides an overview of today's IoT Edge Computing field, based on a limited review of standards, research, open-source and proprietary products in {{sec-overview}}.
+This section provides an overview of today's IoT edge computing field, based on a limited review of standards, research, open-source and proprietary products in {{sec-overview}}.
 
-IoT gateways ({{sec-iot-gateways}}, {{sec-gateway-platforms}}) represent a common class of IoT edge computing products, where the gateway is providing a local service on customer premises, and is remotely managed through a cloud service. IoT communication protocols are typically used between IoT devices and the gateway, including CoAP, MQTT and many specialized IoT protocols (such as OPC-UA and DDS in the industrial IoT space), while the gateway communicates with the distant cloud typically using HTTP. Virtualization platforms enable the deployment of virtual edge computing functions (as VMs, application containers, etc.), including IoT gateway software, on servers in the mobile network infrastructure (at base station and concentration points), in edge datacenters (in central offices) or regional datacenters located near central offices. End devices are envisioned to become computing devices in forward looking projects, but are not commonly used as such today.
+IoT gateways ({{sec-iot-gateways}}, {{sec-gateway-platforms}}) represent a common class of IoT edge computing products, where the gateway is providing a local service on customer premises, and is remotely managed through a cloud service. IoT communication protocols are typically used between IoT devices and the gateway, including CoAP, MQTT and many specialized IoT protocols (such as OPC UA and DDS in the Industrial IoT space), while the gateway communicates with the distant cloud typically using HTTP. Virtualization platforms enable the deployment of virtual edge computing functions (as VMs, application containers, etc.), including IoT gateway software, on servers in the mobile network infrastructure (at base station and concentration points), in edge datacenters (in central offices) or regional datacenters located near central offices. End devices are envisioned to become computing devices in forward looking projects, but are not commonly used as such today.
 
-Physical or virtual IoT gateways can host application programs, which are typically built using an SDK to access local services through a programmatic API. Edge cloud system operators host their customers' applications VMs or containers on servers located in or near access networks, which can implement local edge services. For example, mobile networks can provide edge services for radio network information, location and bandwidth management.
+Physical or virtual IoT gateways can host application programs, which are typically built using an SDK to access local services through a programmatic API.
+Edge cloud system operators host their customers' applications VMs or containers on servers located in or near access networks, which can implement local edge services. For example, mobile networks can provide edge services for radio network information, location and bandwidth management.
 
-Life cycle management of services and applications on physical IoT gateways is often cloud-based. Edge cloud management platforms and products ({{sec-cloud-management-platforms}}, {{sec-cloud-platforms}}) adapt cloud management technologies (e.g. kubernetes) to the edge cloud, i.e. to smaller, distributed computing devices running outside a controlled data center. Services and application life-cycle is typically using a NFV-like management and orchestration model.
+Life cycle management of services and applications on physical IoT gateways is often cloud-based.
+Edge cloud management platforms and products ({{sec-cloud-management-platforms}}, {{sec-cloud-platforms}}) adapt cloud management technologies (e.g., Kubernetes) to the edge cloud, i.e., to smaller, distributed computing devices running outside a controlled data center. Services and application life-cycle is typically using a NFV-like management and orchestration model.
 
-The platform typically includes services to advertise or consume APIs (e.g. Mp1 interface in ETSI MEC supports service discovery and communication), and enables communicating with local and remote endpoints (e.g. message routing function in IoT gateways). The service platform is typically extensible by edge applications, since they can advertise an API that other edge applications can consume. IoT communication services include protocols translation, analytics and transcoding. Communication between edge computing devices is enabled in tiered deployments or distributed deployments.
+The platform typically includes services to advertise or consume APIs (e.g., Mp1 interface in ETSI MEC supports service discovery and communication), and enables communicating with local and remote endpoints (e.g., message routing function in IoT gateways). The service platform is typically extensible by edge applications, since they can advertise an API that other edge applications can consume. IoT communication services include protocols translation, analytics and transcoding. Communication between edge computing devices is enabled in tiered deployments or distributed deployments.
 
-An edge cloud platform may enable pass-through without storage or local storage (e.g. on IoT gateways). Some edge cloud platforms use a distributed form of storage, e.g. an ICN network (e.g. NFN nodes can store data in NDN, {{sec-nfn}}) or a distributed storage platform (e.g., such as Ceph, {{sec-cloud-management-platforms}}). External storage, e.g. on databases in distant or local IT cloud, is typically used for filtered data deemed worthy of long term storage, or in some cases for all data, for example when required for regulatory reasons.
+An edge cloud platform may enable pass-through without storage or local storage (e.g., on IoT gateways). Some edge cloud platforms use a distributed form of storage such as an ICN network (e.g., NFN nodes can store data in NDN, {{sec-nfn}}) or a distributed storage platform (e.g., such as Ceph, {{sec-cloud-management-platforms}}). External storage, e.g., on databases in distant or local IT cloud, is typically used for filtered data deemed worthy of long term storage, or in some cases for all data, for example when required for regulatory reasons.
 
 Stateful computing is supported on platforms hosting native programs, VMs or containers. Stateless computing is supported on platforms providing a "serverless computing" service (a.k.a. function-as-a-service), or on systems based on named function networking.
 
-In many IoT use cases, a typical network usage pattern is high volume uplink with some form of traffic reduction enabled by processing over edge computing devices. Alternatives to traffic reduction include deferred transmission (to off-peak hours or using physical shipping). Downlink traffic includes application control and software updates. Other, downlink-heavy traffic patterns are not excluded but are more often associated with non-IoT usage (e.g. video CDNs). 
+In many IoT use cases, a typical network usage pattern is high volume uplink with some form of traffic reduction enabled by processing over edge computing devices. Alternatives to traffic reduction include deferred transmission (to off-peak hours or using physical shipping). Downlink traffic includes application control and software updates. Other, downlink-heavy traffic patterns are not excluded but are more often associated with non-IoT usage (e.g., video CDNs). 
 
 # Challenges for IoT and Impacts of Edge Computing {#sec-challenges}
 
@@ -429,12 +447,12 @@ Hence, the owner of these systems are generally reluctant to upload IoT data to 
 Edge computing is expected to play an important role in deploying new IoT services integrated with Big Data and AI. Although there are lots of approaches to edge computing, we can lay out a general model and list associated logical functions in this section. In practice, this model can map to different architectures, such as: 
 
 - A single IoT gateway, or a hierarchy of IoT gateways, typically connected to the cloud (e.g., to extend the traditionally cloud-based management of IoT devices and data to the edge). A common role of an IoT Gateway is to provide access to an heterogeneous set of IoT devices/sensors; handle IoT data; and deliver IoT data to its final destination in a cloud network. Whereas an IoT gateway needs  interactions with cloud like as conventional cloud computing, it can also operate independently.
-- A set of distributed computing nodes, e.g. embedded in switches, routers, edge cloud servers or mobile devices. In the future, some IoT end devices may have enough computing capabilities to participate in such distributed systems. In this model, edge computing nodes can collaborate with each other to share their resources.
+- A set of distributed computing nodes, e.g., embedded in switches, routers, edge cloud servers or mobile devices. In the future, some IoT end devices may have enough computing capabilities to participate in such distributed systems. In this model, edge computing nodes can collaborate with each other to share their resources.
 
 ~~~~~~~~~~~~~~~~~~~
    +---------------------+
    |   Remote network    |  +---------------+
-   |(e.g. cloud network) |  |   Service     |
+   |(e.g., cloud network)|  |   Service     |
    +-----------+---------+  |   Operator    |
                |            +------+--------+
                |                   |
@@ -468,7 +486,8 @@ Edge computing is expected to play an important role in deploying new IoT servic
 ~~~~~~~~~~~~~~~~~~~
 {: artwork-align="center" #rl-fig1 title="Model of IoT Edge Computing"}
 
-In this general model, the edge computing domain is interconnected with IoT end devices (southbound connectivity) and possibly with a remote/cloud network (northbound connectivity), and with a service operator's system. Edge computing nodes provide multiple logical functions, or components, which may not all be present in a given system. They may be implemented in a centralized or distributed fashion, in the edge network, or through some interworking between the edge network and a remote cloud network.
+In this general model, the edge computing domain is interconnected with IoT end devices (southbound connectivity) and possibly with a remote/cloud network (northbound connectivity), and with a service operator's system.
+Edge computing nodes provide multiple logical functions, or components, which may not all be present in a given system. They may be implemented in a centralized or distributed fashion, in the edge network, or through some interworking between the edge network and a remote cloud network.
 
 We now attempt to enumerate major edge computing domain components. They are here loosely organized into OAM and functional components, with the understanding that the distinction between these classes may not always be clear, depending on actual system architectures.
 
@@ -490,7 +509,7 @@ Some IoT edge computing systems make use of virtualized (compute, storage and ne
 
 ### Authentication and Authorization
 
-This can cover authenticating platforms, end devices, data, code units and applications or users interacting with the system. Today, centralized gateway-based systems rely for device authentication on the installation of a secret on IoT end devices and on computing devices (e.g. a device certificate stored in a hardware security module).
+This can cover authenticating platforms, end devices, data, code units and applications or users interacting with the system. Today, centralized gateway-based systems rely for device authentication on the installation of a secret on IoT end devices and on computing devices (e.g., a device certificate stored in a hardware security module).
 
 ### Edge Organization and Federation
 
@@ -498,35 +517,36 @@ In a distributed system context, once edge devices have discovered and authentic
 
 ### IoT End Devices Management
 
-IoT end device management includes managing information about the IoT devices, including their sensors, how to communicate with them, etc. Edge computing addresses the scalability challenges from the massive number of IoT end devices and IoT data value by separating the scalability domain into edge/local networks and remote network.
+IoT end device management includes managing information about the IoT devices, including their sensors, how to communicate with them, etc.
+Edge computing addresses the scalability challenges from the massive number of IoT end devices and IoT data value by separating the scalability domain into edge/local networks and remote network.
 
 ## Functional Components
 
 ### External APIs
 
-An IoT edge cloud may provide a northbound data plane or management plane interface to a remote network, e.g. a cloud, home or enterprise network. This interface does not exist in standalone (local-only) scenarios. To support such an interface when it exists, an edge computing component needs to expose an API, deal with authentication and authorization, support secure communication.
+An IoT edge cloud may provide a northbound data plane or management plane interface to a remote network, e.g., a cloud, home or enterprise network. This interface does not exist in standalone (local-only) scenarios. To support such an interface when it exists, an edge computing component needs to expose an API, deal with authentication and authorization, support secure communication.
 
-An IoT edge cloud may provide an API or interface to local users (e.g. to facilitate local management), or to mobile users (e.g. to provide access to services and applications, or to manage data published by the mobile device).
+An IoT edge cloud may provide an API or interface to local users (e.g., to facilitate local management), or to mobile users (e.g., to provide access to services and applications, or to manage data published by the mobile device).
 
 ### Communication Brokering
 
-A typical function of IoT edge computing is to facilitate communication with IoT end devices: for example, enable clients to register as recipients for data from devices, as well as forwarding/routing of traffic to or from IoT end devices, enabling various data discovery and redistribution patterns, e.g. north-south with clouds, east-west with other edge devices {{DATA-DISCOVERY}}. Another aspect of a communication component is dispatching of alerts and notifications to interested consumers both inside and outside of the edge computing domain. Protocol translation, analytics and transcoding may also be performed when necessary.
+A typical function of IoT edge computing is to facilitate communication with IoT end devices: for example, enable clients to register as recipients for data from devices, as well as forwarding/routing of traffic to or from IoT end devices, enabling various data discovery and redistribution patterns, e.g., north-south with clouds, east-west with other edge devices {{DATA-DISCOVERY}}. Another aspect of a communication component is dispatching of alerts and notifications to interested consumers both inside and outside of the edge computing domain. Protocol translation, analytics and transcoding may also be performed when necessary.
 
-Communication brokering may be centralized in some systems, e.g. using a hub-and-spoke message broker, or distributed like with message buses, possibly in a layered bus approach. Distributed systems may leverage direct communication between end devices and communication devices, such as device-to-device links. Brokers functions can include ensuring communication reliability, traceability, and in some cases transaction management.
+Communication brokering may be centralized in some systems, e.g., using a hub-and-spoke message broker, or distributed like with message buses, possibly in a layered bus approach. Distributed systems may leverage direct communication between end devices and communication devices, such as device-to-device links. Brokers functions can include ensuring communication reliability, traceability, and in some cases transaction management.
 
-QoS can be provided in some systems through the combination of network QoS (e.g. traffic engineering or wireless resource scheduling) and compute/storage resource allocations. In some systems a bandwidth manager service can be exposed to enable allocation of bandwidth to/from an edge computing application instance.
+QoS can be provided in some systems through the combination of network QoS (e.g., traffic engineering or wireless resource scheduling) and compute/storage resource allocations. In some systems a bandwidth manager service can be exposed to enable allocation of bandwidth to/from an edge computing application instance.
 
 ### In-Network Computation
 
-A core function of IoT edge computing is to enable computation offloading, i.e. to perform computation on an edge node on behalf of a device or user. The support for in-network computation may vary in term of capability, e.g. computing nodes can host a virtual machine able run stateful or stateless code, or a rule engine providing an API to register actions in response to conditions such as IoT device ID, sensor values to check, thresholds, etc. Computation offloading includes orchestration or application lifecycle related aspects, such as: selecting an appropriate compute device based on available resources, compute node properties, etc., and with varying goals including for example load balancing and energy conservation; onboarding code on a platform or compute device; assisted or automatic partitioning of code; invoking remote code execution; relocating an instance from one compute node to another.
+A core function of IoT edge computing is to enable computation offloading, i.e., to perform computation on an edge node on behalf of a device or user. The support for in-network computation may vary in term of capability, e.g., computing nodes can host a virtual machine able run stateful or stateless code, or a rule engine providing an API to register actions in response to conditions such as IoT device ID, sensor values to check, thresholds, etc. Computation offloading includes orchestration or application lifecycle related aspects, such as: selecting an appropriate compute device based on available resources, compute node properties, etc., and with varying goals including for example load balancing and energy conservation; onboarding code on a platform or compute device; assisted or automatic partitioning of code; invoking remote code execution; relocating an instance from one compute node to another.
 
 ### Edge Caching
 
-A purpose of local caching may be to enable local data processing (e.g. pre-processing or analysis), or to enable delayed virtual or physical shipping. A responsibility of the edge caching component is to manage data persistence, e.g. to schedule removal of data when it is no longer needed. Another aspect of this component may be to authenticate an encrypt data. It can for example take the form of a distributed storage system, and deal with related issues, e.g., reaching and maintaining data consistency; enabling efficient access to data, for example using some form of sharding.
+A purpose of local caching may be to enable local data processing (e.g., pre-processing or analysis), or to enable delayed virtual or physical shipping. A responsibility of the edge caching component is to manage data persistence, e.g., to schedule removal of data when it is no longer needed. Another aspect of this component may be to authenticate an encrypt data. It can for example take the form of a distributed storage system, and deal with related issues, e.g., reaching and maintaining data consistency; enabling efficient access to data, for example using some form of sharding.
 
 ### Data Management
 
-With regard to the high level challenges listed in {{sec-challenges}}, data storage and processing at the edge is a major aspect of IoT edge computing. Data may therefore need to be classified (e.g. in terms of privacy, importance, validity, etc.). Data analysis such as performed in AI/ML tasks performed at the edge may benefit from specialized hardware support on computing nodes. IoT edge computing will face challenges in term of, for example, programmability, naming, data abstraction, data service management and data discovery (discussed in communication brokering). Furthermore, while edge computing can support IoT services independently of cloud computing, it can also be connected to cloud computing. Thus, the relationship of IoT edge computing to cloud computing, with regard to data management, is another potential challenge {{ISO_TR}}.
+With regard to the high level challenges listed in {{sec-challenges}}, data storage and processing at the edge is a major aspect of IoT edge computing. Data may therefore need to be classified (e.g., in terms of privacy, importance, validity, etc.). Data analysis such as performed in AI/ML tasks performed at the edge may benefit from specialized hardware support on computing nodes. IoT edge computing will face challenges in term of, for example, programmability, naming, data abstraction, data service management and data discovery (discussed in communication brokering). Furthermore, while edge computing can support IoT services independently of cloud computing, it can also be connected to cloud computing. Thus, the relationship of IoT edge computing to cloud computing, with regard to data management, is another potential challenge {{ISO_TR}}.
 
 ### Other Services
 
@@ -544,7 +564,7 @@ The authors would like to thank Joo-Sang Youn and Akbak Rahman for their valuabl
 
 # Overview of the IoT Edge Computing {#sec-overview}
 
-This list of initiatives, projects and products aim to provide an overview of the IoT Edge Computing.
+This list of initiatives, projects and products aim to provide an overview of the IoT edge computing.
 
 Our goal is to be representative rather than exhaustive.
 
@@ -577,7 +597,7 @@ Service platform:
 : EdgeX uses a micro-service architecture. Micro-services on the gateway are connected together, and to outside applications, through REST, or messaging technologies such as MQTT, AMQP and 0MQ. The gateway can communicate with external backend applications or other gateways (north-south in tiered deployments or east-west in more distributed deployments). Gateway-device communication can use a wide range of IoT protocols. "Export services" enable on-gateway and off-gateway clients to register as recipient for data from devices. Core services are microservices that deal with persisting data from devices or alternatively "streaming" device data through, without persistence (core data service); managing information about the IoT devices, including their sensors, how to communicate with them, etc. (metadata service); and actual communication with IoT devices, on behalf of other on-gateway or off-gateway services (command service). A rule engine provides an API to register actions in response to conditions typically including an IoT device ID, sensor values to check, thresholds, etc. The scheduling micro service deals with organizing the removal of data persisted on the gateway. Alerts and notifications microservice can be used to dispatch alert/notifications from internal or external sources to interested consumers including backend servers, or human operators through email or SMS.
 
 Edge cloud applications:
-: Target applications for EdgeX include industrial IoT (e.g. IoT sensor data and actuator control mixed with augmented reality application for technicians). Home Edge focuses on smart home use cases, including using AI lifestyle and safety applications.
+: Target applications for EdgeX include Industrial IoT (e.g., IoT sensor data and actuator control mixed with augmented reality application for technicians). Home Edge focuses on smart home use cases, including using AI lifestyle and safety applications.
 
 ### Edge Cloud Management Platforms {#sec-cloud-management-platforms}
 
@@ -605,7 +625,7 @@ Edge cloud applications:
 ### Related Projects
 
 Open Edge Computing ({{OpenEdgeComputing}}) is an initiative from universities, manufacturers, infrastructure providers and operators, enabling efficiently offloading cloudlets (VMs) to the edge.
-Computing devices are typically powerful, well-connected servers located in mobile networks (e.g. collocated with base stations or aggregation sites).
+Computing devices are typically powerful, well-connected servers located in mobile networks (e.g., collocated with base stations or aggregation sites).
 The service platform is built on top of OpenStack++, an extension of OpenStack
 to support cloudlets.
 This project is mentioned here as a related project because of its edge computing focus, and potential for some IoT use cases. Nevertheless, its primary use cases are typically non-IoT related, such as offloading processing-intensive applications from a mobile device to the edge.
@@ -623,17 +643,17 @@ customer application components.
 Some IoT gateway products (Amazon Snowball) have a primary purpose of storing edge data on premises, to enable physically moving this data into the cloud without incurring digital data transfer cost.
 
 Computing devices:
-: Typical computing devices run Linux, Windows or a Real-Time OS over an ARM or x86 architecture. The level of service support on the computing device can range from low-level packages giving maximum control to embedded developers, to high-level SDKs. Typical requirements can start at 1GHz and 128MB RAM, e.g. ranging from Raspberry Pi to a server-level appliance.
+: Typical computing devices run Linux, Windows or a Real-Time OS over an ARM or x86 architecture. The level of service support on the computing device can range from low-level packages giving maximum control to embedded developers, to high-level SDKs. Typical requirements can start at 1GHz and 128MB RAM, e.g., ranging from Raspberry Pi to a server-level appliance.
 
 Service platform:
 : IoT gateways can provide a range of service including: running stateless functions; routing messages between connected IoT devices (using a wide range of IoT protocols); caching data; enabling some form of synchronization between IoT devices; authenticating and encrypting device data. Association between IoT devices and gateway based can require a device certificate.
 
 Edge cloud applications:
-: Pre-processing of IoT data for later processing in the Cloud is a major driver. Use cases include industrial automation, farming, etc.
+: Pre-processing of IoT data for later processing in the cloud is a major driver. Use cases include industrial automation, farming, etc.
 
 ### Edge Cloud Platforms {#sec-cloud-platforms}
 
-Services such as MobileEdgeX provide a platform for application developers to deploy software (e.g. as software containers) on edge networks.
+Services such as MobileEdgeX provide a platform for application developers to deploy software (e.g., as software containers) on edge networks.
 
 Computing devices:
 : Bare metal and virtual servers provided by mobile network operators are used as computing devices.
@@ -642,7 +662,7 @@ Service platform:
 : The service platform provides end device location service, using GPS data obtained from platform software deployed in end devices, correlated with location information obtained from the mobile network. The service platform manages the deployment of application instances (containers) on servers close to end devices, using a declarative specification of optimal location from the application provider.
 
 Edge cloud applications:
-: Use cases include autonomous mobility, asset management, AI-based systems (e.g. quality inspection, assistance systems, safety and security cameras) and privacy-preserving video processing. There are also non-IoT use cases such as augmented reality and gaming.
+: Use cases include autonomous mobility, asset management, AI-based systems (e.g., quality inspection, assistance systems, safety and security cameras) and privacy-preserving video processing. There are also non-IoT use cases such as augmented reality and gaming.
 
 ## Standards Initiatives
 
@@ -675,7 +695,7 @@ The 3GPP standards organization included edge computing support in 5G {{_3GPP.23
 Integration of MEC and 5G systems has been studied in ETSI as well {{ETSI_MEC_WP_28}}.
 
 Computing devices:
-: From 3GPP standpoint, a mobile device may access any computing device located in a local data network, i.e. traffic is steered towards the local data network where the computing device is located.
+: From 3GPP standpoint, a mobile device may access any computing device located in a local data network, i.e., traffic is steered towards the local data network where the computing device is located.
 
 Service platform:
 : An external party may influence steering, QoS and charging of traffic towards the computing device. Session and service continuity can ensure that edge service is maintained when a client device moves. The network supports multiple-anchor connections, which makes it possible to connect a client device to both a local and a remote data network. The client device can be made aware of the availability of a local area data network, based on its location.
@@ -685,10 +705,10 @@ Edge cloud applications:
 
 ### OpenFog and Industrial Internet Consortium {#sec-openfog}
 
-The OpenFog Consortium (now merged with the Industrial Internet Consortium) aims to standardize industrial IoT, fog and edge computing. It produced a reference architecture for the Fog ({{OpenFog}}), which has been published as IEEE standard P1934 in 2018. This work continues within the Industrial Internet Consortium. 
+The OpenFog Consortium (now merged with the Industrial Internet Consortium) aims to standardize industrial IoT, fog, and edge computing. It produced a reference architecture for the fog ({{OpenFog}}), which has been published as IEEE standard P1934 in 2018. This work continues within the Industrial Internet Consortium. 
 
 Computing devices:
-: Fog nodes include computational, networking, storage and acceleration elements. This includes nodes collocated with sensors and actuators, roadside or mobile nodes involved in V2X connectivity. Fog nodes should be programmable and may support multi-tenancy. Fog computing devices must employ a hardware-based immutable root of trust, i.e. a trusted hardware component which receives control at power-on.
+: Fog nodes include computational, networking, storage and acceleration elements. This includes nodes collocated with sensors and actuators, roadside or mobile nodes involved in V2X connectivity. Fog nodes should be programmable and may support multi-tenancy. Fog computing devices must employ a hardware-based immutable root of trust, i.e., a trusted hardware component which receives control at power-on.
 
 Service platform:
 : The service platform is structured around "pillars" including: security end-to-end, scalability by adding internal components or adding more fog nodes,openness in term of discovery of/by other nodes and networks, autonomy from centralized clouds (for discovery, orchestration and management, security and operation) and hierarchical organization of fog nodes.
@@ -710,23 +730,23 @@ Computing devices:
 : NFN-capable switches are collocated with computing devices.
 
 Service platform:
-: NFN enables accessing static data and dynamic computation results in one data-oriented framework, thus benefiting from usual ICN features such as data authenticity and caching, as well as enabling the network to perform various optimizations, e.g. moving data, code or both closer to requesters. NFN also enables secure access to individual elements within Named Data Objects, e.g. for filtering or aggregation.
+: NFN enables accessing static data and dynamic computation results in one data-oriented framework, thus benefiting from usual ICN features such as data authenticity and caching, as well as enabling the network to perform various optimizations, e.g., moving data, code or both closer to requesters. NFN also enables secure access to individual elements within Named Data Objects, e.g., for filtering or aggregation.
 
 Edge cloud applications:
 : Use cases include some form of MapReduce operations and service chaining. NDN, on which NFN is based, has been studied in the context of IoT, where it can provide local trust management and rendezvous service.
 
 ### 5G-CORAL
 
-The 5G-CORAL project ({{_5G-CORAL}}) aims to enable convergence of access across multiple RATs using Fog computing, using for this purpose an Edge and Fog Computing System (EFS).
+The 5G-CORAL project ({{_5G-CORAL}}) aims to enable convergence of access across multiple radio access technologies using fog computing, using for this purpose an edge and fog computing system (EFS).
 
 Computing devices:
-: Computing devices used in 5G-CORAL include cloud and central data center servers, edge data center servers, and fixed or mobile "Fog Computing Devices", which can be computing devices located in vehicles or factories, e.g. IoT gateways, mobile phones, cyber-physical devices, etc.
+: Computing devices used in 5G-CORAL include cloud and central data center servers, edge data center servers, and fixed or mobile "fog computing devices", which can be computing devices located in vehicles or factories, e.g., IoT gateways, mobile phones, cyber-physical devices, etc.
 
 Service platform:
 : 5G-CORAL architecture is based on an integrated virtualized edge and fog computing system (EFS), that aims to be flexible, scalable and interoperable with other domains including transport (fronthaul, backhaul), core and clouds. An Orchestration and Control System (OCS) enables automatic discovery of heterogeneous, multiple-owner resources, and federate them into a unified hosting environment. OCS monitors resource usage to guarantee service levels. Finally, OCS also includes orchestration and life cycle functions, including live migration and scaling. Applications (user and third-party) both inside and outside the EFS subscribe to EFS services through APIs, with emphasis on IoT and cyber-physical functionalities.
 
 Edge cloud applications:
-: EFS-hosted services include analytics obtained from IoT gateways (e.g. LORA or eNodeB gateways), context information services from RATs, transport (fronthaul and backhaul) and core networks. EFS-hosted functions include network performance acceleration functions, virtualized C-RAN functions for access nodes and possible end user devices.
+: EFS-hosted services include analytics obtained from IoT gateways (e.g., LORA or eNodeB gateways), context information services from RATs, transport (fronthaul and backhaul) and core networks. EFS-hosted functions include network performance acceleration functions, virtualized C-RAN functions for access nodes and possible end user devices.
 
 ### FLAME
 
@@ -740,7 +760,7 @@ Computing devices:
 : The FLAME platform provides a service layer on top of an infrastructure platform, which can include cloud servers as well as computing devices collocated with WiFi access points.
 
 Service platform:
-: The FLAME platform can be seen as an edge + cloud computing platform with a use case focus on media dissemination, although the basic platform can be suitable for micro-services in general. The computing platform is comprised of: computing devices, an infrastructure platform (XOS, OpenStack, ONOS/ODL), NFV-MANO components (orchestrator, virtual infrastructure manager) and FLAME platform core services (PCE, network access point, surrogate manager).
+: The FLAME platform can be seen as an "edge + cloud" computing platform with a use case focus on media dissemination, although the basic platform can be suitable for micro-services in general. The computing platform is comprised of: computing devices, an infrastructure platform (XOS, OpenStack, ONOS/ODL), NFV-MANO components (orchestrator, virtual infrastructure manager) and FLAME platform core services (PCE, network access point, surrogate manager).
 
 Edge cloud applications:
 : IoT use cases include public safety, such as supporting body-worn camera for police and social workers. As opposed to other multi-media applications that are also envisioned (pre-processing, user reporting, curation...), where a typical goal is to curate content early at the edge, to reduce expected high data volume, public safety use cases are typically about implementing triggers at the edge: everything needs to be kept anyway, to be available in case of an audit. Content is stored offline during off peak-hours delivery. For privacy and data volume concerns, triggers for, e.g., alerting police, cannot be performed in the cloud and should be performed as close to the data source as possible.
