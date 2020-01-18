@@ -1,7 +1,7 @@
 ---
 stand_alone: true
 ipr: trust200902
-docname: draft-hong-t2trg-iot-edge-computing-latest
+docname: draft-hong-t2trg-iot-edge-computing-02
 cat: info
 pi:
   toc: 'yes'
