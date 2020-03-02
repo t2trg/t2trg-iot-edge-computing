@@ -819,11 +819,11 @@ table.left {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">IoT Edge Computing</td>
-<td class="right">January 2020</td>
+<td class="right">February 2020</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Hong, et al.</td>
-<td class="center">Expires 19 July 2020</td>
+<td class="center">Expires 28 August 2020</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -836,12 +836,12 @@ table.left {
 <dd class="internet-draft">draft-hong-t2trg-iot-edge-computing-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2020-01-16" class="published">16 January 2020</time>
+<time datetime="2020-02-25" class="published">25 February 2020</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2020-07-19">19 July 2020</time></dd>
+<dd class="expires"><time datetime="2020-08-28">28 August 2020</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -895,7 +895,7 @@ table.left {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 19 July 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 28 August 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1179,15 +1179,17 @@ Companies like Amazon, Google, Facebook, etc. widely adopted this paradigm for d
         <h3 id="name-edge-computing">
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-edge-computing" class="section-name selfRef">Edge Computing</a>
         </h3>
-<p id="section-3.3-1">Edge computing, under certain aspects also referred to as fog computing, is a new paradigm in which substantial computing and storage resources are placed at the edge of the Internet, that is,in close proximity to mobile devices, sensors, actuators, or machines, so that computing happens near data sources <span>[<a href="#Mahadev" class="xref">Mahadev</a>]</span>, or closer to where decisions or interactions with the physical world are happening.
+<p id="section-3.3-1">Edge computing, under certain aspects also referred to as fog computing, is a new paradigm in which substantial computing and storage resources are placed at the edge of the Internet, that is, in close proximity to mobile devices, sensors, actuators, or machines, so that computing happens near data sources <span>[<a href="#Mahadev" class="xref">Mahadev</a>]</span>, or closer (topologically, physically, in term of latency, etc.) to where decisions or interactions with the physical world are happening.
 It works on both downstream data on behalf of cloud services and upstream data on behalf of IoT services.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <p id="section-3.3-2">An edge device is any computing or networking resource residing between data sources and cloud-based datacenters.
-In edge computing, end devices not only consume data, but also produce data. And at the network edge, devices not only request services and information from the cloud, but also handle computing tasks including processing, storage, caching, and load balancing on data sent to and from the cloud <span>[<a href="#Shi" class="xref">Shi</a>]</span>.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
+In edge computing, end devices not only consume data, but also produce data. 
+And at the network edge, devices not only request services and information from the cloud, but also handle computing tasks including processing, storage, caching, and load balancing on data sent to and from the cloud <span>[<a href="#Shi" class="xref">Shi</a>]</span>.
+This does not preclude end devices from hosting computation themselves when possible, independently or as part of a distributed edge computing platform.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 <p id="section-3.3-3">The definition of edge computing from ISO is a "form of distributed computing in which significant processing and data storage takes place on nodes which are at the edge of the network" <span>[<a href="#ISO_TR" class="xref">ISO_TR</a>]</span>. ETSI's definition of multi-access edge computing is a "system which provides an IT service environment and cloud-computing capabilities at the edge of an access network which contains one or more type of access technology, and in close proximity to its users" <span>[<a href="#ETSI_MEC_01" class="xref">ETSI_MEC_01</a>]</span>.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
 <p id="section-3.3-4">The similar concept of fog computing from the Industrial Internet Consortium (formerly OpenFog) is "a horizontal, system-level architecture that distributes computing, storage, control and networking functions closer to the users along a cloud-to-thing continuum" <a href="#sec-openfog" class="xref">Appendix A.3.3</a>.
 The term fog computing usually represents the notion of a multi-tiered edge computing, that is, several layers of compute infrastructure between the end devices and the cloud.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
 <p id="section-3.3-5">Based on these definitions, we can summarize a general philosophy of edge computing as to distribute the required functions close to users and data, while the difference to classic local systems is the usage of management and orchestration features adopted from cloud computing.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
-<p id="section-3.3-6">Actors from various industries approach edge computing using different terms and reference models,although in practice these approaches are not incompatible and may integrate with each other:<a href="#section-3.3-6" class="pilcrow">¶</a></p>
+<p id="section-3.3-6">Actors from various industries approach edge computing using different terms and reference models, although in practice these approaches are not incompatible and may integrate with each other:<a href="#section-3.3-6" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-3.3-7.1">The telecommunication industry tends to use a model where edge computing services are deployed over NFV infrastructure at aggregation points, or in proximity to the user equipment (e.g., gNodeBs) <a href="#sec-etsi-mec" class="xref">Appendix A.3.1</a>.<a href="#section-3.3-7.1" class="pilcrow">¶</a>
 </li>
@@ -1267,7 +1269,7 @@ In particular, the amount of data created at the edge is expected to be vast.
 Industrial machines such as laser cutters already produce over 1 terabyte per hour, the same applies for autonomous cars <span>[<a href="#NVIDIA" class="xref">NVIDIA</a>]</span>.
 90% of IoT data is expected to be stored, processed, analyzed, and acted upon close to the source <span>[<a href="#Kelly" class="xref">Kelly</a>]</span>,
 as cloud computing models alone cannot address the new challenges <span>[<a href="#Chiang" class="xref">Chiang</a>]</span>.
-Below we discuss IoT use case requirements that are moving cloud capabilities to be more proximate and more distributed and disaggregated.<a href="#section-4-1" class="pilcrow">¶</a></p>
+Below we discuss IoT use case requirements that are moving cloud capabilities to be more proximate and more distributed and disaggregated. Beyond addressing those requirements, however, edge computing can also bring flexibility to classic networking functions such as protocol translation in gateways.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div id="time-sensitivity">
 <section id="section-4.1">
         <h3 id="name-time-sensitivity">
@@ -1344,12 +1346,13 @@ Hence, the owner of these systems are generally reluctant to upload IoT data to 
 +--------------+-------------------+-----------+
 |            Edge Computing Domain             |
 |                                              |
+|   Computing Nodes (edge or end devices)      |
+|                                              |
 |   OAM Components                             |
 |   - Resources Discovery                      |
 |   - Virtualization Management                |
 |   - Authentication                           |
 |   - Edge Organization and Federation         |
-|   - IoT End Devices Management               |
 |   - ...                                      |
 |                                              |
 |   Functional Components                      |
@@ -1357,17 +1360,22 @@ Hence, the owner of these systems are generally reluctant to upload IoT data to 
 |   - Communication Brokering                  |
 |   - In-Network Computation                   |
 |   - Edge Caching                             |
-|   - Data Analysis                            |
 |   - Other Services                           |
 |   - ...                                      |
 |                                              |
-+------+--------------+---------------+--------+
-       |              |               |
-       |              |               |
-  +----+---+    +-----+--+      +-----+--+
-  |  End   |    |  End   | .... |  End   |
-  |Device 1|    |Device 2| .... |Device n|
-  +--------+    +--------+      +--------+
+|   Application Components                     |
+|   - IoT End Devices Management               |
+|   - Data Management                          |
+|   - ...                                      |
+|                                              |
++------+--------------+-------- - - - -+- - - -+
+       |              |       |        |       |
+       |              |          +-----+--+     
+  +----+---+    +-----+--+    |  |compute |    |
+  |  End   |    |  End   | ...   |node/end|     
+  |Device 1|    |Device 2| ...|  |device n|    |
+  +--------+    +--------+       +--------+     
+                              + - - - - - - - -+
 </pre>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
@@ -1448,7 +1456,7 @@ Edge computing nodes provide multiple logical functions, or components, which ma
           <h4 id="name-in-network-computation">
 <a href="#section-5.2.3" class="section-number selfRef">5.2.3. </a><a href="#name-in-network-computation" class="section-name selfRef">In-Network Computation</a>
           </h4>
-<p id="section-5.2.3-1">A core function of IoT edge computing is to enable computation offloading, i.e., to perform computation on an edge node on behalf of a device or user. The support for in-network computation may vary in term of capability, e.g., computing nodes can host a virtual machine able run stateful or stateless code, or a rule engine providing an API to register actions in response to conditions such as IoT device ID, sensor values to check, thresholds, etc. Computation offloading includes orchestration or application lifecycle related aspects, such as: selecting an appropriate compute device based on available resources, compute node properties, etc., and with varying goals including for example load balancing and energy conservation; onboarding code on a platform or compute device; assisted or automatic partitioning of code; invoking remote code execution; relocating an instance from one compute node to another.<a href="#section-5.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.2.3-1">A core function of IoT edge computing is to enable computation offloading, i.e., to perform computation on an edge node on behalf of a device or user. The support for in-network computation may vary in term of capability, e.g., computing nodes can host a virtual machine able run stateful or stateless code, or a rule engine providing an API to register actions in response to conditions such as IoT device ID, sensor values to check, thresholds, etc. Computation offloading includes orchestration or application lifecycle related aspects, such as: selecting an appropriate compute device based on available resources, compute node properties, etc., and with varying goals including for example load balancing and energy conservation; onboarding code on a platform or compute device; assisted or automatic partitioning of code; invoking remote code execution; relocating an instance from one compute node to another; session continuity when communicating with mobile end devices.<a href="#section-5.2.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="edge-caching">
@@ -1517,7 +1525,7 @@ Edge computing addresses the scalability challenges from the massive number of I
       <h2 id="name-acknowledgement">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-acknowledgement" class="section-name selfRef">Acknowledgement</a>
       </h2>
-<p id="section-7-1">The authors would like to thank Joo-Sang Youn, Akbar Rahman, Michel Roy and Robert Gazda for their valuable comments and suggestions on this document.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">The authors would like to thank Joo-Sang Youn, Akbar Rahman, Michel Roy, Robert Gazda and Rute Sofia for their valuable comments and suggestions on this document.<a href="#section-7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <section id="section-8">
@@ -1541,7 +1549,7 @@ Edge computing addresses the scalability challenges from the massive number of I
 <dl class="references">
 <dt id="AdvantEDGE">[AdvantEDGE]</dt>
         <dd>
-<span class="refAuthor"></span>, <span class="refTitle">"Mobile Edge Emulation Platform"</span>, <span class="seriesInfo">Source Code Repository </span>, <time datetime="2020-01">January 2020</time>, <span>&lt;<a href="https://github.com/InterDigitalInc/AdvantEDGE">https://github.com/InterDigitalInc/AdvantEDGE</a>&gt;</span>. </dd>
+<span class="refAuthor"></span>, <span class="refTitle">"Mobile Edge Emulation Platform"</span>, <span class="seriesInfo">Source Code Repository </span>, <time datetime="2020-02">February 2020</time>, <span>&lt;<a href="https://github.com/InterDigitalInc/AdvantEDGE">https://github.com/InterDigitalInc/AdvantEDGE</a>&gt;</span>. </dd>
 <dt id="Ashton">[Ashton]</dt>
         <dd>
 <span class="refAuthor">Ashton, K.</span>, <span class="refTitle">"That Internet of Things thing"</span>, <span class="seriesInfo">RFID J. vol. 22, no. 7, pp. 97-114 </span>, <time datetime="2009">2009</time>. </dd>
@@ -1553,7 +1561,7 @@ Edge computing addresses the scalability challenges from the massive number of I
 <span class="refAuthor">Chiang, M.</span><span class="refAuthor"> and T. Zhang</span>, <span class="refTitle">"Fog and IoT: An overview of research opportunities"</span>, <span class="seriesInfo">IEEE Internet Things J., vol. 3, no. 6, pp. 854-864 </span>, <time datetime="2016">2016</time>. </dd>
 <dt id="DATA-DISCOVERY">[DATA-DISCOVERY]</dt>
         <dd>
-<span class="refAuthor">McBride, M.</span><span class="refAuthor">, Kutscher, D.</span><span class="refAuthor">, Schooler, E.</span><span class="refAuthor">, and CJ. Bernardos</span>, <span class="refTitle">"Edge Data Discovery for COIN"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-mcbride-edge-data-discovery-overview</span>, <time>January 2020</time>, <span>&lt;<a href="https://tools.ietf.org/html/draft-mcbride-edge-data-discovery-overview">https://tools.ietf.org/html/draft-mcbride-edge-data-discovery-overview</a>&gt;</span>. </dd>
+<span class="refAuthor">McBride, M.</span><span class="refAuthor">, Kutscher, D.</span><span class="refAuthor">, Schooler, E.</span><span class="refAuthor">, and CJ. Bernardos</span>, <span class="refTitle">"Edge Data Discovery for COIN"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-mcbride-edge-data-discovery-overview</span>, <time>February 2020</time>, <span>&lt;<a href="https://tools.ietf.org/html/draft-mcbride-edge-data-discovery-overview">https://tools.ietf.org/html/draft-mcbride-edge-data-discovery-overview</a>&gt;</span>. </dd>
 <dt id="ENERGY">[ENERGY]</dt>
         <dd>
 <span class="refAuthor">Beckel, C.</span><span class="refAuthor">, Sadamori, L.</span><span class="refAuthor">, Staake, T.</span><span class="refAuthor">, and S. Santini</span>, <span class="refTitle">"Revealing Household Characteristics from Smart Meter Data"</span>, <span class="seriesInfo">Energy, vol. 78, pp. 397-410 </span>, <time datetime="2014">2014</time>. </dd>
@@ -1571,7 +1579,7 @@ Edge computing addresses the scalability challenges from the massive number of I
 <span class="refAuthor">ETSI, .</span>, <span class="refTitle">"MEC in 5G networks"</span>, <span class="seriesInfo">White Paper </span>, <time datetime="2018">2018</time>, <span>&lt;<a href="https://www.etsi.org/images/files/ETSIWhitePapers/etsi_wp28_mec_in_5G_FINAL.pdf">https://www.etsi.org/images/files/ETSIWhitePapers/etsi_wp28_mec_in_5G_FINAL.pdf</a>&gt;</span>. </dd>
 <dt id="ETSI_Sandbox">[ETSI_Sandbox]</dt>
         <dd>
-<span class="refAuthor"></span>, <span class="refTitle">"Multi-access Edge Computing (MEC) MEC Sandbox Work Item"</span>, <span class="seriesInfo">Portal </span>, <time datetime="2020-01">January 2020</time>, <span>&lt;<a href="https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=57671">https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=57671</a>&gt;</span>. </dd>
+<span class="refAuthor"></span>, <span class="refTitle">"Multi-access Edge Computing (MEC) MEC Sandbox Work Item"</span>, <span class="seriesInfo">Portal </span>, <time datetime="2020-02">February 2020</time>, <span>&lt;<a href="https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=57671">https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=57671</a>&gt;</span>. </dd>
 <dt id="Evans">[Evans]</dt>
         <dd>
 <span class="refAuthor">Evans, D.</span>, <span class="refTitle">"The Internet of Things: How the next evolution of the Internet is changing everything"</span>, <span class="seriesInfo">CISCO White Paper </span>, <time datetime="2011">2011</time>. </dd>
