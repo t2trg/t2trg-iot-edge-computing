@@ -361,11 +361,13 @@ In cloud computing, users traditionally only consumed IoT data through cloud ser
 
 ## Edge Computing
 
-Edge computing, under certain aspects also referred to as fog computing, is a new paradigm in which substantial computing and storage resources are placed at the edge of the Internet, that is,in close proximity to mobile devices, sensors, actuators, or machines, so that computing happens near data sources {{Mahadev}}, or closer to where decisions or interactions with the physical world are happening.
+Edge computing, under certain aspects also referred to as fog computing, is a new paradigm in which substantial computing and storage resources are placed at the edge of the Internet, that is, in close proximity to mobile devices, sensors, actuators, or machines, so that computing happens near data sources {{Mahadev}}, or closer (topologically, physically, in term of latency, etc.) to where decisions or interactions with the physical world are happening.
 It works on both downstream data on behalf of cloud services and upstream data on behalf of IoT services.
 
 An edge device is any computing or networking resource residing between data sources and cloud-based datacenters.
-In edge computing, end devices not only consume data, but also produce data. And at the network edge, devices not only request services and information from the cloud, but also handle computing tasks including processing, storage, caching, and load balancing on data sent to and from the cloud {{Shi}}.
+In edge computing, end devices not only consume data, but also produce data. 
+And at the network edge, devices not only request services and information from the cloud, but also handle computing tasks including processing, storage, caching, and load balancing on data sent to and from the cloud {{Shi}}.
+This does not preclude end devices from hosting computation themselves when possible, independently or as part of a distributed edge computing platform.
 
 The definition of edge computing from ISO is a "form of distributed computing in which significant processing and data storage takes place on nodes which are at the edge of the network" {{ISO_TR}}. ETSI's definition of multi-access edge computing is a "system which provides an IT service environment and cloud-computing capabilities at the edge of an access network which contains one or more type of access technology, and in close proximity to its users" {{ETSI_MEC_01}}.
 
@@ -374,7 +376,7 @@ The term fog computing usually represents the notion of a multi-tiered edge comp
 
 Based on these definitions, we can summarize a general philosophy of edge computing as to distribute the required functions close to users and data, while the difference to classic local systems is the usage of management and orchestration features adopted from cloud computing.
 
-Actors from various industries approach edge computing using different terms and reference models,although in practice these approaches are not incompatible and may integrate with each other:
+Actors from various industries approach edge computing using different terms and reference models, although in practice these approaches are not incompatible and may integrate with each other:
 
 * The telecommunication industry tends to use a model where edge computing services are deployed over NFV infrastructure at aggregation points, or in proximity to the user equipment (e.g., gNodeBs) {{sec-etsi-mec}}.
 * Enterprise and campus solutions often interpret edge computing as an "edge cloud", that is, a smaller data center directly connected to the local network (often referred to as "on-premise").
@@ -434,7 +436,7 @@ In particular, the amount of data created at the edge is expected to be vast.
 Industrial machines such as laser cutters already produce over 1 terabyte per hour, the same applies for autonomous cars {{NVIDIA}}.
 90% of IoT data is expected to be stored, processed, analyzed, and acted upon close to the source {{Kelly}},
 as cloud computing models alone cannot address the new challenges {{Chiang}}.
-Below we discuss IoT use case requirements that are moving cloud capabilities to be more proximate and more distributed and disaggregated.
+Below we discuss IoT use case requirements that are moving cloud capabilities to be more proximate and more distributed and disaggregated. Beyond addressing those requirements, however, edge computing can also bring flexibility to classic networking functions such as protocol translation in gateways.
 
 ## Time Sensitivity
 
@@ -487,12 +489,13 @@ Edge computing is expected to play an important role in deploying new IoT servic
 +--------------+-------------------+-----------+
 |            Edge Computing Domain             |
 |                                              |
+|   Computing Nodes (edge or end devices)      |
+|                                              |
 |   OAM Components                             |
 |   - Resources Discovery                      |
 |   - Virtualization Management                |
 |   - Authentication                           |
 |   - Edge Organization and Federation         |
-|   - IoT End Devices Management               |
 |   - ...                                      |
 |                                              |
 |   Functional Components                      |
@@ -500,17 +503,22 @@ Edge computing is expected to play an important role in deploying new IoT servic
 |   - Communication Brokering                  |
 |   - In-Network Computation                   |
 |   - Edge Caching                             |
-|   - Data Analysis                            |
 |   - Other Services                           |
 |   - ...                                      |
 |                                              |
-+------+--------------+---------------+--------+
-       |              |               |
-       |              |               |
-  +----+---+    +-----+--+      +-----+--+
-  |  End   |    |  End   | .... |  End   |
-  |Device 1|    |Device 2| .... |Device n|
-  +--------+    +--------+      +--------+
+|   Application Components                     |
+|   - IoT End Devices Management               |
+|   - Data Management                          |
+|   - ...                                      |
+|                                              |
++------+--------------+-------- - - - -+- - - -+
+       |              |       |        |       |
+       |              |          +-----+--+     
+  +----+---+    +-----+--+    |  |compute |    |
+  |  End   |    |  End   | ...   |node/end|     
+  |Device 1|    |Device 2| ...|  |device n|    |
+  +--------+    +--------+       +--------+     
+                              + - - - - - - - -+
 ~~~~~~~~~~~~~~~~~~~
 {: artwork-align="center" #rl-fig1 title="Model of IoT Edge Computing"}
 
@@ -561,7 +569,7 @@ QoS can be provided in some systems through the combination of network QoS (e.g.
 
 ### In-Network Computation
 
-A core function of IoT edge computing is to enable computation offloading, i.e., to perform computation on an edge node on behalf of a device or user. The support for in-network computation may vary in term of capability, e.g., computing nodes can host a virtual machine able run stateful or stateless code, or a rule engine providing an API to register actions in response to conditions such as IoT device ID, sensor values to check, thresholds, etc. Computation offloading includes orchestration or application lifecycle related aspects, such as: selecting an appropriate compute device based on available resources, compute node properties, etc., and with varying goals including for example load balancing and energy conservation; onboarding code on a platform or compute device; assisted or automatic partitioning of code; invoking remote code execution; relocating an instance from one compute node to another.
+A core function of IoT edge computing is to enable computation offloading, i.e., to perform computation on an edge node on behalf of a device or user. The support for in-network computation may vary in term of capability, e.g., computing nodes can host a virtual machine able run stateful or stateless code, or a rule engine providing an API to register actions in response to conditions such as IoT device ID, sensor values to check, thresholds, etc. Computation offloading includes orchestration or application lifecycle related aspects, such as: selecting an appropriate compute device based on available resources, compute node properties, etc., and with varying goals including for example load balancing and energy conservation; onboarding code on a platform or compute device; assisted or automatic partitioning of code; invoking remote code execution; relocating an instance from one compute node to another; session continuity when communicating with mobile end devices.
 
 ### Edge Caching
 
@@ -594,7 +602,7 @@ T.B.D.
 
 # Acknowledgement
 
-The authors would like to thank Joo-Sang Youn, Akbar Rahman, Michel Roy and Robert Gazda for their valuable comments and suggestions on this document.
+The authors would like to thank Joo-Sang Youn, Akbar Rahman, Michel Roy, Robert Gazda and Rute Sofia for their valuable comments and suggestions on this document.
 
 --- back
 
