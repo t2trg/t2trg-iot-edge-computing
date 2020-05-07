@@ -1,0 +1,9 @@
+# Simple make script that works in Git bash
+set -x
+cat draft-hong-t2trg-iot-edge-computing.md  | kramdown-rfc2629 | lib/add-note.py > tmp.txt
+xml2rfc -q --v2v3 tmp.txt -o draft-hong-t2trg-iot-edge-computing.xml
+rm tmp.txt
+
+xml2rfc -q draft-hong-t2trg-iot-edge-computing.xml -o draft-hong-t2trg-iot-edge-computing.txt --text
+xml2rfc -q --css=lib/v3.css --metadata-js-url=metadata.min.js draft-hong-t2trg-iot-edge-computing.xml -o draft-hong-t2trg-iot-edge-computing.html --html
+rm tracker.log
