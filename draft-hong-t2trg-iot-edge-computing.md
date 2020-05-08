@@ -1,7 +1,7 @@
 ---
 stand_alone: true
 ipr: trust200902
-docname: draft-hong-t2trg-iot-edge-computing-latest
+docname: draft-hong-t2trg-iot-edge-computing-04
 cat: info
 pi:
   toc: 'yes'
@@ -73,7 +73,7 @@ author:
   email: ietf@dkutscher.net
 
 normative:
-  RFC2119:
+
 informative:
 
   DATA-DISCOVERY:
@@ -179,13 +179,6 @@ informative:
     date: '2019'
     seriesinfo: 'ETSI GS 003'
     target: 'https://www.etsi.org/deliver/etsi_gs/MEC/001_099/003/02.01.01_60/gs_MEC003v020101p.pdf'
-  ETSI_MEC_02:
-    title: 'Multi-access Edge Computing (MEC); Phase 2: Use Cases and Requirements'
-    author:
-    - ins: ETSI
-    date: '2016'
-    seriesinfo: 'ETSI GS 002'
-    target: 'https://www.etsi.org/deliver/etsi_gs/MEC/001_099/002/02.01.01_60/gs_MEC002v020101p.pdf'
   ETSI_MEC_01:
     title: 'Multi-access Edge Computing (MEC); Terminology'
     author:
@@ -193,76 +186,6 @@ informative:
     date: '2019'
     seriesinfo: 'ETSI GS 001'
     target: 'https://www.etsi.org/deliver/etsi_gs/MEC/001_099/001/02.01.01_60/gs_MEC001v020101p.pdf'
-  _3GPP.23.501:
-    title: 'System Architecture for the 5G System'
-    author:
-    - ins: 3GPP
-    date: '2019'
-    seriesinfo: '3GPP TS 23.501'
-    target: 'http://www.3gpp.org/ftp/Specs/html-info/23501.htm'
-  ETSI_MEC_WP_28:
-    title: 'MEC in 5G networks'
-    author:
-    - ins: ETSI
-    date: '2018'
-    seriesinfo: 'White Paper'
-    target: 'https://www.etsi.org/images/files/ETSIWhitePapers/etsi_wp28_mec_in_5G_FINAL.pdf'
-  Linux_Foundation_Edge:
-    title: 'Linux Foundation Edge'
-    author:
-    - ins: Linux Foundation
-    date: '2019'
-    seriesinfo: Portal
-    target: https://www.lfedge.org/
-  StarlingX:
-    title: 'StarlingX'
-    author:
-    - ins: OpenStack Foundation
-    date: '2019'
-    seriesinfo: 'Portal'
-    target: 'https://www.starlingx.io/'
-  Sifalakis:
-    title: 'An Information Centric Network for Computing the Distribution of Computations'
-    author:
-    - ins: M. Sifalakis
-    - ins: B. Kohler
-    - ins: C. Scherb
-    - ins: C. Tschudin
-    date: '2014'
-    seriesinfo: 'Proceedings of the 1st International Conference on Information-centric networking (INC)'
-  FLAME:
-    title: 'FLAME Project'
-    author:
-    - ins: Horizon 2020 Programme
-    date: '2019'
-    seriesinfo: 'Portal'
-    target: 'https://www.ict-flame.eu/'
-  POINT:
-    title: 'IP Over ICN - the better IP (POINT) Project'
-    author:
-    - ins: Horizon 2020 Programme
-    date: '2019'
-    seriesinfo: 'Portal'
-    target: 'https://www.point-h2020.eu/'
-  _5G-CORAL:
-    title: '5G Convergent Virtualised Radio Access Network Living at the Edge (5G-CORAL) Project'
-    author:
-    - ins: Horizon 2020 Programme
-    date: '2019'
-    seriesinfo: 'Portal'
-    target: 'http://5g-coral.eu/'
-  OpenEdgeComputing:
-    title: 'Open Edge Computing'
-    date: '2019'
-    seriesinfo: 'Portal'
-    target: 'http://openedgecomputing.org/'
-  IEEE-1934:
-    title: 'FOG - Fog Computing and Networking Architecture Framework'
-    author:
-    - ins: IEEE
-    date: '2019'
-    seriesinfo: 'Portal'
-    target: 'https://standards.ieee.org/standard/1934-2018.html'
   NVIDIA:
     title: 'Training AI for Self-Driving Vehicles: the Challenge of Scale'
     author:
@@ -331,10 +254,6 @@ These requirements suggest a more flexible way to distribute computing (and stor
 We will refer to this integration of edge computing and IoT as "IoT edge computing".
 Our draft describes uses cases, challenges, a proposed system model and derived functional components.
 
-# Conventions and Terminology
-
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in {{RFC2119}}.
-
 # Background
 
 ## Internet of Things (IoT)
@@ -371,14 +290,14 @@ This does not preclude end devices from hosting computation themselves when poss
 
 The definition of edge computing from ISO is a "form of distributed computing in which significant processing and data storage takes place on nodes which are at the edge of the network" {{ISO_TR}}. ETSI's definition of multi-access edge computing is a "system which provides an IT service environment and cloud-computing capabilities at the edge of an access network which contains one or more type of access technology, and in close proximity to its users" {{ETSI_MEC_01}}.
 
-The similar concept of fog computing from the Industrial Internet Consortium (formerly OpenFog) is "a horizontal, system-level architecture that distributes computing, storage, control and networking functions closer to the users along a cloud-to-thing continuum" {{sec-openfog}}.
+The similar concept of fog computing from the Industrial Internet Consortium (formerly OpenFog) is "a horizontal, system-level architecture that distributes computing, storage, control and networking functions closer to the users along a cloud-to-thing continuum" {{OpenFog}}.
 The term fog computing usually represents the notion of a multi-tiered edge computing, that is, several layers of compute infrastructure between the end devices and the cloud.
 
 Based on these definitions, we can summarize a general philosophy of edge computing as to distribute the required functions close to users and data, while the difference to classic local systems is the usage of management and orchestration features adopted from cloud computing.
 
 Actors from various industries approach edge computing using different terms and reference models, although in practice these approaches are not incompatible and may integrate with each other:
 
-* The telecommunication industry tends to use a model where edge computing services are deployed over NFV infrastructure at aggregation points, or in proximity to the user equipment (e.g., gNodeBs) {{sec-etsi-mec}}.
+* The telecommunication industry tends to use a model where edge computing services are deployed over NFV infrastructure at aggregation points, or in proximity to the user equipment (e.g., gNodeBs) {{ETSI_MEC_03}}.
 * Enterprise and campus solutions often interpret edge computing as an "edge cloud", that is, a smaller data center directly connected to the local network (often referred to as "on-premise").
 * The automation industry defines the edge as the connection point between IT from OT (Operational Technology). Hence, here edge computing sometimes referres to applying IT solutions to OT problems such as analytics, more flexible user interfaces, or simply having more compute power than an automation controller.
 
@@ -456,23 +375,23 @@ Hence, the owner of these systems are generally reluctant to upload IoT data to 
 
 ## Overview of IoT Edge Computing Today
 
-This section provides an overview of today's IoT edge computing field, based on a limited review of standards, research, open-source and proprietary products in {{sec-overview}}.
+This section provides an overview of today's IoT edge computing field, based on a limited review of standards, research, open-source and proprietary products in draft-defoy-t2trg-iot-edge-computing-background.
 
-IoT gateways ({{sec-iot-gateways}}, {{sec-gateway-platforms}}) represent a common class of IoT edge computing products, where the gateway is providing a local service on customer premises, and is remotely managed through a cloud service. IoT communication protocols are typically used between IoT devices and the gateway, including CoAP, MQTT and many specialized IoT protocols (such as OPC UA and DDS in the Industrial IoT space), while the gateway communicates with the distant cloud typically using HTTPS. Virtualization platforms enable the deployment of virtual edge computing functions (as VMs, application containers, etc.), including IoT gateway software, on servers in the mobile network infrastructure (at base station and concentration points), in edge datacenters (in central offices) or regional datacenters located near central offices. End devices are envisioned to become computing devices in forward looking projects, but are not commonly used as such today.
+IoT gateways, both open-source (such as EdgeX Foundry or Home Edge) and proprietary (such as Amazon Greengrass, Microsoft Azure IoT Edge, Google Cloud Iot Core, and gateways from Bosh, Siemens), represent a common class of IoT edge computing products, where the gateway is providing a local service on customer premises, and is remotely managed through a cloud service. IoT communication protocols are typically used between IoT devices and the gateway, including CoAP, MQTT and many specialized IoT protocols (such as OPC UA and DDS in the Industrial IoT space), while the gateway communicates with the distant cloud typically using HTTPS. Virtualization platforms enable the deployment of virtual edge computing functions (as VMs, application containers, etc.), including IoT gateway software, on servers in the mobile network infrastructure (at base station and concentration points), in edge datacenters (in central offices) or regional datacenters located near central offices. End devices are envisioned to become computing devices in forward looking projects, but are not commonly used as such today.
 
 Physical or virtual IoT gateways can host application programs, which are typically built using an SDK to access local services through a programmatic API.
 Edge cloud system operators host their customers' applications VMs or containers on servers located in or near access networks, which can implement local edge services. For example, mobile networks can provide edge services for radio network information, location and bandwidth management.
 
 Life cycle management of services and applications on physical IoT gateways is often cloud-based.
-Edge cloud management platforms and products ({{sec-cloud-management-platforms}}, {{sec-cloud-platforms}}) adapt cloud management technologies (e.g., Kubernetes) to the edge cloud, i.e., to smaller, distributed computing devices running outside a controlled data center. Services and application life-cycle is typically using a NFV-like management and orchestration model.
+Edge cloud management platforms and products (such as StarlingX, Akraino Edge Stack, Mobile EdgeX) adapt cloud management technologies (e.g., Kubernetes) to the edge cloud, i.e., to smaller, distributed computing devices running outside a controlled data center. Services and application life-cycle is typically using a NFV-like management and orchestration model.
 
 The platform typically includes services to advertise or consume APIs (e.g., Mp1 interface in ETSI MEC supports service discovery and communication), and enables communicating with local and remote endpoints (e.g., message routing function in IoT gateways). The service platform is typically extensible by edge applications, since they can advertise an API that other edge applications can consume. IoT communication services include protocols translation, analytics and transcoding. Communication between edge computing devices is enabled in tiered deployments or distributed deployments.
 
-An edge cloud platform may enable pass-through without storage or local storage (e.g., on IoT gateways). Some edge cloud platforms use a distributed form of storage such as an ICN network (e.g., NFN nodes can store data in NDN, {{sec-nfn}}) or a distributed storage platform (e.g., such as Ceph, {{sec-cloud-management-platforms}}). External storage, e.g., on databases in distant or local IT cloud, is typically used for filtered data deemed worthy of long term storage, or in some cases for all data, for example when required for regulatory reasons.
+An edge cloud platform may enable pass-through without storage or local storage (e.g., on IoT gateways). Some edge cloud platforms use a distributed form of storage such as an ICN network (e.g., NFN nodes can store data in NDN) or a distributed storage platform (e.g., Ceph). External storage, e.g., on databases in distant or local IT cloud, is typically used for filtered data deemed worthy of long term storage, although in some case it may be for all data, for example when required for regulatory reasons.
 
 Stateful computing is supported on platforms hosting native programs, VMs or containers. Stateless computing is supported on platforms providing a "serverless computing" service (a.k.a. function-as-a-service), or on systems based on named function networking.
 
-In many IoT use cases, a typical network usage pattern is high volume uplink with some form of traffic reduction enabled by processing over edge computing devices. Alternatives to traffic reduction include deferred transmission (to off-peak hours or using physical shipping). Downlink traffic includes application control and software updates. Other, downlink-heavy traffic patterns are not excluded but are more often associated with non-IoT usage (e.g., video CDNs). 
+In many IoT use cases, a typical network usage pattern is high volume uplink with some form of traffic reduction enabled by processing over edge computing devices. Alternatives to traffic reduction include deferred transmission (to off-peak hours or using physical shipping). Downlink traffic includes application control and software updates. Other, downlink-heavy traffic patterns are not excluded but are more often associated with non-IoT usage (e.g., video CDNs).
 
 ## Models
 
@@ -606,207 +525,3 @@ T.B.D.
 
 The authors would like to thank Joo-Sang Youn, Akbar Rahman, Michel Roy, Robert Gazda and Rute Sofia for their valuable comments and suggestions on this document.
 
---- back
-
-# Overview of the IoT Edge Computing {#sec-overview}
-
-This list of initiatives, projects and products aim to provide an overview of the IoT edge computing.
-
-Our goal is to be representative rather than exhaustive.
-
-Please help us complete this overview by communicating with us about entries we have missed.
-
-## Open Source Projects
-
-### Gateway/CPE Platforms {#sec-gateway-platforms}
-
-EdgeX Foundry, Home Edge, Edge Virtualization Engine are
-Linux Foundation projects ({{Linux_Foundation_Edge}})
-aiming to provide a platform for edge computing devices.
-
-Such an open source platform can, for example, host proprietary
-programs currently run on IoT gateway products (<xref target="products"/>).
-
-EdgeX Foundry develops an edge computing framework running on the IoT gateway.
-
-Home Edge develops an edge computing framework especially dedicated to home computing devices,
-controlling home appliances, sensors, etc., and enabling AI applications, especially
-distributed and parallel machine learning.
-
-The Edge Virtualization Engine (EVE) project develops a virtualization platform (for VMs and containers)
-designed to run outside of the datacenter, in an edge network; EVE is deployed on bare-metal hardware.
-
-Computing devices:
-: Hardware support for EdgeX and EVE is similar: they support x86 and ARM-based computing devices; A typical target can be a Linux Raspberry Pi  with 1GB RAM, 64bit CPU, 32GB storage.
-
-Service platform:
-: EdgeX uses a micro-service architecture. Micro-services on the gateway are connected together, and to outside applications, through REST, or messaging technologies such as MQTT, AMQP and 0MQ. The gateway can communicate with external backend applications or other gateways (north-south in tiered deployments or east-west in more distributed deployments). Gateway-device communication can use a wide range of IoT protocols. "Export services" enable on-gateway and off-gateway clients to register as recipient for data from devices. Core services are microservices that deal with persisting data from devices or alternatively "streaming" device data through, without persistence (core data service); managing information about the IoT devices, including their sensors, how to communicate with them, etc. (metadata service); and actual communication with IoT devices, on behalf of other on-gateway or off-gateway services (command service). A rule engine provides an API to register actions in response to conditions typically including an IoT device ID, sensor values to check, thresholds, etc. The scheduling micro service deals with organizing the removal of data persisted on the gateway. Alerts and notifications microservice can be used to dispatch alert/notifications from internal or external sources to interested consumers including backend servers, or human operators through email or SMS.
-
-Edge cloud applications:
-: Target applications for EdgeX include Industrial IoT (e.g., IoT sensor data and actuator control mixed with augmented reality application for technicians). Home Edge focuses on smart home use cases, including using AI lifestyle and safety applications.
-
-### Edge Cloud Management Platforms {#sec-cloud-management-platforms}
-
-This set of open-source projects setup and manage clouds of individual edge computing devices.
-
-StarlingX ({{StarlingX}}) extends OpenStack to provide
-virtualization platform management
-for edge clouds, which are distributed (in the range of 100 compute devices),
-secure and highly available.
-
-Akraino Edge Stack, another project from the Linux Fundation Edge {{Linux_Foundation_Edge}},
-has a wider scope of developing a management platform adapted for the edge
-(e.g., covering 1000 plus locations),
-aiming for zero-touch provisioning, and zero-touch lifecycle management.
-
-Computing devices:
-: Compute devices are typically Linux-based application servers or more constrained devices.
-
-Service platform:
-: StarlingX adds new management services to OpenStack by leveraging building blocks such as Ceph for distributed storage, Kubernetes for orchestration. The new services are for management of configuration (enabling auto-discovery and configuration), faults, hosts (enabling host failure detection and auto-recovery), services (providing high availability through service redundancy and multi-path communication) and software (enabling updates).
-
-Edge cloud applications:
-: An edge computing platform may support a wide range of use cases. E.g., autonomous vehicles, industrial automation and robotics, cloud RAN, metering and monitoring, mobile HD video, content delivery, healthcare imaging and diagnostics, caching and surveillance, augmented/virtual reality, small cell services for high density locations (stadiums), universal CPE applications, retail.
-
-### Related Projects
-
-Open Edge Computing ({{OpenEdgeComputing}}) is an initiative from universities, manufacturers, infrastructure providers and operators, enabling efficiently offloading cloudlets (VMs) to the edge.
-Computing devices are typically powerful, well-connected servers located in mobile networks (e.g., collocated with base stations or aggregation sites).
-The service platform is built on top of OpenStack++, an extension of OpenStack
-to support cloudlets.
-This project is mentioned here as a related project because of its edge computing focus, and potential for some IoT use cases. Nevertheless, its primary use cases are typically non-IoT related, such as offloading processing-intensive applications from a mobile device to the edge.
-
-## Products
-
-### IoT Gateways {#sec-iot-gateways}
-
-Multiple products are marketed as IoT gateways (Amazon Greengrass, Microsoft Azure IoT Edge, Google Cloud IoT Core, and gateway solutions from Bosh and Siemens).
-They are typically composed of a software frameworks that can run on a wide range
-of IoT gateway hardware devices to provide local support for cloud services,
-as well as some other local IoT gateway features such as relaying communication and caching content.
-Remote cloud is both used for management of the IoT gateways, and for hosting
-customer application components.
-Some IoT gateway products (Amazon Snowball) have a primary purpose of storing edge data on premises, to enable physically moving this data into the cloud without incurring digital data transfer cost.
-
-Computing devices:
-: Typical computing devices run Linux, Windows or a Real-Time OS over an ARM or x86 architecture. The level of service support on the computing device can range from low-level packages giving maximum control to embedded developers, to high-level SDKs. Typical requirements can start at 1GHz and 128MB RAM, e.g., ranging from Raspberry Pi to a server-level appliance.
-
-Service platform:
-: IoT gateways can provide a range of service including: running stateless functions; routing messages between connected IoT devices (using a wide range of IoT protocols); caching data; enabling some form of synchronization between IoT devices; authenticating and encrypting device data. Association between IoT devices and gateway based can require a device certificate.
-
-Edge cloud applications:
-: Pre-processing of IoT data for later processing in the cloud is a major driver. Use cases include industrial automation, farming, etc.
-
-### Edge Cloud Platforms {#sec-cloud-platforms}
-
-Services such as MobileEdgeX provide a platform for application developers to deploy software (e.g., as software containers) on edge networks.
-
-Computing devices:
-: Bare metal and virtual servers provided by mobile network operators are used as computing devices.
-
-Service platform:
-: The service platform provides end device location service, using GPS data obtained from platform software deployed in end devices, correlated with location information obtained from the mobile network. The service platform manages the deployment of application instances (containers) on servers close to end devices, using a declarative specification of optimal location from the application provider.
-
-Edge cloud applications:
-: Use cases include autonomous mobility, asset management, AI-based systems (e.g., quality inspection, assistance systems, safety and security cameras) and privacy-preserving video processing. There are also non-IoT use cases such as augmented reality and gaming.
-
-## Standards Initiatives
-
-### ETSI Multi-access Edge Computing {#sec-etsi-mec}
-
-The ETSI MEC industry standardization group develops specifications that enable efficient
-and seamless integration of applications from vendors, service providers,
-and 3rd parties across multi-vendor MEC platforms ({{ETSI_MEC_03}}).
-
-Basic principles followed include: leveraging NFV infrastructure; being compliant with 3GPP systems;
-focusing on orchestration, MEC services, applications and platforms.
-
-Phase 1 (2015-2016) focused on basic platform services. Phase 2 (2017-2019) focuses on:
-supporting non-3GPP radio access technologies, especially WiFi;
-supporting a distributed, multi-operator and multi-vendor architecture;
-supporting non-VM based virtualization such as containers and PaaS.
-
-Computing devices:
-: Computing devices are typically application servers, attached to an eNodeB or at a higher level of aggregation point, and provide service to end users.
-
-Service platform:
-: The mobile edge platform offers an environment where the mobile edge applications can discover, advertise, consume and offer mobile edge services. The platform can provide certain native services such as radio network information, location, bandwidth management etc. The platform manager is responsible for managing the life cycle of applications including informing the mobile edge orchestrator of relevant application related events, managing the application rules and requirements including service authorizations, traffic rules, DNS configuration.
-
-Edge cloud applications:
-: Some of the use cases for MEC ({{ETSI_MEC_02}}) are IoT-related, including: security and safety (face recognition and monitoring), sensor data monitoring, active device location (e.g., crowd management), low latency vehicle-to-infrastructure and vehicle-to-vehicle (V2X, e.g., hazard warnings), video production and delivery, camera as a service.
-
-### Edge Computing Support in 3GPP
-
-The 3GPP standards organization included edge computing support in 5G {{_3GPP.23.501}}.
-Integration of MEC and 5G systems has been studied in ETSI as well {{ETSI_MEC_WP_28}}.
-
-Computing devices:
-: From 3GPP standpoint, a mobile device may access any computing device located in a local data network, i.e., traffic is steered towards the local data network where the computing device is located.
-
-Service platform:
-: An external party may influence steering, QoS and charging of traffic towards the computing device. Session and service continuity can ensure that edge service is maintained when a client device moves. The network supports multiple-anchor connections, which makes it possible to connect a client device to both a local and a remote data network. The client device can be made aware of the availability of a local area data network, based on its location.
-
-Edge cloud applications:
-: Edge cloud applications in 3GPP can help support the major use cases envisioned for 5G, including massive IoT and V2X.
-
-### OpenFog and Industrial Internet Consortium {#sec-openfog}
-
-The OpenFog Consortium (now merged with the Industrial Internet Consortium) aims to standardize industrial IoT, fog, and edge computing. It produced a reference architecture for the fog ({{OpenFog}}), which has been published as IEEE standard P1934 in 2018. This work continues within the Industrial Internet Consortium. 
-
-Computing devices:
-: Fog nodes include computational, networking, storage and acceleration elements. This includes nodes collocated with sensors and actuators, roadside or mobile nodes involved in V2X connectivity. Fog nodes should be programmable and may support multi-tenancy. Fog computing devices must employ a hardware-based immutable root of trust, i.e., a trusted hardware component which receives control at power-on.
-
-Service platform:
-: The service platform is structured around "pillars" including: security end-to-end, scalability by adding internal components or adding more fog nodes,openness in term of discovery of/by other nodes and networks, autonomy from centralized clouds (for discovery, orchestration and management, security and operation) and hierarchical organization of fog nodes.
-
-Edge cloud applications:
-: Major use cases include smart cars and traffic control, visual security and surveillance, smart cities.
-
-### Related Standards
-
-The IEEE Fog Computing and Networking Architecture Framework Working Group {{IEEE-1934}} published the OpenFog architecture as an IEEE document, and plan to do further work on taxonomy, architecture framework, and compliance guidelines.
-
-## Research Projects
-
-### Named Function Networking {#sec-nfn}
-
-Named Function Networking ({{Sifalakis}}) is a research project that aims to extend ICN concepts (especially named data networking) to have the network orchestrate computation. Interests are sent for a combination of function and argument names, instead of using the content name in NDN.
-
-Computing devices:
-: NFN-capable switches are collocated with computing devices.
-
-Service platform:
-: NFN enables accessing static data and dynamic computation results in one data-oriented framework, thus benefiting from usual ICN features such as data authenticity and caching, as well as enabling the network to perform various optimizations, e.g., moving data, code or both closer to requesters. NFN also enables secure access to individual elements within Named Data Objects, e.g., for filtering or aggregation.
-
-Edge cloud applications:
-: Use cases include some form of MapReduce operations and service chaining. NDN, on which NFN is based, has been studied in the context of IoT, where it can provide local trust management and rendezvous service.
-
-### 5G-CORAL
-
-The 5G-CORAL project ({{_5G-CORAL}}) aims to enable convergence of access across multiple radio access technologies using fog computing, using for this purpose an edge and fog computing system (EFS).
-
-Computing devices:
-: Computing devices used in 5G-CORAL include cloud and central data center servers, edge data center servers, and fixed or mobile "fog computing devices", which can be computing devices located in vehicles or factories, e.g., IoT gateways, mobile phones, cyber-physical devices, etc.
-
-Service platform:
-: 5G-CORAL architecture is based on an integrated virtualized edge and fog computing system (EFS), that aims to be flexible, scalable and interoperable with other domains including transport (fronthaul, backhaul), core and clouds. An Orchestration and Control System (OCS) enables automatic discovery of heterogeneous, multiple-owner resources, and federate them into a unified hosting environment. OCS monitors resource usage to guarantee service levels. Finally, OCS also includes orchestration and life cycle functions, including live migration and scaling. Applications (user and third-party) both inside and outside the EFS subscribe to EFS services through APIs, with emphasis on IoT and cyber-physical functionalities.
-
-Edge cloud applications:
-: EFS-hosted services include analytics obtained from IoT gateways (e.g., LORA or eNodeB gateways), context information services from RATs, transport (fronthaul and backhaul) and core networks. EFS-hosted functions include network performance acceleration functions, virtualized C-RAN functions for access nodes and possible end user devices.
-
-### FLAME
-
-The FLAME project ({{FLAME}}) aims to improve performance of interactive media systems while keeping infrastructure costs low.
-
-It builds over virtualization technologies such as XOS, OpenStack and ONOS/ODL to offer a programmable media service platform.
-
-FLAME leverages IP-over-ICN technology developed through earlier projects including POINT ({{POINT}}).
-
-Computing devices:
-: The FLAME platform provides a service layer on top of an infrastructure platform, which can include cloud servers as well as computing devices collocated with WiFi access points.
-
-Service platform:
-: The FLAME platform can be seen as an "edge + cloud" computing platform with a use case focus on media dissemination, although the basic platform can be suitable for micro-services in general. The computing platform is comprised of: computing devices, an infrastructure platform (XOS, OpenStack, ONOS/ODL), NFV-MANO components (orchestrator, virtual infrastructure manager) and FLAME platform core services (PCE, network access point, surrogate manager).
-
-Edge cloud applications:
-: IoT use cases include public safety, such as supporting body-worn camera for police and social workers. As opposed to other multi-media applications that are also envisioned (pre-processing, user reporting, curation...), where a typical goal is to curate content early at the edge, to reduce expected high data volume, public safety use cases are typically about implementing triggers at the edge: everything needs to be kept anyway, to be available in case of an audit. Content is stored offline during off peak-hours delivery. For privacy and data volume concerns, triggers for, e.g., alerting police, cannot be performed in the cloud and should be performed as close to the data source as possible.
