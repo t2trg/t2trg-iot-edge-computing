@@ -143,20 +143,6 @@ informative:
     - ins: C. Tschudin
     date: '2014'
     seriesinfo: 'Proceedings of the 1st International Conference on Information-centric networking (INC)'
-  FLAME:
-    title: 'FLAME Project'
-    author:
-    - ins: Horizon 2020 Programme
-    date: '2019'
-    seriesinfo: 'Portal'
-    target: 'https://www.ict-flame.eu/'
-  POINT:
-    title: 'IP Over ICN - the better IP (POINT) Project'
-    author:
-    - ins: Horizon 2020 Programme
-    date: '2019'
-    seriesinfo: 'Portal'
-    target: 'https://www.point-h2020.eu/'
   _5G-CORAL:
     title: '5G Convergent Virtualised Radio Access Network Living at the Edge (5G-CORAL) Project'
     author:
@@ -179,17 +165,17 @@ informative:
 
 --- abstract
 
-This draft reviews initiatives, projects and products related to IoT Edge Computing.
+Many IoT applications have requirements that cannot be met by the traditional Cloud. As a result, the IoT is driving the Internet toward Edge computing. This draft reviews initiatives, projects and products related to IoT Edge Computing.
 
 --- middle
 
 # Introduction
 
-This list of open-source or commercial products, standard initiatives and research projects aim to provide an overview of the IoT edge computing. It has been developped in support of {{IOT-EDGE}}, which studies challenges and functions associated with IoT Edge Computing.
+This list of open-source or commercial products, standard initiatives and research projects aims to provide an overview of the IoT edge computing.
 
-Our goal is to be representative rather than exhaustive.
+It has been developped in support of {{IOT-EDGE}}. This other draft studies challenges and functions associated with IoT edge computing, and provides further background information on IoT, cloud computing and edge computing.
 
-Please help us complete this overview by communicating with us about entries we have missed.
+Our goal is to be representative rather than exhaustive. Please help us complete this overview by communicating with us about entries we have missed.
 
 # Open Source Projects
 
@@ -369,19 +355,3 @@ Service platform:
 Edge cloud applications:
 : EFS-hosted services include analytics obtained from IoT gateways (e.g., LORA or eNodeB gateways), context information services from RATs, transport (fronthaul and backhaul) and core networks. EFS-hosted functions include network performance acceleration functions, virtualized C-RAN functions for access nodes and possible end user devices.
 
-## FLAME
-
-The FLAME project ({{FLAME}}) aims to improve performance of interactive media systems while keeping infrastructure costs low.
-
-It builds over virtualization technologies such as XOS, OpenStack and ONOS/ODL to offer a programmable media service platform.
-
-FLAME leverages IP-over-ICN technology developed through earlier projects including POINT ({{POINT}}).
-
-Computing devices:
-: The FLAME platform provides a service layer on top of an infrastructure platform, which can include cloud servers as well as computing devices collocated with WiFi access points.
-
-Service platform:
-: The FLAME platform can be seen as an "edge + cloud" computing platform with a use case focus on media dissemination, although the basic platform can be suitable for micro-services in general. The computing platform is comprised of: computing devices, an infrastructure platform (XOS, OpenStack, ONOS/ODL), NFV-MANO components (orchestrator, virtual infrastructure manager) and FLAME platform core services (PCE, network access point, surrogate manager).
-
-Edge cloud applications:
-: IoT use cases include public safety, such as supporting body-worn camera for police and social workers. As opposed to other multi-media applications that are also envisioned (pre-processing, user reporting, curation...), where a typical goal is to curate content early at the edge, to reduce expected high data volume, public safety use cases are typically about implementing triggers at the edge: everything needs to be kept anyway, to be available in case of an audit. Content is stored offline during off peak-hours delivery. For privacy and data volume concerns, triggers for, e.g., alerting police, cannot be performed in the cloud and should be performed as close to the data source as possible.
