@@ -361,7 +361,34 @@ informative:
     - ins: M. Parashar
     date: '2017'
     seriesinfo: 'IEEE 1st International Conference on Fog and Edge Computing (ICFEC), pages 31–40'
-
+  Zhang2:
+    title: 'Data Security and Privacy-Preserving in Edge Computing Paradigm: Survey and Open Issues'
+    author:
+    - ins: J. Zhang
+    - ins: B. Chen
+    - ins: Y. Zhao
+    - ins: X. Cheng
+    - ins: F. Hu
+    date: '2018'
+    seriesinfo: 'IEEE Access, vol. 6, pp. 18209-18237'
+  Yates:
+    title: 'The Age of Information: Real-Time Status Updating by Multiple Sources'
+    author:
+    - ins: R. D. Yates
+    - ins: S. K. Kaul
+    date: '2019'
+    seriesinfo: 'IEEE Transactions on Information Theory, vol. 65, no. 3, pp. 1807-1827'
+  Khan:
+    title: 'Edge Computing Enabled Smart Cities: A Comprehensive Survey'
+    author:
+    - ins: L. U. Khan
+    - ins: I. Yaqoob
+    - ins: N. H. Tran
+    - ins: S. M. A. Kazmi
+    - ins: T. N. Dang
+    - ins: C. S. Hong
+    date: '2019'
+    seriesinfo: 'arXiv:1909.08747'
 
 --- abstract
 
@@ -623,7 +650,7 @@ In the above example of system, the edge computing domain is composed of IoT edg
 Edge computing domains are connected with a remote/cloud network, and with their respective service operator's system.
 IoT end devices/computing nodes provide logical functions, as part of a distributed machine learning application. The processing capabilities in IoT end devices being limited, they require the support of other nodes: the training process for AI services is executed at IoT edge gateways or cloud networks and the prediction (inference) service is executed in the IoT end devices.
 
-We now attempt to enumerate major edge computing domain components. They are here loosely organized into OAM, functional and application components, with the understanding that the distinction between these classes may not always be clear, depending on actual system architectures. Some representative research challenges are associated with those functions. We used input from co-authors, IRTF attendees and comprehensive reviews such as {{Yousefpour}}.
+We now attempt to enumerate major edge computing domain components. They are here loosely organized into OAM, functional and application components, with the understanding that the distinction between these classes may not always be clear, depending on actual system architectures. Some representative research challenges are associated with those functions. We used input from co-authors, IRTF attendees and some comprehensive reviews of the field ({{Yousefpour}}, {{Zhang2}}, {{Khan}}).
 
 ## OAM Components {#sec-components}
 
@@ -640,7 +667,8 @@ Some IoT edge computing systems make use of virtualized (compute, storage and ne
 Related challenges include:
 
 * Minimizing virtual function instantiation time and resource usage
-* Integration of edge computing with virtualized radio networks (Fog RAN) {{I-D.bernardos-sfc-fog-ran}}
+* Integration of edge computing with virtualized radio networks (Fog RAN) {{I-D.bernardos-sfc-fog-ran}} and with 5G access networks
+* Handling of multi-tenancy with regards to limited resources at the network edge
 
 ### Resources Discovery and Authentication {#sec-dis-auth}
 
@@ -648,7 +676,7 @@ Discovery and authentication may target platforms, infrastructure resources, suc
 
 Related challenges include:
 
-* Discovery, authentication and trust establishment in relation to mobility and heterogeneity {{Schafer}}, as well as scale
+* Discovery, authentication and trust establishment between end devices, compute nodes and platforms, with regards to concerns such as mobility, heterogeneity, scale, multiple trust domains, constrained devices, anonymity and traceability
 * Intermittent connectivity to the Internet, preventing relying on a third-party authority {{Echeverria}}
 * Resiliency to faults, denial of service attacks {{Harchol}}, easier physical access for attackers
 
@@ -658,7 +686,7 @@ In a distributed system context, once edge devices have discovered and authentic
 
 Related challenges include:
 
-* Sharing resources in multi-vendor/operator scenarios {{Anglano}}, or other goals including to minimize resource usage, latency or energy consumption
+* Sharing resources in multi-vendor/operator scenarios, with a goal to optimize criteria such as profit {{Anglano}}, resource usage, latency or energy consumption
 * Support for scaling, and enabling fault-tolerance or self-healing {{Jeong}}
 * Capacity planning, placement of infrastructure nodes to minimize delay {{Fan}}, cost, energy, etc.
 * Incentives for participation, e.g. in peer-to-peer federation schemes
@@ -673,7 +701,7 @@ An IoT edge cloud may provide an API or interface to local users (e.g., to facil
 
 Related challenges include:
 
-* Defining edge computing abstractions suitable for users and cloud systems to interact with edge computing systems. This interaction may for example be based on the PaaS model {{Yangui}}
+* Defining edge computing abstractions suitable for users and cloud systems to interact with edge computing systems. In one example, this interaction can be based on the PaaS model {{Yangui}}
 
 ### Communication Brokering
 
@@ -681,25 +709,27 @@ A typical function of IoT edge computing is to facilitate communication with IoT
 
 Communication brokering may be centralized in some systems, e.g., using a hub-and-spoke message broker, or distributed like with message buses, possibly in a layered bus approach. Distributed systems may leverage direct communication between end devices and communication devices, such as device-to-device links. A broker can ensure communication reliability, traceability, and in some cases transaction management.
 
+Related challenges include:
+
+* Enabling secure and resilient communication between IoT end devices and remote cloud, e.g. through multipath support
+
 ### In-Network Computation
 
-A core function of IoT edge computing is to enable computation offloading, i.e., to perform computation on an edge node on behalf of a device or user. The support for in-network computation may vary in term of capability, e.g., computing nodes can host virtual machines, software containers, software actors or unikernels able run stateful or stateless code, or a rule engine providing an API to register actions in response to conditions such as IoT device ID, sensor values to check, thresholds, etc. 
+A core function of IoT edge computing is to enable computation offloading, i.e., to perform computation on an edge node on behalf of a device or user, but also to orchestrate computation (in a centralized or distributed manner) and manage applications lifecycle. Support for in-network computation may vary in term of capability, e.g., computing nodes can host virtual machines, software containers, software actors or unikernels able run stateful or stateless code, or a rule engine providing an API to register actions in response to conditions such as IoT device ID, sensor values to check, thresholds, etc.
 
 QoS can be provided in some systems through the combination of network QoS (e.g., traffic engineering or wireless resource scheduling) and compute/storage resource allocations. For example in some systems a bandwidth manager service can be exposed to enable allocation of bandwidth to/from an edge computing application instance.
 
-Computation offloading challenges are related to orchestration or application lifecycle:
+Related challenges include:
 
-* (Computation placement) Selecting, in a centralized or distributed/peer-to-peer manner, an appropriate compute device based on available resources, location of data input and data sinks, compute node properties, etc., and with varying goals including for example end-to-end latency, privacy, high availability, load balancing, energy conservation
-* Onboarding code on a platform or compute device, invoking remote code execution, possibly as part of a distributed programming model and with respect to similar concerns of latency, privacy, etc.
+* (Computation placement) Selecting, in a centralized or distributed/peer-to-peer manner, an appropriate compute device based on available resources, location of data input and data sinks, compute node properties, etc., and with varying goals including for example end-to-end latency, privacy, high availability, energy conservation, network efficiency (e.g. using load balancing techniques to avoid congestion)
+* Onboarding code on a platform or compute device, and invoking remote code execution, possibly as part of a distributed programming model and with respect to similar concerns of latency, privacy, etc. These operations should deal with heterogeneous compute nodes {{Schafer}}, e.g. including end devices
 * Adapting Quality of Results (QoR) for applications where a perfect result is not necessary {{Li}}
 * Assisted or automatic partitioning of code
+* Supporting computation across trust domains, e.g. verifying computation results
 * Relocating an instance from one compute node to another, and its impact on service level
 * Session continuity when communicating with end devices that are mobile, possibly at high speed (e.g. in vehicular scenarios)
-
-Challenges related to QoS for in-network computation include:
-
 * Defining, managing and verifying SLAs for edge computing systems. Pricing is a related challenge.
-* Handling of multi-tenancy with regards to limited resources at the network edge
+
 
 ### Edge Caching
 
@@ -707,9 +737,8 @@ A purpose of local caching may be to enable local data processing (e.g., pre-pro
 
 Related challenges include 
 
-* Reaching and maintaining data consistency
-* (Data placement) Enabling efficient access to data, for example using data placement strategies to minimize data retrieval delay {{Liu}}
-* Maintaining data availability for authorized applications and users, while preventing information leakage
+* (Cache and data placement) Using cache positioning and data placement strategies to minimize data retrieval delay {{Liu}}, energy consumption. Caches may be positioned in the access network infrastructure or may be on end devices using device-to-device communication
+* Maintaining data consistency, freshness and privacy in systems that are distributed, constrained and dynamic (e.g. due to end devices and computing nodes churn or mobility). For example, age of information {{Yates}}, a performance metric that captures the timeliness of information from a sender (e.g. an IoT device), can be exposed to networks to enable tradeoffs in this problem space
 
 ### Other Services
 
@@ -729,9 +758,9 @@ Data storage and processing at the edge is a major aspect of IoT edge computing,
 
 Related challenges include:
 
-* Addressing concerns on resource usage, security and privacy when sharing, discovering or managing data. For example by presenting data in views composed of an aggregation of related data {{Zhang}}, protecting data communication between authenticated peers {{Basudan}}, classifying data (e.g., in terms of privacy, importance, validity, etc.), .
+* Addressing concerns on resource usage, security and privacy when sharing, discovering or managing data. For example by presenting data in views composed of an aggregation of related data {{Zhang}}, protecting data communication between authenticated peers {{Basudan}}, classifying data (e.g., in terms of privacy, importance, validity, etc.)
 * Data driven programming models {{Renart}}, e.g. event-based, including handling of naming and data abstractions
-* While edge computing can support IoT services independently of cloud computing, it can also be connected to cloud computing. Thus, the relationship of IoT edge computing to cloud computing, with regard to data management, is another potential challenge {{ISO_TR}}.
+* While edge computing can support IoT services independently of cloud computing, it can also be connected to cloud computing. Thus, the relationship of IoT edge computing to cloud computing, with regard to data management, is another potential challenge {{ISO_TR}}
 
 ## Simulation and Emulation Environments
 
