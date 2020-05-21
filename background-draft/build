@@ -1,7 +1,8 @@
-# Simple make script that works in Git bash
+# Simple make script that works in Git bash / Linux
 DRAFT=draft-defoy-t2trg-iot-edge-computing-background
+ROOT=..
 set -x
-cat $DRAFT.md  | kramdown-rfc2629 | python3 ../lib/add-note.py > tmp.txt
+cat $DRAFT.md  | kramdown-rfc2629 | python3 $ROOT/lib/add-note.py > tmp.txt
 xml2rfc -q --v2v3 tmp.txt -o $DRAFT.xml
 rm tmp.txt
 
