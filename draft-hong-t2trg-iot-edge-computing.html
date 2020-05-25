@@ -12,10 +12,10 @@
 <meta content="Eve Schooler" name="author">
 <meta content="Dirk Kutscher" name="author">
 <meta content="
-       Many IoT applications have requirements that cannot be met by the traditional Cloud (aka Cloud computing). These include time sensitivity, data volume, uplink cost, operation in the face of intermittent services, privacy and security. As a result, the IoT is driving the Internet toward Edge computing. This document outlines the requirements of the emerging IoT Edge and its challenges. It presents a snapshot of the state-of-the-art, a general model, and major components of the IoT Edge, with the goal to provide a common base for future discussions in T2TRG and other IETF WGs and RGs. 
+       Many IoT applications have requirements that cannot be met by the traditional Cloud (aka Cloud computing). These include time sensitivity, data volume, uplink cost, operation in the face of intermittent services, privacy and security. As a result, the IoT is driving the Internet toward Edge computing. This document outlines the requirements of the emerging IoT Edge and its challenges. It presents a general model, and major components of the IoT Edge, with the goal to provide a common base for future discussions in T2TRG and other IETF WGs and RGs. 
     " name="description">
-<meta content="xml2rfc 2.34.0" name="generator">
-<meta content="draft-hong-t2trg-iot-edge-computing-latest" name="ietf.draft">
+<meta content="xml2rfc 2.44.0" name="generator">
+<meta content="draft-hong-t2trg-iot-edge-computing-04" name="ietf.draft">
 <link href="draft-hong-t2trg-iot-edge-computing.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
 <style type="text/css">@import url('https://martinthomson.github.io/i-d-template/fonts.css');
@@ -30,7 +30,7 @@ html {
   --small-font-size: 14.5px;
 }
 body {
-  max-width: 624px;
+  max-width: 600px;
   margin: 75px auto;
   padding: 0 5px;
   color: var(--text-color);
@@ -197,6 +197,9 @@ a[href]:hover {
 a[href].selfRef:hover {
   background-color: var(--highlight-color);
 }
+a.xref {
+  white-space: nowrap;
+}
 
 /* Figures */
 tt, code, pre {
@@ -205,7 +208,9 @@ tt, code, pre {
 }
 pre {
   border: 1px solid var(--line-color);
-  line-height: 17px;
+  font-size: 13.5px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
   margin: 5px;
   padding: 5px;
 }
@@ -238,6 +243,10 @@ figcaption, caption {
     display: inline-block;
     vertical-align: text-bottom;
     padding-bottom: 8px;
+  }
+  table {
+    display: inline-block;
+    overflow-x: auto;
   }
 }
 
@@ -288,10 +297,9 @@ thead+tbody tr:nth-child(2n+1) > td {
   background-color: var(--background-color);
 }
 table caption {
-  font-style: italic;
-  margin: 0.3em 0;
-  padding: 0;
-  text-align: left;
+  margin: 0;
+  padding: 3px 1em;
+  border-top: 1px solid var(--line-color);
 }
 table p {
   /* XXX to avoid bottom margin on table row signifiers. If paragraphs should
@@ -385,6 +393,9 @@ hr {
   padding-left: 1.2em;
   text-indent: -1.2em;
 }
+#toc a.xref {
+  white-space: normal;
+}
 /* references */
 .references dt {
   text-align: right;
@@ -426,7 +437,7 @@ hr {
   font-weight: 700;
 }
 /* make the index two-column on all but the smallest screens */
-@media (min-width: 600px) {
+@media (min-width: 500px) {
   .index ul {
     column-count: 2;
     column-gap: 20px;
@@ -461,8 +472,8 @@ hr.addr {
   color: #ddd;
   max-width: calc(100% - 16px);
 }
-@media (min-width: 600px) {
-  #authors-addresses {
+@media (min-width: 500px) {
+  #authors-addresses > section {
     display: relative;
     padding: 32px 0 0;
     column-count: 2;
@@ -476,6 +487,7 @@ hr.addr {
   /* hack for break-inside: avoid-column */
   #authors-addresses address {
     display: inline-block;
+    break-inside: avoid-column;
   }
 }
 
@@ -503,7 +515,7 @@ hr.addr {
   font-style: italic;
 }
 /* alternative layout for smaller screens */
-@media screen and (max-width: 953px) {
+@media screen and (max-width: 929px) {
   #toc {
     position: fixed;
     z-index: 2;
@@ -569,9 +581,10 @@ hr.addr {
 }
 
 /* alternative layout for wide screens */
-@media screen and (min-width: 954px) {
+@media screen and (min-width: 930px) {
   body {
-    padding-right: 380px;
+    padding-right: 360px;
+    padding-right: calc(min(180px + 20%, 500px));
   }
   #toc {
     position: fixed;
@@ -713,16 +726,13 @@ dl.dlNewline > dt {
 }
 
 /* Provide styling for table cell text alignment */
-table td.text-left,
-table th.text-left {
+table .text-left, table .text-left {
   text-align: left;
 }
-table td.text-center,
-table th.text-center {
+table .text-center, table .text-center {
   text-align: center;
 }
-table td.text-right,
-table th.text-right {
+table .text-right, table .text-right {
   text-align: right;
 }
 
@@ -814,16 +824,15 @@ table.left {
 <link href="rfc-local.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<script src="metadata.min.js"></script>
 <table class="ears">
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">IoT Edge Computing</td>
-<td class="right">February 2020</td>
+<td class="right">May 2020</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Hong, et al.</td>
-<td class="center">Expires 28 August 2020</td>
+<td class="center">Expires 26 November 2020</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -833,15 +842,15 @@ table.left {
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">Network Working Group</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-hong-t2trg-iot-edge-computing-latest</dd>
+<dd class="internet-draft">draft-hong-t2trg-iot-edge-computing-04</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2020-02-25" class="published">25 February 2020</time>
+<time datetime="2020-05-25" class="published">25 May 2020</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2020-08-28">28 August 2020</time></dd>
+<dd class="expires"><time datetime="2020-11-26">26 November 2020</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -874,7 +883,7 @@ table.left {
 <h1 id="title">IoT Edge Challenges and Functions</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">Many IoT applications have requirements that cannot be met by the traditional Cloud (aka Cloud computing). These include time sensitivity, data volume, uplink cost, operation in the face of intermittent services, privacy and security. As a result, the IoT is driving the Internet toward Edge computing. This document outlines the requirements of the emerging IoT Edge and its challenges. It presents a snapshot of the state-of-the-art, a general model, and major components of the IoT Edge, with the goal to provide a common base for future discussions in T2TRG and other IETF WGs and RGs.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">Many IoT applications have requirements that cannot be met by the traditional Cloud (aka Cloud computing). These include time sensitivity, data volume, uplink cost, operation in the face of intermittent services, privacy and security. As a result, the IoT is driving the Internet toward Edge computing. This document outlines the requirements of the emerging IoT Edge and its challenges. It presents a general model, and major components of the IoT Edge, with the goal to provide a common base for future discussions in T2TRG and other IETF WGs and RGs.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -895,7 +904,7 @@ table.left {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 28 August 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 26 November 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -919,203 +928,131 @@ table.left {
 </section>
 </div>
 <div id="toc">
-<section id="section-boilerplate.3">
+<section id="section-toc.1">
         <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
 <a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
         </h2>
 <nav class="toc"><ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-boilerplate.3-1.1">
-            <p id="section-boilerplate.3-1.1.1"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a><a href="#section-boilerplate.3-1.1.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a><a href="#section-toc.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="toc ulEmpty" id="section-boilerplate.3-1.2">
-            <p id="section-boilerplate.3-1.2.1"><a href="#section-2" class="xref">2</a>.  <a href="#name-conventions-and-terminology" class="xref">Conventions and Terminology</a><a href="#section-boilerplate.3-1.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="toc ulEmpty" id="section-boilerplate.3-1.3">
-            <p id="section-boilerplate.3-1.3.1"><a href="#section-3" class="xref">3</a>.  <a href="#name-background" class="xref">Background</a><a href="#section-boilerplate.3-1.3.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="xref">2</a>.  <a href="#name-background" class="xref">Background</a><a href="#section-toc.1-1.2.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-boilerplate.3-1.3.2.1">
-                <p id="section-boilerplate.3-1.3.2.1.1"><a href="#section-3.1" class="xref">3.1</a>.  <a href="#name-internet-of-things-iot" class="xref">Internet of Things (IoT)</a><a href="#section-boilerplate.3-1.3.2.1.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.2.2.1">
+                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="xref">2.1</a>.  <a href="#name-internet-of-things-iot" class="xref">Internet of Things (IoT)</a><a href="#section-toc.1-1.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-boilerplate.3-1.3.2.2">
-                <p id="section-boilerplate.3-1.3.2.2.1"><a href="#section-3.2" class="xref">3.2</a>.  <a href="#name-cloud-computing" class="xref">Cloud Computing</a><a href="#section-boilerplate.3-1.3.2.2.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.2.2.2">
+                <p id="section-toc.1-1.2.2.2.1" class="keepWithNext"><a href="#section-2.2" class="xref">2.2</a>.  <a href="#name-cloud-computing" class="xref">Cloud Computing</a><a href="#section-toc.1-1.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-boilerplate.3-1.3.2.3">
-                <p id="section-boilerplate.3-1.3.2.3.1"><a href="#section-3.3" class="xref">3.3</a>.  <a href="#name-edge-computing" class="xref">Edge Computing</a><a href="#section-boilerplate.3-1.3.2.3.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.2.2.3">
+                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="xref">2.3</a>.  <a href="#name-edge-computing" class="xref">Edge Computing</a><a href="#section-toc.1-1.2.2.3.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-boilerplate.3-1.3.2.4">
-                <p id="section-boilerplate.3-1.3.2.4.1"><a href="#section-3.4" class="xref">3.4</a>.  <a href="#name-example-of-iot-edge-computi" class="xref">Example of IoT Edge Computing Use Cases</a><a href="#section-boilerplate.3-1.3.2.4.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.2.2.4">
+                <p id="section-toc.1-1.2.2.4.1"><a href="#section-2.4" class="xref">2.4</a>.  <a href="#name-example-of-iot-edge-computi" class="xref">Example of IoT Edge Computing Use Cases</a><a href="#section-toc.1-1.2.2.4.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-boilerplate.3-1.3.2.4.2.1">
-                    <p id="section-boilerplate.3-1.3.2.4.2.1.1"><a href="#section-3.4.1" class="xref">3.4.1</a>.  <a href="#name-smart-construction" class="xref">Smart Construction</a><a href="#section-boilerplate.3-1.3.2.4.2.1.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.2.2.4.2.1">
+                    <p id="section-toc.1-1.2.2.4.2.1.1"><a href="#section-2.4.1" class="xref">2.4.1</a>.  <a href="#name-smart-construction" class="xref">Smart Construction</a><a href="#section-toc.1-1.2.2.4.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="toc ulEmpty" id="section-boilerplate.3-1.3.2.4.2.2">
-                    <p id="section-boilerplate.3-1.3.2.4.2.2.1"><a href="#section-3.4.2" class="xref">3.4.2</a>.  <a href="#name-smart-grid" class="xref">Smart Grid</a><a href="#section-boilerplate.3-1.3.2.4.2.2.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.2.2.4.2.2">
+                    <p id="section-toc.1-1.2.2.4.2.2.1"><a href="#section-2.4.2" class="xref">2.4.2</a>.  <a href="#name-smart-grid" class="xref">Smart Grid</a><a href="#section-toc.1-1.2.2.4.2.2.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="toc ulEmpty" id="section-boilerplate.3-1.3.2.4.2.3">
-                    <p id="section-boilerplate.3-1.3.2.4.2.3.1"><a href="#section-3.4.3" class="xref">3.4.3</a>.  <a href="#name-smart-water-system" class="xref">Smart Water System</a><a href="#section-boilerplate.3-1.3.2.4.2.3.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.2.2.4.2.3">
+                    <p id="section-toc.1-1.2.2.4.2.3.1"><a href="#section-2.4.3" class="xref">2.4.3</a>.  <a href="#name-smart-water-system" class="xref">Smart Water System</a><a href="#section-toc.1-1.2.2.4.2.3.1" class="pilcrow">¶</a></p>
 </li>
-                </ul>
+</ul>
 </li>
-              <li class="toc ulEmpty" id="section-boilerplate.3-1.3.2.5">
-                <p id="section-boilerplate.3-1.3.2.5.1"><a href="#section-3.5" class="xref">3.5</a>.  <a href="#name-common-aspects-of-current-i" class="xref">Common Aspects of Current IoT Edge Computing Service Platforms</a><a href="#section-boilerplate.3-1.3.2.5.1" class="pilcrow">¶</a></p>
+</ul>
 </li>
-            </ul>
-</li>
-          <li class="toc ulEmpty" id="section-boilerplate.3-1.4">
-            <p id="section-boilerplate.3-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-challenges-for-iot-and-impa" class="xref">Challenges for IoT and Impacts of Edge Computing</a><a href="#section-boilerplate.3-1.4.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="xref">3</a>.  <a href="#name-iot-challenges-leading-towa" class="xref">IoT Challenges Leading Towards Edge Computing</a><a href="#section-toc.1-1.3.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-boilerplate.3-1.4.2.1">
-                <p id="section-boilerplate.3-1.4.2.1.1"><a href="#section-4.1" class="xref">4.1</a>.  <a href="#name-time-sensitivity" class="xref">Time Sensitivity</a><a href="#section-boilerplate.3-1.4.2.1.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="xref">3.1</a>.  <a href="#name-time-sensitivity" class="xref">Time Sensitivity</a><a href="#section-toc.1-1.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-boilerplate.3-1.4.2.2">
-                <p id="section-boilerplate.3-1.4.2.2.1"><a href="#section-4.2" class="xref">4.2</a>.  <a href="#name-uplink-cost" class="xref">Uplink Cost</a><a href="#section-boilerplate.3-1.4.2.2.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="xref">3.2</a>.  <a href="#name-uplink-cost" class="xref">Uplink Cost</a><a href="#section-toc.1-1.3.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-boilerplate.3-1.4.2.3">
-                <p id="section-boilerplate.3-1.4.2.3.1"><a href="#section-4.3" class="xref">4.3</a>.  <a href="#name-resilience-to-intermittent-" class="xref">Resilience to Intermittent Services</a><a href="#section-boilerplate.3-1.4.2.3.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.3.2.3">
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="xref">3.3</a>.  <a href="#name-resilience-to-intermittent-" class="xref">Resilience to Intermittent Services</a><a href="#section-toc.1-1.3.2.3.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-boilerplate.3-1.4.2.4">
-                <p id="section-boilerplate.3-1.4.2.4.1"><a href="#section-4.4" class="xref">4.4</a>.  <a href="#name-privacy-and-security" class="xref">Privacy and Security</a><a href="#section-boilerplate.3-1.4.2.4.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.3.2.4">
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="xref">3.4</a>.  <a href="#name-privacy-and-security" class="xref">Privacy and Security</a><a href="#section-toc.1-1.3.2.4.1" class="pilcrow">¶</a></p>
 </li>
-            </ul>
+</ul>
 </li>
-          <li class="toc ulEmpty" id="section-boilerplate.3-1.5">
-            <p id="section-boilerplate.3-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-iot-edge-computing-function" class="xref">IoT Edge Computing Functions</a><a href="#section-boilerplate.3-1.5.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-iot-edge-computing-function" class="xref">IoT Edge Computing Functions</a><a href="#section-toc.1-1.4.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-boilerplate.3-1.5.2.1">
-                <p id="section-boilerplate.3-1.5.2.1.1"><a href="#section-5.1" class="xref">5.1</a>.  <a href="#name-oam-components" class="xref">OAM Components</a><a href="#section-boilerplate.3-1.5.2.1.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.4.2.1">
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="xref">4.1</a>.  <a href="#name-overview-of-iot-edge-comput" class="xref">Overview of IoT Edge Computing Today</a><a href="#section-toc.1-1.4.2.1.1" class="pilcrow">¶</a></p>
+</li>
+<li class="toc ulEmpty" id="section-toc.1-1.4.2.2">
+                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="xref">4.2</a>.  <a href="#name-general-model" class="xref">General Model</a><a href="#section-toc.1-1.4.2.2.1" class="pilcrow">¶</a></p>
+</li>
+<li class="toc ulEmpty" id="section-toc.1-1.4.2.3">
+                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="xref">4.3</a>.  <a href="#name-oam-components" class="xref">OAM Components</a><a href="#section-toc.1-1.4.2.3.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-boilerplate.3-1.5.2.1.2.1">
-                    <p id="section-boilerplate.3-1.5.2.1.2.1.1"><a href="#section-5.1.1" class="xref">5.1.1</a>.  <a href="#name-resources-discovery" class="xref">Resources Discovery</a><a href="#section-boilerplate.3-1.5.2.1.2.1.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.4.2.3.2.1">
+                    <p id="section-toc.1-1.4.2.3.2.1.1"><a href="#section-4.3.1" class="xref">4.3.1</a>.  <a href="#name-virtualization-management" class="xref">Virtualization Management</a><a href="#section-toc.1-1.4.2.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="toc ulEmpty" id="section-boilerplate.3-1.5.2.1.2.2">
-                    <p id="section-boilerplate.3-1.5.2.1.2.2.1"><a href="#section-5.1.2" class="xref">5.1.2</a>.  <a href="#name-virtualization-management" class="xref">Virtualization Management</a><a href="#section-boilerplate.3-1.5.2.1.2.2.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.4.2.3.2.2">
+                    <p id="section-toc.1-1.4.2.3.2.2.1"><a href="#section-4.3.2" class="xref">4.3.2</a>.  <a href="#name-resources-discovery-and-aut" class="xref">Resources Discovery and Authentication</a><a href="#section-toc.1-1.4.2.3.2.2.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="toc ulEmpty" id="section-boilerplate.3-1.5.2.1.2.3">
-                    <p id="section-boilerplate.3-1.5.2.1.2.3.1"><a href="#section-5.1.3" class="xref">5.1.3</a>.  <a href="#name-authentication-and-authoriz" class="xref">Authentication and Authorization</a><a href="#section-boilerplate.3-1.5.2.1.2.3.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.4.2.3.2.3">
+                    <p id="section-toc.1-1.4.2.3.2.3.1"><a href="#section-4.3.3" class="xref">4.3.3</a>.  <a href="#name-edge-organization-and-feder" class="xref">Edge Organization and Federation</a><a href="#section-toc.1-1.4.2.3.2.3.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="toc ulEmpty" id="section-boilerplate.3-1.5.2.1.2.4">
-                    <p id="section-boilerplate.3-1.5.2.1.2.4.1"><a href="#section-5.1.4" class="xref">5.1.4</a>.  <a href="#name-edge-organization-and-feder" class="xref">Edge Organization and Federation</a><a href="#section-boilerplate.3-1.5.2.1.2.4.1" class="pilcrow">¶</a></p>
+</ul>
 </li>
-                </ul>
-</li>
-              <li class="toc ulEmpty" id="section-boilerplate.3-1.5.2.2">
-                <p id="section-boilerplate.3-1.5.2.2.1"><a href="#section-5.2" class="xref">5.2</a>.  <a href="#name-functional-components" class="xref">Functional Components</a><a href="#section-boilerplate.3-1.5.2.2.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.4.2.4">
+                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="xref">4.4</a>.  <a href="#name-functional-components" class="xref">Functional Components</a><a href="#section-toc.1-1.4.2.4.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-boilerplate.3-1.5.2.2.2.1">
-                    <p id="section-boilerplate.3-1.5.2.2.2.1.1"><a href="#section-5.2.1" class="xref">5.2.1</a>.  <a href="#name-external-apis" class="xref">External APIs</a><a href="#section-boilerplate.3-1.5.2.2.2.1.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.4.2.4.2.1">
+                    <p id="section-toc.1-1.4.2.4.2.1.1"><a href="#section-4.4.1" class="xref">4.4.1</a>.  <a href="#name-external-apis" class="xref">External APIs</a><a href="#section-toc.1-1.4.2.4.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="toc ulEmpty" id="section-boilerplate.3-1.5.2.2.2.2">
-                    <p id="section-boilerplate.3-1.5.2.2.2.2.1"><a href="#section-5.2.2" class="xref">5.2.2</a>.  <a href="#name-communication-brokering" class="xref">Communication Brokering</a><a href="#section-boilerplate.3-1.5.2.2.2.2.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.4.2.4.2.2">
+                    <p id="section-toc.1-1.4.2.4.2.2.1"><a href="#section-4.4.2" class="xref">4.4.2</a>.  <a href="#name-communication-brokering" class="xref">Communication Brokering</a><a href="#section-toc.1-1.4.2.4.2.2.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="toc ulEmpty" id="section-boilerplate.3-1.5.2.2.2.3">
-                    <p id="section-boilerplate.3-1.5.2.2.2.3.1"><a href="#section-5.2.3" class="xref">5.2.3</a>.  <a href="#name-in-network-computation" class="xref">In-Network Computation</a><a href="#section-boilerplate.3-1.5.2.2.2.3.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.4.2.4.2.3">
+                    <p id="section-toc.1-1.4.2.4.2.3.1"><a href="#section-4.4.3" class="xref">4.4.3</a>.  <a href="#name-in-network-computation" class="xref">In-Network Computation</a><a href="#section-toc.1-1.4.2.4.2.3.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="toc ulEmpty" id="section-boilerplate.3-1.5.2.2.2.4">
-                    <p id="section-boilerplate.3-1.5.2.2.2.4.1"><a href="#section-5.2.4" class="xref">5.2.4</a>.  <a href="#name-edge-caching" class="xref">Edge Caching</a><a href="#section-boilerplate.3-1.5.2.2.2.4.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.4.2.4.2.4">
+                    <p id="section-toc.1-1.4.2.4.2.4.1"><a href="#section-4.4.4" class="xref">4.4.4</a>.  <a href="#name-edge-caching" class="xref">Edge Caching</a><a href="#section-toc.1-1.4.2.4.2.4.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="toc ulEmpty" id="section-boilerplate.3-1.5.2.2.2.5">
-                    <p id="section-boilerplate.3-1.5.2.2.2.5.1"><a href="#section-5.2.5" class="xref">5.2.5</a>.  <a href="#name-other-services" class="xref">Other Services</a><a href="#section-boilerplate.3-1.5.2.2.2.5.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.4.2.4.2.5">
+                    <p id="section-toc.1-1.4.2.4.2.5.1"><a href="#section-4.4.5" class="xref">4.4.5</a>.  <a href="#name-other-services" class="xref">Other Services</a><a href="#section-toc.1-1.4.2.4.2.5.1" class="pilcrow">¶</a></p>
 </li>
-                </ul>
+</ul>
 </li>
-              <li class="toc ulEmpty" id="section-boilerplate.3-1.5.2.3">
-                <p id="section-boilerplate.3-1.5.2.3.1"><a href="#section-5.3" class="xref">5.3</a>.  <a href="#name-application-components" class="xref">Application Components</a><a href="#section-boilerplate.3-1.5.2.3.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.4.2.5">
+                <p id="section-toc.1-1.4.2.5.1"><a href="#section-4.5" class="xref">4.5</a>.  <a href="#name-application-components" class="xref">Application Components</a><a href="#section-toc.1-1.4.2.5.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-boilerplate.3-1.5.2.3.2.1">
-                    <p id="section-boilerplate.3-1.5.2.3.2.1.1"><a href="#section-5.3.1" class="xref">5.3.1</a>.  <a href="#name-iot-end-devices-management" class="xref">IoT End Devices Management</a><a href="#section-boilerplate.3-1.5.2.3.2.1.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.4.2.5.2.1">
+                    <p id="section-toc.1-1.4.2.5.2.1.1"><a href="#section-4.5.1" class="xref">4.5.1</a>.  <a href="#name-iot-end-devices-management" class="xref">IoT End Devices Management</a><a href="#section-toc.1-1.4.2.5.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="toc ulEmpty" id="section-boilerplate.3-1.5.2.3.2.2">
-                    <p id="section-boilerplate.3-1.5.2.3.2.2.1"><a href="#section-5.3.2" class="xref">5.3.2</a>.  <a href="#name-data-management" class="xref">Data Management</a><a href="#section-boilerplate.3-1.5.2.3.2.2.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.4.2.5.2.2">
+                    <p id="section-toc.1-1.4.2.5.2.2.1"><a href="#section-4.5.2" class="xref">4.5.2</a>.  <a href="#name-data-management" class="xref">Data Management</a><a href="#section-toc.1-1.4.2.5.2.2.1" class="pilcrow">¶</a></p>
 </li>
-                </ul>
+</ul>
 </li>
-              <li class="toc ulEmpty" id="section-boilerplate.3-1.5.2.4">
-                <p id="section-boilerplate.3-1.5.2.4.1"><a href="#section-5.4" class="xref">5.4</a>.  <a href="#name-simulation-and-emulation-en" class="xref">Simulation and Emulation Environments</a><a href="#section-boilerplate.3-1.5.2.4.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.4.2.6">
+                <p id="section-toc.1-1.4.2.6.1"><a href="#section-4.6" class="xref">4.6</a>.  <a href="#name-simulation-and-emulation-en" class="xref">Simulation and Emulation Environments</a><a href="#section-toc.1-1.4.2.6.1" class="pilcrow">¶</a></p>
 </li>
-            </ul>
+</ul>
 </li>
-          <li class="toc ulEmpty" id="section-boilerplate.3-1.6">
-            <p id="section-boilerplate.3-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-security-considerations" class="xref">Security Considerations</a><a href="#section-boilerplate.3-1.6.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-security-considerations" class="xref">Security Considerations</a><a href="#section-toc.1-1.5.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="toc ulEmpty" id="section-boilerplate.3-1.7">
-            <p id="section-boilerplate.3-1.7.1"><a href="#section-7" class="xref">7</a>.  <a href="#name-acknowledgement" class="xref">Acknowledgement</a><a href="#section-boilerplate.3-1.7.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-acknowledgment" class="xref">Acknowledgment</a><a href="#section-toc.1-1.6.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="toc ulEmpty" id="section-boilerplate.3-1.8">
-            <p id="section-boilerplate.3-1.8.1"><a href="#section-8" class="xref">8</a>.  <a href="#name-references" class="xref">References</a><a href="#section-boilerplate.3-1.8.1" class="pilcrow">¶</a></p>
-<ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-boilerplate.3-1.8.2.1">
-                <p id="section-boilerplate.3-1.8.2.1.1"><a href="#section-8.1" class="xref">8.1</a>.  <a href="#name-normative-references" class="xref">Normative References</a><a href="#section-boilerplate.3-1.8.2.1.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="xref">7</a>.  <a href="#name-informative-references" class="xref">Informative References</a><a href="#section-toc.1-1.7.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty" id="section-boilerplate.3-1.8.2.2">
-                <p id="section-boilerplate.3-1.8.2.2.1"><a href="#section-8.2" class="xref">8.2</a>.  <a href="#name-informative-references" class="xref">Informative References</a><a href="#section-boilerplate.3-1.8.2.2.1" class="pilcrow">¶</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-appendix.a" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a><a href="#section-toc.1-1.8.1" class="pilcrow">¶</a></p>
 </li>
-            </ul>
-</li>
-          <li class="toc ulEmpty" id="section-boilerplate.3-1.9">
-            <p id="section-boilerplate.3-1.9.1"><a href="#section-appendix.a" class="xref">Appendix A</a>.  <a href="#name-overview-of-the-iot-edge-co" class="xref">Overview of the IoT Edge Computing</a><a href="#section-boilerplate.3-1.9.1" class="pilcrow">¶</a></p>
-<ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-boilerplate.3-1.9.2.1">
-                <p id="section-boilerplate.3-1.9.2.1.1"><a href="#section-a.1" class="xref">A.1</a>.  <a href="#name-open-source-projects" class="xref">Open Source Projects</a><a href="#section-boilerplate.3-1.9.2.1.1" class="pilcrow">¶</a></p>
-<ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-boilerplate.3-1.9.2.1.2.1">
-                    <p id="section-boilerplate.3-1.9.2.1.2.1.1"><a href="#section-a.1.1" class="xref">A.1.1</a>.  <a href="#name-gateway-cpe-platforms" class="xref">Gateway/CPE Platforms</a><a href="#section-boilerplate.3-1.9.2.1.2.1.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc ulEmpty" id="section-boilerplate.3-1.9.2.1.2.2">
-                    <p id="section-boilerplate.3-1.9.2.1.2.2.1"><a href="#section-a.1.2" class="xref">A.1.2</a>.  <a href="#name-edge-cloud-management-platf" class="xref">Edge Cloud Management Platforms</a><a href="#section-boilerplate.3-1.9.2.1.2.2.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc ulEmpty" id="section-boilerplate.3-1.9.2.1.2.3">
-                    <p id="section-boilerplate.3-1.9.2.1.2.3.1"><a href="#section-a.1.3" class="xref">A.1.3</a>.  <a href="#name-related-projects" class="xref">Related Projects</a><a href="#section-boilerplate.3-1.9.2.1.2.3.1" class="pilcrow">¶</a></p>
-</li>
-                </ul>
-</li>
-              <li class="toc ulEmpty" id="section-boilerplate.3-1.9.2.2">
-                <p id="section-boilerplate.3-1.9.2.2.1"><a href="#section-a.2" class="xref">A.2</a>.  <a href="#name-products" class="xref">Products</a><a href="#section-boilerplate.3-1.9.2.2.1" class="pilcrow">¶</a></p>
-<ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-boilerplate.3-1.9.2.2.2.1">
-                    <p id="section-boilerplate.3-1.9.2.2.2.1.1"><a href="#section-a.2.1" class="xref">A.2.1</a>.  <a href="#name-iot-gateways" class="xref">IoT Gateways</a><a href="#section-boilerplate.3-1.9.2.2.2.1.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc ulEmpty" id="section-boilerplate.3-1.9.2.2.2.2">
-                    <p id="section-boilerplate.3-1.9.2.2.2.2.1"><a href="#section-a.2.2" class="xref">A.2.2</a>.  <a href="#name-edge-cloud-platforms" class="xref">Edge Cloud Platforms</a><a href="#section-boilerplate.3-1.9.2.2.2.2.1" class="pilcrow">¶</a></p>
-</li>
-                </ul>
-</li>
-              <li class="toc ulEmpty" id="section-boilerplate.3-1.9.2.3">
-                <p id="section-boilerplate.3-1.9.2.3.1"><a href="#section-a.3" class="xref">A.3</a>.  <a href="#name-standards-initiatives" class="xref">Standards Initiatives</a><a href="#section-boilerplate.3-1.9.2.3.1" class="pilcrow">¶</a></p>
-<ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-boilerplate.3-1.9.2.3.2.1">
-                    <p id="section-boilerplate.3-1.9.2.3.2.1.1"><a href="#section-a.3.1" class="xref">A.3.1</a>.  <a href="#name-etsi-multi-access-edge-comp" class="xref">ETSI Multi-access Edge Computing</a><a href="#section-boilerplate.3-1.9.2.3.2.1.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc ulEmpty" id="section-boilerplate.3-1.9.2.3.2.2">
-                    <p id="section-boilerplate.3-1.9.2.3.2.2.1"><a href="#section-a.3.2" class="xref">A.3.2</a>.  <a href="#name-edge-computing-support-in-3" class="xref">Edge Computing Support in 3GPP</a><a href="#section-boilerplate.3-1.9.2.3.2.2.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc ulEmpty" id="section-boilerplate.3-1.9.2.3.2.3">
-                    <p id="section-boilerplate.3-1.9.2.3.2.3.1"><a href="#section-a.3.3" class="xref">A.3.3</a>.  <a href="#name-openfog-and-industrial-inte" class="xref">OpenFog and Industrial Internet Consortium</a><a href="#section-boilerplate.3-1.9.2.3.2.3.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc ulEmpty" id="section-boilerplate.3-1.9.2.3.2.4">
-                    <p id="section-boilerplate.3-1.9.2.3.2.4.1"><a href="#section-a.3.4" class="xref">A.3.4</a>.  <a href="#name-related-standards" class="xref">Related Standards</a><a href="#section-boilerplate.3-1.9.2.3.2.4.1" class="pilcrow">¶</a></p>
-</li>
-                </ul>
-</li>
-              <li class="toc ulEmpty" id="section-boilerplate.3-1.9.2.4">
-                <p id="section-boilerplate.3-1.9.2.4.1"><a href="#section-a.4" class="xref">A.4</a>.  <a href="#name-research-projects" class="xref">Research Projects</a><a href="#section-boilerplate.3-1.9.2.4.1" class="pilcrow">¶</a></p>
-<ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-boilerplate.3-1.9.2.4.2.1">
-                    <p id="section-boilerplate.3-1.9.2.4.2.1.1"><a href="#section-a.4.1" class="xref">A.4.1</a>.  <a href="#name-named-function-networking" class="xref">Named Function Networking</a><a href="#section-boilerplate.3-1.9.2.4.2.1.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc ulEmpty" id="section-boilerplate.3-1.9.2.4.2.2">
-                    <p id="section-boilerplate.3-1.9.2.4.2.2.1"><a href="#section-a.4.2" class="xref">A.4.2</a>.  <a href="#name-5g-coral" class="xref">5G-CORAL</a><a href="#section-boilerplate.3-1.9.2.4.2.2.1" class="pilcrow">¶</a></p>
-</li>
-                  <li class="toc ulEmpty" id="section-boilerplate.3-1.9.2.4.2.3">
-                    <p id="section-boilerplate.3-1.9.2.4.2.3.1"><a href="#section-a.4.3" class="xref">A.4.3</a>.  <a href="#name-flame" class="xref">FLAME</a><a href="#section-boilerplate.3-1.9.2.4.2.3.1" class="pilcrow">¶</a></p>
-</li>
-                </ul>
-</li>
-            </ul>
-</li>
-          <li class="toc ulEmpty" id="section-boilerplate.3-1.10">
-            <p id="section-boilerplate.3-1.10.1"><a href="#section-appendix.b" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a><a href="#section-boilerplate.3-1.10.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
+</ul>
 </nav>
 </section>
 </div>
@@ -1125,217 +1062,223 @@ table.left {
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">Currently, many IoT services leverage the Cloud, since it can provide virtually unlimited storage and processing power.
-The reliance of IoT on  back-end cloud computing brings additional advantages such as flexibility and efficiency.
+The reliance of IoT on back-end cloud computing brings additional advantages such as flexibility and efficiency.
 Today's IoT systems are fairly static with respect to integrating and supporting computation. It's not that there is no computation, but systems are often limited to static configurations (edge gateways, the Cloud).<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">However, IoT devices are creating vast amounts of data at the network edge. To meet IoT use case requirements, that data increasingly is being stored, processed, analyzed, and acted upon close to the data producers.
 These requirements include time sensitivity, data volume, uplink cost, resiliency in the face of intermittent connectivity, privacy, and security, which cannot be addressed by today's centralized cloud computing.
 These requirements suggest a more flexible way to distribute computing (and storage) and to integrate it in the edge-cloud continuum.
 We will refer to this integration of edge computing and IoT as "IoT edge computing".
-Our draft describes uses cases, challenges, a proposed system model and derived functional components.<a href="#section-1-2" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="conventions-and-terminology">
-<section id="section-2">
-      <h2 id="name-conventions-and-terminology">
-<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-conventions-and-terminology" class="section-name selfRef">Conventions and Terminology</a>
-      </h2>
-<p id="section-2-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <span>[<a href="#RFC2119" class="xref">RFC2119</a>]</span>.<a href="#section-2-1" class="pilcrow">¶</a></p>
+Our draft describes background, uses cases, challenges, and presents system models and functional components.<a href="#section-1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="background">
-<section id="section-3">
+<section id="section-2">
       <h2 id="name-background">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-background" class="section-name selfRef">Background</a>
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-background" class="section-name selfRef">Background</a>
       </h2>
 <div id="internet-of-things-iot">
-<section id="section-3.1">
+<section id="section-2.1">
         <h3 id="name-internet-of-things-iot">
-<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-internet-of-things-iot" class="section-name selfRef">Internet of Things (IoT)</a>
+<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-internet-of-things-iot" class="section-name selfRef">Internet of Things (IoT)</a>
         </h3>
-<p id="section-3.1-1">Since the term "Internet of Things" (IoT) was coined by Kevin Ashton in 1999 working on Radio-Frequency Identification (RFID) technology at the Auto-ID Center of the Massachusetts Institute of Technology (MIT) <span>[<a href="#Ashton" class="xref">Ashton</a>]</span>,
-the concept of IoT had been broadened to reflect the vision of connecting the physical world to the virtual world of computers using (wireless) sensor networks with any kind of technology with which the Things can send and receive information without human intervention.
-Recently, the term has become more literal by actually connecting Things to the Internet and converging on Internet and also Web technology.
-Things are usually embedded systems of various kinds, such as home appliances, mobile equipment, wearable devices, etc. 
-Things are widely distributed, but typically have limited storage and processing power, which raise concerns regarding reliability, performance, energy consumption, security, and privacy  <span>[<a href="#Lin" class="xref">Lin</a>]</span>.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-1">Since the term "Internet of Things" (IoT) was coined by Kevin Ashton in 1999 working on Radio-Frequency Identification (RFID) technology <span>[<a href="#Ashton" class="xref">Ashton</a>]</span>,
+the concept of IoT has evolved. It now reflects a vision of connecting the physical world to the virtual world of computers using (wireless) networks over which Things can send and receive information without human intervention.
+Recently, the term has become more literal by actually connecting Things to the Internet and converging on Internet and Web technology.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2">Things are usually embedded systems of various kinds, such as home appliances, mobile equipment, wearable devices, etc. 
+Things are widely distributed, but typically have limited storage and processing power, which raise concerns regarding reliability, performance, energy consumption, security, and privacy  <span>[<a href="#Lin" class="xref">Lin</a>]</span>.
+This limited storage and processing power leads to complementing IoT with cloud computing.<a href="#section-2.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="cloud-computing">
-<section id="section-3.2">
+<section id="section-2.2">
         <h3 id="name-cloud-computing">
-<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-cloud-computing" class="section-name selfRef">Cloud Computing</a>
+<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-cloud-computing" class="section-name selfRef">Cloud Computing</a>
         </h3>
-<p id="section-3.2-1">Cloud computing has been defined in <span>[<a href="#NIST" class="xref">NIST</a>]</span>: "cloud computing is a model for enabling ubiquitous, convenient, on-demand network access to a shared pool of configurable computing resources
+<p id="section-2.2-1">Cloud computing has been defined in <span>[<a href="#NIST" class="xref">NIST</a>]</span>: "cloud computing is a model for enabling ubiquitous, convenient, on-demand network access to a shared pool of configurable computing resources
 (e.g., networks, servers, storage, applications, and services) that can be rapidly provisioned and released with minimal management effort or service provider interaction".
-Cloud computing has been a predominant technology which has virtually unlimited capacity in terms of storage and processing power.
-The availability of virtually unlimited storage and processing capabilities at low cost enabled the realization of a new computing model, in which virtualized resources can be leased in an on-demand fashion, being provided as general utilities.
-Companies like Amazon, Google, Facebook, etc. widely adopted this paradigm for delivering services over the Internet, gaining both economical and technical benefits <span>[<a href="#Botta" class="xref">Botta</a>]</span>.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2-2">Now with IoT, we will reach the era of post-clouds where unprecedented volume and variety of data will be generated by things at edge/local networks and many applications will be deployed on the edge networks to consume these IoT data. Some of the applications may need very short response times, some may contain personal data, and others may generate vast amounts of data. Today's cloud-based service models are not suitable for these applications.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.2-3">It is predicted that by 2019, 45% of the data created in IoT will be stored, processed, analyzed and acted close to, or at the edge of the network and about 50 billion devices will connect to the Internet by 2020 <span>[<a href="#Evans" class="xref">Evans</a>]</span>. So, moving all data from edge/local networks to the cloud data center may not be an efficient way anymore to process vast amounts of data.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
-<p id="section-3.2-4">In cloud computing, users traditionally only consumed IoT data through cloud services. Now, however, users are also producing IoT data with their mobile devices. This change requires even more functionality at edge/local networks <span>[<a href="#Shi" class="xref">Shi</a>]</span>, to support mobile edge computing considerations.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+Cloud computing has become a predominant technology that offers virtually unlimited capacity in terms of storage and processing power, at low cost.
+This offering enabled the realization of a new computing model, in which virtualized resources can be leased in an on-demand fashion, being provided as general utilities.
+Companies like Amazon, Google, Facebook, etc. widely adopted this paradigm for delivering services over the Internet, gaining both economical and technical benefits <span>[<a href="#Botta" class="xref">Botta</a>]</span>.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-2">Today, an unprecedented volume and variety of data is generated by Things and applications deployed in edge networks consume this data. Some of these applications may need very short response times, some may access personal data, while others may generate vast amounts of data. Today's cloud-based service models are not suitable for these applications, which can instead leverage edge computing.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="edge-computing">
-<section id="section-3.3">
+<section id="section-2.3">
         <h3 id="name-edge-computing">
-<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-edge-computing" class="section-name selfRef">Edge Computing</a>
+<a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-edge-computing" class="section-name selfRef">Edge Computing</a>
         </h3>
-<p id="section-3.3-1">Edge computing, under certain aspects also referred to as fog computing, is a new paradigm in which substantial computing and storage resources are placed at the edge of the Internet, that is, in close proximity to mobile devices, sensors, actuators, or machines, so that computing happens near data sources <span>[<a href="#Mahadev" class="xref">Mahadev</a>]</span>, or closer (topologically, physically, in term of latency, etc.) to where decisions or interactions with the physical world are happening.
-It works on both downstream data on behalf of cloud services and upstream data on behalf of IoT services.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.3-2">An edge device is any computing or networking resource residing between data sources and cloud-based datacenters.
+<p id="section-2.3-1">Edge computing, in some settings also referred to as fog computing, is a new paradigm in which substantial computing and storage resources are placed at the edge of the Internet, that is, in close proximity to mobile devices, sensors, actuators, or machines.
+Edge computing happens near data sources <span>[<a href="#Mahadev" class="xref">Mahadev</a>]</span>, or closer (topologically, physically, in term of latency, etc.) to where decisions or interactions with the physical world are happening.
+It works on both downstream data on behalf of cloud services and upstream data on behalf of IoT services.
+The term fog computing usually represents the notion of a multi-tiered edge computing, that is, several layers of compute infrastructure between the end devices and the cloud.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.3-2">An edge device is any computing or networking resource residing between data sources and cloud-based datacenters.
 In edge computing, end devices not only consume data, but also produce data. 
 And at the network edge, devices not only request services and information from the cloud, but also handle computing tasks including processing, storage, caching, and load balancing on data sent to and from the cloud <span>[<a href="#Shi" class="xref">Shi</a>]</span>.
-This does not preclude end devices from hosting computation themselves when possible, independently or as part of a distributed edge computing platform.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
-<p id="section-3.3-3">The definition of edge computing from ISO is a "form of distributed computing in which significant processing and data storage takes place on nodes which are at the edge of the network" <span>[<a href="#ISO_TR" class="xref">ISO_TR</a>]</span>. ETSI's definition of multi-access edge computing is a "system which provides an IT service environment and cloud-computing capabilities at the edge of an access network which contains one or more type of access technology, and in close proximity to its users" <span>[<a href="#ETSI_MEC_01" class="xref">ETSI_MEC_01</a>]</span>.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
-<p id="section-3.3-4">The similar concept of fog computing from the Industrial Internet Consortium (formerly OpenFog) is "a horizontal, system-level architecture that distributes computing, storage, control and networking functions closer to the users along a cloud-to-thing continuum" <a href="#sec-openfog" class="xref">Appendix A.3.3</a>.
-The term fog computing usually represents the notion of a multi-tiered edge computing, that is, several layers of compute infrastructure between the end devices and the cloud.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
-<p id="section-3.3-5">Based on these definitions, we can summarize a general philosophy of edge computing as to distribute the required functions close to users and data, while the difference to classic local systems is the usage of management and orchestration features adopted from cloud computing.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
-<p id="section-3.3-6">Actors from various industries approach edge computing using different terms and reference models, although in practice these approaches are not incompatible and may integrate with each other:<a href="#section-3.3-6" class="pilcrow">¶</a></p>
+This does not preclude end devices from hosting computation themselves when possible, independently or as part of a distributed edge computing platform (this is also referred to as Mist Computing).<a href="#section-2.3-2" class="pilcrow">¶</a></p>
+<p id="section-2.3-3">Several standards defining organization and industry forums have provided definitions of edge and fog computing:<a href="#section-2.3-3" class="pilcrow">¶</a></p>
 <ul>
-<li id="section-3.3-7.1">The telecommunication industry tends to use a model where edge computing services are deployed over NFV infrastructure at aggregation points, or in proximity to the user equipment (e.g., gNodeBs) <a href="#sec-etsi-mec" class="xref">Appendix A.3.1</a>.<a href="#section-3.3-7.1" class="pilcrow">¶</a>
+<li id="section-2.3-4.1">ISO defines edge computing as a "form of distributed computing in which significant processing and data storage takes place on nodes which are at the edge of the network" <span>[<a href="#ISO_TR" class="xref">ISO_TR</a>]</span>.<a href="#section-2.3-4.1" class="pilcrow">¶</a>
 </li>
-          <li id="section-3.3-7.2">Enterprise and campus solutions often interpret edge computing as an "edge cloud", that is, a smaller data center directly connected to the local network (often referred to as "on-premise").<a href="#section-3.3-7.2" class="pilcrow">¶</a>
+<li id="section-2.3-4.2">ETSI defines multi-access edge computing as a "system which provides an IT service environment and cloud-computing capabilities at the edge of an access network which contains one or more type of access technology, and in close proximity to its users" <span>[<a href="#ETSI_MEC_01" class="xref">ETSI_MEC_01</a>]</span>.<a href="#section-2.3-4.2" class="pilcrow">¶</a>
 </li>
-          <li id="section-3.3-7.3">The automation industry defines the edge as the connection point between IT from OT (Operational Technology). Hence, here edge computing sometimes referres to applying IT solutions to OT problems such as analytics, more flexible user interfaces, or simply having more compute power than an automation controller.<a href="#section-3.3-7.3" class="pilcrow">¶</a>
+<li id="section-2.3-4.3">The Industrial Internet Consortium (formerly OpenFog) defines fog computing as "a horizontal, system-level architecture that distributes computing, storage, control and networking functions closer to the users along a cloud-to-thing continuum" <span>[<a href="#OpenFog" class="xref">OpenFog</a>]</span>.<a href="#section-2.3-4.3" class="pilcrow">¶</a>
 </li>
-        </ul>
-<p id="section-3.3-8">It is clear that the combination of these models leads to a multi-tier edge computing solution as mentioned above.<a href="#section-3.3-8" class="pilcrow">¶</a></p>
+</ul>
+<p id="section-2.3-5">Based on these definitions, we can summarize a general philosophy of edge computing as to distribute the required functions close to users and data, while the difference to classic local systems is the usage of management and orchestration features adopted from cloud computing.<a href="#section-2.3-5" class="pilcrow">¶</a></p>
+<p id="section-2.3-6">Actors from various industries approach edge computing using different terms and reference models, although in practice these approaches are not incompatible and may integrate with each other:<a href="#section-2.3-6" class="pilcrow">¶</a></p>
+<ul>
+<li id="section-2.3-7.1">The telecommunication industry tends to use a model where edge computing services are deployed over NFV infrastructure at aggregation points, or in proximity to the user equipment (e.g., gNodeBs) <span>[<a href="#ETSI_MEC_03" class="xref">ETSI_MEC_03</a>]</span>.<a href="#section-2.3-7.1" class="pilcrow">¶</a>
+</li>
+<li id="section-2.3-7.2">Enterprise and campus solutions often interpret edge computing as an "edge cloud", that is, a smaller data center directly connected to the local network (often referred to as "on-premise").<a href="#section-2.3-7.2" class="pilcrow">¶</a>
+</li>
+<li id="section-2.3-7.3">The automation industry defines the edge as the connection point between IT from OT (Operational Technology). Hence, here edge computing sometimes refers to applying IT solutions to OT problems such as analytics, more flexible user interfaces, or simply having more compute power than an automation controller.<a href="#section-2.3-7.3" class="pilcrow">¶</a>
+</li>
+</ul>
 </section>
 </div>
-<div id="example-of-iot-edge-computing-use-cases">
-<section id="section-3.4">
+<div id="sec-uc">
+<section id="section-2.4">
         <h3 id="name-example-of-iot-edge-computi">
-<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-example-of-iot-edge-computi" class="section-name selfRef">Example of IoT Edge Computing Use Cases</a>
+<a href="#section-2.4" class="section-number selfRef">2.4. </a><a href="#name-example-of-iot-edge-computi" class="section-name selfRef">Example of IoT Edge Computing Use Cases</a>
         </h3>
-<p id="section-3.4-1">IoT edge computing can be used in home, industry, grid, healthcare, city, transportation, agriculture, and/or education scenarios.
-We discuss here only a few examples of such use cases, to point out differentiating requirements.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<p id="section-2.4-1">IoT edge computing can be used in home, industry, grid, healthcare, city, transportation, agriculture, and/or education scenarios.
+We discuss here only a few examples of such use cases, to point out differentiating requirements.<a href="#section-2.4-1" class="pilcrow">¶</a></p>
 <div id="smart-construction">
-<section id="section-3.4.1">
+<section id="section-2.4.1">
           <h4 id="name-smart-construction">
-<a href="#section-3.4.1" class="section-number selfRef">3.4.1. </a><a href="#name-smart-construction" class="section-name selfRef">Smart Construction</a>
+<a href="#section-2.4.1" class="section-number selfRef">2.4.1. </a><a href="#name-smart-construction" class="section-name selfRef">Smart Construction</a>
           </h4>
-<p id="section-3.4.1-1">In traditional construction domain, heavy equipment and machinery pose risks to humans and property. Thus, there have been many attempts to deploy technology to protect lives and property in construction sites. For example, measurements of noise, vibration, and gas can be recorded on a remote server and reported to an inspector. Today, data produced by such measurements is collected by a local gateway and transferred to a remote server. This incurs transmission costs, e.g., over a LTE connection, and storage costs, e.g., when using Amazon Web Services. When an inspector needs to investigate an incident, he checks the information stored on a server.<a href="#section-3.4.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.4.1-2">If we leverage IoT edge computing, sensor data can be processed and analyzed on a gateway located within or near a construction site. And with the help of statistical analysis or machine learning technologies, we can predict future incidents in advance and this prediction can trigger an on-site alarm and a notification to an inspector.<a href="#section-3.4.1-2" class="pilcrow">¶</a></p>
-<p id="section-3.4.1-3">To determine the exact cause of an incident, sensor data including audio and video are transferred to a remote server. In this case, audio and video data volume is typically very large and the cost of transmission can be an issue.
-Edge computing can be leveraged to predict the time of an incident, which can reduce the volume of transmitted data; while during a normal time period audio and video data may be transmitted with a low resolution, during an emergency, this transmission may use a high resolution. This adjustment can reduce transmission cost significantly.<a href="#section-3.4.1-3" class="pilcrow">¶</a></p>
+<p id="section-2.4.1-1">In traditional construction domain, heavy equipment and machinery pose risks to humans and property. Thus, there have been many attempts to deploy technology to protect lives and property in construction sites. For example, measurements of noise, vibration, and gas can be recorded and reported to an inspector. Today, data produced by such measurements is collected by a local gateway and transferred to a remote cloud server. This incurs transmission costs, e.g., over a LTE connection, and storage costs, e.g., when using Amazon Web Services. When an inspector needs to investigate an incident, he checks the information stored on the cloud server.<a href="#section-2.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.4.1-2">To determine the exact cause of an incident, sensor data including audio and video are transferred to a remote server.
+In this case, audio and video data volume is typically very large and the cost of transmission can be an issue.
+By leveraging IoT edge computing, sensor data can be processed and analyzed on a gateway located within or near a construction site.
+And with the help of statistical analysis or machine learning technologies, we can predict future incidents in advance and trigger an on-site alarm.
+Furthermore, predicting the time of an incident can help reducing significantly the volume and cost of transmitted data, by transmitting video at high resolution during critical periods, while otherwise using a lower resolution.<a href="#section-2.4.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="smart-grid">
-<section id="section-3.4.2">
+<section id="section-2.4.2">
           <h4 id="name-smart-grid">
-<a href="#section-3.4.2" class="section-number selfRef">3.4.2. </a><a href="#name-smart-grid" class="section-name selfRef">Smart Grid</a>
+<a href="#section-2.4.2" class="section-number selfRef">2.4.2. </a><a href="#name-smart-grid" class="section-name selfRef">Smart Grid</a>
           </h4>
-<p id="section-3.4.2-1">In future smart city scenarios, the Smart Grid will be critical in ensuring highly available/efficient energy control in city-wide electricity management.
-Edge computing is expected to play a significant role in those systems to improve transmission efficiency of electricity; to react and restore power after a disturbance; to reduce operation costs and reuse renewable energy effectively, since these operations involve local decision making. In addition, edge computing can help monitoring power generation and power demand, and making electrical energy storage decisions in the smart grid system.<a href="#section-3.4.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.4.2-1">In future smart city scenarios, the Smart Grid will be critical in ensuring highly available/efficient energy control in city-wide electricity management.
+Edge computing is expected to play a significant role in those systems to improve transmission efficiency of electricity; to react and restore power after a disturbance; to reduce operation costs and reuse renewable energy effectively, since these operations involve local decision making. In addition, edge computing can help monitoring power generation and power demand, and making local electrical energy storage decisions in the smart grid system.<a href="#section-2.4.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="smart-water-system">
-<section id="section-3.4.3">
+<section id="section-2.4.3">
           <h4 id="name-smart-water-system">
-<a href="#section-3.4.3" class="section-number selfRef">3.4.3. </a><a href="#name-smart-water-system" class="section-name selfRef">Smart Water System</a>
+<a href="#section-2.4.3" class="section-number selfRef">2.4.3. </a><a href="#name-smart-water-system" class="section-name selfRef">Smart Water System</a>
           </h4>
-<p id="section-3.4.3-1">The water system is one of the most important aspects of a city. Effective use of water, and cost-effective and environment-friendly water treatment  are critical aspects of this system. They can be facilitated by edge computing in smart water systems, to help monitor water consumption, transportation and prediction of future water use. For example, water harvesting and ground water monitoring will be supported through edge computing.
-Edge computing will also enable locally analyzing collected information related to water control and management, and limit water losses.<a href="#section-3.4.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.4.3-1">The water system is one of the most important aspects of a city. Effective use of water, and cost-effective and environment-friendly water treatment  are critical aspects of this system. Edge computing can help with monitoring water consumption and transport, and with predicting future water usage level. Examples of application include: water harvesting, ground water monitoring, locally analyzing collected information related to water control and management to limit water losses.<a href="#section-2.4.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-</section>
-</div>
-<div id="common-aspects-of-current-iot-edge-computing-service-platforms">
-<section id="section-3.5">
-        <h3 id="name-common-aspects-of-current-i">
-<a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-common-aspects-of-current-i" class="section-name selfRef">Common Aspects of Current IoT Edge Computing Service Platforms</a>
-        </h3>
-<p id="section-3.5-1">This section provides an overview of today's IoT edge computing field, based on a limited review of standards, research, open-source and proprietary products in <a href="#sec-overview" class="xref">Appendix A</a>.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
-<p id="section-3.5-2">IoT gateways (<a href="#sec-iot-gateways" class="xref">Appendix A.2.1</a>, <a href="#sec-gateway-platforms" class="xref">Appendix A.1.1</a>) represent a common class of IoT edge computing products, where the gateway is providing a local service on customer premises, and is remotely managed through a cloud service. IoT communication protocols are typically used between IoT devices and the gateway, including CoAP, MQTT and many specialized IoT protocols (such as OPC UA and DDS in the Industrial IoT space), while the gateway communicates with the distant cloud typically using HTTPS. Virtualization platforms enable the deployment of virtual edge computing functions (as VMs, application containers, etc.), including IoT gateway software, on servers in the mobile network infrastructure (at base station and concentration points), in edge datacenters (in central offices) or regional datacenters located near central offices. End devices are envisioned to become computing devices in forward looking projects, but are not commonly used as such today.<a href="#section-3.5-2" class="pilcrow">¶</a></p>
-<p id="section-3.5-3">Physical or virtual IoT gateways can host application programs, which are typically built using an SDK to access local services through a programmatic API.
-Edge cloud system operators host their customers' applications VMs or containers on servers located in or near access networks, which can implement local edge services. For example, mobile networks can provide edge services for radio network information, location and bandwidth management.<a href="#section-3.5-3" class="pilcrow">¶</a></p>
-<p id="section-3.5-4">Life cycle management of services and applications on physical IoT gateways is often cloud-based.
-Edge cloud management platforms and products (<a href="#sec-cloud-management-platforms" class="xref">Appendix A.1.2</a>, <a href="#sec-cloud-platforms" class="xref">Appendix A.2.2</a>) adapt cloud management technologies (e.g., Kubernetes) to the edge cloud, i.e., to smaller, distributed computing devices running outside a controlled data center. Services and application life-cycle is typically using a NFV-like management and orchestration model.<a href="#section-3.5-4" class="pilcrow">¶</a></p>
-<p id="section-3.5-5">The platform typically includes services to advertise or consume APIs (e.g., Mp1 interface in ETSI MEC supports service discovery and communication), and enables communicating with local and remote endpoints (e.g., message routing function in IoT gateways). The service platform is typically extensible by edge applications, since they can advertise an API that other edge applications can consume. IoT communication services include protocols translation, analytics and transcoding. Communication between edge computing devices is enabled in tiered deployments or distributed deployments.<a href="#section-3.5-5" class="pilcrow">¶</a></p>
-<p id="section-3.5-6">An edge cloud platform may enable pass-through without storage or local storage (e.g., on IoT gateways). Some edge cloud platforms use a distributed form of storage such as an ICN network (e.g., NFN nodes can store data in NDN, <a href="#sec-nfn" class="xref">Appendix A.4.1</a>) or a distributed storage platform (e.g., such as Ceph, <a href="#sec-cloud-management-platforms" class="xref">Appendix A.1.2</a>). External storage, e.g., on databases in distant or local IT cloud, is typically used for filtered data deemed worthy of long term storage, or in some cases for all data, for example when required for regulatory reasons.<a href="#section-3.5-6" class="pilcrow">¶</a></p>
-<p id="section-3.5-7">Stateful computing is supported on platforms hosting native programs, VMs or containers. Stateless computing is supported on platforms providing a "serverless computing" service (a.k.a. function-as-a-service), or on systems based on named function networking.<a href="#section-3.5-7" class="pilcrow">¶</a></p>
-<p id="section-3.5-8">In many IoT use cases, a typical network usage pattern is high volume uplink with some form of traffic reduction enabled by processing over edge computing devices. Alternatives to traffic reduction include deferred transmission (to off-peak hours or using physical shipping). Downlink traffic includes application control and software updates. Other, downlink-heavy traffic patterns are not excluded but are more often associated with non-IoT usage (e.g., video CDNs).<a href="#section-3.5-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
 <div id="sec-challenges">
-<section id="section-4">
-      <h2 id="name-challenges-for-iot-and-impa">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-challenges-for-iot-and-impa" class="section-name selfRef">Challenges for IoT and Impacts of Edge Computing</a>
+<section id="section-3">
+      <h2 id="name-iot-challenges-leading-towa">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-iot-challenges-leading-towa" class="section-name selfRef">IoT Challenges Leading Towards Edge Computing</a>
       </h2>
-<p id="section-4-1">As the IoT is maturing, systems are converging, deployments are growing, and IoT technology is used with more and more demanding applications such as industrial, automotive, or healthcare.
-This leads to new challenges for the network infrastructure.
-In particular, the amount of data created at the edge is expected to be vast.
-Industrial machines such as laser cutters already produce over 1 terabyte per hour, the same applies for autonomous cars <span>[<a href="#NVIDIA" class="xref">NVIDIA</a>]</span>.
-90% of IoT data is expected to be stored, processed, analyzed, and acted upon close to the source <span>[<a href="#Kelly" class="xref">Kelly</a>]</span>,
-as cloud computing models alone cannot address the new challenges <span>[<a href="#Chiang" class="xref">Chiang</a>]</span>.
-Below we discuss IoT use case requirements that are moving cloud capabilities to be more proximate and more distributed and disaggregated. Beyond addressing those requirements, however, edge computing can also bring flexibility to classic networking functions such as protocol translation in gateways.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">This section describes challenges met by IoT, that are motivating the adoption of edge computing for IoT. Those are distinct from research challenges applicable to IoT edge computing, some of which will be mentioned in <a href="#sec-components" class="xref">Section 4.3</a>.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">IoT technology is used with more and more demanding applications,e.g. in industrial, automotive or healthcare domains, leading to new challenges.
+For example, industrial machines such as laser cutters already produce over 1 terabyte per hour, and similar amounts can be generated in autonomous cars <span>[<a href="#NVIDIA" class="xref">NVIDIA</a>]</span>.
+90% of IoT data is expected to be stored, processed, analyzed, and acted upon close to the source <span>[<a href="#Kelly" class="xref">Kelly</a>]</span>, as cloud computing models alone cannot address the new challenges <span>[<a href="#Chiang" class="xref">Chiang</a>]</span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-3">Below we discuss IoT use case requirements that are moving cloud capabilities to be more proximate and more distributed and disaggregated.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <div id="time-sensitivity">
-<section id="section-4.1">
+<section id="section-3.1">
         <h3 id="name-time-sensitivity">
-<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-time-sensitivity" class="section-name selfRef">Time Sensitivity</a>
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-time-sensitivity" class="section-name selfRef">Time Sensitivity</a>
         </h3>
-<p id="section-4.1-1">Many industrial control systems, such as manufacturing systems, smart grids, oil and gas systems, etc., often require stringent end-to-end latency between the sensor and control node.
+<p id="section-3.1-1">Many industrial control systems, such as manufacturing systems, smart grids, oil and gas systems, etc., often require stringent end-to-end latency between the sensor and control node.
 While some IoT applications may require latency below a few tens of milliseconds <span>[<a href="#Weiner" class="xref">Weiner</a>]</span>,
 industrial robots and motion control systems have use cases for cycle times in the order of microseconds <span>[<a href="#_60802" class="xref">_60802</a>]</span>.
 An important aspect for real-time communications is not only the latency, but also guarantees for jitter.
-This means control packets need to arrive with as little variation as possible with a strict deadline.
-Given the best-effort characteristics of the Internet, this challenge is virtually impossible to address, without comprehending end-to-end guarantees for individual message delivery and continuous data flows.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+This means control packets need to arrive with as little variation as possible and within a strict deadline.
+Given the best-effort characteristics of the Internet, or in some cases given speed-of-light limitations, this challenge is virtually impossible to address, without comprehending end-to-end guarantees for individual message delivery and continuous data flows.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="uplink-cost">
-<section id="section-4.2">
+<section id="section-3.2">
         <h3 id="name-uplink-cost">
-<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-uplink-cost" class="section-name selfRef">Uplink Cost</a>
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-uplink-cost" class="section-name selfRef">Uplink Cost</a>
         </h3>
-<p id="section-4.2-1">Many IoT deployments are not challenged by a constrained network bandwidth to the cloud.
+<p id="section-3.2-1">Many IoT deployments are not challenged by a constrained network bandwidth to the cloud.
 The fifth generation mobile networks (5G) and Wi-Fi 6 both theoretically top out at 10 gigabits per second (i.e., 4.5 terabyte per hour), which enables high-bandwidth uplinks.
 However, the resulting cost for high-bandwidth connectivity to upload all data to the cloud is unjustifiable and impractical for most IoT applications.
-In some settings, e.g. in aeronautical communication, higher communication costs reduce the amount of data that can be practically uploaded even further.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+In some settings, e.g. in aeronautical communication, higher communication costs reduce the amount of data that can be practically uploaded even further.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="resilience-to-intermittent-services">
-<section id="section-4.3">
+<section id="section-3.3">
         <h3 id="name-resilience-to-intermittent-">
-<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-resilience-to-intermittent-" class="section-name selfRef">Resilience to Intermittent Services</a>
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-resilience-to-intermittent-" class="section-name selfRef">Resilience to Intermittent Services</a>
         </h3>
-<p id="section-4.3-1">Many IoT devices such as sensors, data collectors, actuators, controllers, etc. have very limited hardware resources
+<p id="section-3.3-1">Many IoT devices such as sensors, data collectors, actuators, controllers, etc. have very limited hardware resources
 and cannot rely solely on their limited resources to meet all their computing and/or storage needs.
 They require reliable, uninterrupted or resilient services to augment their capabilities in order to fulfill their application tasks.
-This is hard and partly impossible to achieve with cloud services for systems such as vehicles, drones, or oil rigs that have intermittent network connectivity.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+This is hard and partly impossible to achieve with cloud services for systems such as vehicles, drones, or oil rigs that have intermittent network connectivity.
+The dual is also true, a cloud back-end might want to have a reading of the device even if it's currently asleep.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="privacy-and-security">
-<section id="section-4.4">
+<section id="section-3.4">
         <h3 id="name-privacy-and-security">
-<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-privacy-and-security" class="section-name selfRef">Privacy and Security</a>
+<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-privacy-and-security" class="section-name selfRef">Privacy and Security</a>
         </h3>
-<p id="section-4.4-1">When IoT services are deployed at home, personal information can be learned from detected usage data.
+<p id="section-3.4-1">When IoT services are deployed at home, personal information can be learned from detected usage data.
 For example, one can extract information about employment, family status, age, and income by analyzing smart meter data <span>[<a href="#ENERGY" class="xref">ENERGY</a>]</span>.
 Policy makers started to provide frameworks that limit the usage of personal data and put strict requirements on data controllers and processors.
-However, data stored indefinitely in the cloud also increases the risk of data leakage, for instance, through attacks on rich targets.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
-<p id="section-4.4-2">Industrial systems are often argued to not have privacy implications, as no personal data is gathered.
+However, data stored indefinitely in the cloud also increases the risk of data leakage, for instance, through attacks on rich targets.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.4-2">Industrial systems are often argued to not have privacy implications, as no personal data is gathered.
 Yet data from such systems is often highly sensitive, as one might be able to infer trade secrets such as the setup of production lines.
-Hence, the owner of these systems are generally reluctant to upload IoT data to the cloud.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
+Hence, the owner of these systems are generally reluctant to upload IoT data to the cloud.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
+<p id="section-3.4-3">Furthermore, passive observers can perform traffic analysis on the device-to-cloud path.
+Hiding traffic patterns associated with sensor networks can therefore be another requirement for edge computing.<a href="#section-3.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
 <div id="iot-edge-computing-functions">
-<section id="section-5">
+<section id="section-4">
       <h2 id="name-iot-edge-computing-function">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-iot-edge-computing-function" class="section-name selfRef">IoT Edge Computing Functions</a>
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-iot-edge-computing-function" class="section-name selfRef">IoT Edge Computing Functions</a>
       </h2>
-<p id="section-5-1">Edge computing is expected to play an important role in deploying new IoT services integrated with Big Data and AI, enabled by flexible in-network computing platforms. Although there are lots of approaches to edge computing, we attempt to lay out a general model and list associated logical functions in this section. In practice, this model can map to different architectures, such as:<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">In this section we first look at the current state of IoT edge computing <a href="#sec-overview" class="xref">Section 4.1</a>, and then define a general system model <a href="#sec-model" class="xref">Section 4.2</a>. This provides context for IoT edge computing functions, which are listed in <a href="#sec-components" class="xref">Section 4.3</a>.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<div id="sec-overview">
+<section id="section-4.1">
+        <h3 id="name-overview-of-iot-edge-comput">
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-overview-of-iot-edge-comput" class="section-name selfRef">Overview of IoT Edge Computing Today</a>
+        </h3>
+<p id="section-4.1-1">This section provides an overview of today's IoT edge computing field, based on a limited review of standards, research, open-source and proprietary products in <span>[<a href="#I-D-defoy-t2trg-iot-edge-computing-background" class="xref">I-D-defoy-t2trg-iot-edge-computing-background</a>]</span>.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2">IoT gateways, both open-source (such as EdgeX Foundry or Home Edge) and proprietary (such as Amazon Greengrass, Microsoft Azure IoT Edge, Google Cloud IoT Core, and gateways from Bosh, Siemens), represent a common class of IoT edge computing products, where the gateway is providing a local service on customer premises, and is remotely managed through a cloud service. IoT communication protocols are typically used between IoT devices and the gateway, including CoAP, MQTT and many specialized IoT protocols (such as OPC UA and DDS in the Industrial IoT space), while the gateway communicates with the distant cloud typically using HTTPS. Virtualization platforms enable the deployment of virtual edge computing functions (as VMs, application containers, etc.), including IoT gateway software, on servers in the mobile network infrastructure (at base station and concentration points), in edge datacenters (in central offices) or regional datacenters located near central offices. End devices are envisioned to become computing devices in forward looking projects, but are not commonly used as such today.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1-3">Physical or virtual IoT gateways can host application programs, which are typically built using an SDK to access local services through a programmatic API.
+Edge cloud system operators host their customers' applications VMs or containers on servers located in or near access networks, which can implement local edge services. For example, mobile networks can provide edge services for radio network information, location and bandwidth management.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
+<p id="section-4.1-4">Life cycle management of services and applications on physical IoT gateways is often cloud-based.
+Edge cloud management platforms and products (such as StarlingX, Akraino Edge Stack, Mobile EdgeX) adapt cloud management technologies (e.g., Kubernetes) to the edge cloud, i.e., to smaller, distributed computing devices running outside a controlled data center. Services and application life-cycle is typically using a NFV-like management and orchestration model.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
+<p id="section-4.1-5">The platform typically includes services to advertise or consume APIs (e.g., Mp1 interface in ETSI MEC supports service discovery and communication), and enables communicating with local and remote endpoints (e.g., message routing function in IoT gateways). The service platform is typically extensible by edge applications, since they can advertise an API that other edge applications can consume. IoT communication services include protocols translation, analytics and transcoding. Communication between edge computing devices is enabled in tiered deployments or distributed deployments.<a href="#section-4.1-5" class="pilcrow">¶</a></p>
+<p id="section-4.1-6">An edge cloud platform may enable pass-through without storage or local storage (e.g., on IoT gateways). Some edge cloud platforms use a distributed form of storage such as an ICN network (e.g., NFN nodes can store data in NDN) or a distributed storage platform (e.g., Ceph). External storage, e.g., on databases in distant or local IT cloud, is typically used for filtered data deemed worthy of long term storage, although in some case it may be for all data, for example when required for regulatory reasons.<a href="#section-4.1-6" class="pilcrow">¶</a></p>
+<p id="section-4.1-7">Stateful computing is supported on platforms hosting native programs, VMs or containers. Stateless computing is supported on platforms providing a "serverless computing" service (a.k.a. function-as-a-service), or on systems based on named function networking.<a href="#section-4.1-7" class="pilcrow">¶</a></p>
+<p id="section-4.1-8">In many IoT use cases, a typical network usage pattern is high volume uplink with some form of traffic reduction enabled by processing over edge computing devices. Alternatives to traffic reduction include deferred transmission (to off-peak hours or using physical shipping). Downlink traffic includes application control and software updates. Other, downlink-heavy traffic patterns are not excluded but are more often associated with non-IoT usage (e.g., video CDNs).<a href="#section-4.1-8" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="sec-model">
+<section id="section-4.2">
+        <h3 id="name-general-model">
+<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-general-model" class="section-name selfRef">General Model</a>
+        </h3>
+<p id="section-4.2-1">Edge computing is expected to play an important role in deploying new IoT services integrated with Big Data and AI, enabled by flexible in-network computing platforms. Although there are lots of approaches to edge computing, we attempt to lay out a general model and list associated logical functions in this section. In practice, this model can map to different architectures, such as:<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <ul>
-<li id="section-5-2.1">A single IoT gateway, or a hierarchy of IoT gateways, typically connected to the cloud (e.g., to extend the traditionally cloud-based management of IoT devices and data to the edge). A common role of an IoT Gateway is to provide access to an heterogeneous set of IoT devices/sensors; handle IoT data; and deliver IoT data to its final destination in a cloud network. Whereas an IoT gateway needs  interactions with cloud like as conventional cloud computing, it can also operate independently.<a href="#section-5-2.1" class="pilcrow">¶</a>
+<li id="section-4.2-2.1">A single IoT gateway, or a hierarchy of IoT gateways, typically connected to the cloud (e.g., to extend the traditionally cloud-based management of IoT devices and data to the edge). A common role of an IoT Gateway is to provide access to an heterogeneous set of IoT devices/sensors; handle IoT data; and deliver IoT data to its final destination in a cloud network. Whereas an IoT gateway needs  interactions with cloud like as conventional cloud computing, it can also operate independently.<a href="#section-4.2-2.1" class="pilcrow">¶</a>
 </li>
-        <li id="section-5-2.2">A set of distributed computing nodes, e.g., embedded in switches, routers, edge cloud servers or mobile devices. In the future, some IoT end devices may have enough computing capabilities to participate in such distributed systems. In this model, edge computing nodes can collaborate with each other to share their resources.<a href="#section-5-2.2" class="pilcrow">¶</a>
+<li id="section-4.2-2.2">A set of distributed computing nodes, e.g., embedded in switches, routers, edge cloud servers or mobile devices. Some IoT end devices can have enough computing capabilities to participate in such distributed systems due to advances in hardware technology. In this model, edge computing nodes can collaborate with each other to share their resources.<a href="#section-4.2-2.2" class="pilcrow">¶</a>
 </li>
-      </ul>
+</ul>
 <span id="name-model-of-iot-edge-computing"></span><div id="rl-fig1">
 <figure id="figure-1">
-        <div class="artwork art-text alignCenter" id="section-5-3.1">
+          <div class="artwork art-text alignCenter" id="section-4.2-3.1">
 <pre>
    +---------------------+
    |   Remote network    |  +---------------+
@@ -1346,12 +1289,13 @@ Hence, the owner of these systems are generally reluctant to upload IoT data to 
 +--------------+-------------------+-----------+
 |            Edge Computing Domain             |
 |                                              |
-|   Computing Nodes (edge or end devices)      |
+|   One or more Computing Nodes                |
+|   (IoT gateway, end devices, switches,       |
+|   routers, mini/micro-datacenters, etc.)     |
 |                                              |
 |   OAM Components                             |
-|   - Resources Discovery                      |
 |   - Virtualization Management                |
-|   - Authentication                           |
+|   - Resources Discovery and Authentication   |
 |   - Edge Organization and Federation         |
 |   - ...                                      |
 |                                              |
@@ -1370,603 +1314,476 @@ Hence, the owner of these systems are generally reluctant to upload IoT data to 
 |                                              |
 +------+--------------+-------- - - - -+- - - -+
        |              |       |        |       |
-       |              |          +-----+--+     
+       |              |          +-----+--+
   +----+---+    +-----+--+    |  |compute |    |
-  |  End   |    |  End   | ...   |node/end|     
+  |  End   |    |  End   | ...   |node/end|
   |Device 1|    |Device 2| ...|  |device n|    |
-  +--------+    +--------+       +--------+     
+  +--------+    +--------+       +--------+
                               + - - - - - - - -+
 </pre>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
 <a href="#name-model-of-iot-edge-computing" class="selfRef">Model of IoT Edge Computing</a>
-        </figcaption></figure>
+          </figcaption></figure>
 </div>
-<p id="section-5-4">In this general model, the edge computing domain is interconnected with IoT end devices (southbound connectivity) and possibly with a remote/cloud network (northbound connectivity), and with a service operator's system.
-Edge computing nodes provide multiple logical functions, or components, which may not all be present in a given system. They may be implemented in a centralized or distributed fashion, in the edge network, or through some interworking between the edge network and a remote cloud network.<a href="#section-5-4" class="pilcrow">¶</a></p>
-<p id="section-5-5">We now attempt to enumerate major edge computing domain components. They are here loosely organized into OAM, functional and application components, with the understanding that the distinction between these classes may not always be clear, depending on actual system architectures.<a href="#section-5-5" class="pilcrow">¶</a></p>
-<div id="oam-components">
-<section id="section-5.1">
+<p id="section-4.2-4">In the above model, the edge computing domain is interconnected with IoT end devices (southbound connectivity) and possibly with a remote/cloud network (northbound connectivity), and with a service operator's system.
+Edge computing nodes provide multiple logical functions, or components, which may not all be present in a given system. They may be implemented in a centralized or distributed fashion, in the edge network, or through some interworking between the edge network and a remote cloud network.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
+<span id="name-example-machine-learning-ov"></span><div id="rl-fig2">
+<figure id="figure-2">
+          <div class="artwork art-text alignCenter" id="section-4.2-5.1">
+<pre>
++----------------------------------------------+
+|            Edge Computing Domain             |
+|                                              |
+| +--------+    +--------+        +--------+   |
+| |Compute |    |Compute |        |Compute |   |
+| |node/End|    |node/End|  ....  |node/End|   |
+| |device 1|    |device 2|  ....  |device m|   |
+| +----+---+    +----+---+        +----+---+   |
+|      |             |                 |       |
+|  +---+-------------+-----------------+--+    |
+|  |           IoT Edge Gateway           |    |
+|  +-----------+-------------------+------+    |
+|              |                   |           |
++--------------+-------------------+-----------+
+               |                   |
+   +-----------+---------+  +------+-------+
+   |   Remote network    |  |   Service    |
+   |(e.g., cloud network)|  |  Operator(s) |
+   +-----------+---------+  +------+-------+
+               |                   |
++--------------+-------------------+-----------+
+|              |                   |           |
+|  +-----------+-------------------+------+    |
+|  |           IoT Edge Gateway           |    |
+|  +---+-------------+-----------------+--+    |
+|      |             |                 |       |
+| +----+---+    +----+---+        +----+---+   |
+| |Compute |    |Compute |        |Compute |   |
+| |node/End|    |node/End|  ....  |node/End|   |
+| |device 1|    |device 2|  ....  |device n|   |
+| +--------+    +--------+        +--------+   |
+|                                              |
+|            Edge Computing Domain             |
++----------------------------------------------+
+</pre>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-example-machine-learning-ov" class="selfRef">Example: Machine Learning over a Distributed IoT Edge Computing System</a>
+          </figcaption></figure>
+</div>
+<p id="section-4.2-6">In the above example of system, the edge computing domain is composed of IoT edge gateways and IoT end devices which are also used as computing nodes.
+Edge computing domains are connected with a remote/cloud network, and with their respective service operator's system.
+IoT end devices/computing nodes provide logical functions, as part of a distributed machine learning application. The processing capabilities in IoT end devices being limited, they require the support of other nodes: the training process for AI services is executed at IoT edge gateways or cloud networks and the prediction (inference) service is executed in the IoT end devices.<a href="#section-4.2-6" class="pilcrow">¶</a></p>
+<p id="section-4.2-7">We now attempt to enumerate major edge computing domain components. They are here loosely organized into OAM, functional and application components, with the understanding that the distinction between these classes may not always be clear, depending on actual system architectures. Some representative research challenges are associated with those functions. We used input from co-authors, IRTF attendees and some comprehensive reviews of the field (<span>[<a href="#Yousefpour" class="xref">Yousefpour</a>]</span>, <span>[<a href="#Zhang2" class="xref">Zhang2</a>]</span>, <span>[<a href="#Khan" class="xref">Khan</a>]</span>).<a href="#section-4.2-7" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="sec-components">
+<section id="section-4.3">
         <h3 id="name-oam-components">
-<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-oam-components" class="section-name selfRef">OAM Components</a>
+<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-oam-components" class="section-name selfRef">OAM Components</a>
         </h3>
-<p id="section-5.1-1">Edge computing OAM goes beyond the network-related OAM functions listed in <span>[<a href="#RFC6291" class="xref">RFC6291</a>]</span>. Besides infrastructure (network, storage and computing resources), edge computing systems can also include computing environments (for VMs, software containers, functions), IoT end devices, data and code.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1-2">Operation related functions include performance monitoring for service level agreement measurement; fault management and provisioning for links, nodes, compute and storage resources, platforms and services. Administration covers network/compute/storage resources, platforms and services discovery, configuration and planning. Management covers monitoring and diagnostics of failures, as well as means to minimize their occurrence and take corrective actions. This may include software updates management, high service availability through redundancy and multipath communication.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
-<p id="section-5.1-3">We further detail a few OAM components.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
-<div id="resources-discovery">
-<section id="section-5.1.1">
-          <h4 id="name-resources-discovery">
-<a href="#section-5.1.1" class="section-number selfRef">5.1.1. </a><a href="#name-resources-discovery" class="section-name selfRef">Resources Discovery</a>
-          </h4>
-<p id="section-5.1.1-1">This component is about finding infrastructure resources, such as compute, network and storage, but also other resources such as IoT end devices, sensors, data, code, or services.<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
-</section>
-</div>
+<p id="section-4.3-1">Edge computing OAM goes beyond the network-related OAM functions listed in <span>[<a href="#RFC6291" class="xref">RFC6291</a>]</span>. Besides infrastructure (network, storage and computing resources), edge computing systems can also include computing environments (for VMs, software containers, functions), IoT end devices, data and code.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3-2">Operation related functions include performance monitoring for service level agreement measurement; fault management and provisioning for links, nodes, compute and storage resources, platforms and services. Administration covers network/compute/storage resources, platforms and services discovery, configuration and planning. Management covers monitoring and diagnostics of failures, as well as means to minimize their occurrence and take corrective actions. This may include software updates management, high service availability through redundancy and multipath communication. Centralized (e.g., SDN) and decentralized management systems can be used.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
+<p id="section-4.3-3">We further detail a few OAM components.<a href="#section-4.3-3" class="pilcrow">¶</a></p>
 <div id="virtualization-management">
-<section id="section-5.1.2">
+<section id="section-4.3.1">
           <h4 id="name-virtualization-management">
-<a href="#section-5.1.2" class="section-number selfRef">5.1.2. </a><a href="#name-virtualization-management" class="section-name selfRef">Virtualization Management</a>
+<a href="#section-4.3.1" class="section-number selfRef">4.3.1. </a><a href="#name-virtualization-management" class="section-name selfRef">Virtualization Management</a>
           </h4>
-<p id="section-5.1.2-1">Some IoT edge computing systems make use of virtualized (compute, storage and networking) resources, which need to be allocated and configured.<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.3.1-1">Some IoT edge computing systems make use of virtualized (compute, storage and networking) resources, which need to be allocated and configured. This function is covered to a large extent by ETSI NFV and MEC standards activities. Projects such as <span>[<a href="#LFEDGE-EVE" class="xref">LFEDGE-EVE</a>]</span> further cover virtualization and its management into distributed edge computing settings.<a href="#section-4.3.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.3.1-2">Related challenges include:<a href="#section-4.3.1-2" class="pilcrow">¶</a></p>
+<ul>
+<li id="section-4.3.1-3.1">Minimizing virtual function instantiation time and resource usage<a href="#section-4.3.1-3.1" class="pilcrow">¶</a>
+</li>
+<li id="section-4.3.1-3.2">Integration of edge computing with virtualized radio networks (Fog RAN) <span>[<a href="#I-D.bernardos-sfc-fog-ran" class="xref">I-D.bernardos-sfc-fog-ran</a>]</span> and with 5G access networks<a href="#section-4.3.1-3.2" class="pilcrow">¶</a>
+</li>
+<li id="section-4.3.1-3.3">Handling of multi-tenancy with regards to limited resources at the network edge<a href="#section-4.3.1-3.3" class="pilcrow">¶</a>
+</li>
+</ul>
 </section>
 </div>
-<div id="authentication-and-authorization">
-<section id="section-5.1.3">
-          <h4 id="name-authentication-and-authoriz">
-<a href="#section-5.1.3" class="section-number selfRef">5.1.3. </a><a href="#name-authentication-and-authoriz" class="section-name selfRef">Authentication and Authorization</a>
+<div id="sec-dis-auth">
+<section id="section-4.3.2">
+          <h4 id="name-resources-discovery-and-aut">
+<a href="#section-4.3.2" class="section-number selfRef">4.3.2. </a><a href="#name-resources-discovery-and-aut" class="section-name selfRef">Resources Discovery and Authentication</a>
           </h4>
-<p id="section-5.1.3-1">This can cover authenticating platforms, end devices, data, code units and applications or users interacting with the system. Today, centralized gateway-based systems rely for device authentication on the installation of a secret on IoT end devices and on computing devices (e.g., a device certificate stored in a hardware security module).<a href="#section-5.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3.2-1">Discovery and authentication may target platforms, infrastructure resources, such as compute, network and storage, but also other resources such as IoT end devices, sensors, data, code units, services, applications or users interacting with the system. Broker-based solutions can be used, e.g. using an IoT gateway as broker to discover IoT resources. Today, centralized gateway-based systems rely, for device authentication, on the installation of a secret on IoT end devices and on computing devices (e.g., a device certificate stored in a hardware security module).<a href="#section-4.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.3.2-2">Related challenges include:<a href="#section-4.3.2-2" class="pilcrow">¶</a></p>
+<ul>
+<li id="section-4.3.2-3.1">Discovery, authentication and trust establishment between end devices, compute nodes and platforms, with regards to concerns such as mobility, heterogeneity, scale, multiple trust domains, constrained devices, anonymity and traceability<a href="#section-4.3.2-3.1" class="pilcrow">¶</a>
+</li>
+<li id="section-4.3.2-3.2">Intermittent connectivity to the Internet, preventing relying on a third-party authority <span>[<a href="#Echeverria" class="xref">Echeverria</a>]</span><a href="#section-4.3.2-3.2" class="pilcrow">¶</a>
+</li>
+<li id="section-4.3.2-3.3">Resiliency to failures <span>[<a href="#Harchol" class="xref">Harchol</a>]</span>, denial of service attacks, easier physical access for attackers<a href="#section-4.3.2-3.3" class="pilcrow">¶</a>
+</li>
+</ul>
 </section>
 </div>
 <div id="edge-organization-and-federation">
-<section id="section-5.1.4">
+<section id="section-4.3.3">
           <h4 id="name-edge-organization-and-feder">
-<a href="#section-5.1.4" class="section-number selfRef">5.1.4. </a><a href="#name-edge-organization-and-feder" class="section-name selfRef">Edge Organization and Federation</a>
+<a href="#section-4.3.3" class="section-number selfRef">4.3.3. </a><a href="#name-edge-organization-and-feder" class="section-name selfRef">Edge Organization and Federation</a>
           </h4>
-<p id="section-5.1.4-1">In a distributed system context, once edge devices have discovered and authenticated each other, they can be organized, or self-organize, into hierarchies or clusters. Such groups can also form federations with other edge or remote clouds.<a href="#section-5.1.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.3.3-1">In a distributed system context, once edge devices have discovered and authenticated each other, they can be organized, or self-organize, into hierarchies or clusters. Organization may range from centralized to peer-to-peer. Such groups can also form federations with other edge or remote clouds.<a href="#section-4.3.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3.3-2">Related challenges include:<a href="#section-4.3.3-2" class="pilcrow">¶</a></p>
+<ul>
+<li id="section-4.3.3-3.1">Sharing resources in multi-vendor/operator scenarios, with a goal to optimize criteria such as profit <span>[<a href="#Anglano" class="xref">Anglano</a>]</span>, resource usage, latency or energy consumption<a href="#section-4.3.3-3.1" class="pilcrow">¶</a>
+</li>
+<li id="section-4.3.3-3.2">Support for scaling, and enabling fault-tolerance or self-healing <span>[<a href="#Jeong" class="xref">Jeong</a>]</span>. Besides using hierarchical organization to cope with scaling, another available and possibly complementary mechanism is multicast (<span>[<a href="#RFC7390" class="xref">RFC7390</a>]</span> <span>[<a href="#I-D.ietf-core-oscore-groupcomm" class="xref">I-D.ietf-core-oscore-groupcomm</a>]</span>)<a href="#section-4.3.3-3.2" class="pilcrow">¶</a>
+</li>
+<li id="section-4.3.3-3.3">Capacity planning, placement of infrastructure nodes to minimize delay <span>[<a href="#Fan" class="xref">Fan</a>]</span>, cost, energy, etc.<a href="#section-4.3.3-3.3" class="pilcrow">¶</a>
+</li>
+<li id="section-4.3.3-3.4">Incentives for participation, e.g. in peer-to-peer federation schemes<a href="#section-4.3.3-3.4" class="pilcrow">¶</a>
+</li>
+</ul>
 </section>
 </div>
 </section>
 </div>
 <div id="functional-components">
-<section id="section-5.2">
+<section id="section-4.4">
         <h3 id="name-functional-components">
-<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-functional-components" class="section-name selfRef">Functional Components</a>
+<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-functional-components" class="section-name selfRef">Functional Components</a>
         </h3>
 <div id="external-apis">
-<section id="section-5.2.1">
+<section id="section-4.4.1">
           <h4 id="name-external-apis">
-<a href="#section-5.2.1" class="section-number selfRef">5.2.1. </a><a href="#name-external-apis" class="section-name selfRef">External APIs</a>
+<a href="#section-4.4.1" class="section-number selfRef">4.4.1. </a><a href="#name-external-apis" class="section-name selfRef">External APIs</a>
           </h4>
-<p id="section-5.2.1-1">An IoT edge cloud may provide a northbound data plane or management plane interface to a remote network, e.g., a cloud, home or enterprise network. This interface does not exist in standalone (local-only) scenarios. To support such an interface when it exists, an edge computing component needs to expose an API, deal with authentication and authorization, support secure communication.<a href="#section-5.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.2.1-2">An IoT edge cloud may provide an API or interface to local users (e.g., to facilitate local management), or to mobile users (e.g., to provide access to services and applications, or to manage data published by the mobile device).<a href="#section-5.2.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.4.1-1">An IoT edge cloud may provide a northbound data plane or management plane interface to a remote network, e.g., a cloud, home or enterprise network. This interface does not exist in standalone (local-only) scenarios. To support such an interface when it exists, an edge computing component needs to expose an API, deal with authentication and authorization, support secure communication.<a href="#section-4.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.4.1-2">An IoT edge cloud may provide an API or interface to local or mobile users, for example to provide access to services and applications, or to manage data published by local/mobile devices.<a href="#section-4.4.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.4.1-3">Related challenges include:<a href="#section-4.4.1-3" class="pilcrow">¶</a></p>
+<ul>
+<li id="section-4.4.1-4.1">Defining edge computing abstractions suitable for users and cloud systems to interact with edge computing systems. In one example, this interaction can be based on the PaaS model <span>[<a href="#Yangui" class="xref">Yangui</a>]</span><a href="#section-4.4.1-4.1" class="pilcrow">¶</a>
+</li>
+</ul>
 </section>
 </div>
 <div id="communication-brokering">
-<section id="section-5.2.2">
+<section id="section-4.4.2">
           <h4 id="name-communication-brokering">
-<a href="#section-5.2.2" class="section-number selfRef">5.2.2. </a><a href="#name-communication-brokering" class="section-name selfRef">Communication Brokering</a>
+<a href="#section-4.4.2" class="section-number selfRef">4.4.2. </a><a href="#name-communication-brokering" class="section-name selfRef">Communication Brokering</a>
           </h4>
-<p id="section-5.2.2-1">A typical function of IoT edge computing is to facilitate communication with IoT end devices: for example, enable clients to register as recipients for data from devices, as well as forwarding/routing of traffic to or from IoT end devices, enabling various data discovery and redistribution patterns, e.g., north-south with clouds, east-west with other edge devices <span>[<a href="#DATA-DISCOVERY" class="xref">DATA-DISCOVERY</a>]</span>. Another aspect of a communication component is dispatching of alerts and notifications to interested consumers both inside and outside of the edge computing domain. Protocol translation, analytics and transcoding may also be performed when necessary.<a href="#section-5.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.2.2-2">Communication brokering may be centralized in some systems, e.g., using a hub-and-spoke message broker, or distributed like with message buses, possibly in a layered bus approach. Distributed systems may leverage direct communication between end devices and communication devices, such as device-to-device links. Brokers functions can include ensuring communication reliability, traceability, and in some cases transaction management.<a href="#section-5.2.2-2" class="pilcrow">¶</a></p>
-<p id="section-5.2.2-3">QoS can be provided in some systems through the combination of network QoS (e.g., traffic engineering or wireless resource scheduling) and compute/storage resource allocations. In some systems a bandwidth manager service can be exposed to enable allocation of bandwidth to/from an edge computing application instance.<a href="#section-5.2.2-3" class="pilcrow">¶</a></p>
+<p id="section-4.4.2-1">A typical function of IoT edge computing is to facilitate communication with IoT end devices: for example, enable clients to register as recipients for data from devices, as well as forwarding/routing of traffic to or from IoT end devices, enabling various data discovery and redistribution patterns, e.g., north-south with clouds, east-west with other edge devices <span>[<a href="#I-D.mcbride-edge-data-discovery-overview" class="xref">I-D.mcbride-edge-data-discovery-overview</a>]</span>.
+Another related aspect is dispatching of alerts and notifications to interested consumers both inside and outside of the edge computing domain.
+Protocol translation, analytics and transcoding may also be performed when necessary.<a href="#section-4.4.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.4.2-2">Communication brokering may be centralized in some systems, e.g., using a hub-and-spoke message broker, or distributed like with message buses, possibly in a layered bus approach.
+Distributed systems may leverage direct communication between end devices, over device-to-device links.
+A broker can ensure communication reliability, traceability, and in some cases transaction management.<a href="#section-4.4.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.4.2-3">Related challenges include:<a href="#section-4.4.2-3" class="pilcrow">¶</a></p>
+<ul>
+<li id="section-4.4.2-4.1">Enabling secure and resilient communication between IoT end devices and remote cloud, e.g. through multipath support<a href="#section-4.4.2-4.1" class="pilcrow">¶</a>
+</li>
+</ul>
 </section>
 </div>
 <div id="in-network-computation">
-<section id="section-5.2.3">
+<section id="section-4.4.3">
           <h4 id="name-in-network-computation">
-<a href="#section-5.2.3" class="section-number selfRef">5.2.3. </a><a href="#name-in-network-computation" class="section-name selfRef">In-Network Computation</a>
+<a href="#section-4.4.3" class="section-number selfRef">4.4.3. </a><a href="#name-in-network-computation" class="section-name selfRef">In-Network Computation</a>
           </h4>
-<p id="section-5.2.3-1">A core function of IoT edge computing is to enable computation offloading, i.e., to perform computation on an edge node on behalf of a device or user. The support for in-network computation may vary in term of capability, e.g., computing nodes can host a virtual machine able run stateful or stateless code, or a rule engine providing an API to register actions in response to conditions such as IoT device ID, sensor values to check, thresholds, etc. Computation offloading includes orchestration or application lifecycle related aspects, such as: selecting an appropriate compute device based on available resources, compute node properties, etc., and with varying goals including for example load balancing and energy conservation; onboarding code on a platform or compute device; assisted or automatic partitioning of code; invoking remote code execution; relocating an instance from one compute node to another; session continuity when communicating with mobile end devices.<a href="#section-5.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.4.3-1">A core function of IoT edge computing is to enable computation offloading, i.e., to perform computation on an edge node on behalf of a device or user, but also to orchestrate computation (in a centralized or distributed manner) and manage applications lifecycle. Support for in-network computation may vary in term of capability, e.g., computing nodes can host virtual machines, software containers, software actors or unikernels able run stateful or stateless code, or a rule engine providing an API to register actions in response to conditions such as IoT device ID, sensor values to check, thresholds, etc.<a href="#section-4.4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.4.3-2">QoS can be provided in some systems through the combination of network QoS (e.g., traffic engineering or wireless resource scheduling) and compute/storage resource allocations. For example in some systems a bandwidth manager service can be exposed to enable allocation of bandwidth to/from an edge computing application instance.<a href="#section-4.4.3-2" class="pilcrow">¶</a></p>
+<p id="section-4.4.3-3">Related challenges include:<a href="#section-4.4.3-3" class="pilcrow">¶</a></p>
+<ul>
+<li id="section-4.4.3-4.1">(Computation placement) Selecting, in a centralized or distributed/peer-to-peer manner, an appropriate compute device based on available resources, location of data input and data sinks, compute node properties, etc., and with varying goals including for example end-to-end latency, privacy, high availability, energy conservation, network efficiency (e.g. using load balancing techniques to avoid congestion)<a href="#section-4.4.3-4.1" class="pilcrow">¶</a>
+</li>
+<li id="section-4.4.3-4.2">Onboarding code on a platform or compute device, and invoking remote code execution, possibly as part of a distributed programming model and with respect to similar concerns of latency, privacy, etc. These operations should deal with heterogeneous compute nodes <span>[<a href="#Schafer" class="xref">Schafer</a>]</span>, and may in some cases also support end devices as compute nodes<a href="#section-4.4.3-4.2" class="pilcrow">¶</a>
+</li>
+<li id="section-4.4.3-4.3">Adapting Quality of Results (QoR) for applications where a perfect result is not necessary <span>[<a href="#Li" class="xref">Li</a>]</span><a href="#section-4.4.3-4.3" class="pilcrow">¶</a>
+</li>
+<li id="section-4.4.3-4.4">Assisted or automatic partitioning of code <span>[<a href="#I-D.sarathchandra-coin-appcentres" class="xref">I-D.sarathchandra-coin-appcentres</a>]</span><a href="#section-4.4.3-4.4" class="pilcrow">¶</a>
+</li>
+<li id="section-4.4.3-4.5">Supporting computation across trust domains, e.g. verifying computation results<a href="#section-4.4.3-4.5" class="pilcrow">¶</a>
+</li>
+<li id="section-4.4.3-4.6">Relocating an instance from one compute node to another, while maintaining a given service level.<a href="#section-4.4.3-4.6" class="pilcrow">¶</a>
+</li>
+<li id="section-4.4.3-4.7">Session continuity when communicating with end devices that are mobile, possibly at high speed (e.g. in vehicular scenarios)<a href="#section-4.4.3-4.7" class="pilcrow">¶</a>
+</li>
+<li id="section-4.4.3-4.8">Defining, managing and verifying SLAs for edge computing systems. Pricing is a related challenge<a href="#section-4.4.3-4.8" class="pilcrow">¶</a>
+</li>
+</ul>
 </section>
 </div>
 <div id="edge-caching">
-<section id="section-5.2.4">
+<section id="section-4.4.4">
           <h4 id="name-edge-caching">
-<a href="#section-5.2.4" class="section-number selfRef">5.2.4. </a><a href="#name-edge-caching" class="section-name selfRef">Edge Caching</a>
+<a href="#section-4.4.4" class="section-number selfRef">4.4.4. </a><a href="#name-edge-caching" class="section-name selfRef">Edge Caching</a>
           </h4>
-<p id="section-5.2.4-1">A purpose of local caching may be to enable local data processing (e.g., pre-processing or analysis), or to enable delayed virtual or physical shipping. A responsibility of the edge caching component is to manage data persistence, e.g., to schedule removal of data when it is no longer needed. Another aspect of this component may be to authenticate and encrypt data. It can for example take the form of a distributed storage system, and deal with related issues, e.g., reaching and maintaining data consistency; enabling efficient access to data, for example using some form of sharding.<a href="#section-5.2.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.4.4-1">A purpose of local caching may be to enable local data processing (e.g., pre-processing or analysis), or to enable delayed virtual or physical shipping. A responsibility of the edge caching component is to manage data persistence, e.g., to schedule removal of data when it is no longer needed. Another aspect of this component may be to authenticate and encrypt data. It can for example take the form of a distributed storage system.<a href="#section-4.4.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.4.4-2">Related challenges include<a href="#section-4.4.4-2" class="pilcrow">¶</a></p>
+<ul>
+<li id="section-4.4.4-3.1">(Cache and data placement) Using cache positioning and data placement strategies to minimize data retrieval delay <span>[<a href="#Liu" class="xref">Liu</a>]</span>, energy consumption. Caches may be positioned in the access network infrastructure or may be on end devices using device-to-device communication<a href="#section-4.4.4-3.1" class="pilcrow">¶</a>
+</li>
+<li id="section-4.4.4-3.2">Maintaining data consistency, freshness and privacy in systems that are distributed, constrained and dynamic (e.g. due to end devices and computing nodes churn or mobility). For example, age of information <span>[<a href="#Yates" class="xref">Yates</a>]</span>, a performance metric that captures the timeliness of information from a sender (e.g. an IoT device), can be exposed to networks to enable tradeoffs in this problem space<a href="#section-4.4.4-3.2" class="pilcrow">¶</a>
+</li>
+</ul>
 </section>
 </div>
 <div id="other-services">
-<section id="section-5.2.5">
+<section id="section-4.4.5">
           <h4 id="name-other-services">
-<a href="#section-5.2.5" class="section-number selfRef">5.2.5. </a><a href="#name-other-services" class="section-name selfRef">Other Services</a>
+<a href="#section-4.4.5" class="section-number selfRef">4.4.5. </a><a href="#name-other-services" class="section-name selfRef">Other Services</a>
           </h4>
-<p id="section-5.2.5-1">Data generated by IoT devices and associated information obtained from the access network may be used to provide high level services such as end device location, radio network information and bandwidth management.<a href="#section-5.2.5-1" class="pilcrow">¶</a></p>
+<p id="section-4.4.5-1">Data generated by IoT devices and associated information obtained from the access network may be used to provide high level services such as end device location, radio network information and bandwidth management.<a href="#section-4.4.5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
 <div id="application-components">
-<section id="section-5.3">
+<section id="section-4.5">
         <h3 id="name-application-components">
-<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-application-components" class="section-name selfRef">Application Components</a>
+<a href="#section-4.5" class="section-number selfRef">4.5. </a><a href="#name-application-components" class="section-name selfRef">Application Components</a>
         </h3>
+<p id="section-4.5-1">IoT edge computing can host applications such as the ones mentioned in <a href="#sec-uc" class="xref">Section 2.4</a>. While describing components of individual applications is out of our scope, some of those applications share similar functions, such as IoT end device management, data management, described below.<a href="#section-4.5-1" class="pilcrow">¶</a></p>
 <div id="iot-end-devices-management">
-<section id="section-5.3.1">
+<section id="section-4.5.1">
           <h4 id="name-iot-end-devices-management">
-<a href="#section-5.3.1" class="section-number selfRef">5.3.1. </a><a href="#name-iot-end-devices-management" class="section-name selfRef">IoT End Devices Management</a>
+<a href="#section-4.5.1" class="section-number selfRef">4.5.1. </a><a href="#name-iot-end-devices-management" class="section-name selfRef">IoT End Devices Management</a>
           </h4>
-<p id="section-5.3.1-1">IoT end device management includes managing information about the IoT devices, including their sensors, how to communicate with them, etc.
-Edge computing addresses the scalability challenges from the massive number of IoT end devices and IoT data value by separating the scalability domain into edge/local networks and remote network.<a href="#section-5.3.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.5.1-1">IoT end device management includes managing information about the IoT devices, including their sensors, how to communicate with them, etc. Edge computing addresses the scalability challenges from the massive number of IoT end devices by separating the scalability domain into edge/local networks and remote network.<a href="#section-4.5.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.5.1-2">Challenges listed in <a href="#sec-dis-auth" class="xref">Section 4.3.2</a> may be applicable to IoT end devices management as well.<a href="#section-4.5.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="data-management">
-<section id="section-5.3.2">
+<div id="sec-data">
+<section id="section-4.5.2">
           <h4 id="name-data-management">
-<a href="#section-5.3.2" class="section-number selfRef">5.3.2. </a><a href="#name-data-management" class="section-name selfRef">Data Management</a>
+<a href="#section-4.5.2" class="section-number selfRef">4.5.2. </a><a href="#name-data-management" class="section-name selfRef">Data Management</a>
           </h4>
-<p id="section-5.3.2-1">With regard to the high level challenges listed in <a href="#sec-challenges" class="xref">Section 4</a>, data storage and processing at the edge is a major aspect of IoT edge computing. Data may therefore need to be classified (e.g., in terms of privacy, importance, validity, etc.). Data analysis such as performed in AI/ML tasks performed at the edge may benefit from specialized hardware support on computing nodes. IoT edge computing will face challenges in term of, for example, programmability, naming, data abstraction, data service management and data discovery (discussed in communication brokering). Furthermore, while edge computing can support IoT services independently of cloud computing, it can also be connected to cloud computing. Thus, the relationship of IoT edge computing to cloud computing, with regard to data management, is another potential challenge <span>[<a href="#ISO_TR" class="xref">ISO_TR</a>]</span>.<a href="#section-5.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.5.2-1">Data storage and processing at the edge is a major aspect of IoT edge computing, directly addressing high level IoT challenges listed in <a href="#sec-challenges" class="xref">Section 3</a>. Data analysis such as performed in AI/ML tasks performed at the edge may benefit from specialized hardware support on computing nodes.<a href="#section-4.5.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.5.2-2">Related challenges include:<a href="#section-4.5.2-2" class="pilcrow">¶</a></p>
+<ul>
+<li id="section-4.5.2-3.1">Addressing concerns on resource usage, security and privacy when sharing, discovering or managing data. For example by presenting data in views composed of an aggregation of related data <span>[<a href="#Zhang" class="xref">Zhang</a>]</span>, protecting data communication between authenticated peers <span>[<a href="#Basudan" class="xref">Basudan</a>]</span>, classifying data (e.g., in terms of privacy, importance, validity, etc.), compressing data<a href="#section-4.5.2-3.1" class="pilcrow">¶</a>
+</li>
+<li id="section-4.5.2-3.2">Data driven programming models <span>[<a href="#Renart" class="xref">Renart</a>]</span>, e.g. event-based, including handling of naming and data abstractions<a href="#section-4.5.2-3.2" class="pilcrow">¶</a>
+</li>
+<li id="section-4.5.2-3.3">Addressing concerns such as limited resources, privacy, dynamic and heterogeneous environment, to deploy machine learning at the edge. For example, making machine learning more lightweight and distributed, supporting shorter training time and simplified models, and supporting models that can be compressed for efficient communication <span>[<a href="#Murshed" class="xref">Murshed</a>]</span><a href="#section-4.5.2-3.3" class="pilcrow">¶</a>
+</li>
+<li id="section-4.5.2-3.4">While edge computing can support IoT services independently of cloud computing, it can also be connected to cloud computing. Thus, the relationship of IoT edge computing to cloud computing, with regard to data management, is another potential challenge <span>[<a href="#ISO_TR" class="xref">ISO_TR</a>]</span><a href="#section-4.5.2-3.4" class="pilcrow">¶</a>
+</li>
+</ul>
 </section>
 </div>
 </section>
 </div>
 <div id="simulation-and-emulation-environments">
-<section id="section-5.4">
+<section id="section-4.6">
         <h3 id="name-simulation-and-emulation-en">
-<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-simulation-and-emulation-en" class="section-name selfRef">Simulation and Emulation Environments</a>
+<a href="#section-4.6" class="section-number selfRef">4.6. </a><a href="#name-simulation-and-emulation-en" class="section-name selfRef">Simulation and Emulation Environments</a>
         </h3>
-<p id="section-5.4-1">IoT Edge Computing brings new challenges to simulation and emulation tools used by researchers and developers. A varied set of applications, network and computing technologies can coexist in a distributed system, which make modelling difficult. Scale, mobility and resource management are additional challenges <span>[<a href="#SimulatingFog" class="xref">SimulatingFog</a>]</span>.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
-<p id="section-5.4-2">Tools include simulators, where simplified application logic runs on top of a fog network model, and emulators, where actual applications can be deployed, typically in software containers, over a cloud infrastructure (e.g. Docker, Kubernetes) itself running over a network emulating edge network conditions such as variable delays, throughput and mobility events. To gain in scale, emulated and simulated systems can be used together in hybrid federation-based approaches <span>[<a href="#PseudoDynamicTesting" class="xref">PseudoDynamicTesting</a>]</span>, while to gain in realism physical devices can be interconnected with emulated systems. Examples of related work and platforms include the publicly accessible MEC sandbox work recently initiated in ETSI <span>[<a href="#ETSI_Sandbox" class="xref">ETSI_Sandbox</a>]</span>, and open source simulators and emulators (<span>[<a href="#AdvantEDGE" class="xref">AdvantEDGE</a>]</span> emulator and tools cited in <span>[<a href="#SimulatingFog" class="xref">SimulatingFog</a>]</span>).<a href="#section-5.4-2" class="pilcrow">¶</a></p>
+<p id="section-4.6-1">IoT Edge Computing brings new challenges to simulation and emulation tools used by researchers and developers. A varied set of applications, network and computing technologies can coexist in a distributed system, which make modelling difficult. Scale, mobility and resource management are additional challenges <span>[<a href="#SimulatingFog" class="xref">SimulatingFog</a>]</span>.<a href="#section-4.6-1" class="pilcrow">¶</a></p>
+<p id="section-4.6-2">Tools include simulators, where simplified application logic runs on top of a fog network model, and emulators, where actual applications can be deployed, typically in software containers, over a cloud infrastructure (e.g. Docker, Kubernetes) itself running over a network emulating edge network conditions such as variable delays, throughput and mobility events. To gain in scale, emulated and simulated systems can be used together in hybrid federation-based approaches <span>[<a href="#PseudoDynamicTesting" class="xref">PseudoDynamicTesting</a>]</span>, while to gain in realism physical devices can be interconnected with emulated systems. Examples of related work and platforms include the publicly accessible MEC sandbox work recently initiated in ETSI <span>[<a href="#ETSI_Sandbox" class="xref">ETSI_Sandbox</a>]</span>, and open source simulators and emulators (<span>[<a href="#AdvantEDGE" class="xref">AdvantEDGE</a>]</span> emulator and tools cited in <span>[<a href="#SimulatingFog" class="xref">SimulatingFog</a>]</span>).<a href="#section-4.6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
 <div id="security-considerations">
-<section id="section-6">
+<section id="section-5">
       <h2 id="name-security-considerations">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-6-1">T.B.D.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">As discussed in <a href="#sec-dis-auth" class="xref">Section 4.3.2</a>, authentication and trust (between computing nodes, management nodes, end devices) can be challenging as scale, mobility and heterogeneity increase. The sometimes disconnected nature of edge resources can prevent relying on a third-party authority. Distributed edge computing is exposed to issues with reliability and denial of service attacks. Personal or proprietary IoT data leakage is also a major threat, especially due to the distributed nature of the systems (<a href="#sec-data" class="xref">Section 4.5.2</a>).<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">However, edge computing also brings solutions in the security space: maintaining privacy by computing sensitive data closer to data generators is a major use case for IoT edge computing. An edge cloud can be used to take actions based on sensitive data, or anonymizing, aggregating or compressing data prior to transmitting to a remote cloud server. Edge computing communication brokering functions can also be used to secure communication between edge and cloud networks.<a href="#section-5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="acknowledgement">
+<div id="acknowledgment">
+<section id="section-6">
+      <h2 id="name-acknowledgment">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-acknowledgment" class="section-name selfRef">Acknowledgment</a>
+      </h2>
+<p id="section-6-1">The authors would like to thank Joo-Sang Youn, Akbar Rahman, Michel Roy, Robert Gazda, Rute Sofia, Thomas Fossati and Chonggang Wang for their valuable comments and suggestions on this document.<a href="#section-6-1" class="pilcrow">¶</a></p>
+</section>
+</div>
 <section id="section-7">
-      <h2 id="name-acknowledgement">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-acknowledgement" class="section-name selfRef">Acknowledgement</a>
+      <h2 id="name-informative-references">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
       </h2>
-<p id="section-7-1">The authors would like to thank Joo-Sang Youn, Akbar Rahman, Michel Roy, Robert Gazda and Rute Sofia for their valuable comments and suggestions on this document.<a href="#section-7-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<section id="section-8">
-      <h2 id="name-references">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-references" class="section-name selfRef">References</a>
-      </h2>
-<section id="section-8.1">
-        <h3 id="name-normative-references">
-<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
-        </h3>
-<dl class="references">
-<dt id="RFC2119">[RFC2119]</dt>
-      <dd>
-<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
-</dl>
-</section>
-<section id="section-8.2">
-        <h3 id="name-informative-references">
-<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
-        </h3>
 <dl class="references">
 <dt id="AdvantEDGE">[AdvantEDGE]</dt>
-        <dd>
-<span class="refAuthor"></span>, <span class="refTitle">"Mobile Edge Emulation Platform"</span>, <span class="seriesInfo">Source Code Repository </span>, <time datetime="2020-02">February 2020</time>, <span>&lt;<a href="https://github.com/InterDigitalInc/AdvantEDGE">https://github.com/InterDigitalInc/AdvantEDGE</a>&gt;</span>. </dd>
+<dd>
+<span class="refTitle">"Mobile Edge Emulation Platform"</span>, <span class="seriesInfo">Source Code Repository </span>, <time datetime="2020">2020</time>, <span>&lt;<a href="https://github.com/InterDigitalInc/AdvantEDGE">https://github.com/InterDigitalInc/AdvantEDGE</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Anglano">[Anglano]</dt>
+<dd>
+<span class="refAuthor">Anglano, C.</span><span class="refAuthor">, Canonico, M.</span><span class="refAuthor">, Castagno, P.</span><span class="refAuthor">, Guazzone, M.</span><span class="refAuthor">, and M. Sereno</span>, <span class="refTitle">"A game-theoretic approach to coalition formation in fog provider federations"</span>, <span class="seriesInfo">IEEE Third International Conference on Fog and Mobile Edge Computing (FMEC), pages 123-130 </span>, <time datetime="2018">2018</time>. </dd>
+<dd class="break"></dd>
 <dt id="Ashton">[Ashton]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Ashton, K.</span>, <span class="refTitle">"That Internet of Things thing"</span>, <span class="seriesInfo">RFID J. vol. 22, no. 7, pp. 97-114 </span>, <time datetime="2009">2009</time>. </dd>
+<dd class="break"></dd>
+<dt id="Basudan">[Basudan]</dt>
+<dd>
+<span class="refAuthor">Basudan, S.</span><span class="refAuthor">, Lin, X.</span><span class="refAuthor">, and K. Sankaranarayanan</span>, <span class="refTitle">"A privacy-preserving vehicular crowdsensing-based road surface condition monitoring system using fog computing"</span>, <span class="seriesInfo">IEEE Internet of Things Journal, 4(3):772-782 </span>, <time datetime="2017">2017</time>. </dd>
+<dd class="break"></dd>
 <dt id="Botta">[Botta]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Botta, A.</span><span class="refAuthor">, Donato, W.</span><span class="refAuthor">, Persico, V.</span><span class="refAuthor">, and A. Pescape</span>, <span class="refTitle">"Integration of Cloud Computing and Internet of Things: A survey"</span>, <span class="seriesInfo">Future Gener. Comput. Syst., vol. 56, pp. 684-700 </span>, <time datetime="2016">2016</time>. </dd>
+<dd class="break"></dd>
 <dt id="Chiang">[Chiang]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Chiang, M.</span><span class="refAuthor"> and T. Zhang</span>, <span class="refTitle">"Fog and IoT: An overview of research opportunities"</span>, <span class="seriesInfo">IEEE Internet Things J., vol. 3, no. 6, pp. 854-864 </span>, <time datetime="2016">2016</time>. </dd>
-<dt id="DATA-DISCOVERY">[DATA-DISCOVERY]</dt>
-        <dd>
-<span class="refAuthor">McBride, M.</span><span class="refAuthor">, Kutscher, D.</span><span class="refAuthor">, Schooler, E.</span><span class="refAuthor">, and CJ. Bernardos</span>, <span class="refTitle">"Edge Data Discovery for COIN"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-mcbride-edge-data-discovery-overview</span>, <time>February 2020</time>, <span>&lt;<a href="https://tools.ietf.org/html/draft-mcbride-edge-data-discovery-overview">https://tools.ietf.org/html/draft-mcbride-edge-data-discovery-overview</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Echeverria">[Echeverria]</dt>
+<dd>
+<span class="refAuthor">Echeverria, S.</span><span class="refAuthor">, Klinedinst, D.</span><span class="refAuthor">, Williams, K.</span><span class="refAuthor">, and G. A Lewis</span>, <span class="refTitle">"Establishing trusted identities in disconnected edge environments"</span>, <span class="seriesInfo">IEEE/ACM Symposium Edge Computing (SEC), pages 51-63. </span>, <time datetime="2016">2016</time>. </dd>
+<dd class="break"></dd>
 <dt id="ENERGY">[ENERGY]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Beckel, C.</span><span class="refAuthor">, Sadamori, L.</span><span class="refAuthor">, Staake, T.</span><span class="refAuthor">, and S. Santini</span>, <span class="refTitle">"Revealing Household Characteristics from Smart Meter Data"</span>, <span class="seriesInfo">Energy, vol. 78, pp. 397-410 </span>, <time datetime="2014">2014</time>. </dd>
+<dd class="break"></dd>
 <dt id="ETSI_MEC_01">[ETSI_MEC_01]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">ETSI, .</span>, <span class="refTitle">"Multi-access Edge Computing (MEC); Terminology"</span>, <span class="seriesInfo">ETSI GS 001 </span>, <time datetime="2019">2019</time>, <span>&lt;<a href="https://www.etsi.org/deliver/etsi_gs/MEC/001_099/001/02.01.01_60/gs_MEC001v020101p.pdf">https://www.etsi.org/deliver/etsi_gs/MEC/001_099/001/02.01.01_60/gs_MEC001v020101p.pdf</a>&gt;</span>. </dd>
-<dt id="ETSI_MEC_02">[ETSI_MEC_02]</dt>
-        <dd>
-<span class="refAuthor">ETSI, .</span>, <span class="refTitle">"Multi-access Edge Computing (MEC); Phase 2: Use Cases and Requirements"</span>, <span class="seriesInfo">ETSI GS 002 </span>, <time datetime="2016">2016</time>, <span>&lt;<a href="https://www.etsi.org/deliver/etsi_gs/MEC/001_099/002/02.01.01_60/gs_MEC002v020101p.pdf">https://www.etsi.org/deliver/etsi_gs/MEC/001_099/002/02.01.01_60/gs_MEC002v020101p.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="ETSI_MEC_03">[ETSI_MEC_03]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">ETSI, .</span>, <span class="refTitle">"Mobile Edge Computing (MEC); Framework and Reference Architecture"</span>, <span class="seriesInfo">ETSI GS 003 </span>, <time datetime="2019">2019</time>, <span>&lt;<a href="https://www.etsi.org/deliver/etsi_gs/MEC/001_099/003/02.01.01_60/gs_MEC003v020101p.pdf">https://www.etsi.org/deliver/etsi_gs/MEC/001_099/003/02.01.01_60/gs_MEC003v020101p.pdf</a>&gt;</span>. </dd>
-<dt id="ETSI_MEC_WP_28">[ETSI_MEC_WP_28]</dt>
-        <dd>
-<span class="refAuthor">ETSI, .</span>, <span class="refTitle">"MEC in 5G networks"</span>, <span class="seriesInfo">White Paper </span>, <time datetime="2018">2018</time>, <span>&lt;<a href="https://www.etsi.org/images/files/ETSIWhitePapers/etsi_wp28_mec_in_5G_FINAL.pdf">https://www.etsi.org/images/files/ETSIWhitePapers/etsi_wp28_mec_in_5G_FINAL.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="ETSI_Sandbox">[ETSI_Sandbox]</dt>
-        <dd>
-<span class="refAuthor"></span>, <span class="refTitle">"Multi-access Edge Computing (MEC) MEC Sandbox Work Item"</span>, <span class="seriesInfo">Portal </span>, <time datetime="2020-02">February 2020</time>, <span>&lt;<a href="https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=57671">https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=57671</a>&gt;</span>. </dd>
-<dt id="Evans">[Evans]</dt>
-        <dd>
-<span class="refAuthor">Evans, D.</span>, <span class="refTitle">"The Internet of Things: How the next evolution of the Internet is changing everything"</span>, <span class="seriesInfo">CISCO White Paper </span>, <time datetime="2011">2011</time>. </dd>
-<dt id="FLAME">[FLAME]</dt>
-        <dd>
-<span class="refAuthor">Horizon 2020 Programme, .</span>, <span class="refTitle">"FLAME Project"</span>, <span class="seriesInfo">Portal </span>, <time datetime="2019">2019</time>, <span>&lt;<a href="https://www.ict-flame.eu/">https://www.ict-flame.eu/</a>&gt;</span>. </dd>
-<dt id="IEEE-1934">[IEEE-1934]</dt>
-        <dd>
-<span class="refAuthor">IEEE, .</span>, <span class="refTitle">"FOG - Fog Computing and Networking Architecture Framework"</span>, <span class="seriesInfo">Portal </span>, <time datetime="2019">2019</time>, <span>&lt;<a href="https://standards.ieee.org/standard/1934-2018.html">https://standards.ieee.org/standard/1934-2018.html</a>&gt;</span>. </dd>
+<dd>
+<span class="refTitle">"Multi-access Edge Computing (MEC) MEC Sandbox Work Item"</span>, <span class="seriesInfo">Portal </span>, <time datetime="2020">2020</time>, <span>&lt;<a href="https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=57671">https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=57671</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Fan">[Fan]</dt>
+<dd>
+<span class="refAuthor">Fan, Q.</span><span class="refAuthor"> and N. Ansari</span>, <span class="refTitle">"Cost aware cloudlet placement for big data processing at the edge"</span>, <span class="seriesInfo">IEEE International Conference on Communications (ICC), pages 1-6 </span>, <time datetime="2017">2017</time>. </dd>
+<dd class="break"></dd>
+<dt id="Harchol">[Harchol]</dt>
+<dd>
+<span class="refAuthor">Harchol, Y.</span><span class="refAuthor">, Mushtaq, A.</span><span class="refAuthor">, McCauley, J.</span><span class="refAuthor">, Panda, A.</span><span class="refAuthor">, and S. Shenker</span>, <span class="refTitle">"Cessna: Resilient edge-computing"</span>, <span class="seriesInfo">Workshop on Mobile Edge Communications, pages 1-6. ACM </span>, <time datetime="2018">2018</time>. </dd>
+<dd class="break"></dd>
+<dt id="I-D-defoy-t2trg-iot-edge-computing-background">[I-D-defoy-t2trg-iot-edge-computing-background]</dt>
+<dd>
+<span class="refAuthor">de Foy, X.</span><span class="refAuthor">, Hong, J.</span><span class="refAuthor">, Hong, Y.</span><span class="refAuthor">, Kovatsch, M.</span><span class="refAuthor">, Schooler, E.</span><span class="refAuthor">, and D. Kutscher</span>, <span class="refTitle">"Machine learning at the network edge: A survey"</span>, <span class="seriesInfo">draft-defoy-t2trg-iot-edge-computing-background-00 </span>, <time datetime="2020">2020</time>, <span>&lt;<a href="http://www.ietf.org/internet-drafts/draft-defoy-t2trg-iot-edge-computing-background-00.txt">http://www.ietf.org/internet-drafts/draft-defoy-t2trg-iot-edge-computing-background-00.txt</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.bernardos-sfc-fog-ran">[I-D.bernardos-sfc-fog-ran]</dt>
+<dd>
+<span class="refAuthor">Bernardos, C.</span><span class="refAuthor">, Rahman, A.</span><span class="refAuthor">, and A. Mourad</span>, <span class="refTitle">"Service Function Chaining Use Cases in Fog RAN"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bernardos-sfc-fog-ran-07</span>, <time datetime="2020-03-11">11 March 2020</time>, <span>&lt;<a href="http://www.ietf.org/internet-drafts/draft-bernardos-sfc-fog-ran-07.txt">http://www.ietf.org/internet-drafts/draft-bernardos-sfc-fog-ran-07.txt</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-core-oscore-groupcomm">[I-D.ietf-core-oscore-groupcomm]</dt>
+<dd>
+<span class="refAuthor">Tiloca, M.</span><span class="refAuthor">, Selander, G.</span><span class="refAuthor">, Palombini, F.</span><span class="refAuthor">, and J. Park</span>, <span class="refTitle">"Group OSCORE - Secure Group Communication for CoAP"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-core-oscore-groupcomm-08</span>, <time datetime="2020-04-06">6 April 2020</time>, <span>&lt;<a href="http://www.ietf.org/internet-drafts/draft-ietf-core-oscore-groupcomm-08.txt">http://www.ietf.org/internet-drafts/draft-ietf-core-oscore-groupcomm-08.txt</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.mcbride-edge-data-discovery-overview">[I-D.mcbride-edge-data-discovery-overview]</dt>
+<dd>
+<span class="refAuthor">McBride, M.</span><span class="refAuthor">, Kutscher, D.</span><span class="refAuthor">, Schooler, E.</span><span class="refAuthor">, and C. Bernardos</span>, <span class="refTitle">"Edge Data Discovery for COIN"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-mcbride-edge-data-discovery-overview-03</span>, <time datetime="2020-01-29">29 January 2020</time>, <span>&lt;<a href="http://www.ietf.org/internet-drafts/draft-mcbride-edge-data-discovery-overview-03.txt">http://www.ietf.org/internet-drafts/draft-mcbride-edge-data-discovery-overview-03.txt</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.sarathchandra-coin-appcentres">[I-D.sarathchandra-coin-appcentres]</dt>
+<dd>
+<span class="refAuthor">Sarathchandra, C.</span><span class="refAuthor">, Trossen, D.</span><span class="refAuthor">, and M. Boniface</span>, <span class="refTitle">"In-Network Computing for App-Centric Micro-Services"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-sarathchandra-coin-appcentres-02</span>, <time datetime="2020-02-28">28 February 2020</time>, <span>&lt;<a href="http://www.ietf.org/internet-drafts/draft-sarathchandra-coin-appcentres-02.txt">http://www.ietf.org/internet-drafts/draft-sarathchandra-coin-appcentres-02.txt</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="ISO_TR">[ISO_TR]</dt>
-        <dd>
-<span class="refAuthor"></span>, <span class="refTitle">"Information Technology - Cloud Computing - Edge Computing Landscape"</span>, <span class="seriesInfo">ISO/IEC TR 23188 </span>, <time datetime="2018">2018</time>. </dd>
+<dd>
+<span class="refTitle">"Information Technology - Cloud Computing - Edge Computing Landscape"</span>, <span class="seriesInfo">ISO/IEC TR 23188 </span>, <time datetime="2018">2018</time>. </dd>
+<dd class="break"></dd>
+<dt id="Jeong">[Jeong]</dt>
+<dd>
+<span class="refAuthor">Jeong, T.</span><span class="refAuthor">, Chung, J.</span><span class="refAuthor">, Hong, J.W.</span><span class="refAuthor">, and S. Ha</span>, <span class="refTitle">"Towards a distributed computing framework for fog"</span>, <span class="seriesInfo">IEEE Fog World Congress (FWC), pages 1-6 </span>, <time datetime="2017">2017</time>. </dd>
+<dd class="break"></dd>
 <dt id="Kelly">[Kelly]</dt>
-        <dd>
-<span class="refAuthor">Kelly, R.</span>, <span class="refTitle">"Internet of Things Data to Top 1.6 Zettabytes by 2022"</span>, <time datetime="2016">2016</time>, <span>&lt;<a href="https://campustechnology.com/articles/2015/04/15/internet-of-thingsdata-to-top-1-6-zettabytes-by-2020.aspx">https://campustechnology.com/articles/2015/04/15/internet-of-thingsdata-to-top-1-6-zettabytes-by-2020.aspx</a>&gt;</span>. </dd>
+<dd>
+<span class="refAuthor">Kelly, R.</span>, <span class="refTitle">"Internet of Things Data to Top 1.6 Zettabytes by 2022"</span>, <time datetime="2015">2015</time>, <span>&lt;<a href="https://campustechnology.com/articles/2015/04/15/internet-of-things-data-to-top-1-6-zettabytes-by-2020.aspx">https://campustechnology.com/articles/2015/04/15/internet-of-things-data-to-top-1-6-zettabytes-by-2020.aspx</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Khan">[Khan]</dt>
+<dd>
+<span class="refAuthor">Khan, L.U.</span><span class="refAuthor">, Yaqoob, I.</span><span class="refAuthor">, Tran, N.H.</span><span class="refAuthor">, Kazmi, S.M.A.</span><span class="refAuthor">, Dang, T.N.</span><span class="refAuthor">, and C.S. Hong</span>, <span class="refTitle">"Edge Computing Enabled Smart Cities: A Comprehensive Survey"</span>, <span class="seriesInfo">arXiv:1909.08747 </span>, <time datetime="2019">2019</time>. </dd>
+<dd class="break"></dd>
+<dt id="LFEDGE-EVE">[LFEDGE-EVE]</dt>
+<dd>
+<span class="refAuthor">Linux Foundation, .</span>, <span class="refTitle">"Project Edge Virtualization Engine (EVE)"</span>, <span class="seriesInfo">Portal </span>, <time datetime="2020">2020</time>, <span>&lt;<a href="https://www.lfedge.org/projects/eve">https://www.lfedge.org/projects/eve</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Li">[Li]</dt>
+<dd>
+<span class="refAuthor">Li, Y.</span><span class="refAuthor">, Chen, Y.</span><span class="refAuthor">, Lan, T.</span><span class="refAuthor">, and G. Venkataramani</span>, <span class="refTitle">"Mobiqor: Pushing the envelope of mobile edge computing via quality-of-result optimization"</span>, <span class="seriesInfo">IEEE 37th International Conference on Distributed Computing Systems (ICDCS), pages 1261-1270 </span>, <time datetime="2017">2017</time>. </dd>
+<dd class="break"></dd>
 <dt id="Lin">[Lin]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Lin, J.</span><span class="refAuthor">, Yu, W.</span><span class="refAuthor">, Zhang, N.</span><span class="refAuthor">, Yang, X.</span><span class="refAuthor">, Zhang, H.</span><span class="refAuthor">, and W. Zhao</span>, <span class="refTitle">"A survey on Internet of Things: Architecture, enabling technologies, security and privacy, and applications"</span>, <span class="seriesInfo">IEEE Internet of Things J., vol. 4, no. 5, pp. 1125-1142 </span>, <time datetime="2017">2017</time>. </dd>
-<dt id="Linux_Foundation_Edge">[Linux_Foundation_Edge]</dt>
-        <dd>
-<span class="refAuthor">Linux Foundation, .</span>, <span class="refTitle">"Linux Foundation Edge"</span>, <span class="seriesInfo">Portal </span>, <time datetime="2019">2019</time>, <span>&lt;<a href="https://www.lfedge.org/">https://www.lfedge.org/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Liu">[Liu]</dt>
+<dd>
+<span class="refAuthor">Liu, J.</span><span class="refAuthor">, Bai, B.</span><span class="refAuthor">, Zhang, J.</span><span class="refAuthor">, and K.B. Letaief</span>, <span class="refTitle">"Cache placement in fog-rans: From centralized to distributed algorithms"</span>, <span class="seriesInfo">IEEE Transactions on Wireless Communications, 16(11):7039-7051 </span>, <time datetime="2017">2017</time>. </dd>
+<dd class="break"></dd>
 <dt id="Mahadev">[Mahadev]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Satyanarayanan, M.</span>, <span class="refTitle">"The Emergence of Edge Computing"</span>, <span class="seriesInfo">Computer, vol. 50, no. 1, pp. 30-39 </span>, <time datetime="2017">2017</time>. </dd>
+<dd class="break"></dd>
+<dt id="Murshed">[Murshed]</dt>
+<dd>
+<span class="refAuthor">Murshed, M.</span><span class="refAuthor">, Murphy, C.</span><span class="refAuthor">, Hou, D.</span><span class="refAuthor">, Khan, N.</span><span class="refAuthor">, Ananthanarayanan, G.</span><span class="refAuthor">, and F. Hussain</span>, <span class="refTitle">"Machine learning at the network edge: A survey"</span>, <span class="seriesInfo">arXiv:1908.00080 </span>, <time datetime="2019">2019</time>. </dd>
+<dd class="break"></dd>
 <dt id="NIST">[NIST]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Mell, P.</span><span class="refAuthor"> and T. Grance</span>, <span class="refTitle">"The NIST definition of Cloud Computing"</span>, <span class="seriesInfo">Natl. Inst. Stand. Technol, vol. 53, no. 6, p. 50 </span>, <time datetime="2009">2009</time>. </dd>
+<dd class="break"></dd>
 <dt id="NVIDIA">[NVIDIA]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Grzywaczewski, A.</span>, <span class="refTitle">"Training AI for Self-Driving Vehicles: the Challenge of Scale"</span>, <span class="seriesInfo">NVIDIA Developer Blog </span>, <time datetime="2017">2017</time>, <span>&lt;<a href="https://devblogs.nvidia.com/training-self-driving-vehicles-challenge-scale/">https://devblogs.nvidia.com/training-self-driving-vehicles-challenge-scale/</a>&gt;</span>. </dd>
-<dt id="OpenEdgeComputing">[OpenEdgeComputing]</dt>
-        <dd>
-<span class="refAuthor"></span>, <span class="refTitle">"Open Edge Computing"</span>, <span class="seriesInfo">Portal </span>, <time datetime="2019">2019</time>, <span>&lt;<a href="http://openedgecomputing.org/">http://openedgecomputing.org/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="OpenFog">[OpenFog]</dt>
-        <dd>
-<span class="refAuthor"></span>, <span class="refTitle">"OpenFog Reference Architecture for Fog Computing"</span>, <span class="seriesInfo">OpenFog Consortium </span>, <time datetime="2017">2017</time>. </dd>
-<dt id="POINT">[POINT]</dt>
-        <dd>
-<span class="refAuthor">Horizon 2020 Programme, .</span>, <span class="refTitle">"IP Over ICN - the better IP (POINT) Project"</span>, <span class="seriesInfo">Portal </span>, <time datetime="2019">2019</time>, <span>&lt;<a href="https://www.point-h2020.eu/">https://www.point-h2020.eu/</a>&gt;</span>. </dd>
+<dd>
+<span class="refTitle">"OpenFog Reference Architecture for Fog Computing"</span>, <span class="seriesInfo">OpenFog Consortium </span>, <time datetime="2017">2017</time>. </dd>
+<dd class="break"></dd>
 <dt id="PseudoDynamicTesting">[PseudoDynamicTesting]</dt>
-        <dd>
-<span class="refAuthor">Ficco, M.</span><span class="refAuthor">, Esposito, C.</span><span class="refAuthor">, Xiang, Y.</span><span class="refAuthor">, and F. Palmieri</span>, <span class="refTitle">"Revealing Household Characteristics from Smart Meter Data"</span>, <span class="seriesInfo">IEEE Communications Magazine, Nov. 2017 </span>, <time datetime="2017">2017</time>. </dd>
+<dd>
+<span class="refAuthor">Ficco, M.</span><span class="refAuthor">, Esposito, C.</span><span class="refAuthor">, Xiang, Y.</span><span class="refAuthor">, and F. Palmieri</span>, <span class="refTitle">"Pseudo-Dynamic Testing of Realistic Edge-Fog Cloud Ecosystems"</span>, <span class="seriesInfo">IEEE Communications Magazine, Nov. 2017 </span>, <time datetime="2017">2017</time>. </dd>
+<dd class="break"></dd>
+<dt id="Renart">[Renart]</dt>
+<dd>
+<span class="refAuthor">Renart, E.G.</span><span class="refAuthor">, Diaz-Montes, J.</span><span class="refAuthor">, and M. Parashar</span>, <span class="refTitle">"Data-driven stream processing at the edge"</span>, <span class="seriesInfo">IEEE 1st International Conference on Fog and Edge Computing (ICFEC), pages 31-40 </span>, <time datetime="2017">2017</time>. </dd>
+<dd class="break"></dd>
 <dt id="RFC6291">[RFC6291]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Andersson, L.</span><span class="refAuthor">, van Helvoort, H.</span><span class="refAuthor">, Bonica, R.</span><span class="refAuthor">, Romascanu, D.</span><span class="refAuthor">, and S. Mansfield</span>, <span class="refTitle">"Guidelines for the Use of the "OAM" Acronym in the IETF"</span>, <span class="seriesInfo">BCP 161</span>, <span class="seriesInfo">RFC 6291</span>, <span class="seriesInfo">DOI 10.17487/RFC6291</span>, <time datetime="2011-06">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6291">https://www.rfc-editor.org/info/rfc6291</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7390">[RFC7390]</dt>
+<dd>
+<span class="refAuthor">Rahman, A., Ed.</span><span class="refAuthor"> and E. Dijk, Ed.</span>, <span class="refTitle">"Group Communication for the Constrained Application Protocol (CoAP)"</span>, <span class="seriesInfo">RFC 7390</span>, <span class="seriesInfo">DOI 10.17487/RFC7390</span>, <time datetime="2014-10">October 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7390">https://www.rfc-editor.org/info/rfc7390</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Schafer">[Schafer]</dt>
+<dd>
+<span class="refAuthor">Schafer, D.</span><span class="refAuthor">, Edinger, J.</span><span class="refAuthor">, VanSyckel, S.</span><span class="refAuthor">, Paluska, J.M.</span><span class="refAuthor">, and C. Becker</span>, <span class="refTitle">"Tasklets: Overcoming Heterogeneity in Distributed Computing Systems"</span>, <span class="seriesInfo">IEEE 36th International Conference on Distributed Computing Systems Workshops (ICDCSW), Nara, pp. 156-161 </span>, <time datetime="2016">2016</time>. </dd>
+<dd class="break"></dd>
 <dt id="Shi">[Shi]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Shi, W.</span><span class="refAuthor">, Cao, J.</span><span class="refAuthor">, Zhang, Q.</span><span class="refAuthor">, Li, Y.</span><span class="refAuthor">, and L. Xu</span>, <span class="refTitle">"Edge computing: vision and challenges"</span>, <span class="seriesInfo">IEEE Internet of Things J., vol. 3, no. 5, pp. 637-646 </span>, <time datetime="2016">2016</time>. </dd>
-<dt id="Sifalakis">[Sifalakis]</dt>
-        <dd>
-<span class="refAuthor">Sifalakis, M.</span><span class="refAuthor">, Kohler, B.</span><span class="refAuthor">, Scherb, C.</span><span class="refAuthor">, and C. Tschudin</span>, <span class="refTitle">"An Information Centric Network for Computing the Distribution of Computations"</span>, <span class="seriesInfo">Proceedings of the 1st International Conference on Information-centric networking (INC) </span>, <time datetime="2014">2014</time>. </dd>
+<dd class="break"></dd>
 <dt id="SimulatingFog">[SimulatingFog]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Svorobej, S.</span><span class="refAuthor"> and . al</span>, <span class="refTitle">"Simulating Fog and Edge Computing Scenarios: An Overview and Research Challenges"</span>, <span class="seriesInfo">MPDI Future Internet 2019 </span>, <time datetime="2019">2019</time>. </dd>
-<dt id="StarlingX">[StarlingX]</dt>
-        <dd>
-<span class="refAuthor">OpenStack Foundation, .</span>, <span class="refTitle">"StarlingX"</span>, <span class="seriesInfo">Portal </span>, <time datetime="2019">2019</time>, <span>&lt;<a href="https://www.starlingx.io/">https://www.starlingx.io/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="Weiner">[Weiner]</dt>
-        <dd>
+<dd>
 <span class="refAuthor">Weiner, M.</span><span class="refAuthor">, Jorgovanovic, M.</span><span class="refAuthor">, Sahai, A.</span><span class="refAuthor">, and B. Nikolie</span>, <span class="refTitle">"Design of a low-latency, high-reliability wireless communication system for control applications"</span>, <span class="seriesInfo">IEEE Int. Conf. Commun. (ICC), Sydney, NSW, Australia, pp. 3829-3835 </span>, <time datetime="2014">2014</time>. </dd>
-<dt id="_3GPP.23.501">[_3GPP.23.501]</dt>
-        <dd>
-<span class="refAuthor">3GPP, .</span>, <span class="refTitle">"System Architecture for the 5G System"</span>, <span class="seriesInfo">3GPP TS 23.501 </span>, <time datetime="2019">2019</time>, <span>&lt;<a href="http://www.3gpp.org/ftp/Specs/html-info/23501.htm">http://www.3gpp.org/ftp/Specs/html-info/23501.htm</a>&gt;</span>. </dd>
-<dt id="_5G-CORAL">[_5G-CORAL]</dt>
-        <dd>
-<span class="refAuthor">Horizon 2020 Programme, .</span>, <span class="refTitle">"5G Convergent Virtualised Radio Access Network Living at the Edge (5G-CORAL) Project"</span>, <span class="seriesInfo">Portal </span>, <time datetime="2019">2019</time>, <span>&lt;<a href="http://5g-coral.eu/">http://5g-coral.eu/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Yangui">[Yangui]</dt>
+<dd>
+<span class="refAuthor">Yangui, S.</span><span class="refAuthor">, Ravindran, P.</span><span class="refAuthor">, Bibani, O.</span><span class="refAuthor">, H Glitho, R.</span><span class="refAuthor">, Ben Hadj-Alouane, N.</span><span class="refAuthor">, Morrow, M.J.</span><span class="refAuthor">, and P.A. Polakos</span>, <span class="refTitle">"A platform as-a-service for hybrid cloud/fog environments"</span>, <span class="seriesInfo">IEEE International Symposium on Local and Metropolitan Area Networks (LANMAN), pages 1-7 </span>, <time datetime="2016">2016</time>. </dd>
+<dd class="break"></dd>
+<dt id="Yates">[Yates]</dt>
+<dd>
+<span class="refAuthor">Yates, R.D.</span><span class="refAuthor"> and S.K. Kaul</span>, <span class="refTitle">"The Age of Information: Real-Time Status Updating by Multiple Sources"</span>, <span class="seriesInfo">IEEE Transactions on Information Theory, vol. 65, no. 3, pp. 1807-1827 </span>, <time datetime="2019">2019</time>. </dd>
+<dd class="break"></dd>
+<dt id="Yousefpour">[Yousefpour]</dt>
+<dd>
+<span class="refAuthor">Yousefpour, A.</span><span class="refAuthor">, Fung, C.</span><span class="refAuthor">, Nguyen, T.</span><span class="refAuthor">, Kadiyala, K.</span><span class="refAuthor">, Jalali, F.</span><span class="refAuthor">, Niakanlahiji, A.</span><span class="refAuthor">, Kong, J.</span><span class="refAuthor">, and J.P. Jue</span>, <span class="refTitle">"All one needs to know about fog computing and related edge computing paradigms: A complete survey"</span>, <span class="seriesInfo">Journal of Systems Architecture, vol. 98, pp. 289-330 </span>, <time datetime="2019">2019</time>. </dd>
+<dd class="break"></dd>
+<dt id="Zhang">[Zhang]</dt>
+<dd>
+<span class="refAuthor">Zhang, Q.</span><span class="refAuthor">, Zhang, X.</span><span class="refAuthor">, Zhang, Q.</span><span class="refAuthor">, Shi, W.</span><span class="refAuthor">, and H. Zhong</span>, <span class="refTitle">"Firework: Big data sharing and processing in collaborative edge environment"</span>, <span class="seriesInfo">Fourth IEEE Workshop on Hot Topics in Web Systems and Technologies (HotWeb), pages 20-25 </span>, <time datetime="2016">2016</time>. </dd>
+<dd class="break"></dd>
+<dt id="Zhang2">[Zhang2]</dt>
+<dd>
+<span class="refAuthor">Zhang, J.</span><span class="refAuthor">, Chen, B.</span><span class="refAuthor">, Zhao, Y.</span><span class="refAuthor">, Cheng, X.</span><span class="refAuthor">, and F. Hu</span>, <span class="refTitle">"Data Security and Privacy-Preserving in Edge Computing Paradigm: Survey and Open Issues"</span>, <span class="seriesInfo">IEEE Access, vol. 6, pp. 18209-18237 </span>, <time datetime="2018">2018</time>. </dd>
+<dd class="break"></dd>
 <dt id="_60802">[_60802]</dt>
-      <dd>
+<dd>
 <span class="refAuthor">IEC/IEEE, .</span>, <span class="refTitle">"Use Cases IEC/IEEE 60802 V1.3"</span>, <span class="seriesInfo">IEC/IEEE 60802 </span>, <time datetime="2018">2018</time>, <span>&lt;<a href="http://www.ieee802.org/1/files/public/docs2018/60802-industrial-use-cases-0818-v13.pdf">http://www.ieee802.org/1/files/public/docs2018/60802-industrial-use-cases-0818-v13.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 </dl>
 </section>
-</section>
-<div id="sec-overview">
-<section id="section-appendix.a">
-      <h2 id="name-overview-of-the-iot-edge-co">
-<a href="#section-appendix.a" class="section-number selfRef">Appendix A. </a><a href="#name-overview-of-the-iot-edge-co" class="section-name selfRef">Overview of the IoT Edge Computing</a>
-      </h2>
-<p id="section-appendix.a-1">This list of initiatives, projects and products aim to provide an overview of the IoT edge computing.<a href="#section-appendix.a-1" class="pilcrow">¶</a></p>
-<p id="section-appendix.a-2">Our goal is to be representative rather than exhaustive.<a href="#section-appendix.a-2" class="pilcrow">¶</a></p>
-<p id="section-appendix.a-3">Please help us complete this overview by communicating with us about entries we have missed.<a href="#section-appendix.a-3" class="pilcrow">¶</a></p>
-<div id="open-source-projects">
-<section id="section-a.1">
-        <h2 id="name-open-source-projects">
-<a href="#section-a.1" class="section-number selfRef">A.1. </a><a href="#name-open-source-projects" class="section-name selfRef">Open Source Projects</a>
-        </h2>
-<div id="sec-gateway-platforms">
-<section id="section-a.1.1">
-          <h3 id="name-gateway-cpe-platforms">
-<a href="#section-a.1.1" class="section-number selfRef">A.1.1. </a><a href="#name-gateway-cpe-platforms" class="section-name selfRef">Gateway/CPE Platforms</a>
-          </h3>
-<p id="section-a.1.1-1">EdgeX Foundry, Home Edge, Edge Virtualization Engine are
-Linux Foundation projects (<span>[<a href="#Linux_Foundation_Edge" class="xref">Linux_Foundation_Edge</a>]</span>)
-aiming to provide a platform for edge computing devices.<a href="#section-a.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-a.1.1-2">Such an open source platform can, for example, host proprietary
-programs currently run on IoT gateway products (<a href="#products" class="xref">Appendix A.2</a>).<a href="#section-a.1.1-2" class="pilcrow">¶</a></p>
-<p id="section-a.1.1-3">EdgeX Foundry develops an edge computing framework running on the IoT gateway.<a href="#section-a.1.1-3" class="pilcrow">¶</a></p>
-<p id="section-a.1.1-4">Home Edge develops an edge computing framework especially dedicated to home computing devices,
-controlling home appliances, sensors, etc., and enabling AI applications, especially
-distributed and parallel machine learning.<a href="#section-a.1.1-4" class="pilcrow">¶</a></p>
-<p id="section-a.1.1-5">The Edge Virtualization Engine (EVE) project develops a virtualization platform (for VMs and containers)
-designed to run outside of the datacenter, in an edge network; EVE is deployed on bare-metal hardware.<a href="#section-a.1.1-5" class="pilcrow">¶</a></p>
-<dl class="dlParallel" id="section-a.1.1-6">
-            <dt id="section-a.1.1-6.1">Computing devices:</dt>
-            <dd id="section-a.1.1-6.2">
-  Hardware support for EdgeX and EVE is similar: they support x86 and ARM-based computing devices; A typical target can be a Linux Raspberry Pi  with 1GB RAM, 64bit CPU, 32GB storage.<a href="#section-a.1.1-6.2" class="pilcrow">¶</a>
-</dd>
-<dt id="section-a.1.1-6.3">Service platform:</dt>
-            <dd id="section-a.1.1-6.4">
-  EdgeX uses a micro-service architecture. Micro-services on the gateway are connected together, and to outside applications, through REST, or messaging technologies such as MQTT, AMQP and 0MQ. The gateway can communicate with external backend applications or other gateways (north-south in tiered deployments or east-west in more distributed deployments). Gateway-device communication can use a wide range of IoT protocols. "Export services" enable on-gateway and off-gateway clients to register as recipient for data from devices. Core services are microservices that deal with persisting data from devices or alternatively "streaming" device data through, without persistence (core data service); managing information about the IoT devices, including their sensors, how to communicate with them, etc. (metadata service); and actual communication with IoT devices, on behalf of other on-gateway or off-gateway services (command service). A rule engine provides an API to register actions in response to conditions typically including an IoT device ID, sensor values to check, thresholds, etc. The scheduling micro service deals with organizing the removal of data persisted on the gateway. Alerts and notifications microservice can be used to dispatch alert/notifications from internal or external sources to interested consumers including backend servers, or human operators through email or SMS.<a href="#section-a.1.1-6.4" class="pilcrow">¶</a>
-</dd>
-<dt id="section-a.1.1-6.5">Edge cloud applications:</dt>
-            <dd id="section-a.1.1-6.6">
-  Target applications for EdgeX include Industrial IoT (e.g., IoT sensor data and actuator control mixed with augmented reality application for technicians). Home Edge focuses on smart home use cases, including using AI lifestyle and safety applications.<a href="#section-a.1.1-6.6" class="pilcrow">¶</a>
-</dd>
-</dl>
-</section>
-</div>
-<div id="sec-cloud-management-platforms">
-<section id="section-a.1.2">
-          <h3 id="name-edge-cloud-management-platf">
-<a href="#section-a.1.2" class="section-number selfRef">A.1.2. </a><a href="#name-edge-cloud-management-platf" class="section-name selfRef">Edge Cloud Management Platforms</a>
-          </h3>
-<p id="section-a.1.2-1">This set of open-source projects setup and manage clouds of individual edge computing devices.<a href="#section-a.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-a.1.2-2">StarlingX (<span>[<a href="#StarlingX" class="xref">StarlingX</a>]</span>) extends OpenStack to provide
-virtualization platform management
-for edge clouds, which are distributed (in the range of 100 compute devices),
-secure and highly available.<a href="#section-a.1.2-2" class="pilcrow">¶</a></p>
-<p id="section-a.1.2-3">Akraino Edge Stack, another project from the Linux Fundation Edge <span>[<a href="#Linux_Foundation_Edge" class="xref">Linux_Foundation_Edge</a>]</span>,
-has a wider scope of developing a management platform adapted for the edge
-(e.g., covering 1000 plus locations),
-aiming for zero-touch provisioning, and zero-touch lifecycle management.<a href="#section-a.1.2-3" class="pilcrow">¶</a></p>
-<dl class="dlParallel" id="section-a.1.2-4">
-            <dt id="section-a.1.2-4.1">Computing devices:</dt>
-            <dd id="section-a.1.2-4.2">
-  Compute devices are typically Linux-based application servers or more constrained devices.<a href="#section-a.1.2-4.2" class="pilcrow">¶</a>
-</dd>
-<dt id="section-a.1.2-4.3">Service platform:</dt>
-            <dd id="section-a.1.2-4.4">
-  StarlingX adds new management services to OpenStack by leveraging building blocks such as Ceph for distributed storage, Kubernetes for orchestration. The new services are for management of configuration (enabling auto-discovery and configuration), faults, hosts (enabling host failure detection and auto-recovery), services (providing high availability through service redundancy and multi-path communication) and software (enabling updates).<a href="#section-a.1.2-4.4" class="pilcrow">¶</a>
-</dd>
-<dt id="section-a.1.2-4.5">Edge cloud applications:</dt>
-            <dd id="section-a.1.2-4.6">
-  An edge computing platform may support a wide range of use cases. E.g., autonomous vehicles, industrial automation and robotics, cloud RAN, metering and monitoring, mobile HD video, content delivery, healthcare imaging and diagnostics, caching and surveillance, augmented/virtual reality, small cell services for high density locations (stadiums), universal CPE applications, retail.<a href="#section-a.1.2-4.6" class="pilcrow">¶</a>
-</dd>
-</dl>
-</section>
-</div>
-<div id="related-projects">
-<section id="section-a.1.3">
-          <h3 id="name-related-projects">
-<a href="#section-a.1.3" class="section-number selfRef">A.1.3. </a><a href="#name-related-projects" class="section-name selfRef">Related Projects</a>
-          </h3>
-<p id="section-a.1.3-1">Open Edge Computing (<span>[<a href="#OpenEdgeComputing" class="xref">OpenEdgeComputing</a>]</span>) is an initiative from universities, manufacturers, infrastructure providers and operators, enabling efficiently offloading cloudlets (VMs) to the edge.
-Computing devices are typically powerful, well-connected servers located in mobile networks (e.g., collocated with base stations or aggregation sites).
-The service platform is built on top of OpenStack++, an extension of OpenStack
-to support cloudlets.
-This project is mentioned here as a related project because of its edge computing focus, and potential for some IoT use cases. Nevertheless, its primary use cases are typically non-IoT related, such as offloading processing-intensive applications from a mobile device to the edge.<a href="#section-a.1.3-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-</section>
-</div>
-<div id="products">
-<section id="section-a.2">
-        <h2 id="name-products">
-<a href="#section-a.2" class="section-number selfRef">A.2. </a><a href="#name-products" class="section-name selfRef">Products</a>
-        </h2>
-<div id="sec-iot-gateways">
-<section id="section-a.2.1">
-          <h3 id="name-iot-gateways">
-<a href="#section-a.2.1" class="section-number selfRef">A.2.1. </a><a href="#name-iot-gateways" class="section-name selfRef">IoT Gateways</a>
-          </h3>
-<p id="section-a.2.1-1">Multiple products are marketed as IoT gateways (Amazon Greengrass, Microsoft Azure IoT Edge, Google Cloud IoT Core, and gateway solutions from Bosh and Siemens).
-They are typically composed of a software frameworks that can run on a wide range
-of IoT gateway hardware devices to provide local support for cloud services,
-as well as some other local IoT gateway features such as relaying communication and caching content.
-Remote cloud is both used for management of the IoT gateways, and for hosting
-customer application components.
-Some IoT gateway products (Amazon Snowball) have a primary purpose of storing edge data on premises, to enable physically moving this data into the cloud without incurring digital data transfer cost.<a href="#section-a.2.1-1" class="pilcrow">¶</a></p>
-<dl class="dlParallel" id="section-a.2.1-2">
-            <dt id="section-a.2.1-2.1">Computing devices:</dt>
-            <dd id="section-a.2.1-2.2">
-  Typical computing devices run Linux, Windows or a Real-Time OS over an ARM or x86 architecture. The level of service support on the computing device can range from low-level packages giving maximum control to embedded developers, to high-level SDKs. Typical requirements can start at 1GHz and 128MB RAM, e.g., ranging from Raspberry Pi to a server-level appliance.<a href="#section-a.2.1-2.2" class="pilcrow">¶</a>
-</dd>
-<dt id="section-a.2.1-2.3">Service platform:</dt>
-            <dd id="section-a.2.1-2.4">
-  IoT gateways can provide a range of service including: running stateless functions; routing messages between connected IoT devices (using a wide range of IoT protocols); caching data; enabling some form of synchronization between IoT devices; authenticating and encrypting device data. Association between IoT devices and gateway based can require a device certificate.<a href="#section-a.2.1-2.4" class="pilcrow">¶</a>
-</dd>
-<dt id="section-a.2.1-2.5">Edge cloud applications:</dt>
-            <dd id="section-a.2.1-2.6">
-  Pre-processing of IoT data for later processing in the cloud is a major driver. Use cases include industrial automation, farming, etc.<a href="#section-a.2.1-2.6" class="pilcrow">¶</a>
-</dd>
-</dl>
-</section>
-</div>
-<div id="sec-cloud-platforms">
-<section id="section-a.2.2">
-          <h3 id="name-edge-cloud-platforms">
-<a href="#section-a.2.2" class="section-number selfRef">A.2.2. </a><a href="#name-edge-cloud-platforms" class="section-name selfRef">Edge Cloud Platforms</a>
-          </h3>
-<p id="section-a.2.2-1">Services such as MobileEdgeX provide a platform for application developers to deploy software (e.g., as software containers) on edge networks.<a href="#section-a.2.2-1" class="pilcrow">¶</a></p>
-<dl class="dlParallel" id="section-a.2.2-2">
-            <dt id="section-a.2.2-2.1">Computing devices:</dt>
-            <dd id="section-a.2.2-2.2">
-  Bare metal and virtual servers provided by mobile network operators are used as computing devices.<a href="#section-a.2.2-2.2" class="pilcrow">¶</a>
-</dd>
-<dt id="section-a.2.2-2.3">Service platform:</dt>
-            <dd id="section-a.2.2-2.4">
-  The service platform provides end device location service, using GPS data obtained from platform software deployed in end devices, correlated with location information obtained from the mobile network. The service platform manages the deployment of application instances (containers) on servers close to end devices, using a declarative specification of optimal location from the application provider.<a href="#section-a.2.2-2.4" class="pilcrow">¶</a>
-</dd>
-<dt id="section-a.2.2-2.5">Edge cloud applications:</dt>
-            <dd id="section-a.2.2-2.6">
-  Use cases include autonomous mobility, asset management, AI-based systems (e.g., quality inspection, assistance systems, safety and security cameras) and privacy-preserving video processing. There are also non-IoT use cases such as augmented reality and gaming.<a href="#section-a.2.2-2.6" class="pilcrow">¶</a>
-</dd>
-</dl>
-</section>
-</div>
-</section>
-</div>
-<div id="standards-initiatives">
-<section id="section-a.3">
-        <h2 id="name-standards-initiatives">
-<a href="#section-a.3" class="section-number selfRef">A.3. </a><a href="#name-standards-initiatives" class="section-name selfRef">Standards Initiatives</a>
-        </h2>
-<div id="sec-etsi-mec">
-<section id="section-a.3.1">
-          <h3 id="name-etsi-multi-access-edge-comp">
-<a href="#section-a.3.1" class="section-number selfRef">A.3.1. </a><a href="#name-etsi-multi-access-edge-comp" class="section-name selfRef">ETSI Multi-access Edge Computing</a>
-          </h3>
-<p id="section-a.3.1-1">The ETSI MEC industry standardization group develops specifications that enable efficient
-and seamless integration of applications from vendors, service providers,
-and 3rd parties across multi-vendor MEC platforms (<span>[<a href="#ETSI_MEC_03" class="xref">ETSI_MEC_03</a>]</span>).<a href="#section-a.3.1-1" class="pilcrow">¶</a></p>
-<p id="section-a.3.1-2">Basic principles followed include: leveraging NFV infrastructure; being compliant with 3GPP systems;
-focusing on orchestration, MEC services, applications and platforms.<a href="#section-a.3.1-2" class="pilcrow">¶</a></p>
-<p id="section-a.3.1-3">Phase 1 (2015-2016) focused on basic platform services. Phase 2 (2017-2019) focuses on:
-supporting non-3GPP radio access technologies, especially WiFi;
-supporting a distributed, multi-operator and multi-vendor architecture;
-supporting non-VM based virtualization such as containers and PaaS.<a href="#section-a.3.1-3" class="pilcrow">¶</a></p>
-<dl class="dlParallel" id="section-a.3.1-4">
-            <dt id="section-a.3.1-4.1">Computing devices:</dt>
-            <dd id="section-a.3.1-4.2">
-  Computing devices are typically application servers, attached to an eNodeB or at a higher level of aggregation point, and provide service to end users.<a href="#section-a.3.1-4.2" class="pilcrow">¶</a>
-</dd>
-<dt id="section-a.3.1-4.3">Service platform:</dt>
-            <dd id="section-a.3.1-4.4">
-  The mobile edge platform offers an environment where the mobile edge applications can discover, advertise, consume and offer mobile edge services. The platform can provide certain native services such as radio network information, location, bandwidth management etc. The platform manager is responsible for managing the life cycle of applications including informing the mobile edge orchestrator of relevant application related events, managing the application rules and requirements including service authorizations, traffic rules, DNS configuration.<a href="#section-a.3.1-4.4" class="pilcrow">¶</a>
-</dd>
-<dt id="section-a.3.1-4.5">Edge cloud applications:</dt>
-            <dd id="section-a.3.1-4.6">
-  Some of the use cases for MEC (<span>[<a href="#ETSI_MEC_02" class="xref">ETSI_MEC_02</a>]</span>) are IoT-related, including: security and safety (face recognition and monitoring), sensor data monitoring, active device location (e.g., crowd management), low latency vehicle-to-infrastructure and vehicle-to-vehicle (V2X, e.g., hazard warnings), video production and delivery, camera as a service.<a href="#section-a.3.1-4.6" class="pilcrow">¶</a>
-</dd>
-</dl>
-</section>
-</div>
-<div id="edge-computing-support-in-3gpp">
-<section id="section-a.3.2">
-          <h3 id="name-edge-computing-support-in-3">
-<a href="#section-a.3.2" class="section-number selfRef">A.3.2. </a><a href="#name-edge-computing-support-in-3" class="section-name selfRef">Edge Computing Support in 3GPP</a>
-          </h3>
-<p id="section-a.3.2-1">The 3GPP standards organization included edge computing support in 5G <span>[<a href="#_3GPP.23.501" class="xref">_3GPP.23.501</a>]</span>.
-Integration of MEC and 5G systems has been studied in ETSI as well <span>[<a href="#ETSI_MEC_WP_28" class="xref">ETSI_MEC_WP_28</a>]</span>.<a href="#section-a.3.2-1" class="pilcrow">¶</a></p>
-<dl class="dlParallel" id="section-a.3.2-2">
-            <dt id="section-a.3.2-2.1">Computing devices:</dt>
-            <dd id="section-a.3.2-2.2">
-  From 3GPP standpoint, a mobile device may access any computing device located in a local data network, i.e., traffic is steered towards the local data network where the computing device is located.<a href="#section-a.3.2-2.2" class="pilcrow">¶</a>
-</dd>
-<dt id="section-a.3.2-2.3">Service platform:</dt>
-            <dd id="section-a.3.2-2.4">
-  An external party may influence steering, QoS and charging of traffic towards the computing device. Session and service continuity can ensure that edge service is maintained when a client device moves. The network supports multiple-anchor connections, which makes it possible to connect a client device to both a local and a remote data network. The client device can be made aware of the availability of a local area data network, based on its location.<a href="#section-a.3.2-2.4" class="pilcrow">¶</a>
-</dd>
-<dt id="section-a.3.2-2.5">Edge cloud applications:</dt>
-            <dd id="section-a.3.2-2.6">
-  Edge cloud applications in 3GPP can help support the major use cases envisioned for 5G, including massive IoT and V2X.<a href="#section-a.3.2-2.6" class="pilcrow">¶</a>
-</dd>
-</dl>
-</section>
-</div>
-<div id="sec-openfog">
-<section id="section-a.3.3">
-          <h3 id="name-openfog-and-industrial-inte">
-<a href="#section-a.3.3" class="section-number selfRef">A.3.3. </a><a href="#name-openfog-and-industrial-inte" class="section-name selfRef">OpenFog and Industrial Internet Consortium</a>
-          </h3>
-<p id="section-a.3.3-1">The OpenFog Consortium (now merged with the Industrial Internet Consortium) aims to standardize industrial IoT, fog, and edge computing. It produced a reference architecture for the fog (<span>[<a href="#OpenFog" class="xref">OpenFog</a>]</span>), which has been published as IEEE standard P1934 in 2018. This work continues within the Industrial Internet Consortium.<a href="#section-a.3.3-1" class="pilcrow">¶</a></p>
-<dl class="dlParallel" id="section-a.3.3-2">
-            <dt id="section-a.3.3-2.1">Computing devices:</dt>
-            <dd id="section-a.3.3-2.2">
-  Fog nodes include computational, networking, storage and acceleration elements. This includes nodes collocated with sensors and actuators, roadside or mobile nodes involved in V2X connectivity. Fog nodes should be programmable and may support multi-tenancy. Fog computing devices must employ a hardware-based immutable root of trust, i.e., a trusted hardware component which receives control at power-on.<a href="#section-a.3.3-2.2" class="pilcrow">¶</a>
-</dd>
-<dt id="section-a.3.3-2.3">Service platform:</dt>
-            <dd id="section-a.3.3-2.4">
-  The service platform is structured around "pillars" including: security end-to-end, scalability by adding internal components or adding more fog nodes,openness in term of discovery of/by other nodes and networks, autonomy from centralized clouds (for discovery, orchestration and management, security and operation) and hierarchical organization of fog nodes.<a href="#section-a.3.3-2.4" class="pilcrow">¶</a>
-</dd>
-<dt id="section-a.3.3-2.5">Edge cloud applications:</dt>
-            <dd id="section-a.3.3-2.6">
-  Major use cases include smart cars and traffic control, visual security and surveillance, smart cities.<a href="#section-a.3.3-2.6" class="pilcrow">¶</a>
-</dd>
-</dl>
-</section>
-</div>
-<div id="related-standards">
-<section id="section-a.3.4">
-          <h3 id="name-related-standards">
-<a href="#section-a.3.4" class="section-number selfRef">A.3.4. </a><a href="#name-related-standards" class="section-name selfRef">Related Standards</a>
-          </h3>
-<p id="section-a.3.4-1">The IEEE Fog Computing and Networking Architecture Framework Working Group <span>[<a href="#IEEE-1934" class="xref">IEEE-1934</a>]</span> published the OpenFog architecture as an IEEE document, and plan to do further work on taxonomy, architecture framework, and compliance guidelines.<a href="#section-a.3.4-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-</section>
-</div>
-<div id="research-projects">
-<section id="section-a.4">
-        <h2 id="name-research-projects">
-<a href="#section-a.4" class="section-number selfRef">A.4. </a><a href="#name-research-projects" class="section-name selfRef">Research Projects</a>
-        </h2>
-<div id="sec-nfn">
-<section id="section-a.4.1">
-          <h3 id="name-named-function-networking">
-<a href="#section-a.4.1" class="section-number selfRef">A.4.1. </a><a href="#name-named-function-networking" class="section-name selfRef">Named Function Networking</a>
-          </h3>
-<p id="section-a.4.1-1">Named Function Networking (<span>[<a href="#Sifalakis" class="xref">Sifalakis</a>]</span>) is a research project that aims to extend ICN concepts (especially named data networking) to have the network orchestrate computation. Interests are sent for a combination of function and argument names, instead of using the content name in NDN.<a href="#section-a.4.1-1" class="pilcrow">¶</a></p>
-<dl class="dlParallel" id="section-a.4.1-2">
-            <dt id="section-a.4.1-2.1">Computing devices:</dt>
-            <dd id="section-a.4.1-2.2">
-  NFN-capable switches are collocated with computing devices.<a href="#section-a.4.1-2.2" class="pilcrow">¶</a>
-</dd>
-<dt id="section-a.4.1-2.3">Service platform:</dt>
-            <dd id="section-a.4.1-2.4">
-  NFN enables accessing static data and dynamic computation results in one data-oriented framework, thus benefiting from usual ICN features such as data authenticity and caching, as well as enabling the network to perform various optimizations, e.g., moving data, code or both closer to requesters. NFN also enables secure access to individual elements within Named Data Objects, e.g., for filtering or aggregation.<a href="#section-a.4.1-2.4" class="pilcrow">¶</a>
-</dd>
-<dt id="section-a.4.1-2.5">Edge cloud applications:</dt>
-            <dd id="section-a.4.1-2.6">
-  Use cases include some form of MapReduce operations and service chaining. NDN, on which NFN is based, has been studied in the context of IoT, where it can provide local trust management and rendezvous service.<a href="#section-a.4.1-2.6" class="pilcrow">¶</a>
-</dd>
-</dl>
-</section>
-</div>
-<div id="g-coral">
-<section id="section-a.4.2">
-          <h3 id="name-5g-coral">
-<a href="#section-a.4.2" class="section-number selfRef">A.4.2. </a><a href="#name-5g-coral" class="section-name selfRef">5G-CORAL</a>
-          </h3>
-<p id="section-a.4.2-1">The 5G-CORAL project (<span>[<a href="#_5G-CORAL" class="xref">_5G-CORAL</a>]</span>) aims to enable convergence of access across multiple radio access technologies using fog computing, using for this purpose an edge and fog computing system (EFS).<a href="#section-a.4.2-1" class="pilcrow">¶</a></p>
-<dl class="dlParallel" id="section-a.4.2-2">
-            <dt id="section-a.4.2-2.1">Computing devices:</dt>
-            <dd id="section-a.4.2-2.2">
-  Computing devices used in 5G-CORAL include cloud and central data center servers, edge data center servers, and fixed or mobile "fog computing devices", which can be computing devices located in vehicles or factories, e.g., IoT gateways, mobile phones, cyber-physical devices, etc.<a href="#section-a.4.2-2.2" class="pilcrow">¶</a>
-</dd>
-<dt id="section-a.4.2-2.3">Service platform:</dt>
-            <dd id="section-a.4.2-2.4">
-  5G-CORAL architecture is based on an integrated virtualized edge and fog computing system (EFS), that aims to be flexible, scalable and interoperable with other domains including transport (fronthaul, backhaul), core and clouds. An Orchestration and Control System (OCS) enables automatic discovery of heterogeneous, multiple-owner resources, and federate them into a unified hosting environment. OCS monitors resource usage to guarantee service levels. Finally, OCS also includes orchestration and life cycle functions, including live migration and scaling. Applications (user and third-party) both inside and outside the EFS subscribe to EFS services through APIs, with emphasis on IoT and cyber-physical functionalities.<a href="#section-a.4.2-2.4" class="pilcrow">¶</a>
-</dd>
-<dt id="section-a.4.2-2.5">Edge cloud applications:</dt>
-            <dd id="section-a.4.2-2.6">
-  EFS-hosted services include analytics obtained from IoT gateways (e.g., LORA or eNodeB gateways), context information services from RATs, transport (fronthaul and backhaul) and core networks. EFS-hosted functions include network performance acceleration functions, virtualized C-RAN functions for access nodes and possible end user devices.<a href="#section-a.4.2-2.6" class="pilcrow">¶</a>
-</dd>
-</dl>
-</section>
-</div>
-<div id="flame">
-<section id="section-a.4.3">
-          <h3 id="name-flame">
-<a href="#section-a.4.3" class="section-number selfRef">A.4.3. </a><a href="#name-flame" class="section-name selfRef">FLAME</a>
-          </h3>
-<p id="section-a.4.3-1">The FLAME project (<span>[<a href="#FLAME" class="xref">FLAME</a>]</span>) aims to improve performance of interactive media systems while keeping infrastructure costs low.<a href="#section-a.4.3-1" class="pilcrow">¶</a></p>
-<p id="section-a.4.3-2">It builds over virtualization technologies such as XOS, OpenStack and ONOS/ODL to offer a programmable media service platform.<a href="#section-a.4.3-2" class="pilcrow">¶</a></p>
-<p id="section-a.4.3-3">FLAME leverages IP-over-ICN technology developed through earlier projects including POINT (<span>[<a href="#POINT" class="xref">POINT</a>]</span>).<a href="#section-a.4.3-3" class="pilcrow">¶</a></p>
-<dl class="dlParallel" id="section-a.4.3-4">
-            <dt id="section-a.4.3-4.1">Computing devices:</dt>
-            <dd id="section-a.4.3-4.2">
-  The FLAME platform provides a service layer on top of an infrastructure platform, which can include cloud servers as well as computing devices collocated with WiFi access points.<a href="#section-a.4.3-4.2" class="pilcrow">¶</a>
-</dd>
-<dt id="section-a.4.3-4.3">Service platform:</dt>
-            <dd id="section-a.4.3-4.4">
-  The FLAME platform can be seen as an "edge + cloud" computing platform with a use case focus on media dissemination, although the basic platform can be suitable for micro-services in general. The computing platform is comprised of: computing devices, an infrastructure platform (XOS, OpenStack, ONOS/ODL), NFV-MANO components (orchestrator, virtual infrastructure manager) and FLAME platform core services (PCE, network access point, surrogate manager).<a href="#section-a.4.3-4.4" class="pilcrow">¶</a>
-</dd>
-<dt id="section-a.4.3-4.5">Edge cloud applications:</dt>
-            <dd id="section-a.4.3-4.6">
-  IoT use cases include public safety, such as supporting body-worn camera for police and social workers. As opposed to other multi-media applications that are also envisioned (pre-processing, user reporting, curation...), where a typical goal is to curate content early at the edge, to reduce expected high data volume, public safety use cases are typically about implementing triggers at the edge: everything needs to be kept anyway, to be available in case of an audit. Content is stored offline during off peak-hours delivery. For privacy and data volume concerns, triggers for, e.g., alerting police, cannot be performed in the cloud and should be performed as close to the data source as possible.<a href="#section-a.4.3-4.6" class="pilcrow">¶</a>
-</dd>
-</dl>
-</section>
-</div>
-</section>
-</div>
-</section>
-</div>
 <div id="authors-addresses">
-<section id="section-appendix.b">
+<section id="section-appendix.a">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
@@ -2044,45 +1861,13 @@ Integration of MEC and 5G systems has been studied in ETSI as well <span>[<a hre
 </address>
 </section>
 </div>
-<script>var toc = document.getElementById("toc");
-var tocToggle = toc.querySelector("h2");
-var tocNav = toc.querySelector("nav");
-
-// mobile menu toggle
-tocToggle.onclick = function(event) {
-    if (window.innerWidth < 1024) {
- var tocNavDisplay = tocNav.currentStyle ? tocNav.currentStyle.display : getComputedStyle(tocNav, null).display;
- if (tocNavDisplay == "none") {
-     tocNav.style.display = "block";
- } else {
-     tocNav.style.display = "none";
- }
-    }
-}
-
-// toc anchor scroll to anchor
-tocNav.addEventListener("click", function (event) {
-    event.preventDefault();
-    if (event.target.nodeName == 'A') {
- if (window.innerWidth < 1024) {
-     tocNav.style.display = "none";
- }
- var href = event.target.getAttribute("href");
- var anchorId = href.substr(1);
- var anchor =  document.getElementById(anchorId);
- anchor.scrollIntoView(true);
- window.history.pushState("","",href);
-    }
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
 });
-
-// switch toc mode when window resized
-window.onresize = function () {
-    if (window.innerWidth < 1024) {
- tocNav.style.display = "none";
-    } else {
- tocNav.style.display = "block";
-    }
-}
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
 </script>
 </body>
 </html>
