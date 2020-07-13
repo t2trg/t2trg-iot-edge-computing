@@ -12,10 +12,10 @@
 <meta content="Eve Schooler" name="author">
 <meta content="Dirk Kutscher" name="author">
 <meta content="
-       Many IoT applications have requirements that cannot be met by the traditional Cloud (aka Cloud computing). These include time sensitivity, data volume, uplink cost, operation in the face of intermittent services, privacy and security. As a result, the IoT is driving the Internet toward Edge computing. This document outlines the requirements of the emerging IoT Edge and its challenges. It presents a general model, and major components of the IoT Edge, with the goal to provide a common base for future discussions in T2TRG and other IETF WGs and RGs. 
+       Many IoT applications have requirements that cannot be met by the traditional Cloud (aka cloud computing). These include time sensitivity, data volume, uplink cost, operation in the face of intermittent services, privacy and security. As a result, the IoT is driving the Internet toward Edge computing. This document outlines the requirements of the emerging IoT Edge and its challenges. It presents a general model, and major components of the IoT Edge, with the goal to provide a common base for future discussions in T2TRG and other IRTF and IETF groups. 
     " name="description">
 <meta content="xml2rfc 2.44.0" name="generator">
-<meta content="draft-hong-t2trg-iot-edge-computing-04" name="ietf.draft">
+<meta content="draft-hong-t2trg-iot-edge-computing-05" name="ietf.draft">
 <link href="draft-hong-t2trg-iot-edge-computing.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
 <style type="text/css">@import url('https://martinthomson.github.io/i-d-template/fonts.css');
@@ -828,11 +828,11 @@ table.left {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">IoT Edge Computing</td>
-<td class="right">May 2020</td>
+<td class="right">July 2020</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Hong, et al.</td>
-<td class="center">Expires 26 November 2020</td>
+<td class="center">Expires 14 January 2021</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -842,15 +842,15 @@ table.left {
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">Network Working Group</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-hong-t2trg-iot-edge-computing-04</dd>
+<dd class="internet-draft">draft-hong-t2trg-iot-edge-computing-05</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2020-05-25" class="published">25 May 2020</time>
+<time datetime="2020-07-13" class="published">13 July 2020</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2020-11-26">26 November 2020</time></dd>
+<dd class="expires"><time datetime="2021-01-14">14 January 2021</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -883,7 +883,7 @@ table.left {
 <h1 id="title">IoT Edge Challenges and Functions</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">Many IoT applications have requirements that cannot be met by the traditional Cloud (aka Cloud computing). These include time sensitivity, data volume, uplink cost, operation in the face of intermittent services, privacy and security. As a result, the IoT is driving the Internet toward Edge computing. This document outlines the requirements of the emerging IoT Edge and its challenges. It presents a general model, and major components of the IoT Edge, with the goal to provide a common base for future discussions in T2TRG and other IETF WGs and RGs.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">Many IoT applications have requirements that cannot be met by the traditional Cloud (aka cloud computing). These include time sensitivity, data volume, uplink cost, operation in the face of intermittent services, privacy and security. As a result, the IoT is driving the Internet toward Edge computing. This document outlines the requirements of the emerging IoT Edge and its challenges. It presents a general model, and major components of the IoT Edge, with the goal to provide a common base for future discussions in T2TRG and other IRTF and IETF groups.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -904,7 +904,7 @@ table.left {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 26 November 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 14 January 2021.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -997,7 +997,7 @@ table.left {
                     <p id="section-toc.1-1.4.2.3.2.1.1"><a href="#section-4.3.1" class="xref">4.3.1</a>.  <a href="#name-virtualization-management" class="xref">Virtualization Management</a><a href="#section-toc.1-1.4.2.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.4.2.3.2.2">
-                    <p id="section-toc.1-1.4.2.3.2.2.1"><a href="#section-4.3.2" class="xref">4.3.2</a>.  <a href="#name-resources-discovery-and-aut" class="xref">Resources Discovery and Authentication</a><a href="#section-toc.1-1.4.2.3.2.2.1" class="pilcrow">¶</a></p>
+                    <p id="section-toc.1-1.4.2.3.2.2.1"><a href="#section-4.3.2" class="xref">4.3.2</a>.  <a href="#name-resource-discovery-and-auth" class="xref">Resource Discovery and Authentication</a><a href="#section-toc.1-1.4.2.3.2.2.1" class="pilcrow">¶</a></p>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.4.2.3.2.3">
                     <p id="section-toc.1-1.4.2.3.2.3.1"><a href="#section-4.3.3" class="xref">4.3.3</a>.  <a href="#name-edge-organization-and-feder" class="xref">Edge Organization and Federation</a><a href="#section-toc.1-1.4.2.3.2.3.1" class="pilcrow">¶</a></p>
@@ -1063,7 +1063,8 @@ table.left {
       </h2>
 <p id="section-1-1">Currently, many IoT services leverage the Cloud, since it can provide virtually unlimited storage and processing power.
 The reliance of IoT on back-end cloud computing brings additional advantages such as flexibility and efficiency.
-Today's IoT systems are fairly static with respect to integrating and supporting computation. It's not that there is no computation, but systems are often limited to static configurations (edge gateways, the Cloud).<a href="#section-1-1" class="pilcrow">¶</a></p>
+Today's IoT systems are fairly static with respect to integrating and supporting computation.
+It's not that there is no computation, but systems are often limited to static configurations (edge gateways, cloud services).<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">However, IoT devices are creating vast amounts of data at the network edge. To meet IoT use case requirements, that data increasingly is being stored, processed, analyzed, and acted upon close to the data producers.
 These requirements include time sensitivity, data volume, uplink cost, resiliency in the face of intermittent connectivity, privacy, and security, which cannot be addressed by today's centralized cloud computing.
 These requirements suggest a more flexible way to distribute computing (and storage) and to integrate it in the edge-cloud continuum.
@@ -1109,11 +1110,11 @@ Companies like Amazon, Google, Facebook, etc. widely adopted this paradigm for d
         </h3>
 <p id="section-2.3-1">Edge computing, in some settings also referred to as fog computing, is a new paradigm in which substantial computing and storage resources are placed at the edge of the Internet, that is, in close proximity to mobile devices, sensors, actuators, or machines.
 Edge computing happens near data sources <span>[<a href="#Mahadev" class="xref">Mahadev</a>]</span>, or closer (topologically, physically, in term of latency, etc.) to where decisions or interactions with the physical world are happening.
-It works on both downstream data on behalf of cloud services and upstream data on behalf of IoT services.
-The term fog computing usually represents the notion of a multi-tiered edge computing, that is, several layers of compute infrastructure between the end devices and the cloud.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+It processes both downstream data, e.g. originated from cloud services, and upstream data, e.g. originated from end devices or network elements.
+The term fog computing usually represents the notion of a multi-tiered edge computing, that is, several layers of compute infrastructure between the end devices and cloud services.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
 <p id="section-2.3-2">An edge device is any computing or networking resource residing between data sources and cloud-based datacenters.
 In edge computing, end devices not only consume data, but also produce data. 
-And at the network edge, devices not only request services and information from the cloud, but also handle computing tasks including processing, storage, caching, and load balancing on data sent to and from the cloud <span>[<a href="#Shi" class="xref">Shi</a>]</span>.
+And at the network edge, devices not only request services and information from the Cloud, but also handle computing tasks including processing, storage, caching, and load balancing on data sent to and from the Cloud <span>[<a href="#Shi" class="xref">Shi</a>]</span>.
 This does not preclude end devices from hosting computation themselves when possible, independently or as part of a distributed edge computing platform (this is also referred to as Mist Computing).<a href="#section-2.3-2" class="pilcrow">¶</a></p>
 <p id="section-2.3-3">Several standards defining organization and industry forums have provided definitions of edge and fog computing:<a href="#section-2.3-3" class="pilcrow">¶</a></p>
 <ul>
@@ -1195,9 +1196,10 @@ For example, industrial machines such as laser cutters already produce over 1 te
 <p id="section-3.1-1">Many industrial control systems, such as manufacturing systems, smart grids, oil and gas systems, etc., often require stringent end-to-end latency between the sensor and control node.
 While some IoT applications may require latency below a few tens of milliseconds <span>[<a href="#Weiner" class="xref">Weiner</a>]</span>,
 industrial robots and motion control systems have use cases for cycle times in the order of microseconds <span>[<a href="#_60802" class="xref">_60802</a>]</span>.
+In some cases speed-of-light limitations may simply prevent a solution based on remote cloud, however it is not the only challenge relative to time sensitivity.
 An important aspect for real-time communications is not only the latency, but also guarantees for jitter.
 This means control packets need to arrive with as little variation as possible and within a strict deadline.
-Given the best-effort characteristics of the Internet, or in some cases given speed-of-light limitations, this challenge is virtually impossible to address, without comprehending end-to-end guarantees for individual message delivery and continuous data flows.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+Given the best-effort characteristics of the Internet this challenge is virtually impossible to address, without using end-to-end guarantees for individual message delivery and continuous data flows.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="uplink-cost">
@@ -1205,9 +1207,9 @@ Given the best-effort characteristics of the Internet, or in some cases given sp
         <h3 id="name-uplink-cost">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-uplink-cost" class="section-name selfRef">Uplink Cost</a>
         </h3>
-<p id="section-3.2-1">Many IoT deployments are not challenged by a constrained network bandwidth to the cloud.
+<p id="section-3.2-1">Many IoT deployments are not challenged by a constrained network bandwidth to the Cloud.
 The fifth generation mobile networks (5G) and Wi-Fi 6 both theoretically top out at 10 gigabits per second (i.e., 4.5 terabyte per hour), which enables high-bandwidth uplinks.
-However, the resulting cost for high-bandwidth connectivity to upload all data to the cloud is unjustifiable and impractical for most IoT applications.
+However, the resulting cost for high-bandwidth connectivity to upload all data to the Cloud is unjustifiable and impractical for most IoT applications.
 In some settings, e.g. in aeronautical communication, higher communication costs reduce the amount of data that can be practically uploaded even further.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1231,10 +1233,10 @@ The dual is also true, a cloud back-end might want to have a reading of the devi
 <p id="section-3.4-1">When IoT services are deployed at home, personal information can be learned from detected usage data.
 For example, one can extract information about employment, family status, age, and income by analyzing smart meter data <span>[<a href="#ENERGY" class="xref">ENERGY</a>]</span>.
 Policy makers started to provide frameworks that limit the usage of personal data and put strict requirements on data controllers and processors.
-However, data stored indefinitely in the cloud also increases the risk of data leakage, for instance, through attacks on rich targets.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+However, data stored indefinitely in the Cloud also increases the risk of data leakage, for instance, through attacks on rich targets.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
 <p id="section-3.4-2">Industrial systems are often argued to not have privacy implications, as no personal data is gathered.
 Yet data from such systems is often highly sensitive, as one might be able to infer trade secrets such as the setup of production lines.
-Hence, the owner of these systems are generally reluctant to upload IoT data to the cloud.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
+Hence, the owner of these systems are generally reluctant to upload IoT data to the Cloud.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
 <p id="section-3.4-3">Furthermore, passive observers can perform traffic analysis on the device-to-cloud path.
 Hiding traffic patterns associated with sensor networks can therefore be another requirement for edge computing.<a href="#section-3.4-3" class="pilcrow">¶</a></p>
 </section>
@@ -1295,7 +1297,7 @@ Edge cloud management platforms and products (such as StarlingX, Akraino Edge St
 |                                              |
 |   OAM Components                             |
 |   - Virtualization Management                |
-|   - Resources Discovery and Authentication   |
+|   - Resource Discovery and Authentication    |
 |   - Edge Organization and Federation         |
 |   - ...                                      |
 |                                              |
@@ -1405,8 +1407,8 @@ IoT end devices/computing nodes provide logical functions, as part of a distribu
 </div>
 <div id="sec-dis-auth">
 <section id="section-4.3.2">
-          <h4 id="name-resources-discovery-and-aut">
-<a href="#section-4.3.2" class="section-number selfRef">4.3.2. </a><a href="#name-resources-discovery-and-aut" class="section-name selfRef">Resources Discovery and Authentication</a>
+          <h4 id="name-resource-discovery-and-auth">
+<a href="#section-4.3.2" class="section-number selfRef">4.3.2. </a><a href="#name-resource-discovery-and-auth" class="section-name selfRef">Resource Discovery and Authentication</a>
           </h4>
 <p id="section-4.3.2-1">Discovery and authentication may target platforms, infrastructure resources, such as compute, network and storage, but also other resources such as IoT end devices, sensors, data, code units, services, applications or users interacting with the system. Broker-based solutions can be used, e.g. using an IoT gateway as broker to discover IoT resources. Today, centralized gateway-based systems rely, for device authentication, on the installation of a secret on IoT end devices and on computing devices (e.g., a device certificate stored in a hardware security module).<a href="#section-4.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.3.2-2">Related challenges include:<a href="#section-4.3.2-2" class="pilcrow">¶</a></p>
@@ -1662,7 +1664,7 @@ A broker can ensure communication reliability, traceability, and in some cases t
 <dd class="break"></dd>
 <dt id="I-D.ietf-core-oscore-groupcomm">[I-D.ietf-core-oscore-groupcomm]</dt>
 <dd>
-<span class="refAuthor">Tiloca, M.</span><span class="refAuthor">, Selander, G.</span><span class="refAuthor">, Palombini, F.</span><span class="refAuthor">, and J. Park</span>, <span class="refTitle">"Group OSCORE - Secure Group Communication for CoAP"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-core-oscore-groupcomm-08</span>, <time datetime="2020-04-06">6 April 2020</time>, <span>&lt;<a href="http://www.ietf.org/internet-drafts/draft-ietf-core-oscore-groupcomm-08.txt">http://www.ietf.org/internet-drafts/draft-ietf-core-oscore-groupcomm-08.txt</a>&gt;</span>. </dd>
+<span class="refAuthor">Tiloca, M.</span><span class="refAuthor">, Selander, G.</span><span class="refAuthor">, Palombini, F.</span><span class="refAuthor">, and J. Park</span>, <span class="refTitle">"Group OSCORE - Secure Group Communication for CoAP"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-core-oscore-groupcomm-09</span>, <time datetime="2020-06-23">23 June 2020</time>, <span>&lt;<a href="http://www.ietf.org/internet-drafts/draft-ietf-core-oscore-groupcomm-09.txt">http://www.ietf.org/internet-drafts/draft-ietf-core-oscore-groupcomm-09.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.mcbride-edge-data-discovery-overview">[I-D.mcbride-edge-data-discovery-overview]</dt>
 <dd>

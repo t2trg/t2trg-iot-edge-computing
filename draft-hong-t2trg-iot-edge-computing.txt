@@ -5,7 +5,7 @@
 Network Working Group                                            J. Hong
 Internet-Draft                                                 Y-G. Hong
 Intended status: Informational                                      ETRI
-Expires: 26 November 2020                                      X. de Foy
+Expires: 14 January 2021                                       X. de Foy
                                         InterDigital Communications, LLC
                                                              M. Kovatsch
                                     Huawei Technologies Duesseldorf GmbH
@@ -13,23 +13,23 @@ Expires: 26 November 2020                                      X. de Foy
                                                                    Intel
                                                              D. Kutscher
                                University of Applied Sciences Emden/Leer
-                                                             25 May 2020
+                                                            13 July 2020
 
 
                    IoT Edge Challenges and Functions
-                 draft-hong-t2trg-iot-edge-computing-04
+                 draft-hong-t2trg-iot-edge-computing-05
 
 Abstract
 
    Many IoT applications have requirements that cannot be met by the
-   traditional Cloud (aka Cloud computing).  These include time
+   traditional Cloud (aka cloud computing).  These include time
    sensitivity, data volume, uplink cost, operation in the face of
    intermittent services, privacy and security.  As a result, the IoT is
    driving the Internet toward Edge computing.  This document outlines
    the requirements of the emerging IoT Edge and its challenges.  It
    presents a general model, and major components of the IoT Edge, with
    the goal to provide a common base for future discussions in T2TRG and
-   other IETF WGs and RGs.
+   other IRTF and IETF groups.
 
 Status of This Memo
 
@@ -46,16 +46,16 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 November 2020.
+   This Internet-Draft will expire on 14 January 2021.
 
 
 
 
 
 
-Hong, et al.            Expires 26 November 2020                [Page 1]
+Hong, et al.             Expires 14 January 2021                [Page 1]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
 Copyright Notice
@@ -93,7 +93,7 @@ Table of Contents
      4.2.  General Model . . . . . . . . . . . . . . . . . . . . . .  10
      4.3.  OAM Components  . . . . . . . . . . . . . . . . . . . . .  14
        4.3.1.  Virtualization Management . . . . . . . . . . . . . .  14
-       4.3.2.  Resources Discovery and Authentication  . . . . . . .  15
+       4.3.2.  Resource Discovery and Authentication . . . . . . . .  15
        4.3.3.  Edge Organization and Federation  . . . . . . . . . .  15
      4.4.  Functional Components . . . . . . . . . . . . . . . . . .  16
        4.4.1.  External APIs . . . . . . . . . . . . . . . . . . . .  16
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Hong, et al.            Expires 26 November 2020                [Page 2]
+Hong, et al.             Expires 14 January 2021                [Page 2]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
    6.  Acknowledgment  . . . . . . . . . . . . . . . . . . . . . . .  21
@@ -126,7 +126,7 @@ Internet-Draft             IoT Edge Computing                   May 2020
    flexibility and efficiency.  Today's IoT systems are fairly static
    with respect to integrating and supporting computation.  It's not
    that there is no computation, but systems are often limited to static
-   configurations (edge gateways, the Cloud).
+   configurations (edge gateways, cloud services).
 
    However, IoT devices are creating vast amounts of data at the network
    edge.  To meet IoT use case requirements, that data increasingly is
@@ -165,9 +165,9 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020                [Page 3]
+Hong, et al.             Expires 14 January 2021                [Page 3]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
 2.2.  Cloud Computing
@@ -202,28 +202,28 @@ Internet-Draft             IoT Edge Computing                   May 2020
    computing happens near data sources [Mahadev], or closer
    (topologically, physically, in term of latency, etc.) to where
    decisions or interactions with the physical world are happening.  It
-   works on both downstream data on behalf of cloud services and
-   upstream data on behalf of IoT services.  The term fog computing
-   usually represents the notion of a multi-tiered edge computing, that
-   is, several layers of compute infrastructure between the end devices
-   and the cloud.
+   processes both downstream data, e.g. originated from cloud services,
+   and upstream data, e.g. originated from end devices or network
+   elements.  The term fog computing usually represents the notion of a
+   multi-tiered edge computing, that is, several layers of compute
+   infrastructure between the end devices and cloud services.
 
    An edge device is any computing or networking resource residing
    between data sources and cloud-based datacenters.  In edge computing,
    end devices not only consume data, but also produce data.  And at the
    network edge, devices not only request services and information from
-   the cloud, but also handle computing tasks including processing,
+   the Cloud, but also handle computing tasks including processing,
    storage, caching, and load balancing on data sent to and from the
-   cloud [Shi].  This does not preclude end devices from hosting
+   Cloud [Shi].  This does not preclude end devices from hosting
    computation themselves when possible, independently or as part of a
    distributed edge computing platform (this is also referred to as Mist
    Computing).
 
 
 
-Hong, et al.            Expires 26 November 2020                [Page 4]
+Hong, et al.             Expires 14 January 2021                [Page 4]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
    Several standards defining organization and industry forums have
@@ -277,9 +277,9 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020                [Page 5]
+Hong, et al.             Expires 14 January 2021                [Page 5]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
 2.4.  Example of IoT Edge Computing Use Cases
@@ -333,9 +333,9 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020                [Page 6]
+Hong, et al.             Expires 14 January 2021                [Page 6]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
 2.4.3.  Smart Water System
@@ -376,32 +376,32 @@ Internet-Draft             IoT Edge Computing                   May 2020
    latency between the sensor and control node.  While some IoT
    applications may require latency below a few tens of milliseconds
    [Weiner], industrial robots and motion control systems have use cases
-   for cycle times in the order of microseconds [_60802].  An important
-   aspect for real-time communications is not only the latency, but also
-   guarantees for jitter.  This means control packets need to arrive
-   with as little variation as possible and within a strict deadline.
-   Given the best-effort characteristics of the Internet, or in some
-   cases given speed-of-light limitations, this challenge is virtually
-   impossible to address, without comprehending end-to-end guarantees
-   for individual message delivery and continuous data flows.
+   for cycle times in the order of microseconds [_60802].  In some cases
+   speed-of-light limitations may simply prevent a solution based on
+   remote cloud, however it is not the only challenge relative to time
+   sensitivity.  An important aspect for real-time communications is not
+   only the latency, but also guarantees for jitter.  This means control
+   packets need to arrive with as little variation as possible and
+   within a strict deadline.  Given the best-effort characteristics of
+   the Internet this challenge is virtually impossible to address,
+   without using end-to-end guarantees for individual message delivery
+   and continuous data flows.
 
 
 
-
-
-Hong, et al.            Expires 26 November 2020                [Page 7]
+Hong, et al.             Expires 14 January 2021                [Page 7]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
 3.2.  Uplink Cost
 
    Many IoT deployments are not challenged by a constrained network
-   bandwidth to the cloud.  The fifth generation mobile networks (5G)
+   bandwidth to the Cloud.  The fifth generation mobile networks (5G)
    and Wi-Fi 6 both theoretically top out at 10 gigabits per second
    (i.e., 4.5 terabyte per hour), which enables high-bandwidth uplinks.
    However, the resulting cost for high-bandwidth connectivity to upload
-   all data to the cloud is unjustifiable and impractical for most IoT
+   all data to the Cloud is unjustifiable and impractical for most IoT
    applications.  In some settings, e.g. in aeronautical communication,
    higher communication costs reduce the amount of data that can be
    practically uploaded even further.
@@ -427,14 +427,14 @@ Internet-Draft             IoT Edge Computing                   May 2020
    analyzing smart meter data [ENERGY].  Policy makers started to
    provide frameworks that limit the usage of personal data and put
    strict requirements on data controllers and processors.  However,
-   data stored indefinitely in the cloud also increases the risk of data
+   data stored indefinitely in the Cloud also increases the risk of data
    leakage, for instance, through attacks on rich targets.
 
    Industrial systems are often argued to not have privacy implications,
    as no personal data is gathered.  Yet data from such systems is often
    highly sensitive, as one might be able to infer trade secrets such as
    the setup of production lines.  Hence, the owner of these systems are
-   generally reluctant to upload IoT data to the cloud.
+   generally reluctant to upload IoT data to the Cloud.
 
    Furthermore, passive observers can perform traffic analysis on the
    device-to-cloud path.  Hiding traffic patterns associated with sensor
@@ -445,9 +445,9 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020                [Page 8]
+Hong, et al.             Expires 14 January 2021                [Page 8]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
 4.  IoT Edge Computing Functions
@@ -501,9 +501,9 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020                [Page 9]
+Hong, et al.             Expires 14 January 2021                [Page 9]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
    The platform typically includes services to advertise or consume APIs
@@ -557,9 +557,9 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020               [Page 10]
+Hong, et al.             Expires 14 January 2021               [Page 10]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
    *  A single IoT gateway, or a hierarchy of IoT gateways, typically
@@ -613,9 +613,9 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020               [Page 11]
+Hong, et al.             Expires 14 January 2021               [Page 11]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
                 +---------------------+
@@ -633,7 +633,7 @@ Internet-Draft             IoT Edge Computing                   May 2020
              |                                              |
              |   OAM Components                             |
              |   - Virtualization Management                |
-             |   - Resources Discovery and Authentication   |
+             |   - Resource Discovery and Authentication    |
              |   - Edge Organization and Federation         |
              |   - ...                                      |
              |                                              |
@@ -669,9 +669,9 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020               [Page 12]
+Hong, et al.             Expires 14 January 2021               [Page 12]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
    system.  They may be implemented in a centralized or distributed
@@ -725,9 +725,9 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020               [Page 13]
+Hong, et al.             Expires 14 January 2021               [Page 13]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
    capabilities in IoT end devices being limited, they require the
@@ -781,9 +781,9 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020               [Page 14]
+Hong, et al.             Expires 14 January 2021               [Page 14]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
    *  Integration of edge computing with virtualized radio networks (Fog
@@ -792,7 +792,7 @@ Internet-Draft             IoT Edge Computing                   May 2020
    *  Handling of multi-tenancy with regards to limited resources at the
       network edge
 
-4.3.2.  Resources Discovery and Authentication
+4.3.2.  Resource Discovery and Authentication
 
    Discovery and authentication may target platforms, infrastructure
    resources, such as compute, network and storage, but also other
@@ -837,9 +837,9 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020               [Page 15]
+Hong, et al.             Expires 14 January 2021               [Page 15]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
    *  Support for scaling, and enabling fault-tolerance or self-healing
@@ -893,9 +893,9 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020               [Page 16]
+Hong, et al.             Expires 14 January 2021               [Page 16]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
    Communication brokering may be centralized in some systems, e.g.,
@@ -949,9 +949,9 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020               [Page 17]
+Hong, et al.             Expires 14 January 2021               [Page 17]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
    *  Adapting Quality of Results (QoR) for applications where a perfect
@@ -1005,9 +1005,9 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020               [Page 18]
+Hong, et al.             Expires 14 January 2021               [Page 18]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
 4.4.5.  Other Services
@@ -1061,9 +1061,9 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020               [Page 19]
+Hong, et al.             Expires 14 January 2021               [Page 19]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
    *  Addressing concerns such as limited resources, privacy, dynamic
@@ -1117,9 +1117,9 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020               [Page 20]
+Hong, et al.             Expires 14 January 2021               [Page 20]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
    However, edge computing also brings solutions in the security space:
@@ -1173,9 +1173,9 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020               [Page 21]
+Hong, et al.             Expires 14 January 2021               [Page 21]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
    [ENERGY]   Beckel, C., Sadamori, L., Staake, T., and S. Santini,
@@ -1229,17 +1229,17 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020               [Page 22]
+Hong, et al.             Expires 14 January 2021               [Page 22]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
    [I-D.ietf-core-oscore-groupcomm]
               Tiloca, M., Selander, G., Palombini, F., and J. Park,
               "Group OSCORE - Secure Group Communication for CoAP", Work
               in Progress, Internet-Draft, draft-ietf-core-oscore-
-              groupcomm-08, 6 April 2020, <http://www.ietf.org/internet-
-              drafts/draft-ietf-core-oscore-groupcomm-08.txt>.
+              groupcomm-09, 23 June 2020, <http://www.ietf.org/internet-
+              drafts/draft-ietf-core-oscore-groupcomm-09.txt>.
 
    [I-D.mcbride-edge-data-discovery-overview]
               McBride, M., Kutscher, D., Schooler, E., and C. Bernardos,
@@ -1285,9 +1285,9 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020               [Page 23]
+Hong, et al.             Expires 14 January 2021               [Page 23]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
    [Li]       Li, Y., Chen, Y., Lan, T., and G. Venkataramani, "Mobiqor:
@@ -1341,9 +1341,9 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020               [Page 24]
+Hong, et al.             Expires 14 January 2021               [Page 24]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
    [RFC6291]  Andersson, L., van Helvoort, H., Bonica, R., Romascanu,
@@ -1397,9 +1397,9 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020               [Page 25]
+Hong, et al.             Expires 14 January 2021               [Page 25]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
    [Yousefpour]
@@ -1453,9 +1453,9 @@ Authors' Addresses
 
 
 
-Hong, et al.            Expires 26 November 2020               [Page 26]
+Hong, et al.             Expires 14 January 2021               [Page 26]
 
-Internet-Draft             IoT Edge Computing                   May 2020
+Internet-Draft             IoT Edge Computing                  July 2020
 
 
    Matthias Kovatsch
@@ -1509,4 +1509,4 @@ Internet-Draft             IoT Edge Computing                   May 2020
 
 
 
-Hong, et al.            Expires 26 November 2020               [Page 27]
+Hong, et al.             Expires 14 January 2021               [Page 27]
