@@ -806,6 +806,7 @@ Data storage and processing at the edge is a major aspect of IoT edge computing,
 Related challenges include:
 
 * Addressing concerns on resource usage, security and privacy when sharing, discovering or managing data. For example by presenting data in views composed of an aggregation of related data {{Zhang}}, protecting data communication between authenticated peers {{Basudan}}, classifying data (e.g., in terms of privacy, importance, validity, etc.), compressing data
+* Other concerns on edge data discovery (e.g., streaming data, metadata, events) include siloization and lack of standard in edge environments that can be dynamic (e.g. vehicular networks) and heterogeneous {{I-D.mcbride-edge-data-discovery-overview}}
 * Data driven programming models {{Renart}}, e.g. event-based, including handling of naming and data abstractions
 * Addressing concerns such as limited resources, privacy, dynamic and heterogeneous environment, to deploy machine learning at the edge. For example, making machine learning more lightweight and distributed, supporting shorter training time and simplified models, and supporting models that can be compressed for efficient communication {{Murshed}}
 * While edge computing can support IoT services independently of cloud computing, it can also be connected to cloud computing. Thus, the relationship of IoT edge computing to cloud computing, with regard to data management, is another potential challenge {{ISO_TR}}
