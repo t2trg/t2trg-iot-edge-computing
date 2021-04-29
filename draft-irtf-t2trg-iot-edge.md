@@ -415,10 +415,68 @@ informative:
     - ins: O. Fourmaux
     - ins: T. Friedman
     - ins: R. McGeer
-    date: '2019'
+    date: '2021'
     seriesinfo: '4th International Workshop on Edge Systems, Analytics and Networking'
     target: 'https://dl.acm.org/doi/pdf/10.1145/3434770.3459737'
-    
+  Stanciu:
+    title: 'Privacy-Preserving Crowd-Monitoring Using Bloom Filters and Homomorphic Encryption'
+    author:
+    - ins: V. Stanciu
+    - ins: M. van Steen
+    - ins: C. Dobre
+    - ins: A. Peter
+    date: '2021'
+    seriesinfo: '4th International Workshop on Edge Systems, Analytics and Networking'
+    target: 'https://dl.acm.org/doi/10.1145/3434770.3459735'
+  Jeffery:
+    title: 'Rearchitecting Kubernetes for the Edge'
+    author:
+    - ins: A. Jeffery
+    - ins: H. Howard
+    - ins: R. Mortier
+    date: '2021'
+    seriesinfo: '4th International Workshop on Edge Systems, Analytics and Networking'
+    target: 'https://dl.acm.org/doi/10.1145/3434770.3459730'
+  Nieke:
+    title: 'Edgedancer: Secure Mobile WebAssembly Services on the Edge'
+    author:
+    - ins: M. Nieke
+    - ins: L. Almstedt
+    - ins: R. Kapitza
+    date: '2021'
+    seriesinfo: '4th International Workshop on Edge Systems, Analytics and Networking'
+    target: 'https://doi.org/10.1145/3434770.3459731'
+  Cao:
+    title: 'ECaaS: A Management Framework of Edge Container as a Service for Business Workload'
+    author:
+    - ins: L. Cao
+    - ins: A. Merican
+    - ins: D. Zad Tootaghaj
+    - ins: F. Ahmed
+    - ins: P. Sharma
+    - ins: V. Saxena
+    date: '2021'
+    seriesinfo: '4th International Workshop on Edge Systems, Analytics and Networking'
+    target: 'https://doi.org/10.1145/3434770.3459741'
+  Larrea:
+    title: 'The serverkernel operating system'
+    author:
+    - ins: J. Larrea
+    - ins: A. Barbalace
+    date: '2020'
+    seriesinfo: 'Third ACM International Workshop on Edge Systems, Analytics and Networking'
+    target: 'https://core.ac.uk/reader/327124532'
+  Mortazavi:
+    title: 'Toward Session Consistency for the Edge'
+    author:
+    - ins: S. Hossein Mortazavi
+    - ins: B. Balasubramanian
+    - ins: E. de Lara
+    - ins: S. P. Narayanan
+    date: '2018'
+    seriesinfo: 'USENIX, Workshop on Hot Topics in Edge Computing (HotEdge 18)'
+    target: 'https://www.usenix.org/conference/hotedge18/presentation/mortazavi'
+
 --- abstract
 
 Many IoT applications have requirements that cannot be met by the traditional Cloud (aka cloud computing). These include time sensitivity, data volume, uplink cost, operation in the face of intermittent services, privacy and security. As a result, the IoT is driving the Internet toward Edge computing. This document outlines the requirements of the emerging IoT Edge and its challenges. It presents a general model, and major components of the IoT Edge, with the goal to provide a common base for future discussions in T2TRG and other IRTF and IETF groups.
@@ -600,7 +658,7 @@ Edge cloud management platforms and products (such as StarlingX, Akraino Edge St
 
 The platform typically includes services to advertise or consume APIs (e.g., Mp1 interface in ETSI MEC supports service discovery and communication), and enables communicating with local and remote endpoints (e.g., message routing function in IoT gateways). The service platform is typically extensible by edge applications, since they can advertise an API that other edge applications can consume. IoT communication services include protocols translation, analytics and transcoding. Communication between edge computing devices is enabled in tiered deployments or distributed deployments.
 
-An edge cloud platform may enable pass-through without storage or local storage (e.g., on IoT gateways). Some edge cloud platforms use a distributed form of storage such as an ICN network (e.g., NFN nodes can store data in NDN) or a distributed storage platform (e.g., IPFS, Ceph). External storage, e.g., on databases in distant or local IT cloud, is typically used for filtered data deemed worthy of long term storage, although in some case it may be for all data, for example when required for regulatory reasons.
+An edge cloud platform may enable pass-through without storage or local storage (e.g., on IoT gateways). Some edge cloud platforms use a distributed form of storage such as an ICN network (e.g., NFN nodes can store data in NDN) or a distributed storage platform (e.g., IPFS, EdgeFS, Ceph). External storage, e.g., on databases in distant or local IT cloud, is typically used for filtered data deemed worthy of long term storage, although in some case it may be for all data, for example when required for regulatory reasons.
 
 Stateful computing is supported on platforms hosting native programs, VMs or containers. Stateless computing is supported on platforms providing a "serverless computing" service (a.k.a. function-as-a-service), or on systems based on named function networking.
 
@@ -721,7 +779,7 @@ Some IoT edge computing systems make use of virtualized (compute, storage and ne
 Related challenges include:
 
 * Minimizing virtual function instantiation time and resource usage
-* Integration of edge computing with virtualized radio networks (Fog RAN) {{I-D.bernardos-sfc-fog-ran}} and with 5G access networks
+* Integration of edge computing with virtualized Radio Access Networks (Fog RAN) {{I-D.bernardos-sfc-fog-ran}} and with 5G access networks
 * Handling of multi-tenancy with regards to limited resources at the network edge
 
 ### Resource Discovery and Authentication {#sec-dis-auth}
@@ -740,6 +798,7 @@ In a distributed system context, once edge devices have discovered and authentic
 
 Related challenges include:
 
+* Extending cloud platforms to the distributed, heterogeneous and customized edge. An example addressing the distributed edge challenge is adapting Kubernetes using a key-value store based on Conflict-free Replicated Data Types (CDRT) {{Jeffery}}. To address heterogeneity and customization, {{Cao}} uses intent-based management mechanisms.
 * Sharing resources in multi-vendor/operator scenarios, with a goal to optimize criteria such as profit {{Anglano}}, resource usage, latency or energy consumption
 * Support for scaling, and enabling fault-tolerance or self-healing {{Jeong}}. Besides using hierarchical organization to cope with scaling, another available and possibly complementary mechanism is multicast ({{RFC7390}} {{I-D.ietf-core-oscore-groupcomm}})
 * Capacity planning, placement of infrastructure nodes to minimize delay {{Fan}}, cost, energy, etc.
@@ -780,13 +839,12 @@ QoS can be provided in some systems through the combination of network QoS (e.g.
 Related challenges include:
 
 * (Computation placement) Selecting, in a centralized or distributed/peer-to-peer manner, an appropriate compute device based on available resources, location of data input and data sinks, compute node properties, etc., and with varying goals including for example end-to-end latency, privacy, high availability, energy conservation, network efficiency (e.g. using load balancing techniques to avoid congestion)
-* Onboarding code on a platform or compute device, and invoking remote code execution, possibly as part of a distributed programming model and with respect to similar concerns of latency, privacy, etc. These operations should deal with heterogeneous compute nodes {{Schafer}}, and may in some cases also support end devices as compute nodes
+* Onboarding code on a platform or compute device, and invoking remote code execution, possibly as part of a distributed programming model and with respect to similar concerns of latency, privacy, etc. These operations should deal with heterogeneous compute nodes {{Schafer}}, and may in some cases also support end devices, including IoT devices, as compute nodes {{Larrea}}
 * Adapting Quality of Results (QoR) for applications where a perfect result is not necessary {{Li}}
 * Assisted or automatic partitioning of code {{I-D.sarathchandra-coin-appcentres}}
 * Supporting computation across trust domains, e.g. verifying computation results
-* Relocating an instance from one compute node to another, while maintaining a given service level. 
-* Session continuity when communicating with end devices that are mobile, possibly at high speed (e.g. in vehicular scenarios)
-* Defining, managing and verifying SLAs for edge computing systems. Pricing is a related challenge
+* Support for computation mobility: relocating an instance from one compute node to another, while maintaining a given service level. Session continuity when communicating with end devices that are mobile, possibly at high speed (e.g. in vehicular scenarios). Defining lightweight execution environments for secure code mobility, e.g., using WebAssembly {{Nieke}}
+* Defining, managing and verifying Service Level Agreements (SLA) for edge computing systems. Pricing is a related challenge
 
 ### Edge Storage and Caching
 
@@ -800,7 +858,8 @@ Edge storage and caching can take the form of a distributed storage system.
 Related challenges include 
 
 * (Cache and data placement) Using cache positioning and data placement strategies to minimize data retrieval delay {{Liu}}, energy consumption. Caches may be positioned in the access network infrastructure or may be on end devices using device-to-device communication
-* Maintaining data consistency, freshness and privacy in systems that are distributed, constrained and dynamic (e.g. due to end devices and computing nodes churn or mobility). For example, age of information {{Yates}}, a performance metric that captures the timeliness of information from a sender (e.g. an IoT device), can be exposed to networks to enable tradeoffs in this problem space
+* Maintaining consistency and privacy of stored/cached data in systems that are distributed, constrained and dynamic (e.g. due to end devices and computing nodes churn or mobility). For example, exploit a hierarchical storage organization {{Mortazavi}}.
+* Similarly, maintaining freshness of cached data in the distributed edge. For example using age of information {{Yates}}, a performance metric that captures the timeliness of information from a sender (e.g. an IoT device). 
 
 ### Other Services
 
@@ -822,11 +881,12 @@ Data storage and processing at the edge is a major aspect of IoT edge computing,
 
 Related challenges include:
 
-* Addressing concerns on resource usage, security and privacy when sharing, discovering or managing data. For example by presenting data in views composed of an aggregation of related data {{Zhang}}, protecting data communication between authenticated peers {{Basudan}}, classifying data (e.g., in terms of privacy, importance, validity, etc.), compressing data
+* Addressing concerns on resource usage, security and privacy when sharing, processing, discovering or managing data. For example by presenting data in views composed of an aggregation of related data {{Zhang}}; protecting data communication between authenticated peers {{Basudan}}; classifying data (e.g., in terms of privacy, importance, validity, etc.); compressing and encrypting data (e.g., using bloom filters and homomorphic encryption to enable processing directly encrypted data {{Stanciu}}).
 * Other concerns on edge data discovery (e.g., streaming data, metadata, events) include siloization and lack of standard in edge environments that can be dynamic (e.g. vehicular networks) and heterogeneous {{I-D.mcbride-edge-data-discovery-overview}}
 * Data driven programming models {{Renart}}, e.g. event-based, including handling of naming and data abstractions
 * Addressing concerns such as limited resources, privacy, dynamic and heterogeneous environment, to deploy machine learning at the edge. For example, making machine learning more lightweight and distributed, supporting shorter training time and simplified models, and supporting models that can be compressed for efficient communication {{Murshed}}
 * While edge computing can support IoT services independently of cloud computing, it can also be connected to cloud computing. Thus, the relationship of IoT edge computing to cloud computing, with regard to data management, is another potential challenge {{ISO_TR}}
+
 
 ## Simulation and Emulation Environments
 
