@@ -406,7 +406,19 @@ informative:
     date: '2020'
     seriesinfo: 'draft-defoy-t2trg-iot-edge-computing-background-00'
     target: 'http://www.ietf.org/internet-drafts/draft-defoy-t2trg-iot-edge-computing-background-00.txt'
-
+  Senel:
+    title: 'EdgeNet: A Multi-Tenant and Multi-Provider Edge Cloud'
+    author:
+    - ins: B. Şenel
+    - ins: M. Mouchet
+    - ins: J. Cappos
+    - ins: O. Fourmaux
+    - ins: T. Friedman
+    - ins: R. McGeer
+    date: '2019'
+    seriesinfo: '4th International Workshop on Edge Systems, Analytics and Networking'
+    target: 'https://dl.acm.org/doi/pdf/10.1145/3434770.3459737'
+    
 --- abstract
 
 Many IoT applications have requirements that cannot be met by the traditional Cloud (aka cloud computing). These include time sensitivity, data volume, uplink cost, operation in the face of intermittent services, privacy and security. As a result, the IoT is driving the Internet toward Edge computing. This document outlines the requirements of the emerging IoT Edge and its challenges. It presents a general model, and major components of the IoT Edge, with the goal to provide a common base for future discussions in T2TRG and other IRTF and IETF groups.
@@ -776,9 +788,14 @@ Related challenges include:
 * Session continuity when communicating with end devices that are mobile, possibly at high speed (e.g. in vehicular scenarios)
 * Defining, managing and verifying SLAs for edge computing systems. Pricing is a related challenge
 
-### Edge Caching
+### Edge Storage and Caching
 
-A purpose of local caching may be to enable local data processing (e.g., pre-processing or analysis), or to enable delayed virtual or physical shipping. A responsibility of the edge caching component is to manage data persistence, e.g., to schedule removal of data when it is no longer needed. Another aspect of this component may be to authenticate and encrypt data. It can for example take the form of a distributed storage system.
+Local storage or caching enable local data processing (e.g., pre-processing or analysis), as well as delayed data transfer to the cloud or delayed physical shipping. 
+An edge node may offer local data storage (where persistence is subject to retention policies), caching, or both.
+Caching generally refers to temporary storage to improve performance with no persistence guarantees. 
+A responsibility of an edge caching component is to manage data persistence, e.g., to schedule removal of data when it is no longer needed.
+Other related aspects include authenticating and encrypting data.
+Edge storage and caching can take the form of a distributed storage system.
 
 Related challenges include 
 
@@ -815,7 +832,7 @@ Related challenges include:
 
 IoT Edge Computing brings new challenges to simulation and emulation tools used by researchers and developers. A varied set of applications, network and computing technologies can coexist in a distributed system, which make modelling difficult. Scale, mobility and resource management are additional challenges [SimulatingFog].
 
-Tools include simulators, where simplified application logic runs on top of a fog network model, and emulators, where actual applications can be deployed, typically in software containers, over a cloud infrastructure (e.g. Docker, Kubernetes) itself running over a network emulating network edge conditions such as variable delays, throughput and mobility events. To gain in scale, emulated and simulated systems can be used together in hybrid federation-based approaches [PseudoDynamicTesting], while to gain in realism physical devices can be interconnected with emulated systems. Examples of related work and platforms include the publicly accessible MEC sandbox work recently initiated in ETSI [ETSI_Sandbox], and open source simulators and emulators ([AdvantEDGE] emulator and tools cited in [SimulatingFog]).
+Tools include simulators, where simplified application logic runs on top of a fog network model, and emulators, where actual applications can be deployed, typically in software containers, over a cloud infrastructure (e.g. Docker, Kubernetes) itself running over a network emulating network edge conditions such as variable delays, throughput and mobility events. To gain in scale, emulated and simulated systems can be used together in hybrid federation-based approaches [PseudoDynamicTesting], while to gain in realism physical devices can be interconnected with emulated systems. Examples of related work and platforms include the publicly accessible MEC sandbox work recently initiated in ETSI [ETSI_Sandbox], and open source simulators and emulators ([AdvantEDGE] emulator and tools cited in [SimulatingFog]). EdgeNet {{Senel}} is a globally distributed edge cloud for Internet researchers, using nodes contributed by institutions, and based on Docker for containerization and Kubernetes for deployment and node management.
 
 # Security Considerations
 
@@ -825,5 +842,5 @@ However, edge computing also brings solutions in the security space: maintaining
 
 # Acknowledgment
 
-The authors would like to thank Joo-Sang Youn, Akbar Rahman, Michel Roy, Robert Gazda, Rute Sofia, Thomas Fossati and Chonggang Wang for their valuable comments and suggestions on this document.
+The authors would like to thank Joo-Sang Youn, Akbar Rahman, Michel Roy, Robert Gazda, Rute Sofia, Thomas Fossati, Chonggang Wang, Marie-José Montpetit, Carlos J. Bernardos and Milan Milenkovic for their valuable comments and suggestions on this document.
 
