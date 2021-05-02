@@ -1,7 +1,7 @@
 ---
 stand_alone: true
 ipr: trust200902
-docname: draft-irtf-t2trg-iot-edge-01
+docname: draft-irtf-t2trg-iot-edge-02
 cat: info
 pi:
   toc: 'yes'
@@ -21,7 +21,7 @@ author:
 - ins: J. Hong
   name: Jungha Hong
   org: ETRI
-  street: '218 Gajeong-ro Yuseung-Gu'
+  street: '218 Gajeong-ro, Yuseung-Gu'
   city: Daejeon
   code: '34129'
   country: Republic of Korea
@@ -29,10 +29,10 @@ author:
 
 - ins: Y-G. Hong
   name: Yong-Geun Hong
-  org: Tongmyong University
-  street: '428 Sinseon-ro Nam-gu'
-  city: Busan
-  code: '48520'
+  org: Daejeon University
+  street: '62 Daehak-ro, Dong-gu'
+  city: Daejeon
+  code: '300716'
   country: Republic of Korea
   email: yonggeun.hong@gmail.com
 
@@ -409,7 +409,7 @@ informative:
   Senel:
     title: 'EdgeNet: A Multi-Tenant and Multi-Provider Edge Cloud'
     author:
-    - ins: B. Şenel
+    - ins: B. Senel
     - ins: M. Mouchet
     - ins: J. Cappos
     - ins: O. Fourmaux
@@ -479,7 +479,11 @@ informative:
 
 --- abstract
 
-Many IoT applications have requirements that cannot be met by the traditional Cloud (aka cloud computing). These include time sensitivity, data volume, uplink cost, operation in the face of intermittent services, privacy, and security. As a result, the IoT is driving the Internet toward Edge computing. This document outlines the requirements of the emerging IoT Edge and its challenges. It presents a general model, and major components of the IoT Edge, to provide a common base for future discussions in T2TRG and other IRTF and IETF groups.
+Many IoT applications have requirements that cannot be met by the traditional Cloud (aka cloud computing). These include time sensitivity, data volume, connectivity cost, operation in the face of intermittent services, privacy, and security. As a result, the IoT is driving the Internet toward Edge computing. This document outlines the requirements of the emerging IoT Edge and its challenges. It presents a general model, and major components of the IoT Edge, to provide a common base for future discussions in T2TRG and other IRTF and IETF groups.
+
+<!--
+This document is a product of the Thing-to-Thing Research Group (T2TRG)
+-->
 
 --- middle
 
@@ -497,6 +501,10 @@ We will refer to this integration of edge computing and IoT as "IoT edge computi
 Our draft describes related background, uses cases, challenges, system models, and functional components.
 
 Due to the dynamic nature of the IoT edge computing landscape, this document does not list existing projects in this field. However, {{sec-overview}} presents a high-level overview of the field, based on a limited review of standards, research, open-source and proprietary products in {{I-D-defoy-t2trg-iot-edge-computing-background}}.
+
+<!--
+This document represents the consensus of the Thing-to-Thing Research Group (T2TRG).  It has been reviewed extensively by Research Group (RG) members with expertise in edge computing and IoT.
+-->
 
 # Background
 
@@ -619,7 +627,7 @@ They require reliable, uninterrupted, or resilient services to augment their cap
 This is hard and partly impossible to achieve with cloud services for systems such as vehicles, drones, or oil rigs that have intermittent network connectivity.
 The dual is also true, a cloud back-end might want to have a reading of the device even if it's currently asleep.
 
-## Privacy and Security
+## Privacy and Security {#sec-priv}
 
 When IoT services are deployed at home, personal information can be learned from detected usage data.
 For example, one can extract information about employment, family status, age, and income by analyzing smart meter data {{ENERGY}}.
@@ -890,7 +898,7 @@ Tools include simulators, where simplified application logic runs on top of a fo
 
 # Security Considerations
 
-As discussed in {{sec-dis-auth}}, authentication and trust (between computing nodes, management nodes, end devices) can be challenging as scale, mobility, and heterogeneity increase. The sometimes disconnected nature of edge resources can prevent relying on a third-party authority. Distributed edge computing is exposed to issues with reliability and denial of service attacks. Personal or proprietary IoT data leakage is also a major threat, especially due to the distributed nature of the systems ({{sec-data}}).
+Privacy and security are drivers for the adoption of edge computing for IoT ({{sec-priv}}). As discussed in {{sec-dis-auth}}, authentication and trust (between computing nodes, management nodes, end devices) can be challenging as scale, mobility, and heterogeneity increase. The sometimes disconnected nature of edge resources can prevent relying on a third-party authority. Distributed edge computing is exposed to issues with reliability and denial of service attacks. Personal or proprietary IoT data leakage is also a major threat, especially due to the distributed nature of the systems ({{sec-data}}).
 
 However, edge computing also brings solutions in the security space: maintaining privacy by computing sensitive data closer to data generators is a major use case for IoT edge computing. An edge cloud can be used to take actions based on sensitive data, or anonymizing, aggregating or compressing data prior to transmitting to a remote cloud server. Edge computing communication brokering functions can also be used to secure communication between edge and cloud networks.
 
