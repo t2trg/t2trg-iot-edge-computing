@@ -476,6 +476,47 @@ informative:
     date: '2018'
     seriesinfo: 'USENIX, Workshop on Hot Topics in Edge Computing (HotEdge 18)'
     target: 'https://www.usenix.org/conference/hotedge18/presentation/mortazavi'
+  oneM2M-TR0001:
+    title: 'TR 0001, Use Cases Collection'
+    author:
+    - ins: C. Mladin
+    date: 'Oct. 2018'
+    seriesinfo: 'oneM2M'
+    target: 'https://member.onem2m.org/Application/documentapp/downloadLatestRevision/default.aspx?docID=28153'
+  oneM2M-TR0018:
+    title: 'TR 0018, Industrial Domain Enablement'
+    author:
+    - ins: C. Lu
+    - ins: M. Jiang
+    date: 'Feb. 2019'
+    seriesinfo: 'oneM2M'
+    target: 'https://member.onem2m.org/Application/documentapp/downloadLatestRevision/default.aspx?docID=29334'
+  oneM2M-TR0026:
+    title: 'TR 0026, Vehicular Domain Enablement'
+    author:
+    - ins: K. Yamamoto
+    - ins: C. Mladin
+    - ins: V. Kueh
+    date: 'Jan. 2020'
+    seriesinfo: 'oneM2M'
+    target: 'https://member.onem2m.org/Application/documentapp/downloadLatestRevision/default.aspx?docID=31410'
+  oneM2M-TR0052:
+    title: 'TR 0052, Study on Edge and Fog Computing in oneM2M systems'
+    author:
+    - ins: K. Yamamoto
+    - ins: C. Mladin
+    date: 'Sep. 2020'
+    seriesinfo: 'oneM2M'
+    target: 'https://member.onem2m.org/Application/documentapp/downloadLatestRevision/default.aspx?docID=32633'
+  oneM2M-TS0002:
+    title: 'TS 0002, Requirements'
+    author:
+    - ins: S. He
+    date: 'Feb. 2019'
+    seriesinfo: 'oneM2M'
+    target: 'https://member.onem2m.org/Application/documentapp/downloadLatestRevision/default.aspx?docID=29274'
+    
+    
 
 --- abstract
 
@@ -559,6 +600,8 @@ Actors from various industries approach edge computing using different terms and
 
 IoT edge computing can be used in home, industry, grid, healthcare, city, transportation, agriculture, and/or education scenarios.
 We discuss here only a few examples of such use cases, to point out differentiating requirements.
+These examples are followed with references to other use cases.
+
 
 **Smart Factory**
 
@@ -591,6 +634,10 @@ The self-driving car, with its focus on safety, is a system where edge computing
 **AR/VR**
 
 Augmented Reality (AR) and Virtual Reality (VR) are likely to strongly influence the Information and Communication Technology (ICT) market in the future, since they can support innovative products in most other use cases including smart factories, self-driving cars, etc. In AR/VR, due to large amounts of data generated at endpoints such as mobile devices and PCs, user immersion can be significantly decreased by a latency of only a few hundred milliseconds. Therefore, using an edge computing infrastructure built close to endpoints can not only reduce the cost and latency of data transmission but also maximize user immersion. For example, in AR using edge computing, streaming video can be displayed realistically in higher quality, giving users the best possible experience.
+
+**Other Use Cases**
+
+Additionally, oneM2M recently studied several use cases related to edge computing, including: smart factories, smart transportation, an accident notification service, a high-precision road map service, a vulnerable road user service and a vehicular data service. These use cases are documented in {{oneM2M-TR0001}}, {{oneM2M-TR0018}} and {{oneM2M-TR0026}}. Edge computing related requirements raised through the analysis of these use cases are captured in {{oneM2M-TS0002}}.
 
 # IoT Challenges Leading Towards Edge Computing {#sec-challenges}
 
@@ -651,6 +698,8 @@ This section provides an overview of today's IoT edge computing field, based on 
 
 IoT gateways, both open-source (such as EdgeX Foundry or Home Edge) and proprietary (such as Amazon Greengrass, Microsoft Azure IoT Edge, Google Cloud IoT Core, and gateways from Bosh, Siemens), represent a common class of IoT edge computing products, where the gateway is providing a local service on customer premises and is remotely managed through a cloud service. IoT communication protocols are typically used between IoT devices and the gateway, including CoAP, MQTT, and many specialized IoT protocols (such as OPC UA and DDS in the Industrial IoT space), while the gateway communicates with the distant cloud typically using HTTPS. Virtualization platforms enable the deployment of virtual edge computing functions (as VMs, application containers, etc.), including IoT gateway software, on servers in the mobile network infrastructure (at base stations and concentration points), in edge data centers (in central offices) or regional data centers located near central offices. End devices are envisioned to become computing devices in forward-looking projects, but they are not commonly used as such today.
 
+Besides open-source and proprietary solutions, a horizontal IoT service layer is standardized by the oneM2M standards body, to reduce fragmentation, increase interoperability and promote reuse in the IoT ecosystem.
+ 
 Physical or virtual IoT gateways can host application programs, which are typically built using an SDK to access local services through a programmatic API.
 Edge cloud system operators host their customers' applications VMs or containers on servers located in or near access networks, which can implement local edge services. For example, mobile networks can provide edge services for radio network information, location, and bandwidth management.
 
@@ -811,6 +860,8 @@ Related challenges include:
 
 A core function of IoT edge computing is to enable local computation on a node at the network edge, e.g. processing input data from sensors, making local decisions, preprocessing data, offloading computation on behalf of a device, service, or user. Related functions include orchestrating computation (in a centralized or distributed manner) and managing applications lifecycle. Support for in-network computation may vary in term of capability, e.g., computing nodes can host virtual machines, software containers, software actors or unikernels able to run stateful or stateless code, or a rules engine providing an API to register actions in response to conditions such as IoT device ID, sensor values to check, thresholds, etc.
 
+For example, edge offloading in the context of oneM2M allows a cloud-based IoT platform to transfer relevant resources and tasks to a target edge node supporting the service layer functionality {{oneM2M-TR0052}}. Once transferred, the edge node can directly support IoT devices it serves with the service offloaded by the cloud. For example, this functionality enables one or more of the individual service functions (e.g. group management, location management, etc.) defined in the service layer to be offloaded from the cloud to one or more edge nodes.
+
 QoS can be provided in some systems through the combination of network QoS (e.g., traffic engineering or wireless resource scheduling) and compute/storage resource allocations. For example, in some systems, a bandwidth manager service can be exposed to enable allocation of bandwidth to/from an edge computing application instance.
 
 Related challenges include:
@@ -865,7 +916,7 @@ Related challenges include:
 
 ### Other Services
 
-Data generated by IoT devices and associated information obtained from the access network may be used to provide high-level services such as end device location, radio network information, and bandwidth management. 
+Data generated by IoT devices and associated information obtained from the access network may be used to provide high-level services such as end device location, radio network information, bandwidth management and congestion management (e.g., by the congestion management feature of oneM2M {{oneM2M-TR0052}}). 
 
 ## Application Components
 
@@ -873,7 +924,7 @@ IoT edge computing can host applications such as the ones mentioned in {{sec-uc}
 
 ### IoT End Devices Management
 
-IoT end device management includes managing information about the IoT devices, including their sensors, how to communicate with them, etc. Edge computing addresses the scalability challenges from the massive number of IoT end devices by separating the scalability domain into edge/local networks and remote networks.
+IoT end device management includes managing information about the IoT devices, including their sensors, how to communicate with them, etc. Edge computing addresses the scalability challenges from the massive number of IoT end devices by separating the scalability domain into edge/local networks and remote networks. For example, in the context of the oneM2M standard, the software campaign feature enables installing, deleting, activating, and deactivating software functions/services on a potentially large number of edge nodes {{oneM2M-TR0052}}. Using a dash board or a management software, a service provider issues those requests through an IoT cloud platform supporting the software campaign functionality.
 
 Challenges listed in {{sec-dis-auth}} may be applicable to IoT end devices management as well.
 
@@ -902,7 +953,7 @@ Privacy and security are drivers for the adoption of edge computing for IoT ({{s
 
 However, edge computing also brings solutions in the security space: maintaining privacy by computing sensitive data closer to data generators is a major use case for IoT edge computing. An edge cloud can be used to take actions based on sensitive data, or anonymizing, aggregating or compressing data prior to transmitting to a remote cloud server. Edge computing communication brokering functions can also be used to secure communication between edge and cloud networks.
 
-# Acknowledgment
+# Acknowledgements
 
-The authors would like to thank Joo-Sang Youn, Akbar Rahman, Michel Roy, Robert Gazda, Rute Sofia, Thomas Fossati, Chonggang Wang, Marie-José Montpetit, Carlos J. Bernardos and Milan Milenkovic for their valuable comments and suggestions on this document.
+The authors would like to thank Joo-Sang Youn, Akbar Rahman, Michel Roy, Robert Gazda, Rute Sofia, Thomas Fossati, Chonggang Wang, Marie-José Montpetit, Carlos J. Bernardos, Milan Milenkovic, Dale Seed and JaeSeung Song for their valuable comments and suggestions on this document.
 
