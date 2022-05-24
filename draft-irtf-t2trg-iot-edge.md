@@ -1215,6 +1215,10 @@ Privacy and security are drivers for the adoption of edge computing for IoT ({{s
 
 However, edge computing also brings solutions in the security space: maintaining privacy by computing sensitive data closer to data generators is a major use case for IoT edge computing. An edge cloud can be used to take actions based on sensitive data, or anonymizing, aggregating or compressing data prior to transmitting to a remote cloud server. Edge computing communication brokering functions can also be used to secure communication between edge and cloud networks.
 
+# Conclusion
+
+IoT edge computing plays an essential role, complementary to the cloud, to enable IoT systems in some situations. This document starts by presenting use cases and listing core challenges faced by IoT, that drive the need for IoT edge computing. The first part of this document may therefore help focusing future research efforts on the aspects of IoT edge computing where it is most useful. A second part of this document presents a general system model and a structured overview of the associated research challenges and related work. The structure, based on the system model, is not meant to be restrictive, and exists for the purpose of having a link between individual research areas and where they are applicable in an IoT edge computing system.
+
 # IANA Considerations
 
 This document has no IANA actions.
