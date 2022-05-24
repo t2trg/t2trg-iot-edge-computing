@@ -130,8 +130,8 @@ informative:
       ins: W. de Donato
     - name: Valerio Persico
       ins: V. Persico
-    - name: Antonio Pescapé
-      ins: A. Pescapé
+    - name: Antonio Pescape
+      ins: A. Pescape
     date: 2016-03
   Shi:
     seriesinfo:
@@ -194,7 +194,7 @@ informative:
     rc: Retrieved on 2022-05-24
     target: 'https://campustechnology.com/articles/2015/04/15/internet-of-things-data-to-top-1-6-zettabytes-by-2020.aspx'
   ISO_TR:
-    title: 'Internet of things (IoT) — Edge computing'
+    title: 'Internet of things (IoT) - Edge computing'
     date: '2020'
     seriesinfo:
       ISO/IEC: TR 30164
@@ -595,8 +595,8 @@ informative:
       DOI: 10.1145/3434770.3459737
     title: 'EdgeNet: A Multi-Tenant and Multi-Provider Edge Cloud'
     author:
-    - name: Berat Can Şenel
-      ins: B. Şenel
+    - name: Berat Can Senel
+      ins: B. Senel
     - name: Maxime Mouchet
       ins: M. Mouchet
     - name: Justin Cappos
@@ -1214,6 +1214,10 @@ Tools include simulators, where simplified application logic runs on top of a fo
 Privacy and security are drivers for the adoption of edge computing for IoT ({{sec-priv}}). As discussed in {{sec-dis-auth}}, authentication and trust (between computing nodes, management nodes, end devices) can be challenging as scale, mobility, and heterogeneity increase. The sometimes disconnected nature of edge resources can prevent relying on a third-party authority. Distributed edge computing is exposed to issues with reliability and denial of service attacks. Personal or proprietary IoT data leakage is also a major threat, especially due to the distributed nature of the systems ({{sec-data}}).
 
 However, edge computing also brings solutions in the security space: maintaining privacy by computing sensitive data closer to data generators is a major use case for IoT edge computing. An edge cloud can be used to take actions based on sensitive data, or anonymizing, aggregating or compressing data prior to transmitting to a remote cloud server. Edge computing communication brokering functions can also be used to secure communication between edge and cloud networks.
+
+# IANA Considerations
+
+This document has no IANA actions.
 
 # Acknowledgements
 
