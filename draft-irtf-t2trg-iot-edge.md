@@ -1,9 +1,10 @@
 ---
 stand_alone: true
 ipr: trust200902
-docname: draft-irtf-t2trg-iot-edge-04
+docname: draft-irtf-t2trg-iot-edge-06
 #docname: draft-irtf-t2trg-iot-edge-latest
 cat: info
+stream: IRTF
 pi:
   toc: 'yes'
   symrefs: 'yes'
@@ -85,7 +86,10 @@ informative:
     - ins: K. Ashton
     date: '2009'
     rc: RFID J. vol. 22, no. 7, pp. 97-114
+    target: http://www.itrco.jp/libraries/RFIDjournal-That%20Internet%20of%20Things%20Thing.pdf
   Lin:
+    seriesinfo:
+      DOI: 10.1109/JIOT.2017.2683200
     title: 'A survey on Internet of Things: Architecture, enabling technologies, security and privacy, and applications'
     author:
     - ins: J. Lin
@@ -97,6 +101,8 @@ informative:
     date: '2017'
     rc: IEEE Internet of Things J., vol. 4, no. 5, pp. 1125-1142
   NIST:
+    seriesinfo:
+      DOI: 10.6028/NIST.SP.800-145
     title: The NIST definition of Cloud Computing
     author:
     - ins: P. Mell
@@ -104,6 +110,8 @@ informative:
     date: '2009'
     rc: Natl. Inst. Stand. Technol, vol. 53, no. 6, p. 50
   Botta:
+    seriesinfo:
+      DOI: 10.1016/j.future.2015.09.021
     title: 'Integration of Cloud Computing and Internet of Things: A survey'
     author:
     - ins: A. Botta
@@ -113,6 +121,8 @@ informative:
     date: '2016'
     rc: Future Gener. Comput. Syst., vol. 56, pp. 684-700
   Shi:
+    seriesinfo:
+      DOI: 10.1109/JIOT.2016.2579198
     title: 'Edge computing: vision and challenges'
     author:
     - ins: W. Shi
@@ -123,12 +133,16 @@ informative:
     date: '2016'
     rc: IEEE Internet of Things J., vol. 3, no. 5, pp. 637-646
   Mahadev:
+    seriesinfo:
+      DOI: 10.1109/MC.2017.9
     title: 'The Emergence of Edge Computing'
     author:
     - ins: M. Satyanarayanan
     date: '2017'
     rc: Computer, vol. 50, no. 1, pp. 30-39
   Chiang:
+    seriesinfo:
+      DOI: 10.1109/JIOT.2016.2584538
     title: 'Fog and IoT: An overview of research opportunities'
     author:
     - ins: M. Chiang
@@ -136,6 +150,8 @@ informative:
     date: '2016'
     rc: IEEE Internet Things J., vol. 3, no. 6, pp. 854-864
   Weiner:
+    seriesinfo:
+      DOI: 10.1109/ICC.2014.6883918
     title: 'Design of a low-latency, high-reliability wireless communication system for control applications'
     author:
     - ins: M. Weiner
@@ -149,16 +165,19 @@ informative:
     author:
     - ins: R. Kelly
     date: '2015'
+    rc: Retrieved on 2022-05-24
     target: 'https://campustechnology.com/articles/2015/04/15/internet-of-things-data-to-top-1-6-zettabytes-by-2020.aspx'
   ISO_TR:
-    title: 'Information Technology - Cloud Computing - Edge Computing Landscape'
-    date: '2018'
+    title: 'Internet of things (IoT) — Edge computing'
+    date: '2020'
     seriesinfo:
-      ISO/IEC: TR 23188
+      ISO/IEC: TR 30164
+    target: 'https://www.iso.org/standard/53284.html'
   OpenFog:
     title: 'OpenFog Reference Architecture for Fog Computing'
     date: '2017'
     seriesinfo: OpenFog Consortium
+    target: https://iiconsortium.org/pdf/OpenFog_Reference_Architecture_2_09_17.pdf
   ETSI_MEC_03:
     title: 'Mobile Edge Computing (MEC); Framework and Reference Architecture'
     author:
@@ -178,7 +197,7 @@ informative:
     author:
     - ins: A. Grzywaczewski
     date: '2017'
-    rc: 'NVIDIA Developer Blog'
+    rc: 'NVIDIA Developer Blog, retrieved on 2022-05-24'
     target: 'https://devblogs.nvidia.com/training-self-driving-vehicles-challenge-scale/'
   _60802:
     title: 'Use Cases IEC/IEEE 60802 V1.3'
@@ -187,8 +206,10 @@ informative:
     date: '2018'
     seriesinfo:
       IEC/IEEE: 60802
-    target: 'http://www.ieee802.org/1/files/public/docs2018/60802-industrial-use-cases-0818-v13.pdf'
+    target: 'https://grouper.ieee.org/groups/802/1/files/public/docs2018/60802-industrial-use-cases-0918-v13.pdf'
   ENERGY:
+    seriesinfo:
+      DOI: 10.1016/J.ENERGY.2014.10.025
     title: 'Revealing Household Characteristics from Smart Meter Data'
     author:
     - ins: C. Beckel
@@ -233,6 +254,8 @@ informative:
       ins: T. Lynn
     date: '2019-02-26'
   PseudoDynamicTesting:
+    seriesinfo:
+      DOI: 10.1109/MCOM.2017.1700328
     title: 'Pseudo-Dynamic Testing of Realistic Edge-Fog Cloud Ecosystems'
     author:
     - ins: M. Ficco
@@ -246,9 +269,11 @@ informative:
     author:
     - ins: Linux Foundation
     date: '2020'
-    rc: Portal
+    rc: Portal, retrieved on 2022-05-24
     target: https://www.lfedge.org/projects/eve
   Yousefpour:
+    seriesinfo:
+      DOI: 10.1016/j.sysarc.2019.02.009
     title: 'All one needs to know about fog computing and related edge computing paradigms: A complete survey'
     author:
     - ins: A. Yousefpour
@@ -263,6 +288,8 @@ informative:
     rc: 'Journal of Systems Architecture, vol. 98, pp. 289-330'
   I-D.bernardos-sfc-fog-ran:
   Schafer:
+    seriesinfo:
+      DOI: 10.1109/ICDCSW.2016.22
     title: 'Tasklets: Overcoming Heterogeneity in Distributed Computing Systems'
     author:
     - ins: D. Schafer
@@ -273,6 +300,8 @@ informative:
     date: '2016'
     rc: 'IEEE 36th International Conference on Distributed Computing Systems Workshops (ICDCSW), Nara, pp. 156-161'
   Echeverria:
+    seriesinfo:
+      DOI: 10.1109/SEC.2016.27
     title: 'Establishing trusted identities in disconnected edge environments'
     author:
     - ins: S. Echeverria
@@ -282,6 +311,8 @@ informative:
     date: '2016'
     rc: 'IEEE/ACM Symposium Edge Computing (SEC), pages 51–63.'
   Harchol:
+    seriesinfo:
+      DOI: 10.1145/3229556.3229558
     title: 'Cessna: Resilient edge-computing'
     author:
     - ins: Y. Harchol
@@ -293,6 +324,8 @@ informative:
     rc: 'Workshop on Mobile Edge Communications, pages 1–6. ACM'
   Anglano:
     title: 'A game-theoretic approach to coalition formation in fog provider federations'
+    seriesinfo:
+      DOI: 10.1109/FMEC.2018.8364054
     author:
     - ins: C. Anglano
     - ins: M. Canonico
@@ -303,6 +336,8 @@ informative:
     rc: 'IEEE Third International Conference on Fog and Mobile Edge Computing (FMEC), pages 123–130'
   Jeong:
     title: 'Towards a distributed computing framework for fog'
+    seriesinfo:
+      DOI: 10.1109/FWC.2017.8368528
     author:
     - ins: T. Jeong
     - ins: J. Chung
@@ -311,6 +346,8 @@ informative:
     date: '2017'
     rc: 'IEEE Fog World Congress (FWC), pages 1–6'
   Fan:
+    seriesinfo:
+      DOI: 10.1109/ICC.2017.7996722
     title: 'Cost aware cloudlet placement for big data processing at the edge'
     author:
     - ins: Q. Fan
@@ -318,6 +355,8 @@ informative:
     date: '2017'
     rc: 'IEEE International Conference on Communications (ICC), pages 1–6'
   Yangui:
+    seriesinfo:
+      DOI: 10.1109/LANMAN.2016.7548853
     title: 'A platform as-a-service for hybrid cloud/fog environments'
     author:
     - ins: S. Yangui
@@ -330,6 +369,8 @@ informative:
     date: '2016'
     rc: 'IEEE International Symposium on Local and Metropolitan Area Networks (LANMAN), pages 1–7'
   Li:
+    seriesinfo:
+      DOI: 10.1109/ICDCS.2017.54
     title: 'Mobiqor: Pushing the envelope of mobile edge computing via quality-of-result optimization'
     author:
     - ins: Y. Li
@@ -339,6 +380,8 @@ informative:
     date: '2017'
     rc: 'IEEE 37th International Conference on Distributed Computing Systems (ICDCS), pages 1261–1270'
   Liu:
+    seriesinfo:
+      DOI: 10.1109/TWC.2017.2737015
     title: 'Cache placement in fog-rans: From centralized to distributed algorithms'
     author:
     - ins: J. Liu
@@ -348,6 +391,8 @@ informative:
     date: '2017'
     rc: 'IEEE Transactions on Wireless Communications, 16(11):7039–7051'
   Zhang:
+    seriesinfo:
+      DOI: 10.1109/HotWeb.2016.12
     title: 'Firework: Big data sharing and processing in collaborative edge environment'
     author:
     - ins: Q. Zhang
@@ -358,6 +403,8 @@ informative:
     date: '2016'
     rc: 'Fourth IEEE Workshop on Hot Topics in Web Systems and Technologies (HotWeb), pages 20–25'
   Basudan:
+    seriesinfo:
+      DOI: 10.1109/JIOT.2017.2666783
     title: 'A privacy-preserving vehicular crowdsensing-based road surface condition monitoring system using fog computing'
     author:
     - ins: S. Basudan
@@ -366,6 +413,8 @@ informative:
     date: '2017'
     rc: 'IEEE Internet of Things Journal, 4(3):772–782'
   Renart:
+    seriesinfo:
+      DOI: 10.1109/ICFEC.2017.18
     title: 'Data-driven stream processing at the edge'
     author:
     - ins: E.G. Renart
@@ -374,6 +423,8 @@ informative:
     date: '2017'
     rc: 'IEEE 1st International Conference on Fog and Edge Computing (ICFEC), pages 31–40'
   Zhang2:
+    seriesinfo:
+      DOI: 10.1109/ACCESS.2018.2820162
     title: 'Data Security and Privacy-Preserving in Edge Computing Paradigm: Survey and Open Issues'
     author:
     - ins: J. Zhang
@@ -384,6 +435,8 @@ informative:
     date: '2018'
     rc: 'IEEE Access, vol. 6, pp. 18209-18237'
   Yates:
+    seriesinfo:
+      DOI: 10.1109/TIT.2018.2871079
     title: 'The Age of Information: Real-Time Status Updating by Multiple Sources'
     author:
     - ins: R. D. Yates
@@ -391,6 +444,8 @@ informative:
     date: '2019'
     rc: 'IEEE Transactions on Information Theory, vol. 65, no. 3, pp. 1807-1827'
   Khan:
+    seriesinfo:
+      DOI: 10.1109/JIOT.2020.2987070
     title: 'Edge Computing Enabled Smart Cities: A Comprehensive Survey'
     author:
     - ins: L. U. Khan
@@ -404,6 +459,8 @@ informative:
   RFC7390:
   I-D.ietf-core-oscore-groupcomm:
   Murshed:
+    seriesinfo:
+      DOI: 10.1145/3469029
     title: 'Machine learning at the network edge: A survey'
     author:
     - ins: M. Murshed
@@ -428,6 +485,8 @@ informative:
     rc: 'draft-defoy-t2trg-iot-edge-computing-background-00'
     target: 'http://www.ietf.org/internet-drafts/draft-defoy-t2trg-iot-edge-computing-background-00.txt'
   Senel:
+    seriesinfo:
+      DOI: 10.1145/3434770.3459737
     title: 'EdgeNet: A Multi-Tenant and Multi-Provider Edge Cloud'
     author:
     - ins: B. Senel
@@ -440,6 +499,8 @@ informative:
     rc: '4th International Workshop on Edge Systems, Analytics and Networking'
     target: 'https://dl.acm.org/doi/pdf/10.1145/3434770.3459737'
   Stanciu:
+    seriesinfo:
+      DOI: 10.1145/3434770.3459735
     title: 'Privacy-Preserving Crowd-Monitoring Using Bloom Filters and Homomorphic Encryption'
     author:
     - ins: V. Stanciu
@@ -451,6 +512,8 @@ informative:
     target: 'https://dl.acm.org/doi/10.1145/3434770.3459735'
   Jeffery:
     title: 'Rearchitecting Kubernetes for the Edge'
+    seriesinfo:
+      DOI: 10.1145/3434770.3459730
     author:
     - ins: A. Jeffery
     - ins: H. Howard
@@ -459,6 +522,8 @@ informative:
     rc: '4th International Workshop on Edge Systems, Analytics and Networking'
     target: 'https://dl.acm.org/doi/10.1145/3434770.3459730'
   Nieke:
+    seriesinfo:
+      DOI: 10.1145/3434770.3459731
     title: 'Edgedancer: Secure Mobile WebAssembly Services on the Edge'
     author:
     - ins: M. Nieke
@@ -468,6 +533,8 @@ informative:
     rc: '4th International Workshop on Edge Systems, Analytics and Networking'
     target: 'https://doi.org/10.1145/3434770.3459731'
   Cao:
+    seriesinfo:
+      DOI: 10.1145/3434770.3459741
     title: 'ECaaS: A Management Framework of Edge Container as a Service for Business Workload'
     author:
     - ins: L. Cao
@@ -480,6 +547,8 @@ informative:
     rc: '4th International Workshop on Edge Systems, Analytics and Networking'
     target: 'https://doi.org/10.1145/3434770.3459741'
   Larrea:
+    seriesinfo:
+      DOI: 10.1145/3378679.3394537
     title: 'The serverkernel operating system'
     author:
     - ins: J. Larrea
@@ -488,6 +557,7 @@ informative:
     rc: 'Third ACM International Workshop on Edge Systems, Analytics and Networking'
     target: 'https://core.ac.uk/reader/327124532'
   Mortazavi:
+    # DOI not found for this paper
     title: 'Toward Session Consistency for the Edge'
     author:
     - ins: S. Hossein Mortazavi
@@ -537,6 +607,8 @@ informative:
     rc: 'oneM2M'
     target: 'https://member.onem2m.org/Application/documentapp/downloadLatestRevision/default.aspx?docID=29274'
   Chen:
+    seriesinfo:
+      DOI: 10.1109/MCOM.2018.1701231
     title: 'Edge computing in IoT-based manufacturing'
     author:
     - ins: Baotong Chen
@@ -550,6 +622,8 @@ informative:
     target: 'https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8466364'
   Jones:
     title: 'Characterising the Digital Twin: A systematic literature review'
+    seriesinfo:
+      DOI: 10.1016/j.cirpj.2020.02.002
     author:
     - ins: David Jones
     - ins: Chris Snider
@@ -561,6 +635,8 @@ informative:
     target: 'https://www.sciencedirect.com/science/article/pii/S1755581720300110'
   RFC7252:
   Cloudlets:
+    seriesinfo:
+      DOI: 10.1109/MPRV.2009.82
     title: 'The Case for VM-Based Cloudlets in Mobile Computing'
     author:
     - ins: Mahadev Satyanarayanan
@@ -574,10 +650,7 @@ informative:
 --- abstract
 
 Many IoT applications have requirements that cannot be met by the traditional Cloud (aka cloud computing). These include time sensitivity, data volume, connectivity cost, operation in the face of intermittent services, privacy, and security. As a result, the IoT is driving the Internet toward Edge computing. This document outlines the requirements of the emerging IoT Edge and its challenges. It presents a general model, and major components of the IoT Edge, to provide a common base for future discussions in T2TRG and other IRTF and IETF groups.
-
-<!--
-This document is a product of the Thing-to-Thing Research Group (T2TRG)
--->
+This document is a product of the IRTF Thing-to-Thing Research Group (T2TRG).
 
 --- middle
 
@@ -596,9 +669,10 @@ Our draft describes related background, uses cases, challenges, system models, a
 
 Due to the dynamic nature of the IoT edge computing landscape, this document does not list existing projects in this field. However, {{sec-overview}} presents a high-level overview of the field, based on a limited review of standards, research, open-source and proprietary products in {{I-D-defoy-t2trg-iot-edge-computing-background}}.
 
-<!--
-This document represents the consensus of the Thing-to-Thing Research Group (T2TRG).  It has been reviewed extensively by Research Group (RG) members with expertise in edge computing and IoT.
--->
+This document represents the consensus of the Thing-to-Thing Research Group (T2TRG). 
+It has been reviewed extensively by the Research Group (RG) members who are actively
+involved in the research and development of the technology covered by this document. 
+It is not an IETF product and is not a standard.
 
 # Background
 
@@ -639,7 +713,7 @@ Several standards developing organization (SDO) and industry forums have provide
 
 * ISO defines edge computing as a "form of distributed computing in which significant processing and data storage takes place on nodes which are at the edge of the network" {{ISO_TR}}.
 * ETSI defines multi-access edge computing as a "system which provides an IT service environment and cloud-computing capabilities at the edge of an access network which contains one or more type of access technology, and in close proximity to its users" {{ETSI_MEC_01}}.
-* The Industrial IoT Consortium (IIC, formerly OpenFog) defines fog computing as "a horizontal, system-level architecture that distributes computing, storage, control and networking functions closer to the users along a cloud-to-thing continuum" {{OpenFog}}.
+* The Industry IoT Consortium (IIC, formerly OpenFog) defines fog computing as "a horizontal, system-level architecture that distributes computing, storage, control and networking functions closer to the users along a cloud-to-thing continuum" {{OpenFog}}.
 
 Based on these definitions, we can summarize a general philosophy of edge computing as to distribute the required functions close to users and data, while the difference to classic local systems is the usage of management and orchestration features adopted from cloud computing.
 
@@ -1007,5 +1081,5 @@ However, edge computing also brings solutions in the security space: maintaining
 
 # Acknowledgements
 
-The authors would like to thank Joo-Sang Youn, Akbar Rahman, Michel Roy, Robert Gazda, Rute Sofia, Thomas Fossati, Chonggang Wang, Marie-José Montpetit, Carlos J. Bernardos, Milan Milenkovic, Dale Seed, JaeSeung Song and Roberto Morabito for their valuable comments and suggestions on this document.
+The authors would like to thank Joo-Sang Youn, Akbar Rahman, Michel Roy, Robert Gazda, Rute Sofia, Thomas Fossati, Chonggang Wang, Marie-José Montpetit, Carlos J. Bernardos, Milan Milenkovic, Dale Seed, JaeSeung Song, Roberto Morabito, Carsten Bormann and Ari Keranen for their valuable comments and suggestions on this document.
 
