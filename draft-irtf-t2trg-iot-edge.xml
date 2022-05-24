@@ -472,6 +472,10 @@ A broker can ensure communication reliability, traceability, and in some cases t
       <t>Privacy and security are drivers for the adoption of edge computing for IoT (<xref target="sec-priv"/>). As discussed in <xref target="sec-dis-auth"/>, authentication and trust (between computing nodes, management nodes, end devices) can be challenging as scale, mobility, and heterogeneity increase. The sometimes disconnected nature of edge resources can prevent relying on a third-party authority. Distributed edge computing is exposed to issues with reliability and denial of service attacks. Personal or proprietary IoT data leakage is also a major threat, especially due to the distributed nature of the systems (<xref target="sec-data"/>).</t>
       <t>However, edge computing also brings solutions in the security space: maintaining privacy by computing sensitive data closer to data generators is a major use case for IoT edge computing. An edge cloud can be used to take actions based on sensitive data, or anonymizing, aggregating or compressing data prior to transmitting to a remote cloud server. Edge computing communication brokering functions can also be used to secure communication between edge and cloud networks.</t>
     </section>
+    <section anchor="conclusion">
+      <name>Conclusion</name>
+      <t>IoT edge computing plays an essential role, complementary to the cloud, to enable IoT systems in some situations. This document starts by presenting use cases and listing core challenges faced by IoT, that drive the need for IoT edge computing. This first part of the document may therefore help focusing future research efforts on the aspects of IoT edge computing where it is most useful. A second part of the document presents a general system model and a structured overview of the associated research challenges and related work. The structure, based on the system model, is not meant to be restrictive, and exists for the purpose of having a link between individual research areas and where they are applicable in an IoT edge computing system.</t>
+    </section>
     <section anchor="iana-considerations">
       <name>IANA Considerations</name>
       <t>This document has no IANA actions.</t>
@@ -2204,12 +2208,17 @@ BUWV3VN8N0re6omZWBITnGPlOlPLyZ7uCFm1VjHt2GDWqZh9SPgciG13rfNr
 4YuIK6UBMpglV9CdSdoOyRCcYfXuS4BTPYZeaJHOdHsaJfKoHTheR2Ubcrin
 GF9YMVc6/CL5mSgjAtNcjxS45wxHoOAodhfLbM4t0Lxvx7/xODiPnEs6P7Cb
 R41JTlMJbTTJbUk5WCeHBNSK00zkZJXu2h0n2+Qez7svDOjUWFPksBu8jHsc
-+ziY85bJMZ7Hr4975Mp11O9hwee40r3aXIEfP57c5MVdht9wKBAZULq3SKsJ
-cuwTDZr8JvmhKIagHObJ+6LJ8fipMRhxl2YBooHOb1zYLLksgMsvC5CVdfLC
-fJjCTlxinthVMUvhz9dg7sKYnhdVBWMeJCeLIp/P8Z3vDO7SBeLC4Q9F9b//
-n+QCxPAKpAFwxYkpga6SH7BuUYr18IsZLCn82+Y3BbDhAIxAUHhXFpHOD8Ze
-2QZzqwp8L4+owCp4PIK9oFdiekXyjBJ1WAYel2nyEmsnba7yN+USAQ67wTaR
-ccv2y1zyOuWY12DdaY3/f5U5hivkHgEA
++ziY85axbAGRgrWPWqTZc5xhxo0IE4TRDBaxL/ugVZ0X5uCE+J+gsh7oqrGC
+FI+0Dlo0uMYSdAhv1TLu3ckRUrhSyUqVNvI8Ap1p+q5E7UkGxmVYfVRCQ+Cj
+STXpkZhFB0WdA9w5qQubreBVEzngqNG+Adz7BiwMOlJIar01I6YfvTPi4uQa
+OvgcO9U02YgautOx7r3jkaWp7jv2lMLHvmx1Gp8guog68vQ27SH46pGCiFSf
+deKYxUsOxZSS04iNO2ppFYFBLzwOmQ/uRX1PoX2nmVZNSdF7GNzC3LJjkw7I
+UAIOvPtuuEZa7U/9IZus9wI/IgL6/P56Pz3H9vj1cY9ijelywQcZ073aXYQf
+P57c5MVdhl9wZhAul7Qvkl4rFNkiFjEwsR+KYgjoaJ68L5ocz18bmzK5NAvQ
+jXSAKZBYclmAmrssACzUyQvzYQqi6BITJa+KWQp/vl4USxjT86KqYMyD5GRR
+5PM5vvOdQTF1gYbR8Iei+t//T3IBOGQF6hDUwokpQbAmP2DhrlSr4hczWCf4
+t81vCtBDg+QU1C2gDoT6Pxh7ZRtMLizwvTyiAttAgCqrC3ol5hclzyhTjUHA
+cZkmL7F42Oa6zSnXyHDcGeQUEzAZ8HNJbBauCdad1vj/B75ZS6XlIQEA
 
 -->
 
