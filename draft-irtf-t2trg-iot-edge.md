@@ -89,77 +89,103 @@ informative:
     target: http://www.itrco.jp/libraries/RFIDjournal-That%20Internet%20of%20Things%20Thing.pdf
   Lin:
     seriesinfo:
-      DOI: 10.1109/JIOT.2017.2683200
-    title: 'A survey on Internet of Things: Architecture, enabling technologies, security and privacy, and applications'
+      IEEE Internet of Things Journal: vol. 4, no. 5, pp. 1125-1142
+      DOI: 10.1109/jiot.2017.2683200
+    title: 'A Survey on Internet of Things: Architecture, Enabling Technologies, Security
+      and Privacy, and Applications'
     author:
-    - ins: J. Lin
-    - ins: W. Yu
-    - ins: N. Zhang
-    - ins: X. Yang
-    - ins: H. Zhang
-    - ins: W. Zhao
-    date: '2017'
-    rc: IEEE Internet of Things J., vol. 4, no. 5, pp. 1125-1142
+    - name: Jie Lin
+      ins: J. Lin
+    - name: Wei Yu
+      ins: W. Yu
+    - name: Nan Zhang
+      ins: N. Zhang
+    - name: Xinyu Yang
+      ins: X. Yang
+    - name: Hanlin Zhang
+      ins: H. Zhang
+    - name: Wei Zhao
+      ins: W. Zhao
+    date: 2017-10
   NIST:
     seriesinfo:
-      DOI: 10.6028/NIST.SP.800-145
-    title: The NIST definition of Cloud Computing
+      National Institute of Standards and Technology: report
+      DOI: 10.6028/nist.sp.800-145
+    title: The NIST definition of cloud computing
     author:
-    - ins: P. Mell
-    - ins: T. Grance
-    date: '2009'
-    rc: Natl. Inst. Stand. Technol, vol. 53, no. 6, p. 50
+    - name: P M Mell
+      ins: P. Mell
+    - name: T Grance
+      ins: T. Grance
+    date: '2011'
   Botta:
     seriesinfo:
+      Future Generation Computer Systems: vol. 56, pp. 684-700
       DOI: 10.1016/j.future.2015.09.021
-    title: 'Integration of Cloud Computing and Internet of Things: A survey'
+    title: 'Integration of Cloud computing and Internet of Things: A survey'
     author:
-    - ins: A. Botta
-    - ins: W. Donato
-    - ins: V. Persico
-    - ins: A. Pescape
-    date: '2016'
-    rc: Future Gener. Comput. Syst., vol. 56, pp. 684-700
+    - name: Alessio Botta
+      ins: A. Botta
+    - name: Walter de Donato
+      ins: W. de Donato
+    - name: Valerio Persico
+      ins: V. Persico
+    - name: Antonio Pescapé
+      ins: A. Pescapé
+    date: 2016-03
   Shi:
     seriesinfo:
-      DOI: 10.1109/JIOT.2016.2579198
-    title: 'Edge computing: vision and challenges'
+      IEEE Internet of Things Journal: vol. 3, no. 5, pp. 637-646
+      DOI: 10.1109/jiot.2016.2579198
+    title: 'Edge Computing: Vision and Challenges'
     author:
-    - ins: W. Shi
-    - ins: J. Cao
-    - ins: Q. Zhang
-    - ins: Y. Li
-    - ins: L. Xu
-    date: '2016'
-    rc: IEEE Internet of Things J., vol. 3, no. 5, pp. 637-646
+    - name: Weisong Shi
+      ins: W. Shi
+    - name: Jie Cao
+      ins: J. Cao
+    - name: Quan Zhang
+      ins: Q. Zhang
+    - name: Youhuizi Li
+      ins: Y. Li
+    - name: Lanyu Xu
+      ins: L. Xu
+    date: 2016-10
   Mahadev:
     seriesinfo:
-      DOI: 10.1109/MC.2017.9
-    title: 'The Emergence of Edge Computing'
+      Computer: vol. 50, no. 1, pp. 30-39
+      DOI: 10.1109/mc.2017.9
+    title: The Emergence of Edge Computing
     author:
-    - ins: M. Satyanarayanan
-    date: '2017'
-    rc: Computer, vol. 50, no. 1, pp. 30-39
+    - name: Mahadev Satyanarayanan
+      ins: M. Satyanarayanan
+    date: 2017-01
   Chiang:
     seriesinfo:
-      DOI: 10.1109/JIOT.2016.2584538
-    title: 'Fog and IoT: An overview of research opportunities'
+      IEEE Internet of Things Journal: vol. 3, no. 6, pp. 854-864
+      DOI: 10.1109/jiot.2016.2584538
+    title: 'Fog and IoT: An Overview of Research Opportunities'
     author:
-    - ins: M. Chiang
-    - ins: T. Zhang
-    date: '2016'
-    rc: IEEE Internet Things J., vol. 3, no. 6, pp. 854-864
+    - name: Mung Chiang
+      ins: M. Chiang
+    - name: Tao Zhang
+      ins: T. Zhang
+    date: 2016-12
   Weiner:
     seriesinfo:
-      DOI: 10.1109/ICC.2014.6883918
-    title: 'Design of a low-latency, high-reliability wireless communication system for control applications'
+      2014 IEEE International Conference on Communications: "(ICC)"
+      DOI: 10.1109/icc.2014.6883918
+    title: Design of a low-latency, high-reliability wireless communication system for
+      control applications
     author:
-    - ins: M. Weiner
-    - ins: M. Jorgovanovic
-    - ins: A. Sahai
-    - ins: B. Nikolie
-    date: '2014'
-    rc: IEEE Int. Conf. Commun. (ICC), Sydney, NSW, Australia, pp. 3829-3835
+    - name: Matthew Weiner
+      ins: M. Weiner
+    - name: Milos Jorgovanovic
+      ins: M. Jorgovanovic
+    - name: Anant Sahai
+      ins: A. Sahai
+    - name: Borivoje Nikolie
+      ins: B. Nikolie
+    date: 2014-06
   Kelly:
     title: 'Internet of Things Data to Top 1.6 Zettabytes by 2022'
     author:
@@ -209,15 +235,19 @@ informative:
     target: 'https://grouper.ieee.org/groups/802/1/files/public/docs2018/60802-industrial-use-cases-0918-v13.pdf'
   ENERGY:
     seriesinfo:
-      DOI: 10.1016/J.ENERGY.2014.10.025
-    title: 'Revealing Household Characteristics from Smart Meter Data'
+      Energy: vol. 78, pp. 397-410
+      DOI: 10.1016/j.energy.2014.10.025
+    title: Revealing household characteristics from smart meter data
     author:
-    - ins: C. Beckel
-    - ins: L. Sadamori
-    - ins: T. Staake
-    - ins: S. Santini
-    date: '2014'
-    rc: 'Energy, vol. 78, pp. 397-410'
+    - name: Christian Beckel
+      ins: C. Beckel
+    - name: Leyna Sadamori
+      ins: L. Sadamori
+    - name: Thorsten Staake
+      ins: T. Staake
+    - name: Silvia Santini
+      ins: S. Santini
+    date: 2014-12
   ETSI_Sandbox:
     title: 'Multi-access Edge Computing (MEC) MEC Sandbox Work Item'
     date: '2020'
@@ -230,7 +260,7 @@ informative:
     target: 'https://github.com/InterDigitalInc/AdvantEDGE'
   SimulatingFog: # DOI.10.3390/fi11030055
     seriesinfo:
-      MDPI Future Internet: vol. 11, no. 3, pp. 55
+      Future Internet: vol. 11, no. 3, pp. 55
       DOI: 10.3390/fi11030055
     title: 'Simulating Fog and Edge Computing Scenarios: An Overview and Research Challenges'
     author:
@@ -255,15 +285,19 @@ informative:
     date: '2019-02-26'
   PseudoDynamicTesting:
     seriesinfo:
-      DOI: 10.1109/MCOM.2017.1700328
-    title: 'Pseudo-Dynamic Testing of Realistic Edge-Fog Cloud Ecosystems'
+      IEEE Communications Magazine: vol. 55, no. 11, pp. 98-104
+      DOI: 10.1109/mcom.2017.1700328
+    title: Pseudo-Dynamic Testing of Realistic Edge-Fog Cloud Ecosystems
     author:
-    - ins: M. Ficco
-    - ins: C. Esposito
-    - ins: Y. Xiang
-    - ins: F. Palmieri
+    - name: Massimo Ficco
+      ins: M. Ficco
+    - name: Christian Esposito
+      ins: C. Esposito
+    - name: Yang Xiang
+      ins: Y. Xiang
+    - name: Francesco Palmieri
+      ins: F. Palmieri
     date: 2017-11
-    rc: 'IEEE Communications Magazine'
   LFEDGE-EVE:
     title: 'Project Edge Virtualization Engine (EVE)'
     author:
@@ -273,289 +307,379 @@ informative:
     target: https://www.lfedge.org/projects/eve
   Yousefpour:
     seriesinfo:
+      Journal of Systems Architecture: vol. 98, pp. 289-330
       DOI: 10.1016/j.sysarc.2019.02.009
-    title: 'All one needs to know about fog computing and related edge computing paradigms: A complete survey'
+    title: 'All one needs to know about fog computing and related edge computing paradigms:
+      A complete survey'
     author:
-    - ins: A. Yousefpour
-    - ins: C. Fung
-    - ins: T. Nguyen
-    - ins: K. Kadiyala
-    - ins: F. Jalali
-    - ins: A. Niakanlahiji
-    - ins: J. Kong
-    - ins: J.P. Jue
-    date: '2019'
-    rc: 'Journal of Systems Architecture, vol. 98, pp. 289-330'
+    - name: Ashkan Yousefpour
+      ins: A. Yousefpour
+    - name: Caleb Fung
+      ins: C. Fung
+    - name: Tam Nguyen
+      ins: T. Nguyen
+    - name: Krishna Kadiyala
+      ins: K. Kadiyala
+    - name: Fatemeh Jalali
+      ins: F. Jalali
+    - name: Amirreza Niakanlahiji
+      ins: A. Niakanlahiji
+    - name: Jian Kong
+      ins: J. Kong
+    - name: Jason P. Jue
+      ins: J. Jue
+    date: 2019-09
   I-D.bernardos-sfc-fog-ran:
   Schafer:
     seriesinfo:
-      DOI: 10.1109/ICDCSW.2016.22
+      2016 IEEE 36th International Conference on Distributed Computing Systems Workshops: "(ICDCSW)"
+      DOI: 10.1109/icdcsw.2016.22
     title: 'Tasklets: Overcoming Heterogeneity in Distributed Computing Systems'
     author:
-    - ins: D. Schafer
-    - ins: J. Edinger
-    - ins: S. VanSyckel
-    - ins: J. M. Paluska
-    - ins: C. Becker
-    date: '2016'
-    rc: 'IEEE 36th International Conference on Distributed Computing Systems Workshops (ICDCSW), Nara, pp. 156-161'
+    - name: Dominik Schafer
+      ins: D. Schafer
+    - name: Janick Edinger
+      ins: J. Edinger
+    - name: Sebastian VanSyckel
+      ins: S. VanSyckel
+    - name: Justin Mazzola Paluska
+      ins: J. Paluska
+    - name: Christian Becker
+      ins: C. Becker
+    date: 2016-06
   Echeverria:
     seriesinfo:
-      DOI: 10.1109/SEC.2016.27
-    title: 'Establishing trusted identities in disconnected edge environments'
+      2016 IEEE/ACM Symposium on Edge Computing: "(SEC)"
+      DOI: 10.1109/sec.2016.27
+    title: Establishing Trusted Identities in Disconnected Edge Environments
     author:
-    - ins: S. Echeverria
-    - ins: D. Klinedinst
-    - ins: K. Williams
-    - ins: G. A Lewis
-    date: '2016'
-    rc: 'IEEE/ACM Symposium Edge Computing (SEC), pages 51–63.'
+    - name: Sebastian Echeverria
+      ins: S. Echeverria
+    - name: Dan Klinedinst
+      ins: D. Klinedinst
+    - name: Keegan Williams
+      ins: K. Williams
+    - name: Grace A. Lewis
+      ins: G. Lewis
+    date: 2016-10
   Harchol:
     seriesinfo:
+      Proceedings of the 2018 Workshop on Mobile Edge: Communications
       DOI: 10.1145/3229556.3229558
-    title: 'Cessna: Resilient edge-computing'
+    title: 'CESSNA: Resilient Edge-Computing'
     author:
-    - ins: Y. Harchol
-    - ins: A. Mushtaq
-    - ins: J. McCauley
-    - ins: A. Panda
-    - ins: S. Shenker
-    date: '2018'
-    rc: 'Workshop on Mobile Edge Communications, pages 1–6. ACM'
+    - name: Yotam Harchol
+      ins: Y. Harchol
+    - name: Aisha Mushtaq
+      ins: A. Mushtaq
+    - name: James McCauley
+      ins: J. McCauley
+    - name: Aurojit Panda
+      ins: A. Panda
+    - name: Scott Shenker
+      ins: S. Shenker
+    date: '2018-08-07'
   Anglano:
-    title: 'A game-theoretic approach to coalition formation in fog provider federations'
     seriesinfo:
-      DOI: 10.1109/FMEC.2018.8364054
+      2018 Third International Conference on Fog and Mobile Edge Computing: "(FMEC)"
+      DOI: 10.1109/fmec.2018.8364054
+    title: A game-theoretic approach to coalition formation in fog provider federations
     author:
-    - ins: C. Anglano
-    - ins: M. Canonico
-    - ins: P. Castagno
-    - ins: M. Guazzone
-    - ins: M. Sereno
-    date: '2018'
-    rc: 'IEEE Third International Conference on Fog and Mobile Edge Computing (FMEC), pages 123–130'
+    - name: Cosimo Anglano
+      ins: C. Anglano
+    - name: Massimo Canonico
+      ins: M. Canonico
+    - name: Paolo Castagno
+      ins: P. Castagno
+    - name: Marco Guazzone
+      ins: M. Guazzone
+    - name: Matteo Sereno
+      ins: M. Sereno
+    date: 2018-04
   Jeong:
-    title: 'Towards a distributed computing framework for fog'
     seriesinfo:
-      DOI: 10.1109/FWC.2017.8368528
+      2017 IEEE Fog World Congress: "(FWC)"
+      DOI: 10.1109/fwc.2017.8368528
+    title: Towards a distributed computing framework for Fog
     author:
-    - ins: T. Jeong
-    - ins: J. Chung
-    - ins: J.W. Hong
-    - ins: S. Ha
-    date: '2017'
-    rc: 'IEEE Fog World Congress (FWC), pages 1–6'
+    - name: Taeyeol Jeong
+      ins: T. Jeong
+    - name: Jaeyoon Chung
+      ins: J. Chung
+    - name: James Won-Ki Hong
+      ins: J. Hong
+    - name: Sangtae Ha
+      ins: S. Ha
+    date: 2017-10
   Fan:
     seriesinfo:
-      DOI: 10.1109/ICC.2017.7996722
-    title: 'Cost aware cloudlet placement for big data processing at the edge'
+      2017 IEEE International Conference on Communications: "(ICC)"
+      DOI: 10.1109/icc.2017.7996722
+    title: Cost Aware cloudlet Placement for big data processing at the edge
     author:
-    - ins: Q. Fan
-    - ins: N. Ansari
-    date: '2017'
-    rc: 'IEEE International Conference on Communications (ICC), pages 1–6'
+    - name: Qiang Fan
+      ins: Q. Fan
+    - name: Nirwan Ansari
+      ins: N. Ansari
+    date: 2017-05
   Yangui:
     seriesinfo:
-      DOI: 10.1109/LANMAN.2016.7548853
-    title: 'A platform as-a-service for hybrid cloud/fog environments'
+      2016 IEEE International Symposium on Local and Metropolitan Area Networks: "(LANMAN)"
+      DOI: 10.1109/lanman.2016.7548853
+    title: A platform as-a-service for hybrid cloud/fog environments
     author:
-    - ins: S. Yangui
-    - ins: P. Ravindran
-    - ins: O. Bibani
-    - ins: R. H Glitho
-    - ins: N. Ben Hadj-Alouane
-    - ins: M.J. Morrow
-    - ins: P.A. Polakos
-    date: '2016'
-    rc: 'IEEE International Symposium on Local and Metropolitan Area Networks (LANMAN), pages 1–7'
+    - name: Sami Yangui
+      ins: S. Yangui
+    - name: Pradeep Ravindran
+      ins: P. Ravindran
+    - name: Ons Bibani
+      ins: O. Bibani
+    - name: Roch H. Glitho
+      ins: R. Glitho
+    - name: Nejib Ben Hadj-Alouane
+      ins: N. Ben Hadj-Alouane
+    - name: Monique J. Morrow
+      ins: M. Morrow
+    - name: Paul A. Polakos
+      ins: P. Polakos
+    date: 2016-06
   Li:
     seriesinfo:
-      DOI: 10.1109/ICDCS.2017.54
-    title: 'Mobiqor: Pushing the envelope of mobile edge computing via quality-of-result optimization'
+      2017 IEEE 37th International Conference on Distributed Computing Systems: "(ICDCS)"
+      DOI: 10.1109/icdcs.2017.54
+    title: 'MobiQoR: Pushing the Envelope of Mobile Edge Computing Via Quality-of-Result
+      Optimization'
     author:
-    - ins: Y. Li
-    - ins: Y. Chen
-    - ins: T. Lan
-    - ins: G. Venkataramani
-    date: '2017'
-    rc: 'IEEE 37th International Conference on Distributed Computing Systems (ICDCS), pages 1261–1270'
+    - name: Yongbo Li
+      ins: Y. Li
+    - name: Yurong Chen
+      ins: Y. Chen
+    - name: Tian Lan
+      ins: T. Lan
+    - name: Guru Venkataramani
+      ins: G. Venkataramani
+    date: 2017-06
   Liu:
     seriesinfo:
-      DOI: 10.1109/TWC.2017.2737015
-    title: 'Cache placement in fog-rans: From centralized to distributed algorithms'
+      IEEE Transactions on Wireless Communications: vol. 16, no. 11, pp. 7039-7051
+      DOI: 10.1109/twc.2017.2737015
+    title: 'Cache Placement in Fog-RANs: From Centralized to Distributed Algorithms'
     author:
-    - ins: J. Liu
-    - ins: B. Bai
-    - ins: J. Zhang
-    - ins: K.B. Letaief
-    date: '2017'
-    rc: 'IEEE Transactions on Wireless Communications, 16(11):7039–7051'
+    - name: Juan Liu
+      ins: J. Liu
+    - name: Bo Bai
+      ins: B. Bai
+    - name: Jun Zhang
+      ins: J. Zhang
+    - name: Khaled B. Letaief
+      ins: K. Letaief
+    date: 2017-11
   Zhang:
     seriesinfo:
-      DOI: 10.1109/HotWeb.2016.12
-    title: 'Firework: Big data sharing and processing in collaborative edge environment'
+      2016 Fourth IEEE Workshop on Hot Topics in Web Systems and Technologies: "(HotWeb)"
+      DOI: 10.1109/hotweb.2016.12
+    title: 'Firework: Big Data Sharing and Processing in Collaborative Edge Environment'
     author:
-    - ins: Q. Zhang
-    - ins: X. Zhang
-    - ins: Q. Zhang
-    - ins: W. Shi
-    - ins: H. Zhong
-    date: '2016'
-    rc: 'Fourth IEEE Workshop on Hot Topics in Web Systems and Technologies (HotWeb), pages 20–25'
+    - name: Quan Zhang
+      ins: Q. Zhang
+    - name: Xiaohong Zhang
+      ins: X. Zhang
+    - name: Qingyang Zhang
+      ins: Q. Zhang
+    - name: Weisong Shi
+      ins: W. Shi
+    - name: Hong Zhong
+      ins: H. Zhong
+    date: 2016-10
   Basudan:
     seriesinfo:
-      DOI: 10.1109/JIOT.2017.2666783
-    title: 'A privacy-preserving vehicular crowdsensing-based road surface condition monitoring system using fog computing'
+      IEEE Internet of Things Journal: vol. 4, no. 3, pp. 772-782
+      DOI: 10.1109/jiot.2017.2666783
+    title: A Privacy-Preserving Vehicular Crowdsensing-Based Road Surface Condition
+      Monitoring System Using Fog Computing
     author:
-    - ins: S. Basudan
-    - ins: X. Lin
-    - ins: K. Sankaranarayanan
-    date: '2017'
-    rc: 'IEEE Internet of Things Journal, 4(3):772–782'
+    - name: Sultan Basudan
+      ins: S. Basudan
+    - name: Xiaodong Lin
+      ins: X. Lin
+    - name: Karthik Sankaranarayanan
+      ins: K. Sankaranarayanan
+    date: 2017-06
   Renart:
     seriesinfo:
-      DOI: 10.1109/ICFEC.2017.18
-    title: 'Data-driven stream processing at the edge'
+      2017 IEEE 1st International Conference on Fog and Edge Computing: "(ICFEC)"
+      DOI: 10.1109/icfec.2017.18
+    title: Data-Driven Stream Processing at the Edge
     author:
-    - ins: E.G. Renart
-    - ins: J. Diaz-Montes
-    - ins: M. Parashar
-    date: '2017'
-    rc: 'IEEE 1st International Conference on Fog and Edge Computing (ICFEC), pages 31–40'
+    - name: Eduard Gibert Renart
+      ins: E. Renart
+    - name: Javier Diaz-Montes
+      ins: J. Diaz-Montes
+    - name: Manish Parashar
+      ins: M. Parashar
+    date: 2017-05
   Zhang2:
     seriesinfo:
-      DOI: 10.1109/ACCESS.2018.2820162
-    title: 'Data Security and Privacy-Preserving in Edge Computing Paradigm: Survey and Open Issues'
+      IEEE Access: vol. 6, pp. 18209-18237
+      DOI: 10.1109/access.2018.2820162
+    title: 'Data Security and Privacy-Preserving in Edge Computing Paradigm: Survey
+      and Open Issues'
     author:
-    - ins: J. Zhang
-    - ins: B. Chen
-    - ins: Y. Zhao
-    - ins: X. Cheng
-    - ins: F. Hu
+    - name: Jiale Zhang
+      ins: J. Zhang
+    - name: Bing Chen
+      ins: B. Chen
+    - name: Yanchao Zhao
+      ins: Y. Zhao
+    - name: Xiang Cheng
+      ins: X. Cheng
+    - name: Feng Hu
+      ins: F. Hu
     date: '2018'
-    rc: 'IEEE Access, vol. 6, pp. 18209-18237'
   Yates:
     seriesinfo:
-      DOI: 10.1109/TIT.2018.2871079
+      IEEE Transactions on Information Theory: vol. 65, no. 3, pp. 1807-1827
+      DOI: 10.1109/tit.2018.2871079
     title: 'The Age of Information: Real-Time Status Updating by Multiple Sources'
     author:
-    - ins: R. D. Yates
-    - ins: S. K. Kaul
-    date: '2019'
-    rc: 'IEEE Transactions on Information Theory, vol. 65, no. 3, pp. 1807-1827'
+    - name: Roy D. Yates
+      ins: R. Yates
+    - name: Sanjit K. Kaul
+      ins: S. Kaul
+    date: 2019-03
   Khan:
     seriesinfo:
-      DOI: 10.1109/JIOT.2020.2987070
-    title: 'Edge Computing Enabled Smart Cities: A Comprehensive Survey'
+      IEEE Internet of Things Journal: vol. 7, no. 10, pp. 10200-10232
+      DOI: 10.1109/jiot.2020.2987070
+    title: 'Edge-Computing-Enabled Smart Cities: A Comprehensive Survey'
     author:
-    - ins: L. U. Khan
-    - ins: I. Yaqoob
-    - ins: N. H. Tran
-    - ins: S. M. A. Kazmi
-    - ins: T. N. Dang
-    - ins: C. S. Hong
-    date: '2019'
-    rc: 'arXiv:1909.08747'
+    - name: Latif U. Khan
+      ins: L. Khan
+    - name: Ibrar Yaqoob
+      ins: I. Yaqoob
+    - name: Nguyen H. Tran
+      ins: N. Tran
+    - name: S. M. Ahsan Kazmi
+      ins: S. Kazmi
+    - name: Tri Nguyen Dang
+      ins: T. Dang
+    - name: Choong Seon Hong
+      ins: C. Hong
+    date: 2020-10
   RFC7390:
   I-D.ietf-core-oscore-groupcomm:
   Murshed:
     seriesinfo:
+      ACM Computing Surveys: vol. 54, no. 8, pp. 1-37
       DOI: 10.1145/3469029
-    title: 'Machine learning at the network edge: A survey'
+    title: 'Machine Learning at the Network Edge: A Survey'
     author:
-    - ins: M. Murshed
-    - ins: C. Murphy
-    - ins: D. Hou
-    - ins: N. Khan
-    - ins: G. Ananthanarayanan
-    - ins: F. Hussain
-    date: '2019'
-    rc: 'arXiv:1908.00080'
+    - name: M. G. Sarwar Murshed
+      ins: M. Murshed
+    - name: Christopher Murphy
+      ins: C. Murphy
+    - name: Daqing Hou
+      ins: D. Hou
+    - name: Nazar Khan
+      ins: N. Khan
+    - name: Ganesh Ananthanarayanan
+      ins: G. Ananthanarayanan
+    - name: Faraz Hussain
+      ins: F. Hussain
+    date: '2022-11-30'
   I-D.sarathchandra-coin-appcentres:
-  I-D-defoy-t2trg-iot-edge-computing-background:
-    title: 'Machine learning at the network edge: A survey'
-    author:
-    - ins: X. de Foy
-    - ins: J. Hong
-    - ins: Y. Hong
-    - ins: M. Kovatsch
-    - ins: E. Schooler
-    - ins: D. Kutscher
-    date: '2020'
-    rc: 'draft-defoy-t2trg-iot-edge-computing-background-00'
-    target: 'http://www.ietf.org/internet-drafts/draft-defoy-t2trg-iot-edge-computing-background-00.txt'
+  I-D.defoy-t2trg-iot-edge-computing-background:
   Senel:
     seriesinfo:
+      Proceedings of the 4th International Workshop on Edge Systems, Analytics and: Networking
       DOI: 10.1145/3434770.3459737
     title: 'EdgeNet: A Multi-Tenant and Multi-Provider Edge Cloud'
     author:
-    - ins: B. Senel
-    - ins: M. Mouchet
-    - ins: J. Cappos
-    - ins: O. Fourmaux
-    - ins: T. Friedman
-    - ins: R. McGeer
-    date: '2021'
-    rc: '4th International Workshop on Edge Systems, Analytics and Networking'
-    target: 'https://dl.acm.org/doi/pdf/10.1145/3434770.3459737'
+    - name: Berat Can Şenel
+      ins: B. Şenel
+    - name: Maxime Mouchet
+      ins: M. Mouchet
+    - name: Justin Cappos
+      ins: J. Cappos
+    - name: Olivier Fourmaux
+      ins: O. Fourmaux
+    - name: Timur Friedman
+      ins: T. Friedman
+    - name: Rick McGeer
+      ins: R. McGeer
+    date: '2021-04-26'
   Stanciu:
     seriesinfo:
+      Proceedings of the 4th International Workshop on Edge Systems, Analytics and: Networking
       DOI: 10.1145/3434770.3459735
-    title: 'Privacy-Preserving Crowd-Monitoring Using Bloom Filters and Homomorphic Encryption'
+    title: Privacy-Preserving Crowd-Monitoring Using Bloom Filters and Homomorphic Encryption
     author:
-    - ins: V. Stanciu
-    - ins: M. van Steen
-    - ins: C. Dobre
-    - ins: A. Peter
-    date: '2021'
-    rc: '4th International Workshop on Edge Systems, Analytics and Networking'
-    target: 'https://dl.acm.org/doi/10.1145/3434770.3459735'
+    - name: Valeriu-Daniel Stanciu
+      ins: V. Stanciu
+    - name: Maarten van Steen
+      ins: M. Steen
+    - name: Ciprian Dobre
+      ins: C. Dobre
+    - name: Andreas Peter
+      ins: A. Peter
+    date: '2021-04-26'
   Jeffery:
-    title: 'Rearchitecting Kubernetes for the Edge'
     seriesinfo:
+      Proceedings of the 4th International Workshop on Edge Systems, Analytics and: Networking
       DOI: 10.1145/3434770.3459730
+    title: Rearchitecting Kubernetes for the Edge
     author:
-    - ins: A. Jeffery
-    - ins: H. Howard
-    - ins: R. Mortier
-    date: '2021'
-    rc: '4th International Workshop on Edge Systems, Analytics and Networking'
-    target: 'https://dl.acm.org/doi/10.1145/3434770.3459730'
+    - name: Andrew Jeffery
+      ins: A. Jeffery
+    - name: Heidi Howard
+      ins: H. Howard
+    - name: Richard Mortier
+      ins: R. Mortier
+    date: '2021-04-26'
   Nieke:
     seriesinfo:
+      Proceedings of the 4th International Workshop on Edge Systems, Analytics and: Networking
       DOI: 10.1145/3434770.3459731
     title: 'Edgedancer: Secure Mobile WebAssembly Services on the Edge'
     author:
-    - ins: M. Nieke
-    - ins: L. Almstedt
-    - ins: R. Kapitza
-    date: '2021'
-    rc: '4th International Workshop on Edge Systems, Analytics and Networking'
-    target: 'https://doi.org/10.1145/3434770.3459731'
+    - name: Manuel Nieke
+      ins: M. Nieke
+    - name: Lennart Almstedt
+      ins: L. Almstedt
+    - name: Rüdiger Kapitza
+      ins: R. Kapitza
+    date: '2021-04-26'
   Cao:
     seriesinfo:
+      Proceedings of the 4th International Workshop on Edge Systems, Analytics and: Networking
       DOI: 10.1145/3434770.3459741
-    title: 'ECaaS: A Management Framework of Edge Container as a Service for Business Workload'
+    title: 'eCaaS: A Management Framework of Edge Container as a Service for Business
+      Workload'
     author:
-    - ins: L. Cao
-    - ins: A. Merican
-    - ins: D. Zad Tootaghaj
-    - ins: F. Ahmed
-    - ins: P. Sharma
-    - ins: V. Saxena
-    date: '2021'
-    rc: '4th International Workshop on Edge Systems, Analytics and Networking'
-    target: 'https://doi.org/10.1145/3434770.3459741'
+    - name: Lianjie Cao
+      ins: L. Cao
+    - name: Anu Merican
+      ins: A. Merican
+    - name: Diman Zad Tootaghaj
+      ins: D. Tootaghaj
+    - name: Faraz Ahmed
+      ins: F. Ahmed
+    - name: Puneet Sharma
+      ins: P. Sharma
+    - name: Vinay Saxena
+      ins: V. Saxena
+    date: '2021-04-26'
   Larrea:
     seriesinfo:
+      Proceedings of the Third ACM International Workshop on Edge Systems, Analytics and: Networking
       DOI: 10.1145/3378679.3394537
-    title: 'The serverkernel operating system'
+    title: The serverkernel operating system
     author:
-    - ins: J. Larrea
-    - ins: A. Barbalace
-    date: '2020'
-    rc: 'Third ACM International Workshop on Edge Systems, Analytics and Networking'
-    target: 'https://core.ac.uk/reader/327124532'
+    - name: Jon Larrea
+      ins: J. Larrea
+    - name: Antonio Barbalace
+      ins: A. Barbalace
+    date: '2020-04-27'
   Mortazavi:
     # DOI not found for this paper
     title: 'Toward Session Consistency for the Edge'
@@ -608,44 +732,56 @@ informative:
     target: 'https://member.onem2m.org/Application/documentapp/downloadLatestRevision/default.aspx?docID=29274'
   Chen:
     seriesinfo:
-      DOI: 10.1109/MCOM.2018.1701231
-    title: 'Edge computing in IoT-based manufacturing'
+      IEEE Communications Magazine: vol. 56, no. 9, pp. 103-109
+      DOI: 10.1109/mcom.2018.1701231
+    title: Edge Computing in IoT-Based Manufacturing
     author:
-    - ins: Baotong Chen
-    - ins: Jiafu Wan
-    - ins: Antonio Celesti
-    - ins: Di Li
-    - ins: Haider Abbas
-    - ins: Qin Zhang
-    date: 2018
-    rc: 'IEEE Communications Magazine'
-    target: 'https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8466364'
+    - name: Baotong Chen
+      ins: B. Chen
+    - name: Jiafu Wan
+      ins: J. Wan
+    - name: Antonio Celesti
+      ins: A. Celesti
+    - name: Di Li
+      ins: D. Li
+    - name: Haider Abbas
+      ins: H. Abbas
+    - name: Qin Zhang
+      ins: Q. Zhang
+    date: 2018-09
   Jones:
-    title: 'Characterising the Digital Twin: A systematic literature review'
     seriesinfo:
+      CIRP Journal of Manufacturing Science and Technology: vol. 29, pp. 36-52
       DOI: 10.1016/j.cirpj.2020.02.002
+    title: 'Characterising the Digital Twin: A systematic literature review'
     author:
-    - ins: David Jones
-    - ins: Chris Snider
-    - ins: Aydin Nassehi
-    - ins: Jason Yon
-    - ins: Ben Hicks
-    date: 2020
-    rc: 'CIRP Journal of Manufacturing Science and Technology'
-    target: 'https://www.sciencedirect.com/science/article/pii/S1755581720300110'
+    - name: David Jones
+      ins: D. Jones
+    - name: Chris Snider
+      ins: C. Snider
+    - name: Aydin Nassehi
+      ins: A. Nassehi
+    - name: Jason Yon
+      ins: J. Yon
+    - name: Ben Hicks
+      ins: B. Hicks
+    date: 2020-05
   RFC7252:
   Cloudlets:
     seriesinfo:
-      DOI: 10.1109/MPRV.2009.82
-    title: 'The Case for VM-Based Cloudlets in Mobile Computing'
+      IEEE Pervasive Computing: vol. 8, no. 4, pp. 14-23
+      DOI: 10.1109/mprv.2009.82
+    title: The Case for VM-Based Cloudlets in Mobile Computing
     author:
-    - ins: Mahadev Satyanarayanan
-    - ins: Paramvir Bahl
-    - ins: Ramón Cáceres
-    - ins: Nigel Davies
-    date: 2009
-    rc: 'IEEE Pervasive Computing'
-    target: 'https://ieeexplore.ieee.org/document/5280678'
+    - name: M. Satyanarayanan
+      ins: M. Satyanarayanan
+    - name: P. Bahl
+      ins: P. Bahl
+    - name: R. Caceres
+      ins: R. Caceres
+    - name: N. Davies
+      ins: N. Davies
+    date: 2009-10
 
 --- abstract
 
@@ -667,7 +803,7 @@ These requirements suggest a more flexible way to distribute computing (and stor
 We will refer to this integration of edge computing and IoT as "IoT edge computing".
 Our draft describes related background, uses cases, challenges, system models, and functional components.
 
-Due to the dynamic nature of the IoT edge computing landscape, this document does not list existing projects in this field. However, {{sec-overview}} presents a high-level overview of the field, based on a limited review of standards, research, open-source and proprietary products in {{I-D-defoy-t2trg-iot-edge-computing-background}}.
+Due to the dynamic nature of the IoT edge computing landscape, this document does not list existing projects in this field. However, {{sec-overview}} presents a high-level overview of the field, based on a limited review of standards, research, open-source and proprietary products in {{I-D.defoy-t2trg-iot-edge-computing-background}}.
 
 This document represents the consensus of the Thing-to-Thing Research Group (T2TRG). 
 It has been reviewed extensively by the Research Group (RG) members who are actively
@@ -821,7 +957,7 @@ In this section, we first look at the current state of IoT edge computing {{sec-
 
 ## Overview of IoT Edge Computing Today {#sec-overview}
 
-This section provides an overview of today's IoT edge computing field, based on a limited review of standards, research, open-source and proprietary products in {{I-D-defoy-t2trg-iot-edge-computing-background}}.
+This section provides an overview of today's IoT edge computing field, based on a limited review of standards, research, open-source and proprietary products in {{I-D.defoy-t2trg-iot-edge-computing-background}}.
 
 IoT gateways, both open-source (such as EdgeX Foundry or Home Edge) and proprietary (such as Amazon Greengrass, Microsoft Azure IoT Edge, Google Cloud IoT Core, and gateways from Bosh, Siemens), represent a common class of IoT edge computing products, where the gateway is providing a local service on customer premises and is remotely managed through a cloud service. IoT communication protocols are typically used between IoT devices and the gateway, including CoAP, MQTT, and many specialized IoT protocols (such as OPC UA and DDS in the Industrial IoT space), while the gateway communicates with the distant cloud typically using HTTPS. Virtualization platforms enable the deployment of virtual edge computing functions (using VMs, application containers, etc.), including IoT gateway software, on servers in the mobile network infrastructure (at base stations and concentration points), in edge data centers (in central offices) or regional data centers located near central offices. End devices are envisioned to become computing devices in forward-looking projects, but they are not commonly used as such today.
 
