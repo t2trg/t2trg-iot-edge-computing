@@ -202,7 +202,7 @@ informative:
   OpenFog:
     title: 'OpenFog Reference Architecture for Fog Computing'
     date: '2017'
-    seriesinfo: OpenFog Consortium
+    rc: OpenFog Consortium
     target: https://iiconsortium.org/pdf/OpenFog_Reference_Architecture_2_09_17.pdf
   ETSI_MEC_03:
     title: 'Mobile Edge Computing (MEC); Framework and Reference Architecture'
@@ -819,7 +819,7 @@ the concept of IoT has evolved. It now reflects a vision of connecting the physi
 Recently, the term has become more literal by actually connecting things to the Internet and converging on Internet and Web technology.
 
 Things are usually embedded systems of various kinds, such as home appliances, mobile equipment, wearable devices, etc.
-Things are widely distributed, but typically have limited storage and processing power, which raise concerns regarding reliability, performance, energy consumption, security, and privacy  {{Lin}}.
+Things are widely distributed, but typically have limited storage and processing power, which raise concerns regarding reliability, performance, energy consumption, security, and privacy {{Lin}}.
 This limited storage and processing power leads to complementing IoT with cloud computing.
 
 ## Cloud Computing
@@ -983,7 +983,7 @@ In many IoT use cases, a typical network usage pattern is high volume uplink wit
 
 Edge computing is expected to play an important role in deploying new IoT services integrated with Big Data and AI, enabled by flexible in-network computing platforms. Although there are lots of approaches to edge computing, we attempt to lay out a general model and list associated logical functions in this section. In practice, this model can map to different architectures, such as:
 
-- A single IoT gateway, or a hierarchy of IoT gateways, typically connected to the cloud (e.g., to extend the traditional cloud-based management of IoT devices and data to the edge). A common role of an IoT Gateway is to provide access to a heterogeneous set of IoT devices/sensors; handle IoT data; and deliver IoT data to its final destination in a cloud network. Whereas an IoT gateway needs  interactions with the cloud, it can also operate independently in a disconnected mode.
+- A single IoT gateway, or a hierarchy of IoT gateways, typically connected to the cloud (e.g., to extend the traditional cloud-based management of IoT devices and data to the edge). A common role of an IoT Gateway is to provide access to a heterogeneous set of IoT devices/sensors; handle IoT data; and deliver IoT data to its final destination in a cloud network. Whereas an IoT gateway needs interactions with the cloud, it can also operate independently in a disconnected mode.
 
 - A set of distributed computing nodes, e.g., embedded in switches, routers, edge cloud servers, or mobile devices. Some IoT end devices can have enough computing capabilities to participate in such distributed systems due to advances in hardware technology. In this model, edge computing nodes can collaborate to share their resources.
 
@@ -1225,5 +1225,5 @@ This document has no IANA actions.
 
 # Acknowledgements
 
-The authors would like to thank Joo-Sang Youn, Akbar Rahman, Michel Roy, Robert Gazda, Rute Sofia, Thomas Fossati, Chonggang Wang, Marie-José Montpetit, Carlos J. Bernardos, Milan Milenkovic, Dale Seed, JaeSeung Song, Roberto Morabito, Carsten Bormann and Ari Keranen for their valuable comments and suggestions on this document.
+The authors would like to thank Joo-Sang Youn, Akbar Rahman, Michel Roy, Robert Gazda, Rute Sofia, Thomas Fossati, Chonggang Wang, {{{Marie-José Montpetit}}}, Carlos J. Bernardos, Milan Milenkovic, Dale Seed, JaeSeung Song, Roberto Morabito, Carsten Bormann and {{{Ari Keränen}}} for their valuable comments and suggestions on this document.
 
