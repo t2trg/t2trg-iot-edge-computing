@@ -89,7 +89,7 @@
         <email>ietf@dkutscher.net</email>
       </address>
     </author>
-    <date year="2022" month="June" day="22"/>
+    <date year="2022" month="June" day="23"/>
     <area>T2TRG</area>
     <abstract>
       <t>Many IoT applications have requirements that cannot be met by the traditional Cloud (aka cloud computing). These include time sensitivity, data volume, connectivity cost, operation in the face of intermittent services, privacy, and security. As a result, the IoT is driving the Internet toward Edge computing. This document outlines the requirements of the emerging IoT Edge and its challenges. It presents a general model, and major components of the IoT Edge, to provide a common base for future discussions in T2TRG and other IRTF and IETF groups.
