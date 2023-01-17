@@ -1,7 +1,7 @@
 ---
 stand_alone: true
 ipr: trust200902
-docname: draft-irtf-t2trg-iot-edge-07
+docname: draft-irtf-t2trg-iot-edge-08
 #docname: draft-irtf-t2trg-iot-edge-latest
 cat: info
 stream: IRTF
