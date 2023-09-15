@@ -12,11 +12,11 @@
 <?rfc compact="yes"?>
 <?rfc colonspace="yes"?>
 <?rfc rfcedstyle="no"?>
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" ipr="trust200902" docName="draft-irtf-t2trg-iot-edge-09" category="info" submissionType="IRTF" tocDepth="4" tocInclude="true" sortRefs="true" symRefs="true" version="3">
-  <!-- xml2rfc v2v3 conversion 3.17.4 -->
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" ipr="trust200902" docName="draft-irtf-t2trg-iot-edge-10" category="info" submissionType="IRTF" tocDepth="4" tocInclude="true" sortRefs="true" symRefs="true" version="3">
+  <!-- xml2rfc v2v3 conversion 3.18.0 -->
   <front>
     <title abbrev="IoT Edge Computing">IoT Edge Challenges and Functions</title>
-    <seriesInfo name="Internet-Draft" value="draft-irtf-t2trg-iot-edge-09"/>
+    <seriesInfo name="Internet-Draft" value="draft-irtf-t2trg-iot-edge-10"/>
     <author initials="J." surname="Hong" fullname="Jungha Hong">
       <organization>ETRI</organization>
       <address>
@@ -74,7 +74,7 @@
           <code>95054-1537</code>
           <country>USA</country>
         </postal>
-        <email>eve.m.schooler@intel.com</email>
+        <email>eve.schooler@gmail.com</email>
       </address>
     </author>
     <author initials="D." surname="Kutscher" fullname="Dirk Kutscher">
@@ -88,191 +88,130 @@
         <email>ietf@dkutscher.net</email>
       </address>
     </author>
-    <date year="2023" month="July" day="24"/>
+    <date year="2023" month="September" day="15"/>
     <area>T2TRG</area>
     <abstract>
-      <?line 870?>
+      <?line 879?>
 
-<t>Many IoT applications have requirements that cannot be met by the traditional Cloud (aka cloud computing). These include time sensitivity, data volume, connectivity cost, operation in the face of intermittent services, privacy, and security. As a result, the IoT is driving the Internet toward Edge computing. This document outlines the requirements of the emerging IoT Edge and its challenges. It presents a general model, and major components of the IoT Edge, to provide a common base for future discussions in T2TRG and other IRTF and IETF groups.
-This document is a product of the IRTF Thing-to-Thing Research Group (T2TRG).</t>
+<t>Many Internet of Things (IoT) applications have requirements that cannot be satisfied by traditional cloud-based systems (i.e., cloud computing). These include time sensitivity, data volume, connectivity cost, operation in the face of intermittent services, privacy, and security. As a result, IoT is driving the Internet toward edge computing. This document outlines the requirements of the emerging IoT Edge and its challenges. It presents a general model and major components of the IoT Edge to provide a common basis for future discussions in the T2TRG and other IRTF and IETF groups. This document is a product of the IRTF Thing-to-Thing Research Group (T2TRG).</t>
     </abstract>
   </front>
   <middle>
-    <?line 875?>
+    <?line 883?>
 
 <section anchor="introduction">
       <name>Introduction</name>
-      <t>Currently, many IoT services leverage the Cloud, since it can provide virtually unlimited storage and processing power.
-The reliance of IoT on back-end cloud computing brings additional advantages such as scalability and efficiency.
-Today's IoT systems are fairly static with respect to integrating and supporting computation.
-It's not that there is no computation, but systems are often limited to static configurations (edge gateways, cloud services).</t>
-      <t>However, IoT devices are generating vast amounts of data at the edge of the network. To meet IoT use case requirements, that data increasingly is being stored, processed, analyzed, and acted upon close to the data sources.
-These requirements include time sensitivity, data volume, connectivity cost, resiliency in the face of intermittent connectivity, privacy, and security, which cannot be addressed by today's centralized cloud computing.
-To address these needs effectively, a more flexible approach is necessary.
-This involves distributing computing (and storage) and seamlessly integrating it into the edge-cloud continuum.
-We will refer to this integration of edge computing and IoT as "IoT edge computing".
-This draft describes related background, uses cases, challenges, system models, and functional components.</t>
-      <t>Due to the dynamic nature of the IoT edge computing landscape, this document does not list existing projects in this field. However, <xref target="sec-overview"/> presents a high-level overview of the field, based on a limited review of standards, research, open-source and proprietary products in <xref target="I-D.defoy-t2trg-iot-edge-computing-background"/>.</t>
-      <t>This document represents the consensus of the Thing-to-Thing Research Group (T2TRG).
-It has been reviewed extensively by the Research Group (RG) members who are actively
-involved in the research and development of the technology covered by this document.
-It is not an IETF product and is not a standard.</t>
+      <t>Currently, many IoT services leverage cloud computing platforms, because they provide virtually unlimited storage and processing power. The reliance of IoT on back-end cloud computing provides additional advantages such as scalability and efficiency.  Today's IoT systems are fairly static with respect to integrating and supporting computation.  It is not that there is no computation, but that systems are often limited to static configurations (edge gateways and cloud services).</t>
+      <t>However, IoT devices generate large amounts of data at the edges of the network. To meet IoT use case requirements, data is increasingly being stored, processed, analyzed, and acted upon close to the data sources. These requirements include time sensitivity, data volume, connectivity cost, and resiliency in the presence of intermittent connectivity, privacy, and security, which cannot be addressed by centralized cloud computing. A more flexible approach is necessary to address these needs effectively. This involves distributing computing (and storage) and seamlessly integrating it into the edge-cloud continuum. We refer to this integration of edge computing and IoT as "IoT edge computing". This draft describes the related background, use cases, challenges, system models, and functional components.</t>
+      <t>Owing to the dynamic nature of the IoT edge computing landscape, this document does not list existing projects in this field. <xref target="sec-overview"/> presents a high-level overview of the field, based on a limited review of standards, research, open-source and proprietary products in <xref target="I-D.defoy-t2trg-iot-edge-computing-background"/>.</t>
+      <t>This document represents the consensus of the Thing-to-Thing Research Group (T2TRG). It has been reviewed extensively by the Research Group (RG) members who are actively involved in the research and development of the technology covered by this document. It is not an IETF product and is not a standard.</t>
     </section>
     <section anchor="background">
       <name>Background</name>
       <section anchor="internet-of-things-iot">
         <name>Internet of Things (IoT)</name>
-        <t>Since the term "Internet of Things" (IoT) was coined by Kevin Ashton in 1999 working on Radio-Frequency Identification (RFID) technology <xref target="Ashton"/>,
-the concept of IoT has evolved. It now reflects a vision of connecting the physical world to the virtual world of computers using (wireless) networks over which things can send and receive information without human intervention.
-Recently, the term has become more literal by actually connecting things to the Internet and converging on Internet and Web technology.</t>
-        <t>A Thing is a physical item that is made available in the Internet of 
-Things, thereby enabling digital interaction with the physical 
-world for humans, services, and/or other Things (<xref target="I-D.irtf-t2trg-rest-iot"/>). 
-In this document we will use the term "IoT device" to designate the embedded system attached to the Thing.</t>
-        <t>Things are not necessarily constrained. 
-Resource-constrained Things such as sensors, home appliances and wearable devices 
-have limited storage and processing power, which raise concerns regarding reliability, performance, 
-energy consumption, security, and privacy <xref target="Lin"/>.
-However, more generally Things, constrained or not, tend to generate a voluminous amount of data.
-This range of factors led to complementing IoT with cloud computing, at least initially.</t>
+        <t>Since the term "Internet of Things" (IoT) was coined by Kevin Ashton in 1999 working on Radio-Frequency Identification (RFID) technology <xref target="Ashton"/>, the concept of IoT has evolved. It now reflects a vision of connecting the physical world to the virtual world of computers using (often wireless) networks over which things can send and receive information without human intervention.  Recently, the term has become more literal by connecting things to the Internet and converging on Internet and Web technologies.</t>
+        <t>A Thing is a physical item made available in the IoT, thereby enabling digital interaction with the physical world for humans, services, and/or other Things (<xref target="I-D.irtf-t2trg-rest-iot"/>). In this document we will use the term "IoT device" to designate the embedded system attached to the Thing.</t>
+        <t>Resource-constrained Things such as sensors, home appliances and wearable devices often have limited storage and processing power, which can provide challenges with respect to reliability, performance, energy consumption, security, and privacy <xref target="Lin"/>. Some, less resource-constrained Things, can generate a voluminous amount of data. This range of factors led IoT designs that integrate Things into larger distributed systems, for example edge or cloud computing systems.</t>
       </section>
       <section anchor="cloud-computing">
         <name>Cloud Computing</name>
-        <t>Cloud computing has been defined in <xref target="NIST"/>: "cloud computing is a model for enabling ubiquitous, convenient, on-demand network access to a shared pool of configurable computing resources
-(e.g., networks, servers, storage, applications, and services) that can be rapidly provisioned and released with minimal management effort or service provider interaction".
-Low cost and massive availability of storage and processing power enabled the realization of another computing model, in which virtualized resources can be leased in an on-demand fashion, being provided as general utilities.
-Companies like Amazon, Google, Facebook, etc. widely adopted this paradigm for delivering services over the Internet, gaining both economical and technical benefits <xref target="Botta"/>.</t>
-        <t>Today, an unprecedented volume and variety of data is generated by Things, and applications deployed at the network edge consume this data.
-In this context, cloud-based service models are not suitable for some classes of applications, which for example need very short response times, access to local personal data, or generate vast amounts of data.
-Those applications may instead leverage edge computing.</t>
+        <t>Cloud computing has been defined in <xref target="NIST"/>: "cloud computing is a model for enabling ubiquitous, convenient, on-demand network access to a shared pool of configurable computing resources (e.g., networks, servers, storage, applications, and services) that can be rapidly provisioned and released with minimal management effort or service provider interaction".  The low cost and massive availability of storage and processing power enabled the realization of another computing model, in which virtualized resources can be leased in an on-demand fashion and be provided as general utilities. Platform-as-a-Service and cloud computing platforms widely adopted this paradigm for delivering services over the Internet, gaining both economical and technical benefits <xref target="Botta"/>.</t>
+        <t>Today, an unprecedented volume and variety of data is generated by Things, and applications deployed at the network edge consume this data.  In this context, cloud-based service models are not suitable for some classes of applications which require very short response times, access to local personal data, or generate vast amounts of data.  These applications may instead leverage edge computing.</t>
       </section>
       <section anchor="edge-computing">
         <name>Edge Computing</name>
-        <t>Edge computing, also referred to as fog computing in some settings, is a new paradigm in which substantial computing and storage resources are placed at the edge of the Internet, that is, close to mobile devices, sensors, actuators, or machines.
-Edge computing happens near data sources <xref target="Mahadev"/>, or closer (topologically, physically, in terms of latency, etc.) to where decisions or interactions with the physical world are happening.
-It processes both downstream data, e.g., originated from cloud services, and upstream data, e.g., originated from end devices or network elements.
-The term "fog computing" usually represents the notion of a multi-tiered edge computing, that is, several layers of compute infrastructure between the end devices and cloud services.</t>
-        <t>An edge device is any computing or networking resource residing between end-devices' data sources and cloud-based data centers.
-In edge computing, end devices not only consume data but also produce data.
-And at the network edge, devices not only request services and information from the Cloud, but also handle computing tasks including processing, storage, caching, and load balancing on data sent to and from the Cloud <xref target="Shi"/>.
-This does not preclude end devices from hosting computation themselves when possible, independently or as part of a distributed edge computing platform (this is also referred to as Mist Computing).</t>
+        <t>Edge computing, also referred to as fog computing in some settings, is a new paradigm in which substantial computing and storage resources are placed at the edge of the Internet, close to mobile devices, sensors, actuators, or machines.  Edge computing happens near data sources <xref target="Mahadev"/>, as well as close to where decisions are made or where interactions with the physical world take place ("close" here can refer to a distance which is topological, physical, latency-based, etc.).  It processes both downstream data (originating from cloud services) and upstream data (originating from end devices or network elements).  The term "fog computing" usually represents the notion of multi-tiered edge computing, that is, several layers of compute infrastructure between end devices and cloud services.</t>
+        <t>An edge device is any computing or networking resource residing between end-device data sources and cloud-based data centers.  In edge computing, end devices consume and produce data. At the network edge, devices not only request services and information from the Cloud but also handle computing tasks including processing, storage, caching, and load balancing on data sent to and from the Cloud <xref target="Shi"/>.  This does not preclude end devices from hosting computation themselves, when possible, independently or as part of a distributed edge computing platform.</t>
         <t>Several standards developing organization (SDO) and industry forums have provided definitions of edge and fog computing:</t>
         <ul spacing="normal">
           <li>ISO defines edge computing as a "form of distributed computing in which significant processing and data storage takes place on nodes which are at the edge of the network" <xref target="ISO_TR"/>.</li>
           <li>ETSI defines multi-access edge computing as a "system which provides an IT service environment and cloud-computing capabilities at the edge of an access network which contains one or more type of access technology, and in close proximity to its users" <xref target="ETSI_MEC_01"/>.</li>
           <li>The Industry IoT Consortium (IIC, now incorporating what was formerly OpenFog) defines fog computing as "a horizontal, system-level architecture that distributes computing, storage, control and networking functions closer to the users along a cloud-to-thing continuum" <xref target="OpenFog"/>.</li>
         </ul>
-        <t>Based on these definitions, we can summarize a general philosophy of edge computing as to distribute the required functions close to users and data, while the difference to classic local systems is the usage of management and orchestration features adopted from cloud computing.</t>
-        <t>Actors from various industries approach edge computing using different terms and reference models, although in practice these approaches are not incompatible and may integrate with each other:</t>
+        <t>Based on these definitions, we can summarize a general philosophy of edge computing as distributing the required functions close to users and data, while the difference to classic local systems is the usage of management and orchestration features adopted from cloud computing.</t>
+        <t>Actors from various industries approach edge computing using different terms and reference models although, in practice, these approaches are not incompatible and may integrate with each other:</t>
         <ul spacing="normal">
           <li>The telecommunication industry tends to use a model where edge computing services are deployed over Network Function Virtualization (NFV) infrastructure, at aggregation points or in proximity to the user equipment (e.g., gNodeBs) <xref target="ETSI_MEC_03"/>.</li>
           <li>Enterprise and campus solutions often interpret edge computing as an "edge cloud", that is, a smaller data center directly connected to the local network (often referred to as "on-premise").</li>
-          <li>The automation industry defines the edge as the connection point between IT from OT (Operational Technology). Hence, here edge computing sometimes refers to applying IT solutions to OT problems such as analytics, more flexible user interfaces, or simply having more computing power than an automation controller.</li>
+          <li>The automation industry defines the edge as the connection point between IT and OT (Operational Technology). Hence, edge computing sometimes refers to applying IT solutions to OT problems, such as analytics, more flexible user interfaces, or simply having more computing power than an automation controller.</li>
         </ul>
       </section>
       <section anchor="sec-uc">
         <name>Examples of IoT Edge Computing Use Cases</name>
-        <t>IoT edge computing can be used in home, industry, grid, healthcare, city, transportation, agriculture, and/or education scenarios.
-We discuss here only a few examples of such use cases, to point out differentiating requirements.
-These examples are followed with references to other use cases.</t>
+        <t>IoT edge computing can be used in home, industry, grid, healthcare, city, transportation, agriculture, and/or educational scenarios. Here, we discuss only a few examples of such use cases, to identify differentiating requirements, providing references to other use cases.</t>
         <t><strong>Smart Factory</strong></t>
-        <t>As part of the 4th industrial revolution, smart factories run real-time processes based on IT technologies such as artificial intelligence and big data. In a smart factory, even a very small environmental change can lead to a situation in which production efficiency decreases or product quality problems occur. Therefore, simple but time-sensitive processing can be performed at the edge: for example, controlling temperature and humidity in the factory, or operating machines based on the real-time collection of the operational status of each machine. On the other hand, data requiring highly precise analysis, such as machine lifecycle management or accident risk prediction, can be transferred to a central data center for processing.</t>
-        <t>The use of edge computing in a smart factory can reduce the cost of network and storage resources by reducing the communication load to the central data center or server. It is also possible to improve process efficiency and facility asset productivity through the real-time prediction of failures, and to reduce the cost of failure through preliminary measures. In the existing manufacturing field, production facilities are manually run according to a program entered in advance, but edge computing in a smart factory enables tailoring solutions by analyzing data at each production facility and machine level. Digital twins <xref target="Jones"/> of IoT devices have been used jointly with edge computing in industrial IoT scenarios <xref target="Chen"/>.</t>
+        <t>As part of the 4th industrial revolution, smart factories run real-time processes based on IT technologies, such as artificial intelligence and big data. Even a very small environmental change in a smart factory can lead to a situation in which production efficiency decreases or product quality problems occur. Therefore, simple but time-sensitive processing can be performed at the edge, for example, controlling the temperature and humidity in the factory, or operating machines based on the real-time collection of the operational status of each machine. However, data requiring highly precise analysis, such as machine lifecycle management or accident risk prediction, can be transferred to a central data center for processing.</t>
+        <t>The use of edge computing in a smart factory can reduce the cost of network and storage resources by reducing the communication load to the central data center or server. It is also possible to improve process efficiency and facility asset productivity through real-time prediction of failures and to reduce the cost of failure through preliminary measures. In the existing manufacturing field, production facilities are manually run according to a program entered in advance; however, edge computing in a smart factory enables tailoring solutions by analyzing data at each production facility and machine level. Digital twins <xref target="Jones"/> of IoT devices have been jointly used with edge computing in industrial IoT scenarios <xref target="Chen"/>.</t>
         <t><strong>Smart Grid</strong></t>
-        <t>In future smart city scenarios, the Smart Grid will be critical in ensuring highly available/efficient energy control in city-wide electricity management.
-Edge computing is expected to play a significant role in those systems to improve transmission efficiency of electricity; to react to, and restore power after, a disturbance; to reduce operation costs and reuse renewable energy effectively, since these operations involve local decision-making. In addition, edge computing can help to monitor power generation and power demand, and making local electrical energy storage decisions in the smart grid system.</t>
+        <t>In future smart city scenarios, the Smart Grid will be critical in ensuring highly available/efficient energy control in city-wide electricity management.  Edge computing is expected to play a significant role in these systems to improve the transmission efficiency of electricity, to react to, and restore power after a disturbance, to reduce operation costs, and to reuse energy effectively, since these operations involve local decision-making. In addition, edge computing can help monitor power generation and power demand, and make local electrical energy storage decisions in smart grid systems.</t>
         <t><strong>Smart Agriculture</strong></t>
-        <t>Smart agriculture integrates information and communication technology with farming technology. Intelligent farms use IoT technology to measure and analyze temperature, humidity, sunlight, carbon dioxide, soil, etc. in crop cultivation facilities. Depending on analysis results, control devices are used to set environmental parameters to an appropriate state. Remote management is also possible through mobile devices such as smartphones.</t>
-        <t>In existing farms, simple systems such as management according to temperature and humidity can easily and inexpensively be implemented with IoT technology. Sensors in fields are gathering data on field and crop condition. This data is then transmitted to cloud servers, which process data and recommend actions. Usage of edge computing can reduce by a large amount data transmitted up and down the network, resulting in saving cost and bandwidth. Locally generated data can be processed at the edge, and local computing and analytics can drive local actions. With edge computing, it is also easy for farmers to select large amounts of data for processing, and data can be analyzed even in remote areas with poor access conditions. Other applications include enabling dashboarding, e.g., to visualize the farm status, as well as enhancing XR applications that require edge audio/video processing. As the number of people working on farming decreases over time, increasing automation enabled by edge computing can be a driving force for future smart agriculture.</t>
+        <t>Smart agriculture integrates information and communication technologies with farming technology. Intelligent farms use IoT technology to measure and analyze parameters, such as the temperature, humidity, sunlight, carbon dioxide, and soil quality, in crop cultivation facilities. Depending on the analysis results, control devices are used to set the environmental parameters to an appropriate state. Remote management is also possible through mobile devices such as smartphones.</t>
+        <t>In existing farms, simple systems such as management according to temperature and humidity can be easily and inexpensively implemented using IoT technology. Field sensors gather data on field and crop condition. This data is then transmitted to cloud servers that process data and recommend actions. The use of edge computing can reduce the volume of back-and-forth data transmissions significantly, resulting in cost and bandwidth savings. Locally generated data can be processed at the edge, and local computing and analytics can drive local actions. With edge computing, it is easy for farmers to select large amounts of data for processing, and data can be analyzed even in remote areas with poor access conditions. Other applications include enabling dashboarding, for example, to visualize the farm status, as well as enhancing Extended Reality (XR) applications that require edge audio/video processing. As the number of people working on farming has been decreasing over time, increasing automation enabled by edge computing can be a driving force for future smart agriculture.</t>
         <t><strong>Smart Construction</strong></t>
-        <t>Safety is critical on a construction site. Every year, many construction workers lose their lives due to falls, collisions, electric shocks, and other accidents.
-Therefore, solutions have been developed in order to improve construction site safety, including real-time identification of workers, monitoring of equipment location, and predictive accident prevention. To deploy these solutions, many cameras and IoT sensors were installed on construction sites, measuring noise, vibration, gas concentration, etc. Typically, data generated from these measurements has been collected in an on-site gateway and sent to a remote cloud server for storage and analysis. Thus, an inspector can check the information stored on the cloud server to investigate an incident. However, this approach can be expensive, due to transmission costs, e.g., of video streams over an LTE connection, and due to usage fees of private cloud services such as Amazon Web Services.</t>
-        <t>Using edge computing, data generated on the construction site can be processed and analyzed on an edge server located within or near the site. Only the result of this processing needs to be transferred to a cloud server, thus saving transmission costs. It is also possible to locally generate warnings to prevent accident in real-time.</t>
+        <t>Safety is critical at construction sites. Every year, many construction workers lose their lives because of falls, collisions, electric shocks, and other accidents.  Therefore, solutions have been developed to improve construction site safety, including the real-time identification of workers, monitoring of equipment location, and predictive accident prevention. To deploy these solutions, many cameras and IoT sensors have been installed on construction sites, to measure noise, vibration, gas concentration, etc. Typically, the data generated from these measurements is collected in on-site gateways and sent to remote cloud servers for storage and analysis. Thus, an inspector can check the information stored on the cloud server to investigate an incident. However, this approach can be expensive because of transmission costs, for example, of video streams over a mobile network connection, and because usage fees of private cloud services.</t>
+        <t>Using edge computing, data generated at the construction site can be processed and analyzed on an edge server located within or near the site. Only the result of this processing needs to be transferred to a cloud server, thus reducing transmission costs. It is also possible to locally generate warnings to prevent accidents in real-time.</t>
         <t><strong>Self-Driving Car</strong></t>
-        <t>Edge computing plays a crucial role in safety-focused self-driving car systems. With a multitude of sensors such as high-resolution cameras, radars, LIDAR, sonar sensors, and GPS systems, autonomous vehicles generate vast amounts of real-time data. Local processing utilizing edge computing nodes allows for efficient collection and analysis of this data to monitor vehicle distances, road conditions, and respond promptly to unexpected situations. Roadside computing nodes can also be leveraged to offload tasks when necessary, e.g., when the local processing capacity on the car is unsufficient due to low-performing hardware or a large amount of data.</t>
-        <t>For instance, when the car ahead slows down, a self-driving car adjusts its speed to maintain a safe distance, or when a roadside signal changes, it adapts its behavior accordingly. In another example, cars equipped with self-parking features utilize local processing to analyze sensor data, determine suitable parking spots, and execute precise parking maneuvers without relying on external processing or connectivity. It is also possible for in-cabin cameras, coupled with local processing, to monitor the driver's attention level, detecting signs of drowsiness or distraction. The system can issue warnings or take preventive measures to ensure driver safety.</t>
-        <t>Edge computing empowers self-driving cars by enabling real-time processing, reducing latency, enhancing data privacy, and optimizing bandwidth usage. By leveraging local processing capabilities, self-driving cars can make rapid decisions, adapt to changing environments, and ensure a safer and more efficient autonomous driving experience.</t>
+        <t>Edge computing plays a crucial role in safety-focused self-driving car systems. With a multitude of sensors, such as high-resolution cameras, radar, LIDAR, sonar sensors, and GPS systems, autonomous vehicles generate vast amounts of real-time data. Local processing utilizing edge computing nodes allows for efficient collection and analysis of this data to monitor vehicle distances and road conditions and respond promptly to unexpected situations. Roadside computing nodes can also be leveraged to offload tasks when necessary, for example, when the local processing capacity of the car is insufficient because of hardware constraints or a large data volume.</t>
+        <t>For instance, when the car ahead slows, a self-driving car adjusts its speed to maintain a safe distance, or when a roadside signal changes, it adapts its behavior accordingly. In another example, cars equipped with self-parking features utilize local processing to analyze sensor data, determine suitable parking spots, and execute precise parking maneuvers without relying on external processing or connectivity. It is also possible to use in-cabin cameras coupled with local processing to monitor the driver's attention level and detect signs of drowsiness or distraction. The system can issue warnings or implement preventive measures to ensure driver safety.</t>
+        <t>Edge computing empowers self-driving cars by enabling real-time processing, reducing latency, enhancing data privacy, and optimizing bandwidth usage. By leveraging local processing capabilities, self-driving cars can make rapid decisions, adapt to changing environments, and ensure safer and more efficient autonomous driving experiences.</t>
         <t><strong>Digital Twin</strong></t>
-        <t>A digital twin can simulate different scenarios and predict outcomes based on real-time data collected from the physical environment. This simulation capability empowers proactive maintenance, optimization of operations, and prediction of potential issues or failures. Decision-makers can use digital twins to test and validate different strategies, identify inefficiencies, and optimize performances.</t>
-        <t>With edge computing, real-time data is collected, processed, and analyzed directly at the edge, allowing for accurate monitoring and simulation of the physical asset. Moreover, edge computing effectively minimizes latency, enabling rapid responses to dynamic conditions, as computational resources are brought closer to the physical object. Running digital twin processing at the edge enables organizations to get timely insights and make informed decisions that maximize efficiency and performance.</t>
+        <t>A digital twin can simulate different scenarios and predict outcomes based on real-time data collected from the physical environment. This simulation capability empowers proactive maintenance, optimization of operations, and the prediction of potential issues or failures. Decision makers can use digital twins to test and validate different strategies, identify inefficiencies, and optimize performance.</t>
+        <t>With edge computing, real-time data is collected, processed, and analyzed directly at the edge, allowing for the accurate monitoring and simulation of physical assets. Moreover, edge computing effectively minimizes latency, enabling rapid responses to dynamic conditions as computational resources are brought closer to the physical object. Running digital twin processing at the edge enables organizations to obtain timely insights and make informed decisions that maximize efficiency and performance.</t>
         <t><strong>Other Use Cases</strong></t>
-        <t>AI/ML systems at the edge empower real-time analysis, faster decision-making, reduced latency, improved operational efficiency, and personalized experiences across various industries, by bringing artificial intelligence and machine learning capabilities closer to the edge devices.</t>
-        <t>Additionally, oneM2M has studied several IoT edge computing use cases, which are documented in <xref target="oneM2M-TR0001"/>, <xref target="oneM2M-TR0018"/> and <xref target="oneM2M-TR0026"/>. The edge computing related requirements raised through the analysis of these use cases are captured in <xref target="oneM2M-TS0002"/>.</t>
+        <t>AI/ML systems at the edge empower real-time analysis, faster decision-making, reduced latency, improved operational efficiency, and personalized experiences across various industries, by bringing artificial intelligence and machine learning capabilities closer to edge devices.</t>
+        <t>In addition, oneM2M has studied several IoT edge computing use cases, which are documented in <xref target="oneM2M-TR0001"/>, <xref target="oneM2M-TR0018"/> and <xref target="oneM2M-TR0026"/>. The edge computing related requirements raised through the analysis of these use cases are captured in <xref target="oneM2M-TS0002"/>.</t>
       </section>
     </section>
     <section anchor="sec-challenges">
       <name>IoT Challenges Leading Towards Edge Computing</name>
-      <t>This section describes challenges met by IoT, that are motivating the adoption of edge computing. Those are distinct from research challenges applicable to IoT edge computing, some of which will be mentioned in <xref target="sec-components"/>.</t>
-      <t>IoT technology is used with more and more demanding applications, e.g., in industrial, automotive or healthcare domains, leading to new challenges.
-For example, industrial machines such as laser cutters already produce over 1 terabyte per hour, and similar amounts can be generated in autonomous cars <xref target="NVIDIA"/>.
-90% of IoT data is expected to be stored, processed, analyzed, and acted upon close to the source <xref target="Kelly"/>, as cloud computing models alone cannot address the new challenges <xref target="Chiang"/>.</t>
-      <t>Below we discuss IoT use case requirements that are moving cloud capabilities to be more proximate and more distributed and disaggregated.</t>
+      <t>This section describes the challenges faced by IoT that are motivating the adoption of edge computing. These are distinct from the research challenges applicable to IoT edge computing, some of which are mentioned in <xref target="sec-functions"/>.</t>
+      <t>IoT technology is used with increasingly demanding applications, for example, in industrial, automotive and healthcare domains, leading to new challenges.  For example, industrial machines such as laser cutters produce over 1 terabyte of data per hour, and similar amounts can be generated in autonomous cars <xref target="NVIDIA"/>.  90% of IoT data is expected to be stored, processed, analyzed, and acted upon close to the source <xref target="Kelly"/>, as cloud computing models alone cannot address these new challenges <xref target="Chiang"/>.</t>
+      <t>Below, we discuss IoT use case requirements that are moving cloud capabilities to be more proximate, distributed, and disaggregated.</t>
       <section anchor="time-sensitivity">
         <name>Time Sensitivity</name>
-        <t>Many industrial control systems, such as manufacturing systems, smart grids, oil and gas systems, etc., often require stringent end-to-end latency between the sensor and control node.
-While some IoT applications may require latency below a few tens of milliseconds <xref target="Weiner"/>,
-industrial robots and motion control systems have use cases for cycle times in the order of microseconds <xref target="_60802"/>.
-In some cases speed-of-light limitations may simply prevent a solution based on remote cloud, however it is not the only challenge relative to time sensitivity.
-Guarantees for bounded latency and jitter (<xref target="RFC8578"/> section 7) are also important to those industrial IoT applications.
-This means control packets need to arrive with as little variation as possible and within a strict deadline.
-Given the best-effort characteristics of the Internet, this challenge is virtually impossible to address, without using end-to-end guarantees for individual message delivery and continuous data flows.</t>
+        <t>Many industrial control systems, such as manufacturing systems, smart grids, and oil and gas systems often require stringent end-to-end latency between the sensor and control nodes.  While some IoT applications may require latency below a few tens of milliseconds <xref target="Weiner"/>, industrial robots and motion control systems have use cases for cycle times in the order of microseconds <xref target="_60802"/>.  In some cases, speed-of-light limitations may simply prevent a cloud-based solutions; however, this is not the only challenge relative to time sensitivity.  Guarantees for bounded latency and jitter (<xref target="RFC8578"/> section 7) are also important for industrial IoT applications.  This means that control packets must arrive with as little variation as possible and within a strict deadline.  Given the best-effort characteristics of the Internet, this challenge is virtually impossible to address, without using end-to-end guarantees for individual message delivery and continuous data flows.</t>
       </section>
       <section anchor="connectivity-cost">
         <name>Connectivity Cost</name>
-        <t>Some IoT deployments may not face bandwidth constraints when uploading data to the Cloud.
-The fifth-generation mobile networks (5G) and Wi-Fi 6 both theoretically top out at 10 gigabits per second (i.e., 4.5 terabytes per hour), allowing for transfering uplink large amounts of data.
-However, the cost of maintaining countinuous high-bandwidth connectivity for such usage can be unjustifiable and impractical for most IoT applications.
-In some settings, e.g., in aeronautical communication, higher communication costs reduce the amount of data that can be practically uploaded even further.
-Minimizing reliance on high-bandwidth connectivity is therefore a requirement, e.g., by processing data at the edge and deriving summarized or actionable insights that can be transmitted to the Cloud.</t>
+        <t>Some IoT deployments may not face bandwidth constraints when uploading data to the Cloud.  5G and Wi-Fi 6 networks both theoretically top out at 10 gigabits per second (i.e., 4.5 terabytes per hour), allowing to transfer large amounts of uplink data.  However, the cost of maintaining continuous high-bandwidth connectivity for such usage is unjustifiable and impractical for most IoT applications.  In some settings, for example, in aeronautical communication, higher communication costs reduce the amount of data that can be practically uploaded even further.  Minimizing reliance on high-bandwidth connectivity is therefore a requirement, for example, by processing data at the edge and deriving summarized or actionable insights that can be transmitted to the Cloud.</t>
       </section>
       <section anchor="resilience-to-intermittent-services">
         <name>Resilience to Intermittent Services</name>
-        <t>Many IoT devices such as sensors, actuators, controllers, etc. have very limited hardware resources and cannot rely solely on their own resources to meet all their computing and/or storage needs.
-They require reliable, uninterrupted, or resilient services to augment their capabilities in order to fulfill their application tasks.
-This is hard and partly impossible to achieve with cloud services for systems such as vehicles, drones, or oil rigs that have intermittent network connectivity.
-The dual is also true, a cloud back-end might want to have a reading of the device even if it's currently asleep.</t>
+        <t>Many IoT devices, such as sensors, actuators, and controllers, have very limited hardware resources and cannot rely solely on their own resources to meet their computing and/or storage needs.  They require reliable, uninterrupted, or resilient services to augment their capabilities to fulfill their application tasks.  This is difficult and partly impossible to achieve using cloud services for systems such as vehicles, drones, or oil rigs that have intermittent network connectivity.  Conversely, a cloud back-end might want to device data even if it is currently asleep.</t>
       </section>
       <section anchor="sec-priv">
         <name>Privacy and Security</name>
-        <t>When IoT services are deployed at home, personal information can be learned from detected usage data.
-For example, one can extract information about employment, family status, age, and income by analyzing smart meter data <xref target="ENERGY"/>.
-Policy-makers started to provide frameworks that limit the usage of personal data and put strict requirements on data controllers and processors.
-Data stored indefinitely in the Cloud also increases the risk of data leakage, for instance, through attacks on rich targets.</t>
-        <t>Industrial systems are often argued to not have privacy implications, as no personal data is gathered.
-Yet data from such systems is often highly sensitive, as one might be able to infer trade secrets such as the setup of production lines.
-Hence, the owners of these systems are generally reluctant to upload IoT data to the Cloud.</t>
-        <t>Furthermore, passive observers can perform traffic analysis on the device-to-cloud path.
-Hiding traffic patterns associated with sensor networks can therefore be another requirement for edge computing.</t>
+        <t>When IoT services are deployed at home, personal information can be learned from detected usage data.  For example, one can extract information about employment, family status, age, and income by analyzing smart-meter data <xref target="ENERGY"/>.  Policy makers have begun to provide frameworks that limit the usage of personal data and impose strict requirements on data controllers and processors.  Data stored indefinitely in the Cloud also increases the risk of data leakage, for instance, through attacks on rich targets.</t>
+        <t>It is often argues that industrial systems do not provide privacy implications, as no personal data is gathered.  However, data from such systems is often highly sensitive, as one might be able to infer trade secrets such as the setup of production lines.  Hence, owners of these systems are generally reluctant to upload IoT data to the Cloud.</t>
+        <t>Furthermore, passive observers can perform traffic analysis on device-to-cloud paths.  Therefore, hiding traffic patterns associated with sensor networks can be another requirement for edge computing.</t>
       </section>
     </section>
-    <section anchor="iot-edge-computing-functions">
+    <section anchor="sec-functions">
       <name>IoT Edge Computing Functions</name>
-      <t>We will first look at the current state of IoT edge computing (<xref target="sec-overview"/>), and then define a general system model (<xref target="sec-model"/>). This provides context for IoT edge computing functions, which are listed in <xref target="sec-components"/>.</t>
+      <t>We first look at the current state of IoT edge computing (<xref target="sec-overview"/>), and then define a general system model (<xref target="sec-model"/>). This provides a context for IoT edge-computing functions, which are listed in <xref target="sec-components-oam"/>, <xref target="sec-components-functional"/> and <xref target="sec-components-app"/>.</t>
       <section anchor="sec-overview">
         <name>Overview of IoT Edge Computing Today</name>
-        <t>This section provides an overview of today's IoT edge computing field, based on a limited review of standards, research, open-source and proprietary products in <xref target="I-D.defoy-t2trg-iot-edge-computing-background"/>.</t>
-        <t>IoT gateways, both open-source (such as EdgeX Foundry or Home Edge) and proprietary (such as Amazon Greengrass, Microsoft Azure IoT Edge, Google Cloud IoT Core, and gateways from Bosch, Siemens), represent a common class of IoT edge computing products, where the gateway is providing a local service on customer premises and is remotely managed through a cloud service. IoT communication protocols are typically used between IoT devices and the gateway, including CoAP, MQTT, and many specialized IoT protocols (such as OPC UA and DDS in the Industrial IoT space), while the gateway communicates with the distant cloud typically using HTTPS. Virtualization platforms enable the deployment of virtual edge computing functions (using VMs, application containers, etc.), including IoT gateway software, on servers in the mobile network infrastructure (at base stations and concentration points), in edge data centers (in central offices) or regional data centers located near central offices. End devices are envisioned to become computing devices in forward-looking projects, but they are not commonly used as such today.</t>
-        <t>Besides open-source and proprietary solutions, a horizontal IoT service layer is standardized by the oneM2M standards body, to reduce fragmentation, increase interoperability and promote reuse in the IoT ecosystem. Furthermore, ETSI MEC developed an IoT API <xref target="ETSI_MEC_33"/> that enables deploying heterogeneous IoT platforms and provides the means to configure the various components of an IoT system.</t>
-        <t>Physical or virtual IoT gateways can host application programs, which are typically built using an SDK to access local services through a programmatic API.
-Edge cloud system operators host their customers' application VMs or containers on servers located in or near access networks, which can implement local edge services. For example, mobile networks can provide edge services for radio network information, location, and bandwidth management.</t>
-        <t>Resilience in IoT can entail the ability to operate autonomously in periods of disconnectedness in order to preserve the integrity and safety of the controlled system, possibly in a degraded mode. IoT devices and gateways are often expected to operate in the always-on and unattended mode, using fault detection and unassisted recovery functions.</t>
-        <t>Life cycle management of services and applications on physical IoT gateways is generally cloud-based.
-Edge cloud management platforms and products (such as StarlingX, Akraino Edge Stack, or proprietary products from major Cloud providers) adapt cloud management technologies (e.g., Kubernetes) to the edge cloud, i.e., to smaller, distributed computing devices running outside a controlled data center. Service and application life-cycle is typically using an NFV-like management and orchestration model.</t>
-        <t>The platform typically enables advertising or consuming services hosted on the platform (e.g., Mp1 interface in ETSI MEC supports service discovery and communication), and enables communicating with local and remote endpoints (e.g., message routing function in IoT gateways).  The platform is typically extensible by edge applications, since they can advertise a service that other edge applications can consume. IoT communication services include protocols translation, analytics, and transcoding.  Communication between edge computing devices is enabled in tiered deployments or distributed deployments.</t>
-        <t>An edge cloud platform may enable pass-through without storage or local storage (e.g., on IoT gateways). Some edge cloud platforms use distributed storage such as provided by a distributed storage platform (e.g., IPFS, EdgeFS, Ceph), or, in more experimental settings, by an ICN network, e.g., Named Function Networking (NFN) nodes can store data in a Named Data Networking (NDN) system. External storage, e.g., on databases in distant or local IT cloud, is typically used for filtered data deemed worthy of long-term storage, although in some cases it may be for all data, for example when required for regulatory reasons.</t>
-        <t>Stateful computing is supported on platforms hosting native programs, VMs or containers. Stateless computing is supported on platforms providing a "serverless computing" service (a.k.a. function-as-a-service, e.g., using stateless containers), or on systems based on named function networking.</t>
-        <t>In many IoT use cases, a typical network usage pattern is high volume uplink with some form of traffic reduction enabled by processing over edge computing devices. Alternatives to traffic reduction include deferred transmission (to off-peak hours or using physical shipping). Downlink traffic includes application control and software updates. Other, downlink-heavy traffic patterns are not excluded but are more often associated with non-IoT usage (e.g., video CDNs).</t>
+        <t>This section provides an overview of today's IoT edge computing field based on a limited review of standards, research, open-source and proprietary products in <xref target="I-D.defoy-t2trg-iot-edge-computing-background"/>.</t>
+        <t>IoT gateways, both open-source (such as EdgeX Foundry or Home Edge) and proprietary products, represent a common class of IoT edge-computing products, where the gateway provides a local service on customer premises and is remotely managed through a cloud service. IoT communication protocols are typically used between IoT devices and the gateway, including CoAP <xref target="RFC7252"/>, MQTT <xref target="mqtt5"/>, and many specialized IoT protocols (such as OPC UA and DDS in the Industrial IoT space), while the gateway communicates with the distant cloud typically using HTTPS. Virtualization platforms enable the deployment of virtual edge computing functions (using VMs and application containers), including IoT gateway software, on servers in the mobile network infrastructure (at base stations and concentration points), edge data centers (in central offices), and regional data centers located near central offices. End devices are envisioned to become computing devices in forward-looking projects, but are not commonly used today.</t>
+        <t>In addition to open-source and proprietary solutions, a horizontal IoT service layer is standardized by the oneM2M standards body to reduce fragmentation, increase interoperability and promote reuse in the IoT ecosystem. Furthermore, ETSI MEC developed an IoT API <xref target="ETSI_MEC_33"/> that enables the deployment of heterogeneous IoT platforms and provides a means to configure the various components of an IoT system.</t>
+        <t>Physical or virtual IoT gateways can host application programs that are typically built using an SDK to access local services through a programmatic API.  Edge cloud system operators host their customers' application VMs or containers on servers located in or near access networks that can implement local edge services. For example, mobile networks can provide edge services for radio-network information, location, and bandwidth management.</t>
+        <t>Resilience in the IoT can entail the ability to operate autonomously in periods of disconnectedness to preserve the integrity and safety of the controlled system, possibly in a degraded mode. IoT devices and gateways are often expected to operate in always-on and unattended modes, using fault detection and unassisted recovery functions.</t>
+        <t>The life cycle management of services and applications on physical IoT gateways is generally cloud-based.  Edge cloud management platforms and products (such as StarlingX, Akraino Edge Stack, or proprietary products from major Cloud providers) adapt cloud management technologies (e.g., Kubernetes) to the edge cloud, that is, to smaller, distributed computing devices running outside a controlled data center. The service and application life-cycle is typically using an NFV-like management and orchestration model.</t>
+        <t>The platform typically enables advertising or consuming services hosted on the platform (e.g., the Mp1 interface in ETSI MEC supports service discovery and communication), and enables communication with local and remote endpoints (e.g., message routing function in IoT gateways).  The platform is typically extensible to edge applications because it can advertise a service that other edge applications can consume. The IoT communication services include protocol translation, analytics, and transcoding.  Communication between edge-computing devices is enabled in tiered or distributed deployments.</t>
+        <t>An edge cloud platform may enable pass-through without storage or local storage (e.g., on IoT gateways). Some edge cloud platforms use distributed storage such as that provided by a distributed storage platform (e.g., EdgeFS, Ceph), or, in more experimental settings, by an ICN network, for example, systems such as Chipmunk <xref target="chipmunk"/> and Kua <xref target="kua"/> have been proposed as distributed information-centric objects stores.  External storage, for example, on databases in distant or local IT cloud, is typically used for filtered data deemed worthy of long-term storage, although in some cases it may be for all data, for example when required for regulatory reasons.</t>
+        <t>Stateful computing is supported on platforms that host native programs, VMs, or containers. Stateless computing is supported on platforms providing a "serverless computing" service (also known as function-as-a-service, e.g., using stateless containers), or on systems based on named function networking.</t>
+        <t>In many IoT use cases, a typical network usage pattern is a high volume uplink with some form of traffic reduction enabled by processing over edge-computing devices. Alternatives to traffic reduction include deferred transmission (to off-peak hours or using physical shipping). Downlink traffic includes application control and software updates. Downlink-heavy traffic patterns are not excluded but are more often associated with non-IoT usage (e.g., video CDNs).</t>
       </section>
       <section anchor="sec-model">
         <name>General Model</name>
-        <t>Edge computing is expected to play an important role in deploying new IoT services integrated with Big Data and AI, enabled by flexible in-network computing platforms. Although there are lots of approaches to edge computing, we attempt to lay out a general model and list associated logical functions in this section. In practice, this model can map to different architectures, such as:</t>
+        <t>Edge computing is expected to play an important role in deploying new IoT services integrated with Big Data and AI enabled by flexible in-network computing platforms. Although there are many approaches to edge computing, in this section, we attempt to lay out a general model and the list associated logical functions. In practice, this model can be mapped to different architectures, such as:</t>
         <ul spacing="normal">
-          <li>A single IoT gateway, or a hierarchy of IoT gateways, typically connected to the cloud (e.g., to extend the traditional cloud-based management of IoT devices and data to the edge). A common role of an IoT Gateway is to provide access to a heterogeneous set of IoT devices/sensors; handle IoT data; and deliver IoT data to its final destination in a cloud network. Whereas an IoT gateway needs interactions with the cloud, it can also operate independently in a disconnected mode.</li>
-          <li>A set of distributed computing nodes, e.g., embedded in switches, routers, edge cloud servers, or mobile devices. Some IoT devices can have enough computing capabilities to participate in such distributed systems due to advances in hardware technology. In this model, edge computing nodes can collaborate to share their resources.</li>
+          <li>A single IoT gateway, or a hierarchy of IoT gateways, typically connected to the cloud (e.g., to extend the traditional cloud-based management of IoT devices and data to the edge). The IoT gateway plays a common role in providing access to a heterogeneous set of IoT devices/sensors, handling IoT data, and delivering IoT data to its final destination in a cloud network. Whereas an IoT gateway requires interactions with the cloud, it can also operate independently in a disconnected mode.</li>
+          <li>A set of distributed computing nodes, for example, embedded in switches, routers, edge cloud servers, or mobile devices. Some IoT devices have sufficient computing capabilities to participate in such distributed systems owing to advances in hardware technology. In this model, edge-computing nodes can collaborate to share resources.</li>
           <li>A hybrid system involving both IoT gateways and supporting functions in distributed computing nodes.</li>
         </ul>
-        <t>In the general model described in <xref target="rl-fig1"/>, the edge computing domain is interconnected with IoT devices (southbound connectivity) and possibly with a remote/cloud network (northbound connectivity), and with a service operator's system.
-Edge computing nodes provide multiple logical functions, or components, which may not all be present in a given system. They may be implemented in a centralized or distributed fashion, at the network edge, or through some interworking between edge network and remote cloud network.</t>
+        <t>In the general model described in <xref target="rl-fig1"/>, the edge computing domain is interconnected with IoT devices (southbound connectivity), possibly with a remote/cloud network (northbound connectivity), and with a service operator's system.  Edge-computing nodes provide multiple logical functions or components that may not be present in a given system. They may be implemented in a centralized or distributed fashion, at the network edge, or through interworking between the edge network and remote cloud networks.</t>
         <figure anchor="rl-fig1">
           <name>Model of IoT Edge Computing</name>
           <artset>
@@ -455,9 +394,7 @@ Edge computing nodes provide multiple logical functions, or components, which ma
 ]]></artwork>
           </artset>
         </figure>
-        <t>In the distributed model described in <xref target="rl-fig2"/>, the edge computing domain is composed of IoT edge gateways and IoT devices which are also used as computing nodes.
-Edge computing domains are connected with a remote/cloud network, and with their respective service operator's system.
-IoT devices/computing nodes provide logical functions, for example as part of a distributed machine learning or distributed image processing application. The processing capabilities in IoT devices being limited, they require the support of other nodes: in a distributed machine learning application, the training process for AI services can be executed at IoT edge gateways or cloud networks and the prediction (inference) service is executed in the IoT devices; in a distributed image processing application, some image processing functions can be similarly executed at the edge or in the cloud, while pre-processing, which helps limiting the amount of uploaded data, is performed by the IoT device.</t>
+        <t>In the distributed model described in <xref target="rl-fig2"/>, the edge-computing domain is composed of IoT edge gateways and IoT devices which are also used as computing nodes.  Edge computing domains are connected to a remote/cloud network and their respective service operator's system. IoT devices/computing nodes provide logical functions, for example as part of distributed machine learning or distributed image processing applications. The processing capabilities in IoT devices are limited; they require the support of other nodes, and in a distributed machine learning application, the training process for AI services can be executed at IoT edge gateways or cloud networks and the prediction (inference) service is executed in the IoT devices. In a distributed image processing application, some image processing functions can be similarly executed at the edge or in the cloud, while preprocessing, which helps limiting the amount of uploaded data, is performed by the IoT device.</t>
         <figure anchor="rl-fig2">
           <name>Example: Machine Learning over a Distributed IoT Edge Computing System</name>
           <artset>
@@ -609,39 +546,39 @@ IoT devices/computing nodes provide logical functions, for example as part of a 
 ]]></artwork>
           </artset>
         </figure>
-        <t>We now attempt to enumerate major edge computing domain components. They are here loosely organized into OAM (Operations, Administration, and Maintenance), functional and application components, with the understanding that the distinction between these classes may not always be clear, depending on actual system architectures. Some representative research challenges are associated with those functions. We used input from co-authors, IRTF attendees, and some comprehensive reviews of the field (<xref target="Yousefpour"/>, <xref target="Zhang2"/>, <xref target="Khan"/>).</t>
+        <t>In the following, we enumerate major edge computing domain components. They are here loosely organized into OAM (Operations, Administration, and Maintenance), functional, and application components, with the understanding that the distinction between these classes may not always be clear, depending on actual system architectures. Some representative research challenges are associated with those functions. We used input from co-authors, IRTF attendees, and some comprehensive reviews of the field (<xref target="Yousefpour"/>, <xref target="Zhang2"/>, <xref target="Khan"/>).</t>
       </section>
-      <section anchor="sec-components">
+      <section anchor="sec-components-oam">
         <name>OAM Components</name>
-        <t>Edge computing OAM goes beyond the network-related OAM functions listed in <xref target="RFC6291"/>. Besides infrastructure (network, storage, and computing resources), edge computing systems can also include computing environments (for VMs, software containers, functions), IoT devices, data, and code.</t>
-        <t>Operation-related functions include performance monitoring for service level agreement measurement; fault management and provisioning for links, nodes, compute and storage resources, platforms, and services. Administration covers network/compute/storage resources, platforms and services discovery, configuration, and planning. Discovery during normal operation (e.g., discovery of compute or storage nodes by endpoints) would typically not be included in OAM, however in this document we will not address it separately. Management covers monitoring and diagnostics of failures, as well as means to minimize their occurrence and take corrective actions. This may include software updates management, high service availability through redundancy and multipath communication. Centralized (e.g., SDN) and decentralized management systems can be used. Finally, we arbitrarily chose to address data management as an application component, however, in some systems, data management may be considered to be similar to a network management function.</t>
-        <t>We further detail a few OAM components.</t>
+        <t>Edge computing OAM extends beyond the network-related OAM functions listed in <xref target="RFC6291"/>. In addition to infrastructure (network, storage, and computing resources), edge computing systems can also include computing environments (for VMs, software containers, functions), IoT devices, data, and code.</t>
+        <t>Operation-related functions include performance monitoring for service-level agreement measurements, fault management and provisioning for links, nodes, compute and storage resources, platforms, and services. Administration covers network/compute/storage resources, platforms and services discovery, configuration, and planning. Discovery during normal operation (e.g., discovery of compute or storage nodes by endpoints) is typically not included in OAM; however, in this document, we do not address it separately. Management covers the monitoring and diagnostics of failures, as well as means to minimize their occurrence and take corrective actions. This may include software update management and high service availability through redundancy and multipath communication. Centralized (e.g., SDN) and decentralized management systems can be used. Finally, we arbitrarily chose to address data management as an application component, however, in some systems, data management may be considered similar to a network management function.</t>
+        <t>We further detail a few relevant OAM components.</t>
         <section anchor="sec-dis-auth">
           <name>Resource Discovery and Authentication</name>
-          <t>Discovery and authentication may target platforms, infrastructure resources, such as compute, network and storage, but also other resources such as IoT devices, sensors, data, code units, services, applications, or users interacting with the system. Broker-based solutions can be used, e.g., using an IoT gateway as a broker to discover IoT resources. More decentralized solutions can also be used in replacement or complement, e.g., CoAP enables multicast discovery of an IoT device, and CoAP service discovery enables obtaining a list of resources made available by this device <xref target="RFC7252"/>. Today, centralized gateway-based systems rely, for device authentication, on the installation of a secret on IoT devices and computing devices (e.g., a device certificate stored in a hardware security module, or a combination of code and data stored in a trusted execution environment).</t>
+          <t>Discovery and authentication may target platforms and , infrastructure resources, such as computing, networking, and storage, as well as other resources such as IoT devices, sensors, data, code units, services, applications, and users interacting with the system. Broker-based solutions can be used, for example, using an IoT gateway as a broker to discover IoT resources. More decentralized solutions can also be used in replacement or complement, for example, CoAP enables multicast discovery of an IoT device, and CoAP service discovery enables obtaining a list of resources made available by this device <xref target="RFC7252"/>. For device authentication, current centralized gateway-based systems rely on the installation of a secret on IoT devices and computing devices (e.g., a device certificate stored in a hardware security module, or a combination of code and data stored in a trusted execution environment).</t>
           <t>Related challenges include:</t>
           <ul spacing="normal">
             <li>Discovery, authentication, and trust establishment between IoT devices, compute nodes, and platforms, with regard to concerns such as mobility, heterogeneous devices and networks, scale, multiple trust domains, constrained devices, anonymity, and traceability.</li>
-            <li>Intermittent connectivity to the Internet, preventing relying on a third-party authority <xref target="Echeverria"/>.</li>
-            <li>Resiliency to failures <xref target="Harchol"/>, denial of service attacks, easier physical access for attackers.</li>
+            <li>Intermittent connectivity to the Internet, removing the need to rely on a third-party authority <xref target="Echeverria"/>.</li>
+            <li>Resiliency to failure <xref target="Harchol"/>, denial of service attacks, easier physical access for attackers.</li>
           </ul>
         </section>
         <section anchor="edge-organization-and-federation">
           <name>Edge Organization and Federation</name>
-          <t>In a distributed system context, once edge devices have discovered and authenticated each other, they can be organized, or self-organize, into hierarchies or clusters. The organization structure may range from centralized to peer-to-peer, or it may be closely tied with other systems. Such groups can also form federations with other edge or remote clouds.</t>
+          <t>In a distributed system context, once edge devices have discovered and authenticated each other, they can be organized, or self-organized, into hierarchies or clusters. The organizational structure may range from centralized to peer-to-peer, or it may be closely tied to other systems. Such groups can also form federations with other edges or with remote clouds.</t>
           <t>Related challenges include:</t>
           <ul spacing="normal">
-            <li>Support for scaling, and enabling fault-tolerance or self-healing <xref target="Jeong"/>. Besides using hierarchical organization to cope with scaling, another available and possibly complementary mechanism is multicast (<xref target="RFC7390"/> <xref target="I-D.ietf-core-groupcomm-bis"/>). Other approaches include relying on blockchains <xref target="Ali"/>.</li>
-            <li>Integration of edge computing with virtualized Radio Access Networks (Fog RAN) <xref target="I-D.bernardos-sfc-fog-ran"/> and with 5G access networks.</li>
-            <li>Sharing resources in multi-vendor/operator scenarios, to optimize criteria such as profit <xref target="Anglano"/>, resource usage, latency, or energy consumption.</li>
+            <li>Support for scaling, and enabling fault-tolerance or self-healing <xref target="Jeong"/>. In addition to using a hierarchical organization to cope with scaling, another available and possibly complementary mechanism is multicast (<xref target="RFC7390"/> <xref target="I-D.ietf-core-groupcomm-bis"/>). Other approaches include relying on blockchains <xref target="Ali"/>.</li>
+            <li>Integration of edge computing with virtualized Radio Access Networks (Fog RAN) <xref target="I-D.bernardos-sfc-fog-ran"/> and 5G access networks.</li>
+            <li>Sharing resources in multi-vendor/operator scenarios, to optimize criteria such as profit <xref target="Anglano"/>, resource usage, latency, and energy consumption.</li>
             <li>Capacity planning, placement of infrastructure nodes to minimize delay <xref target="Fan"/>, cost, energy, etc.</li>
-            <li>Incentives for participation, e.g., in peer-to-peer federation schemes.</li>
-            <li>Design of federated AI over IoT edge computing systems <xref target="Brecko"/>, e.g., for anomaly detection.</li>
+            <li>Incentives for participation, for example, in peer-to-peer federation schemes.</li>
+            <li>Design of federated AI over IoT edge computing systems <xref target="Brecko"/>, for example, for anomaly detection.</li>
           </ul>
         </section>
         <section anchor="multi-tenancy-and-isolation">
           <name>Multi-Tenancy and Isolation</name>
-          <t>Some IoT edge computing systems make use of virtualized (compute, storage and networking) resources to address the need for secure multi-tenancy at the edge. This leads to "edge clouds" that share properties with the remote Cloud and can reuse some of its ecosystem. Virtualization function management is covered to a large extent by ETSI NFV and MEC standards activities. Projects such as <xref target="LFEDGE-EVE"/> further cover virtualization and its management into distributed edge computing settings.</t>
+          <t>Some IoT edge computing systems make use of virtualized (compute, storage and networking) resources to address the need for secure multi-tenancy at the edge. This leads to "edge clouds" that share properties with remotes clouds and can reuse some of their ecosystems. Virtualization function management is largely covered by ETSI NFV and MEC standards and recommendations. Projects such as <xref target="LFEDGE-EVE"/> further cover virtualization and its management in distributed edge-computing settings.</t>
           <t>Related challenges include:</t>
           <ul spacing="normal">
             <li>Adapting cloud management platforms to the edge, to account for its distributed nature, e.g., using Conflict-free Replicated Data Types (CRDT) <xref target="Jeffery"/>, heterogeneity and customization, e.g., using intent-based management mechanisms <xref target="Cao"/>, and limited resources.</li>
@@ -649,96 +586,84 @@ IoT devices/computing nodes provide logical functions, for example as part of a 
           </ul>
         </section>
       </section>
-      <section anchor="functional-components">
+      <section anchor="sec-components-functional">
         <name>Functional Components</name>
         <section anchor="in-network-computation">
           <name>In-Network Computation</name>
-          <t>A core function of IoT edge computing is to enable local computation on a node at the network edge, typically for application-layer processing such as, e.g., processing input data from sensors, making local decisions, preprocessing data, offloading computation on behalf of a device, service, or user. Related functions include orchestrating computation (in a centralized or distributed manner) and managing application lifecycles. Support for in-network computation may vary in terms of capability, e.g., computing nodes can host virtual machines, software containers, software actors or unikernels able to run stateful or stateless code, or a rules engine providing an API to register actions in response to conditions such as IoT device ID, sensor values to check, thresholds, etc.</t>
-          <t>Edge offloading includes offloading to and from an IoT device, and to and from a network node. <xref target="Cloudlets"/> offer an example of offloading from an end device to a network node. On the other side, oneM2M is an example of a system that allows a cloud-based IoT platform to transfer resources and tasks to a target edge node <xref target="oneM2M-TR0052"/>. Once transferred, the edge node can directly support IoT devices it serves with the service offloaded by the cloud (e.g., group management, location management, etc.)</t>
-          <t>QoS can be provided in some systems through the combination of network QoS (e.g., traffic engineering or wireless resource scheduling) and compute/storage resource allocations. For example, in some systems, a bandwidth manager service can be exposed to enable allocation of bandwidth to/from an edge computing application instance.</t>
-          <t>In-network computation may leverage underlying services, provided using data generated by IoT devices and access networks. Such services include IoT device location, radio network information, bandwidth management and congestion management (e.g., by the congestion management feature of oneM2M <xref target="oneM2M-TR0052"/>).</t>
+          <t>A core function of IoT edge computing is to enable local computation on a node at the network edge, typically for application-layer processing, such as processing input data from sensors, making local decisions, preprocessing data, offloading computation on behalf of a device, service, or user. Related functions include orchestrating computation (in a centralized or distributed manner) and managing application lifecycles. Support for in-network computation may vary in terms of capability, for example, computing nodes can host virtual machines, software containers, software actors, uni-kernels running stateful or stateless code, or a rule engine providing an API to register actions in response to conditions such as IoT device ID, sensor values to check, thresholds, etc.</t>
+          <t>Edge offloading includes offloading to and from an IoT device, and to and from a network node. <xref target="Cloudlets"/> offer an example of offloading computation from an end device to a network node. In contrast, oneM2M is an example of a system that allows a cloud-based IoT platform to transfer resources and tasks to a target edge node <xref target="oneM2M-TR0052"/>. Once transferred, the edge node can directly support IoT devices that it serves with the service offloaded by the cloud (e.g., group management, location management, etc.).</t>
+          <t>QoS can be provided in some systems through the combination of network QoS (e.g., traffic engineering or wireless resource scheduling) and compute/storage resource allocations. For example, in some systems, a bandwidth manager service can be exposed to enable allocation of the bandwidth to/from an edge-computing application instance.</t>
+          <t>In-network computation can leverage the underlying services, provided using data generated by IoT devices and access networks. Such services include IoT device location, radio network information, bandwidth management and congestion management (e.g., the congestion management feature of oneM2M <xref target="oneM2M-TR0052"/>).</t>
           <t>Related challenges include:</t>
           <ul spacing="normal">
-            <li>(Computation placement) Selecting, in a centralized or distributed/peer-to-peer manner, an appropriate compute device based on available resources, location of data input and data sinks, compute node properties, etc., and with varying goals including for example end-to-end latency, privacy, high availability, energy conservation, or network efficiency, e.g., using load balancing techniques to avoid congestion.</li>
-            <li>Onboarding code on a platform or computing device, and invoking remote code execution, possibly as part of a distributed programming model and with respect to similar concerns of latency, privacy, etc. For example, this can include offloading in a vehicular scenario <xref target="Grewe"/>. These operations should deal with heterogeneous compute nodes <xref target="Schafer"/>, and may in some cases also support end devices, including IoT devices, as compute nodes <xref target="Larrea"/>.</li>
+            <li>(Computation placement) Selecting, in a centralized or distributed/peer-to-peer manner, an appropriate compute device based on available resources, location of data input and data sinks, compute node properties, etc., and with varying goals including end-to-end latency, privacy, high availability, energy conservation, or network efficiency, for example, using load-balancing techniques to avoid congestion.</li>
+            <li>Onboarding code on a platform or computing device, and invoking remote code execution, possibly as part of a distributed programming model and with respect to similar concerns of latency, privacy, etc.: For example, offloading can be included in a vehicular scenario <xref target="Grewe"/>. These operations should deal with heterogeneous compute nodes <xref target="Schafer"/>, and may also support end devices, including IoT devices, as compute nodes <xref target="Larrea"/>.</li>
             <li>Adapting Quality of Results (QoR) for applications where a perfect result is not necessary <xref target="Li"/>.</li>
-            <li>Assisted or automatic partitioning of code, for example for application programs <xref target="I-D.sarathchandra-coin-appcentres"/> or for network programs <xref target="I-D.hsingh-coinrg-reqs-p4comp"/>.</li>
-            <li>Supporting computation across trust domains, e.g., verifying computation results.</li>
-            <li>Support for computation mobility: relocating an instance from one compute node to another, while maintaining a given service level; session continuity when communicating with end devices that are mobile, possibly at high speed (e.g., in vehicular scenarios); defining lightweight execution environments for secure code mobility, e.g., using WebAssembly <xref target="Nieke"/>.</li>
-            <li>Defining, managing, and verifying Service Level Agreements (SLA) for edge computing systems. Pricing is a related challenge.</li>
+            <li>Assisted or automatic partitioning of code: for example, for application programs <xref target="I-D.sarathchandra-coin-appcentres"/> or network programs <xref target="I-D.hsingh-coinrg-reqs-p4comp"/>.</li>
+            <li>Supporting computation across trust domains: for example, verifying computation results.</li>
+            <li>Support for computation mobility: relocating an instance from one compute node to another, while maintaining a given service level; session continuity when communicating with end devices that are mobile, possibly at high speed (e.g., in vehicular scenarios); defining lightweight execution environments for secure code mobility, for example, using WebAssembly <xref target="Nieke"/>.</li>
+            <li>Defining, managing, and verifying Service Level Agreements (SLA) for edge-computing systems: pricing is a challenging task.</li>
           </ul>
         </section>
         <section anchor="edge-storage-and-caching">
           <name>Edge Storage and Caching</name>
-          <t>Local storage or caching enable local data processing (e.g., pre-processing or analysis), as well as delayed data transfer to the cloud or delayed physical shipping.
-An edge node may offer local data storage (where persistence is subject to retention policies), caching, or both.
-Caching generally refers to temporary storage to improve performance with no persistence guarantees.
-An edge caching component manages data persistence, e.g., it schedules removal of data when it is no longer needed.
-Other related aspects include authenticating and encrypting data.
-Edge storage and caching can take the form of a distributed storage system.</t>
+          <t>Local storage or caching enables local data processing (e.g., preprocessing or analysis) as well as delayed data transfer to the cloud or delayed physical shipping.  An edge node may offer local data storage (in which persistence is subject to retention policies), caching, or both.  Caching generally refers to temporary storage to improve performance without persistence guarantees.  An edge-caching component manages data persistence, for example, it schedules the removal of data when it is no longer needed.  Other related aspects include the authentication and encryption of data.  Edge storage and caching can take the form of a distributed storage systems.</t>
           <t>Related challenges include:</t>
           <ul spacing="normal">
-            <li>(Cache and data placement) Using cache positioning and data placement strategies to minimize data retrieval delay <xref target="Liu"/>, energy consumption. Caches may be positioned in the access network infrastructure, or on end devices.</li>
-            <li>Maintaining consistency, freshness, reliability, and privacy of stored/cached data in systems that are distributed, constrained, and dynamic (e.g., due to end devices and computing nodes churn or mobility), and which can have additional data governance constraints on data storage location. For example, <xref target="Mortazavi"/> exploits a hierarchical storage organization. Freshness-related metrics include the age of information <xref target="Yates"/>, that captures the timeliness of information from a sender (e.g., an IoT device).</li>
+            <li>(Cache and data placement) Using cache positioning and data placement strategies to minimize data retrieval delay <xref target="Liu"/> and energy consumption. Caches may be positioned in the access network infrastructure or on end devices.</li>
+            <li>Maintaining consistency, freshness, reliability, and privacy of stored/cached data in systems that are distributed, constrained, and dynamic (e.g., owing to end devices and computing nodes churn or mobility), and which can have additional data governance constraints on data storage location. For example, <xref target="Mortazavi"/> leverages a hierarchical storage organization. Freshness-related metrics include the age of information <xref target="Yates"/> that captures the timeliness of information received from a sender (e.g., an IoT device).</li>
           </ul>
         </section>
         <section anchor="communication">
           <name>Communication</name>
-          <t>An edge cloud may provide a northbound data plane or management plane interface to a remote network, e.g., a cloud, home or enterprise network. This interface does not exist in standalone (local-only) scenarios. To support such an interface when it exists, an edge computing component needs to expose an API, deal with authentication and authorization, and support secure communication.</t>
+          <t>An edge cloud may provide a northbound data plane or management plane interface to a remote network, such as a cloud, home or enterprise network. This interface does not exist in stand-alone (local-only) scenarios. To support such an interface when it exists, an edge computing component needs to expose an API, deal with authentication and authorization, and support secure communication.</t>
           <t>An edge cloud may provide an API or interface to local or mobile users, for example, to provide access to services and applications, or to manage data published by local/mobile devices.</t>
-          <t>Edge computing nodes communicate with IoT devices over a southbound interface, typically for data acquisition and IoT device management.</t>
-          <t>Communication brokering is a typical function of IoT edge computing, that facilitates communication with IoT devices: for enabling clients to register as recipients for data from devices, as well as forwarding/routing of traffic to or from IoT devices, enabling various data discovery and redistribution patterns, e.g., north-south with clouds, east-west with other edge devices <xref target="I-D.mcbride-edge-data-discovery-overview"/>.
-Another related aspect is dispatching alerts and notifications to interested consumers both inside and outside of the edge computing domain.
-Protocol translation, analytics, and video transcoding may also be performed when necessary.
-Communication brokering may be centralized in some systems, e.g., using a hub-and-spoke message broker, or distributed like with message buses, possibly in a layered bus approach.
-Distributed systems may leverage direct communication between end devices, over device-to-device links.
-A broker can ensure communication reliability, traceability, and in some cases transaction management.</t>
+          <t>Edge-computing nodes communicate with IoT devices over a southbound interface, typically for data acquisition and IoT device management.</t>
+          <t>Communication brokering is a typical function of IoT edge computing that facilitates communication with IoT devices, enabling clients to register as recipients for data from devices, as well as forwarding/routing of traffic to or from IoT devices, enabling various data discovery and redistribution patterns, for example, north-south with clouds, east-west with other edge devices <xref target="I-D.mcbride-edge-data-discovery-overview"/>.  Another related aspect is dispatching alerts and notifications to interested consumers both inside and outside the edge-computing domain.  Protocol translation, analytics, and video transcoding can also be performed when necessary. Communication brokering may be centralized in some systems, for example, using a hub-and-spoke message broker, or distributed with message buses, possibly in a layered bus approach.  Distributed systems can leverage direct communication between end devices over device-to-device links.  A broker can ensure communication reliability and traceability and, in some cases, transaction management.</t>
           <t>Related challenges include:</t>
           <ul spacing="normal">
-            <li>Defining edge computing abstractions, such as PaaS <xref target="Yangui"/>, suitable for users and cloud systems to interact with edge computing systems, and dealing with interoperability issues such as data models heterogeneity.</li>
-            <li>Enabling secure and resilient communication between IoT devices and remote cloud, e.g., through multipath support.</li>
+            <li>Defining edge computing abstractions, such as PaaS <xref target="Yangui"/>, suitable for users and cloud systems to interact with edge computing systems and dealing with interoperability issues such as data model heterogeneity.</li>
+            <li>Enabling secure and resilient communication between IoT devices and remote cloud, for example, through multipath support.</li>
           </ul>
         </section>
       </section>
-      <section anchor="application-components">
+      <section anchor="sec-components-app">
         <name>Application Components</name>
-        <t>IoT edge computing can host applications such as the ones mentioned in <xref target="sec-uc"/>. While describing components of individual applications is out of our scope, some of those applications share similar functions, such as IoT device management, data management, described below.</t>
-        <section anchor="iot-devices-management">
-          <name>IoT Devices Management</name>
-          <t>IoT device management includes managing information about the IoT devices, including their sensors, how to communicate with them, etc. Edge computing addresses the scalability challenges from the massive number of IoT devices by separating the scalability domain into edge/local networks and remote networks. For example, in the context of the oneM2M standard, the software campaign feature enables installing, deleting, activating, and deactivating software functions/services on a potentially large number of edge nodes <xref target="oneM2M-TR0052"/>. Using a dashboard or a management software, a service provider issues those requests through an IoT cloud platform supporting the software campaign functionality.</t>
+        <t>IoT edge computing can host applications, such as those mentioned in <xref target="sec-uc"/>. While describing the components of individual applications is out of our scope, some of those applications share similar functions, such as IoT device management and data management, as described below.</t>
+        <section anchor="iot-device-management">
+          <name>IoT Device Management</name>
+          <t>IoT device management includes managing information regarding IoT devices, including their sensors, and how to communicate with them. Edge computing addresses the scalability challenges of a large number of IoT devices by separating the scalability domain into edge/local networks and remote networks. For example, in the context of the oneM2M standard, a device management functionality (called "software campaign" in oneM2M) enables the installation, deletion, activation, and deactivation of software functions/services on a potentially large number of edge nodes <xref target="oneM2M-TR0052"/>. Using a dashboard or management software, a service provider issues these requests through an IoT cloud platform supporting the software campaign functionality.</t>
           <t>Challenges listed in <xref target="sec-dis-auth"/> may be applicable to IoT devices management as well.</t>
         </section>
         <section anchor="sec-data">
           <name>Data Management and Analytics</name>
-          <t>Data storage and processing at the edge is a major aspect of IoT edge computing, directly addressing high-level IoT challenges listed in <xref target="sec-challenges"/>. Data analysis such as performed in AI/ML tasks performed at the edge may benefit from specialized hardware support on computing nodes.</t>
+          <t>Data storage and processing at the edge are major aspects of IoT edge computing, directly addressing the high-level IoT challenges listed in <xref target="sec-challenges"/>. Data analysis, for example, through AI/ML tasks performed at the edge, may benefit from specialized hardware support on the computing nodes.</t>
           <t>Related challenges include:</t>
           <ul spacing="normal">
-            <li>Addressing concerns on resource usage, security, and privacy when sharing, processing, discovering, or managing data. For example by presenting data in views composed of an aggregation of related data <xref target="Zhang"/>; protecting data communication between authenticated peers <xref target="Basudan"/>; classifying data (e.g., in terms of privacy, importance, validity, etc.); compressing and encrypting data, e.g., using homomorphic encryption to directly process encrypted data <xref target="Stanciu"/>.</li>
-            <li>Other concerns on edge data discovery (e.g., streaming data, metadata, events) include siloization and lack of standard in edge environments that can be dynamic (e.g., vehicular networks) and heterogeneous <xref target="I-D.mcbride-edge-data-discovery-overview"/>.</li>
-            <li>Data-driven programming models <xref target="Renart"/>, e.g., event-based, including handling of naming and data abstractions.</li>
-            <li>Data integration in an environment that do not have data standardization or where different sources use different ontologies <xref target="Farnbauer-Schmidt"/>.</li>
-            <li>Addressing concerns such as limited resources, privacy, dynamic and heterogeneous environment, to deploy machine learning at the edge. For example, making machine learning more lightweight and distributed (e.g., to enable distributed inference at the edge), supporting shorter training time and simplified models, and supporting models that can be compressed for efficient communication <xref target="Murshed"/>.</li>
-            <li>While edge computing can support IoT services independently of cloud computing, it can also be connected to cloud computing. Thus, the relationship of IoT edge computing to cloud computing, with regard to data management, is another potential challenge <xref target="ISO_TR"/>.</li>
+            <li>Addressing concerns regarding resource usage, security, and privacy when sharing, processing, discovering, or managing data: for example presenting data in views composed of an aggregation of related data <xref target="Zhang"/>; protecting data communication between authenticated peers <xref target="Basudan"/>, classifying data (e.g., in terms of privacy, importance, validity), and compressing and encrypting data, for example, using homomorphic encryption to directly process encrypted data <xref target="Stanciu"/>.</li>
+            <li>Other concerns regarding edge data discovery (e.g., streaming data, metadata, and events) include siloization and lack of standards in edge environments that can be dynamic (e.g., vehicular networks) and heterogeneous <xref target="I-D.mcbride-edge-data-discovery-overview"/>.</li>
+            <li>Data-driven programming models <xref target="Renart"/>, for example, event-based, including handling naming and data abstractions.</li>
+            <li>Data integration in an environment that without data standardization, or where different sources use different ontologies <xref target="Farnbauer-Schmidt"/>.</li>
+            <li>Addressing concerns such as limited resources, privacy, dynamic, and heterogeneous environments to deploy machine learning at the edge: for example, making machine learning more lightweight and distributed (e.g., enabling distributed inference at the edge), supporting shorter training times and simplified models, and supporting models that can be compressed for efficient communication <xref target="Murshed"/>.</li>
+            <li>Although edge computing can support IoT services independently of cloud computing, it can also be connected to cloud computing. Thus, the relationship between IoT edge computing and cloud computing, with regard to data management, is another potential challenge <xref target="ISO_TR"/>.</li>
           </ul>
         </section>
       </section>
       <section anchor="simulation-and-emulation-environments">
         <name>Simulation and Emulation Environments</name>
-        <t>IoT Edge Computing brings new challenges to simulation and emulation tools used by researchers and developers. A varied set of applications, network, and computing technologies can coexist in a distributed system, which makes modeling difficult. Scale, mobility, and resource management are additional challenges <xref target="SimulatingFog"/>.</t>
-        <t>Tools include simulators, where simplified application logic runs on top of a fog network model, and emulators, where actual applications can be deployed, typically in software containers, over a cloud infrastructure (e.g., Docker, Kubernetes) itself running over a network emulating network edge conditions such as variable delays, throughput and mobility events. To gain in scale, emulated and simulated systems can be used together in hybrid federation-based approaches <xref target="PseudoDynamicTesting"/>, while to gain in realism physical devices can be interconnected with emulated systems. Examples of related work and platforms include the publicly accessible MEC sandbox work recently initiated in ETSI <xref target="ETSI_Sandbox"/>, and open source simulators and emulators (<xref target="AdvantEDGE"/> emulator and tools cited in <xref target="SimulatingFog"/>). EdgeNet <xref target="Senel"/> is a globally distributed edge cloud for Internet researchers, using nodes contributed by institutions, and based on Docker for containerization and Kubernetes for deployment and node management.</t>
-        <t>Digital twins are virtual instances of a physical system (twin) that is continually updated with the latter's performance, maintenance, and health status data throughout the physical system's life cycle <xref target="Madni"/>. As opposed to a traditional emulation or simulated environment, digital twins, once generated, are maintained in sync by their physical twin, which can be, among many other instances, an IoT device, an edge device or an edge network. The benefits of digital twins go beyond those of emulation, and include accelerated business processes, enhanced productivity, and faster innovation with reduced costs <xref target="I-D.irtf-nmrg-network-digital-twin-arch"/>.</t>
+        <t>IoT Edge Computing introduces new challenges to the simulation and emulation tools used by researchers and developers. A varied set of applications, networks, and computing technologies can coexist in a distributed system, making modeling difficult. Scale, mobility, and resource management are additional challenges <xref target="SimulatingFog"/>.</t>
+        <t>Tools include simulators, where simplified application logic runs on top of a fog network model, and emulators, where actual applications can be deployed, typically in software containers, over a cloud infrastructure (e.g., Docker and Kubernetes) running over a network emulating network edge conditions such as variable delays, throughput and mobility events. To gain in scale, emulated and simulated systems can be used together in hybrid federation-based approaches <xref target="PseudoDynamicTesting"/>, whereas to gain in realism, physical devices can be interconnected with emulated systems. Examples of related work and platforms include the publicly accessible MEC sandbox work recently initiated in ETSI <xref target="ETSI_Sandbox"/>, and open source simulators and emulators (<xref target="AdvantEDGE"/> emulator and tools cited in <xref target="SimulatingFog"/>). EdgeNet <xref target="Senel"/> is a globally distributed edge cloud for Internet researchers, using nodes contributed by institutions, and based on Docker for containerization and Kubernetes for deployment and node management.</t>
+        <t>Digital twins are virtual instances of a physical system (twin) that are continually updated with the latter's performance, maintenance, and health status data throughout the life cycle of the physical system.  <xref target="Madni"/>. In contrast to a traditional emulation or simulated environment, digital twins, once generated, are maintained in sync by their physical twin, which can be, among many other instances, an IoT device, edge device, an edge network. The benefits of digital twins go beyond those of emulation and include accelerated business processes, enhanced productivity, and faster innovation with reduced costs <xref target="I-D.irtf-nmrg-network-digital-twin-arch"/>.</t>
       </section>
     </section>
     <section anchor="security-considerations">
       <name>Security Considerations</name>
-      <t>Privacy and security are drivers for the adoption of edge computing for IoT (<xref target="sec-priv"/>). As discussed in <xref target="sec-dis-auth"/>, authentication and trust (between computing nodes, management nodes, end devices) can be challenging as scale, mobility, and heterogeneity increase. The sometimes disconnected nature of edge resources can prevent relying on a third-party authority. Distributed edge computing is exposed to issues with reliability and denial of service attacks. Personal or proprietary IoT data leakage is also a major threat, especially due to the distributed nature of the systems (<xref target="sec-data"/>). Furthermore, blockchain-based distributed IoT edge computing need to be designed for privacy, since public blockchain addressing does not guarantee absolute anonymity <xref target="Ali"/>.</t>
-      <t>However, edge computing also brings solutions in the security space: maintaining privacy by computing sensitive data closer to data generators is a major use case for IoT edge computing.
-An edge cloud can be used to take actions based on sensitive data, or to anonymize or aggregate data prior to transmitting to a remote cloud server. 
-Edge computing communication brokering functions can also be used to secure communication between edge and cloud networks.</t>
+      <t>Privacy and security are drivers of the adoption of edge computing for the IoT (<xref target="sec-priv"/>). As discussed in <xref target="sec-dis-auth"/>, authentication and trust (among computing nodes, management nodes, and end devices) can be challenging as scale, mobility, and heterogeneity increase. The sometimes disconnected nature of edge resources can avoid reliance on third-party authorities. Distributed edge computing is exposed reliability and denial of service attacks. Personal or proprietary IoT data leakage is also a major threat, particularly because of the distributed nature of the systems (<xref target="sec-data"/>). Furthermore, blockchain-based distributed IoT edge computing must be designed for privacy, since public blockchain addressing does not guarantee absolute anonymity <xref target="Ali"/>.</t>
+      <t>However, edge computing also offers solutions in the security space: maintaining privacy by computing sensitive data closer to data generators is a major use case for IoT edge computing.  An edge cloud can be used to perform actions based on sensitive data or to anonymize or aggregate data prior to transmission to a remote cloud server. Edge computing communication brokering functions can also be used to secure communication between edge and cloud networks.</t>
     </section>
     <section anchor="conclusion">
       <name>Conclusion</name>
-      <t>IoT edge computing plays an essential role, complementary to the cloud, to enable IoT systems in some situations. This document starts by presenting use cases and listing core challenges faced by IoT, that drive the need for IoT edge computing. The first part of this document may therefore help focusing future research efforts on the aspects of IoT edge computing where it is most useful. A second part of this document presents a general system model and a structured overview of the associated research challenges and related work. The structure, based on the system model, is not meant to be restrictive, and exists for the purpose of having a link between individual research areas and where they are applicable in an IoT edge computing system.</t>
+      <t>IoT edge computing plays an essential role, complementary to the cloud, in enabling IoT systems in certain situations. In this document, we presented use cases and listing the core challenges faced by IoT that drive the need for IoT edge computing. The first part of this document may therefore help focus future research efforts on the aspects of IoT edge computing where it is most useful. The second part of this document presents a general system model and structured overview of the associated research challenges and related work. The structure, based on the system model, is not meant to be restrictive and exists for the purpose of having a link between individual research areas and where they are applicable in an IoT edge computing system.</t>
     </section>
     <section anchor="iana-considerations">
       <name>IANA Considerations</name>
@@ -832,7 +757,7 @@ Edge computing communication brokering functions can also be used to secure comm
           </author>
           <author fullname="Klaus Hartke" initials="K." surname="Hartke">
          </author>
-          <date day="11" month="January" year="2023"/>
+          <date day="25" month="July" year="2023"/>
           <abstract>
             <t>   This document gives guidance for designing Internet of Things (IoT)
    systems that follow the principles of the Representational State
@@ -842,7 +767,7 @@ Edge computing communication brokering functions can also be used to secure comm
             </t>
           </abstract>
         </front>
-        <seriesInfo name="Internet-Draft" value="draft-irtf-t2trg-rest-iot-11"/>
+        <seriesInfo name="Internet-Draft" value="draft-irtf-t2trg-rest-iot-12"/>
       </reference>
       <reference anchor="Ashton" target="http://www.itrco.jp/libraries/RFIDjournal-That%20Internet%20of%20Things%20Thing.pdf">
         <front>
@@ -2130,588 +2055,637 @@ Edge computing communication brokering functions can also be used to secure comm
         <seriesInfo name="IEEE Internet of Things Magazine" value="pp. 24-29"/>
         <seriesInfo name="DOI" value="10.1109/IOTM.2019.1800024"/>
       </reference>
+      <reference anchor="chipmunk">
+        <front>
+          <title>Chipmunk: Distributed Object Storage for NDN</title>
+          <author fullname="Yong Yoon Shin" initials="Y." surname="Shin">
+            <organization>ETRI, GurumNetworks, Republic of Korea</organization>
+          </author>
+          <author fullname="Sae Hyong Park" initials="S." surname="Park">
+            <organization>ETRI, GurumNetworks, Republic of Korea</organization>
+          </author>
+          <author fullname="Namseok Ko" initials="N." surname="Ko">
+            <organization>ETRI, GurumNetworks, Republic of Korea</organization>
+          </author>
+          <author fullname="Arm Jeong" initials="A." surname="Jeong">
+            <organization>ETRI, GurumNetworks, Republic of Korea</organization>
+          </author>
+          <date month="September" year="2020"/>
+        </front>
+        <seriesInfo name="Proceedings of the 7th ACM Conference on Information-Centric" value="Networking"/>
+        <seriesInfo name="DOI" value="10.1145/3405656.3420231"/>
+        <refcontent>ACM</refcontent>
+      </reference>
+      <reference anchor="kua">
+        <front>
+          <title>Kua: a distributed object store over named data networking</title>
+          <author fullname="Varun Patil" initials="V." surname="Patil">
+            <organization>UCLA</organization>
+          </author>
+          <author fullname="Hemil Desai" initials="H." surname="Desai">
+            <organization>UCLA</organization>
+          </author>
+          <author fullname="Lixia Zhang" initials="L." surname="Zhang">
+            <organization>UCLA</organization>
+          </author>
+          <date month="September" year="2022"/>
+        </front>
+        <seriesInfo name="Proceedings of the 9th ACM Conference on Information-Centric" value="Networking"/>
+        <seriesInfo name="DOI" value="10.1145/3517212.3558083"/>
+        <refcontent>ACM</refcontent>
+      </reference>
+      <reference anchor="mqtt5" target="https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html">
+        <front>
+          <title>MQTT Version 5.0</title>
+          <author initials="" surname="OASIS Message Queuing Telemetry Transport (MQTT) TC">
+            <organization/>
+          </author>
+          <date year="2019" month="March"/>
+        </front>
+        <refcontent>OASIS</refcontent>
+      </reference>
     </references>
   </back>
   <!-- ##markdown-source:
-H4sIAAAAAAAAA8296XLcVpYu+l8RegeEKk6ILCeSkySScnScpjjItERJRbIs
-uzs6HDsTOzNhIoEsDKRTKt2nuX/uc5wXu2vaI0BKruo+3a5uW0Ji2MPaa17f
-StP08aOmVWX2qyqqUr9M2rrTjx/lq5r+2LS729uH27uPH2XVtFRLuCGr1axN
-87qdpe1uW8/TvGpTnc11un34+NGfvuG+QrW6aR8/mqr2ZZKXswqHUGu1fJmc
-X16fPX60yl8+fpQkbTV9mTxd6+Yp/q1ZL2s9a7wrMMiyavNZrjP/vrbOp613
-YVotVyq40lR1G71rWsH0G7hPexfr2VRnTbsu8GJZPZVBZXrVLuDKM7jQ5i3+
-el5dJ6cwt+R4oYpCl3PdJLCoyVlXTtsc3vz4kZpMan3r3wrj6tq8nMNvMPuX
-yfXu9eVr+EvXLqoaVuDxoxSWB0b54zj5ocL7koTX9seunC+UvVjV85fJ6fXl
-ucxfa5zt7s5B8lr9puGmtK5GyS9do+G59HXHM87b9cvkRGm8g5cgw3nuPdvZ
-PZQ16cq2hpsu9aqbFPk0qWbJmwrGir/qpcqLl8lvC3j/v2pY9HGtxze1N+xf
-0tfxwH/BwbyGYYRjl1Ekfy3zW103MLJgJi928Y6FuqF5nOA75l+ZxPb2/s6L
-b5/FGt45h2GNaTZzvDgGuvEm8/M4yXRyVq3dZH5Wt7muvcs0l/Oy1fVJPs9b
-VeAeL7syB0pHIhglb98eBzPb2d7eTq4Wup7UVXWjk49wMLyJXVQlHozCzeyH
-vaNk7/WzYGLHqlSZP5vfaWDjTM+q9b/mOJ6MxxPN6WIMC3Gr2ma6cLO6UG27
-yFUT/EQz+6FTdzpPrvV0UcJxmedA5CedbhpdZFU9S14vJz8Es7uEO+Av42T3
-eXKcbG0le+P3r/3p4dIsvG072D483A137bWul6pce7PLdTv71xsZ3LjUrTej
-03FyNV1UVaFrN6PTWx1ctdtUhOcFWF1ykTcNbBVsHBxjOKSvitts7A35SpWt
-So4LVatRcnzkjf3w+fbzZ+nO8739cAJ/vTryBq9v9Xg5bmQ0tDnxrpzArnQ4
-N38OJ3l9E1zmHQFqhX2Cf7mTg+R9Nc11OdXEgux2rZON150q558WVbcZzPxd
-Nd6BnUx+7nRymXmztfeH9LbISxVvSHYjgzM7UlawcS2MijgZsnn/70lynp6M
-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
-f67y2JtI88HYxUupyjEfxxdgwlty3jTdw8HoH3MQRd8suF7lQ9rMqyFtBhT0
-6YITgUMl+Re/lMU7hfLmHmP2LtpYhUbfdyi6z8b2Spwr9AsWKP9BXee8dJ4Z
-DOrWJmHnxfOAd+4cbO/jzg9vPOyv2fX9ne39KH6FietHnBTmfe4lxVXT63yp
-Mful7Zrkr6uMcxMm64SyVFawZ5ye8eDmXlZr9MTS/GNDxbvo2frow6MQUdfz
-y7trfqSF5AHoM/+0SNoX7XFb1nV7F2uMtnf3HpRLu9vj3cOD/e39qE4t9Kim
-VIgG0ueK8p+OyW2O0gvvqPUCJRQWlX412vcWtmGW/HVMMw4W6K1/zdx+jtV/
-sNJ/q6pJcPf5OLhqDUWK5qEOcB1br+/8a3bDxsjVjhYNOuLVp2XPSvYuWiuj
-zs13TgZS9E96Z/54UZFOo6uy7zM69n1Ghi52t0VbuTw73t873HalnbqdpdOq
-1iml3GHCfDrJ+WhedHWz0Nn9ZIShFc+ApL2yRVmi0EhYeScdYsTol3/24nB7
-NzqGF2BsYPj9rVZ16Yk3cY2I1//oG8gDnZoo/Os72HaZUCyDgstRls1qoem5
-1WIdr7J/1cVf/kZBwCrkhCdjd8nVNn6CIfWo9t0Q1b5WpQYhShUBi3t0nNfj
-e3534eRafQKO3DQq0quIUXuXXf7CLtg36R5nMSC5NPCOdgFSBH02QDd5marV
-aoqWn/BzvIvK4mNMCut/TSdqeoPUVjJpXelS/7Fg0LOeg8O3p0giiwk1wjUp
-1pRuCWN+aSgod4cmosa9Z/v72+O9Z88P9/fCmB9xsHeYnHHELD+91lSiQW48
-uvDBRApYK0Dn2kPE+QqjCejc5zWIJbh30WlTv6MQuqg6sMbbHiH7l6Mo7THs
-U9VT2/yr1vdW5KTtob26VN3vwTPvx9F15ypZdvAMbF+27DtMwutWGGKs+mL6
-WkcBp8txcNWR4066/cykZ2G17PQhh8l/I+GEvpMBxZHMsNSzrdioelVU1RJz
-9mCIbP7/UC3hf8BoMKWrnNbrlTPOBmmKi0C7FKRGrguzSsHy/jQOLzviAlEM
-QugWCbLVkUqJsR530bLJfFWjk+ykmtSh/xQ4pHfRFTVlYLo0yQdMkwjup2rT
-9uE9/1HPwMJa/4/c81DduaT0U8qxwo19001I19INed+/wVSjhbozM45XKrhs
-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
-DDoBAA==
+H4sIAAAAAAAAA8296XIbV5Yu+t8RfocMOU5YLAPgJIqkKjpOUxxkWqIkkyzL
+7o4ORwLYANJMZMI5kIZYuk9z/9znOC9217inTFJyVffpdnXbUiKHPay95vWt
+4XD49Vd1kxbTX9O8LMyLpKla8/VX2aqiP9bNztbW4dbO119Ny0mRLuGGaZXO
+mmFWNbNhs9NU82FWNkMznZvh9tbXX33zBfflaWPq5uuvJmnzIsmKWYlDqEy6
+fJGcX16fff3VKnvx9VdJ0pSTF8m3a1N/i3+r18vKzGrvCgyyKJtslpmpf19T
+ZZPGuzApl6s0uFKXVRO9a1LC9Gu4z3gXq9nETOtmnePFovxWBjU1q2YBV57B
+hSZr8Nfz8jo5hbklx4s0z00xN3UCi5qctcWkyeDNX3+VjseVufVvhXG1TVbM
+4TeY/Yvkeuf68hX8pW0WZQUr8PVXQ1geGOUPo+T7Eu9LEl7bH9pivkjtxbKa
+v0hOry/PZf7G4Gx3tg+SV+lvBm4aVuUg+aWtDTw3fNXyjLNm/SI5SQ3ewUsw
+xXnuPtveOZQ1aYumgpsuzaod59kkKWfJ6xLGir+aZZrlL5LfFvD+fzWw6KPK
+jG4qb9i/DF/FA/8FB/MKhhGOXUaR/K3Ibk1Vw8iCmTzfwTsW6Q3N4wTfMf/M
+JLa29reff/ks1vDOOQxrRLOZ48UR0I03mZ9HydQkZ+XaTebn9DYzlXeZ5nJe
+NKY6yeZZk+a4x8u2yIDSkQgGyZs3x8HMtre2tpKrhanGVVnemOQDHAxvYhdl
+gQcjdzP7fvco2X31LJjYcVqkU382f9DARlMzK9f/muF4pjyeaE4XI1iI27Sp
+Jws3q4u0aRZZWgc/0cy+b9M7kyXXZrIo4LjMMyDyk9bUtcmnZTVLXi3H3wez
+u4Q74C+jZGcvOU42N5Pd0btX/vRwaRbeth1sHR7uhLv2ylTLtFh7s8tMM/vX
+GxncqDCNN6PTUXI1WZRlbio3o9NbE1y125SH5wVYXXKR1TVsFWwcHGM4pC/z
+2+nIG/JVWjRpcpynVTpIjo+8sR/ube09G27v7e6HE/jb1ZE3eHNrRrWMpZfO
+TmBPWpyZP4OTrLoJLvN+AK3CLsG/3LlB4r6aZKaYGGJAdrPWydNXbVrMPy7K
+diOY99tytA37mPzcmuRy6s3V3h9S2yIr0ng7pjcyON2PooRta2BUxMeQyft/
+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
 
 -->
 
